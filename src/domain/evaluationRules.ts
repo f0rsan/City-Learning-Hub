@@ -9,6 +9,17 @@ import type {
   SocialSignal,
   VenueHistory
 } from "./evaluationTypes";
+import {
+  CONFIDENCE_SCORE_THRESHOLDS as EXPLICIT_CONFIDENCE_SCORE_THRESHOLDS,
+  EVALUATION_RULE_VERSION as EXPLICIT_EVALUATION_RULE_VERSION
+} from "./evaluationTypes";
+
+export const EVALUATION_RULE_VERSION = EXPLICIT_EVALUATION_RULE_VERSION;
+export const CONFIDENCE_SCORE_THRESHOLDS = EXPLICIT_CONFIDENCE_SCORE_THRESHOLDS;
+type ConfidenceEvaluationInput = Pick<ActivityEvaluation, "totalScore" | "riskReasons" | "evidenceSignals"> & {
+  correctionPenaltyScore?: number;
+  hasUnresolvedCorrectionRisk?: boolean;
+};
 
 function clamp(score: number, maxScore: number) {
   return Math.max(0, Math.min(score, maxScore));
@@ -219,19 +230,29 @@ export function deriveRecommendationLevel(evaluation: Pick<ActivityEvaluation, "
   return "caution";
 }
 
-export function deriveConfidenceLevel(evaluation: Pick<ActivityEvaluation, "totalScore" | "riskReasons" | "evidenceSignals">) {
+export function deriveConfidenceLevel(evaluation: ConfidenceEvaluationInput) {
+  const correctionPenaltyScore = typeof evaluation.correctionPenaltyScore === "number" ? evaluation.correctionPenaltyScore : 0;
+  const effectiveScore = evaluation.totalScore + correctionPenaltyScore;
   const missingSource = evaluation.evidenceSignals.find((signal) => signal.type === "source")?.score === 0;
   const hasNewOrganizer = evaluation.evidenceSignals.some(
     (signal) => signal.type === "organizer" && signal.detail.includes("新组织方")
   );
   const hasChildRisk = evaluation.riskReasons.some((reason) => reason.includes("亲子安全信息不足"));
-  const hasCorrectionRisk = evaluation.riskReasons.some((reason) => reason.includes("纠错"));
+  const hasUnresolvedCorrectionRisk =
+    evaluation.hasUnresolvedCorrectionRisk ??
+    evaluation.riskReasons.some((reason) => reason.includes("纠错未解决") || reason.includes("直到纠错解决"));
 
-  if (evaluation.totalScore >= 72 && !missingSource && !hasNewOrganizer && !hasChildRisk && !hasCorrectionRisk) {
+  if (
+    effectiveScore >= CONFIDENCE_SCORE_THRESHOLDS.high &&
+    !missingSource &&
+    !hasNewOrganizer &&
+    !hasChildRisk &&
+    !hasUnresolvedCorrectionRisk
+  ) {
     return "high";
   }
 
-  if (evaluation.totalScore >= 45 && !hasChildRisk) {
+  if (effectiveScore >= CONFIDENCE_SCORE_THRESHOLDS.medium && !hasChildRisk) {
     return "medium";
   }
 
@@ -255,6 +276,11 @@ function riskReasons(activity: Activity, riskSignal: EvidenceSignal, context: Ev
 }
 
 export function evaluateActivity(activity: Activity, context: EvaluationContext = {}): ActivityEvaluation {
+  const correctionImpacts = (context.correctionImpacts ?? []).filter((impact) => impact.activitySlug === activity.slug);
+  const correctionConfidencePenalty = correctionImpacts.reduce((total, impact) => total + impact.confidenceDelta, 0);
+  const hasUnresolvedCorrectionRisk = correctionImpacts.some(
+    (impact) => impact.isResolved === false || impact.reason.includes("纠错未解决") || impact.reason.includes("直到纠错解决")
+  );
   const source = findSource(activity, context.sources);
   const signals = [
     scoreSourceSignal(activity, source),
@@ -267,8 +293,10 @@ export function evaluateActivity(activity: Activity, context: EvaluationContext 
   const riskSignal = signals.find((signal) => signal.type === "risk")!;
   const totalScore = signals.reduce((total, signal) => total + signal.score, 0);
   const risks = riskReasons(activity, riskSignal, context);
+  const evaluatedAt = new Date().toISOString();
   const partial: ActivityEvaluation = {
     activityId: activity.id,
+    ruleVersion: EVALUATION_RULE_VERSION,
     recommendationLevel: "caution",
     confidenceLevel: "low",
     totalScore,
@@ -280,12 +308,17 @@ export function evaluateActivity(activity: Activity, context: EvaluationContext 
     riskReasons: risks,
     evidenceSignals: signals,
     audienceFit: buildAudienceFit(activity),
-    generatedAt: new Date().toISOString()
+    evaluatedAt,
+    generatedAt: evaluatedAt
   };
 
   return {
     ...partial,
     recommendationLevel: deriveRecommendationLevel(partial),
-    confidenceLevel: deriveConfidenceLevel(partial)
+    confidenceLevel: deriveConfidenceLevel({
+      ...partial,
+      correctionPenaltyScore: correctionConfidencePenalty,
+      hasUnresolvedCorrectionRisk
+    })
   };
 }

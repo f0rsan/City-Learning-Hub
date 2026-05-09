@@ -3,6 +3,7 @@ import type {
   CorrectionReportInput,
   SubmittedActivity,
   SubmittedActivityInput,
+  CorrectionReportStatus,
   SubmittedActivityStatus
 } from "./types";
 import type { CorrectionImpact } from "./evaluationTypes";
@@ -86,45 +87,92 @@ export function addCorrectionReport(input: CorrectionReportInput): CorrectionRep
   return next;
 }
 
-export function getCorrectionImpacts(): CorrectionImpact[] {
-  return getCorrectionReports().map((report) => {
-    if (report.issueType === "活动取消") {
-      return {
-        activitySlug: report.activitySlug,
-        issueType: report.issueType,
-        riskDelta: 30,
-        confidenceDelta: -30,
-        reason: "活动取消"
-      };
-    }
-
-    if (report.issueType === "链接失效") {
-      return {
-        activitySlug: report.activitySlug,
-        issueType: report.issueType,
-        riskDelta: 12,
-        confidenceDelta: -20,
-        reason: "官方链接失效，来源信心下降"
-      };
-    }
-
-    if (report.issueType === "时间变更" || report.issueType === "地点变更") {
-      return {
-        activitySlug: report.activitySlug,
-        issueType: report.issueType,
-        riskDelta: 8,
-        confidenceDelta: -12,
-        reason: `${report.issueType}，需要重新确认`
-      };
+export function updateCorrectionReportStatus(id: string, status: CorrectionReportStatus) {
+  const updated = getCorrectionReports().map((report) => {
+    if (report.id !== id) {
+      return report;
     }
 
     return {
-      activitySlug: report.activitySlug,
-      issueType: report.issueType,
-      riskDelta: 6,
-      confidenceDelta: -8,
-      reason: "补充信息会降低当前判断信心，直到复核完成"
+      ...report,
+      status,
+      resolvedAt: status === "resolved" ? new Date().toISOString() : undefined
     };
+  });
+
+  writeList(correctionReportsKey, updated);
+  return updated.find((report) => report.id === id);
+}
+
+const resolvedRecoveryRatio = 0.4;
+
+function withResolvedRecovery(base: Omit<CorrectionImpact, "reason">, issueType: string): CorrectionImpact {
+  const riskDelta = Math.max(1, Math.round(base.riskDelta * resolvedRecoveryRatio));
+  const confidenceDelta = Math.min(-1, Math.round(base.confidenceDelta * resolvedRecoveryRatio));
+
+  return {
+    ...base,
+    riskDelta,
+    confidenceDelta,
+    reason: `${issueType}已处理，风险和信心惩罚部分恢复`
+  };
+}
+
+export function getCorrectionImpacts(): CorrectionImpact[] {
+  return getCorrectionReports().map((report) => {
+    let baseImpact: Omit<CorrectionImpact, "reason">;
+
+    if (report.issueType === "活动取消") {
+      baseImpact = {
+        activitySlug: report.activitySlug,
+        issueType: report.issueType,
+        isResolved: false,
+        riskDelta: 30,
+        confidenceDelta: -30
+      };
+    } else if (report.issueType === "链接失效") {
+      baseImpact = {
+        activitySlug: report.activitySlug,
+        issueType: report.issueType,
+        isResolved: false,
+        riskDelta: 12,
+        confidenceDelta: -20
+      };
+    } else if (report.issueType === "时间变更" || report.issueType === "地点变更") {
+      baseImpact = {
+        activitySlug: report.activitySlug,
+        issueType: report.issueType,
+        isResolved: false,
+        riskDelta: 8,
+        confidenceDelta: -12
+      };
+    } else {
+      baseImpact = {
+        activitySlug: report.activitySlug,
+        issueType: report.issueType,
+        isResolved: false,
+        riskDelta: 6,
+        confidenceDelta: -8
+      };
+    }
+
+    if (report.status === "resolved") {
+      return withResolvedRecovery({ ...baseImpact, isResolved: true }, report.issueType);
+    }
+
+    if (report.issueType === "活动取消") {
+      return { ...baseImpact, reason: "活动取消，纠错未解决，风险最高" };
+    }
+
+    if (report.issueType === "链接失效") {
+      return { ...baseImpact, reason: "官方链接失效，纠错未解决，来源信心下降" };
+    }
+
+    if (report.issueType === "时间变更" || report.issueType === "地点变更") {
+      return { ...baseImpact, reason: `${report.issueType}，纠错未解决，需要重新确认` };
+    }
+
+    return { ...baseImpact, reason: "补充信息会降低当前判断信心，直到纠错解决" };
   });
 }
 

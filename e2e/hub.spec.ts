@@ -16,12 +16,15 @@ test("home page guides users into family and adult discovery", async ({ page }) 
   await expect(page.getByText("南山 AI 互动体验日")).toBeVisible();
 });
 
-test("activity detail page shows decision information and correction entry", async ({ page }) => {
+test("activity detail page shows decision information and correction entry", async ({ page }, testInfo) => {
   await page.goto("/activities/nanshan-ai-family-day");
 
   await expect(page.getByRole("heading", { name: "南山 AI 互动体验日" })).toBeVisible();
   await expect(page.getByText("是否值得去")).toBeVisible();
   await expect(page.getByText("系统判断依据")).toBeVisible();
+  if (testInfo.project.name === "mobile") {
+    await page.getByRole("button", { name: "展开证据" }).click();
+  }
   await expect(page.getByText(/来源可信度/)).toBeVisible();
   await expect(page.getByText(/判断信心/).first()).toBeVisible();
   await expect(page.getByText(/低龄儿童需要家长全程陪同/)).toBeVisible();
@@ -58,4 +61,27 @@ test("mobile layout keeps system judgment readable", async ({ page }) => {
   await expect(page.getByRole("heading", { name: "深圳本周值得去" })).toBeVisible();
   await expect(page.getByText(/为什么值得去/).first()).toBeVisible();
   await expect(page.getByText(/主要风险/).first()).toBeVisible();
+});
+
+test("mobile detail collapses reasons and evidence by default", async ({ page }) => {
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.goto("/activities/nanshan-ai-family-day");
+
+  const reasonsToggle = page.locator(".detail-fold-toggle").first();
+  const evidenceToggle = page.locator(".detail-fold-toggle").nth(1);
+
+  await expect(reasonsToggle).toBeVisible();
+  await expect(evidenceToggle).toBeVisible();
+  await expect(reasonsToggle).toHaveAttribute("aria-expanded", "false");
+  await expect(evidenceToggle).toHaveAttribute("aria-expanded", "false");
+  await expect(page.getByRole("heading", { name: "适合谁" })).toHaveCount(0);
+  await expect(page.getByText(/来源可信度/)).toHaveCount(0);
+
+  await reasonsToggle.click();
+  await expect(page.getByRole("heading", { name: "适合谁" })).toBeVisible();
+  await expect(reasonsToggle).toHaveAttribute("aria-expanded", "true");
+
+  await evidenceToggle.click();
+  await expect(page.getByText(/来源可信度/)).toBeVisible();
+  await expect(evidenceToggle).toHaveAttribute("aria-expanded", "true");
 });

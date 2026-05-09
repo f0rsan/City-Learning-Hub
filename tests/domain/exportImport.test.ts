@@ -2,12 +2,14 @@ import { beforeEach, describe, expect, it } from "vitest";
 import { exportHubData, importHubData } from "../../src/domain/exportImport";
 import { addCorrectionReport, addSubmittedActivity, getSubmittedActivities, resetLocalHubData } from "../../src/domain/localStore";
 import { resetCandidateData, saveCandidateActivity } from "../../src/domain/candidateStore";
+import { getSourceRuntimeMetrics, recordSourceFailure, resetSourceRuntimeMetrics } from "../../src/domain/sourcePool";
 import { sampleActivities } from "../../src/domain/sampleData";
 
 describe("exportImport", () => {
   beforeEach(() => {
     resetLocalHubData();
     resetCandidateData();
+    resetSourceRuntimeMetrics();
   });
 
   it("exports candidates, evaluations, submissions, corrections, calibrations, and source health", () => {
@@ -37,6 +39,7 @@ describe("exportImport", () => {
       createdAt: "2026-05-09T00:00:00.000Z",
       updatedAt: "2026-05-09T00:00:00.000Z"
     });
+    recordSourceFailure("nanshan-tech-museum", "导出前失败样本");
 
     const exported = exportHubData();
 
@@ -46,6 +49,7 @@ describe("exportImport", () => {
     expect(exported.corrections.length).toBe(1);
     expect(exported.calibrations).toEqual(expect.any(Array));
     expect(exported.sourceHealth.length).toBeGreaterThan(0);
+    expect(exported.sourceRuntimeMetrics.length).toBeGreaterThan(0);
   });
 
   it("validates shape before importing", () => {
@@ -70,5 +74,29 @@ describe("exportImport", () => {
 
     expect(result.ok).toBe(true);
     expect(getSubmittedActivities()).toEqual(exported.submissions);
+  });
+
+  it("rejects malformed sourceRuntimeMetrics with a clear error", () => {
+    const exported = exportHubData();
+    const malformed = {
+      ...exported,
+      sourceRuntimeMetrics: [{ sourceId: "nanshan-tech-museum", consecutiveFailures: "bad" }]
+    };
+
+    const result = importHubData(malformed);
+
+    expect(result).toEqual({ ok: false, error: "sourceRuntimeMetrics 格式不正确" });
+  });
+
+  it("clears stale local metrics when importing legacy payload without sourceRuntimeMetrics", () => {
+    recordSourceFailure("nanshan-tech-museum", "旧数据残留");
+    expect(getSourceRuntimeMetrics().length).toBeGreaterThan(0);
+
+    const exported = exportHubData();
+    const { sourceRuntimeMetrics: _ignored, ...legacyPayload } = exported;
+    const result = importHubData(legacyPayload);
+
+    expect(result).toEqual({ ok: true });
+    expect(getSourceRuntimeMetrics()).toEqual([]);
   });
 });

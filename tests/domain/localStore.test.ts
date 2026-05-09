@@ -2,9 +2,11 @@ import { beforeEach, describe, expect, it } from "vitest";
 import {
   addCorrectionReport,
   addSubmittedActivity,
+  getCorrectionImpacts,
   getCorrectionReports,
   getSubmittedActivities,
   resetLocalHubData,
+  updateCorrectionReportStatus,
   updateSubmittedActivityStatus
 } from "../../src/domain/localStore";
 
@@ -58,5 +60,26 @@ describe("localStore", () => {
 
     expect(report.status).toBe("open");
     expect(getCorrectionReports()).toEqual([report]);
+  });
+
+  it("marks correction as resolved and keeps only partial penalty", () => {
+    const report = addCorrectionReport({
+      activitySlug: "nanshan-ai-family-day",
+      issueType: "链接失效",
+      detail: "官方链接恢复",
+      contact: "reader@example.com"
+    });
+
+    updateCorrectionReportStatus(report.id, "resolved");
+
+    const updatedReport = getCorrectionReports()[0];
+    const impact = getCorrectionImpacts()[0];
+
+    expect(updatedReport.status).toBe("resolved");
+    expect(updatedReport.resolvedAt).toBeTruthy();
+    expect(impact.isResolved).toBe(true);
+    expect(impact.riskDelta).toBe(5);
+    expect(impact.confidenceDelta).toBe(-8);
+    expect(impact.reason).toContain("已处理");
   });
 });

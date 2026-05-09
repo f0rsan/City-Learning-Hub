@@ -81,4 +81,5 @@ export type CorrectionReport = CorrectionReportInput & {
   id: string;
   status: CorrectionReportStatus;
   createdAt: string;
+  resolvedAt?: string;
 };

@@ -393,6 +393,25 @@ main,
   margin-top: 0;
 }
 
+.detail-card-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.detail-fold-toggle {
+  border: 1px solid #d0dbd4;
+  border-radius: 8px;
+  padding: 6px 10px;
+  background: #f3f7f4;
+  color: #18352d;
+  font: inherit;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
 .detail-list {
   display: grid;
   gap: 12px;

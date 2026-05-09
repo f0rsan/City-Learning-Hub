@@ -1,6 +1,6 @@
 import { createCollectedCandidate } from "./candidateStore";
 import { createId, readList, writeList } from "./localStore";
-import { getSourcePool } from "./sourcePool";
+import { getSourcePool, recordSourceFailure as recordSourceRuntimeFailure, recordSourceSuccess } from "./sourcePool";
 
 export type CollectionFailure = {
   sourceId: string;
@@ -35,6 +35,7 @@ export function runSimulatedCollection() {
       sourceId: source.id,
       officialUrl: `${source.url}/auto-candidate-${index + 1}`
     });
+    recordSourceSuccess(source.id);
 
     return candidate.id;
   });
@@ -48,6 +49,8 @@ export function runSimulatedCollection() {
 }
 
 export function recordSourceFailure(sourceId: string, reason: string) {
+  recordSourceRuntimeFailure(sourceId, reason);
+
   return writeRun({
     id: createId("collection"),
     createdAt: new Date().toISOString(),

@@ -1,5 +1,11 @@
-import { evaluateActivity } from "./evaluationRules";
-import type { CandidateActivity, CandidateStatus } from "./evaluationTypes";
+import { EVALUATION_RULE_VERSION, evaluateActivity } from "./evaluationRules";
+import type {
+  ActivityEvaluation,
+  CandidateActivity,
+  CandidateArchiveReason,
+  CandidateStatus,
+  EvaluationChangeSnapshot
+} from "./evaluationTypes";
 import {
   createId,
   getCorrectionImpacts,
@@ -12,9 +18,20 @@ import { getSourcePool } from "./sourcePool";
 import type { Activity, ActivityStatus, Audience } from "./types";
 
 const candidateActivitiesKey = "shenzhen-learning-hub:candidate-activities";
+export const CANDIDATE_DRAFT_TTL_MS = 14 * 24 * 60 * 60 * 1000;
+export const CANDIDATE_PENDING_TTL_MS = 7 * 24 * 60 * 60 * 1000;
+
+const candidateTtlByStatus: Partial<Record<CandidateStatus, number>> = {
+  draft: CANDIDATE_DRAFT_TTL_MS,
+  pending: CANDIDATE_PENDING_TTL_MS
+};
 
 function now() {
   return new Date().toISOString();
+}
+
+function evaluationContext() {
+  return { sources: getSourcePool(), correctionImpacts: getCorrectionImpacts() };
 }
 
 function slugify(value: string) {
@@ -34,7 +51,7 @@ function districtFromInput(value: string): Activity["district"] {
 
 function seedCandidates(): CandidateActivity[] {
   return sampleActivities.map((activity) => {
-    const evaluation = evaluateActivity(activity, { sources: getSourcePool(), correctionImpacts: getCorrectionImpacts() });
+    const evaluation = evaluateActivity(activity, evaluationContext());
     return {
       ...activity,
       evaluation,
@@ -53,6 +70,75 @@ function writeLocalCandidates(candidates: CandidateActivity[]) {
   writeList(candidateActivitiesKey, candidates);
 }
 
+function parseIsoToMs(value?: string) {
+  if (!value) {
+    return Number.NaN;
+  }
+
+  return Date.parse(value);
+}
+
+function resolveLastTouchedMs(candidate: Pick<CandidateActivity, "updatedAt" | "createdAt">) {
+  const updatedAtMs = parseIsoToMs(candidate.updatedAt);
+  if (!Number.isNaN(updatedAtMs)) {
+    return updatedAtMs;
+  }
+
+  return parseIsoToMs(candidate.createdAt);
+}
+
+function getArchiveReason(status: CandidateStatus): CandidateArchiveReason | undefined {
+  if (status === "draft") {
+    return "draft_ttl_expired";
+  }
+
+  if (status === "pending") {
+    return "pending_ttl_expired";
+  }
+
+  return undefined;
+}
+
+function autoArchiveStaleCandidates(candidates: CandidateActivity[]) {
+  const referenceTime = Date.now();
+  const archivedAt = now();
+  let changed = false;
+  const updated: CandidateActivity[] = candidates.map((candidate): CandidateActivity => {
+    const ttl = candidateTtlByStatus[candidate.candidateStatus];
+
+    if (!ttl) {
+      return candidate;
+    }
+
+    const lastTouchedMs = resolveLastTouchedMs(candidate);
+    if (Number.isNaN(lastTouchedMs) || referenceTime - lastTouchedMs <= ttl) {
+      return candidate;
+    }
+
+    const archiveReason = getArchiveReason(candidate.candidateStatus);
+    if (!archiveReason) {
+      return candidate;
+    }
+
+    changed = true;
+
+    return {
+      ...candidate,
+      candidateStatus: "archived",
+      status: "expired",
+      archivedAt,
+      archiveReason,
+      updatedAt: archivedAt
+    };
+  });
+
+  if (changed) {
+    writeLocalCandidates(updated);
+  }
+
+  return updated;
+}
+
 function findDuplicate(candidate: CandidateActivity, allCandidates: CandidateActivity[]) {
   return allCandidates.find(
     (existing) =>
@@ -61,22 +147,58 @@ function findDuplicate(candidate: CandidateActivity, allCandidates: CandidateAct
   );
 }
 
+function toEvaluationSnapshot(evaluation: ActivityEvaluation): EvaluationChangeSnapshot {
+  return {
+    ruleVersion: evaluation.ruleVersion,
+    recommendationLevel: evaluation.recommendationLevel,
+    confidenceLevel: evaluation.confidenceLevel,
+    totalScore: evaluation.totalScore,
+    evaluatedAt: evaluation.evaluatedAt
+  };
+}
+
+function hasRuleUpdateScoreChange(previous: ActivityEvaluation, next: ActivityEvaluation) {
+  return (
+    previous.totalScore !== next.totalScore ||
+    previous.recommendationLevel !== next.recommendationLevel ||
+    previous.confidenceLevel !== next.confidenceLevel
+  );
+}
+
 function ensureEvaluation(candidate: CandidateActivity) {
   if (candidate.candidateStatus === "evaluated") {
     return {
       ...candidate,
-      evaluation:
-        candidate.evaluation ??
-        evaluateActivity(candidate, { sources: getSourcePool(), correctionImpacts: getCorrectionImpacts() })
+      evaluation: evaluateActivity(candidate, evaluationContext())
+    };
+  }
+
+  if (candidate.candidateStatus === "published" && candidate.evaluation) {
+    return {
+      ...candidate,
+      evaluation: evaluateActivity(candidate, evaluationContext())
     };
   }
 
   return candidate;
 }
 
+function getFreshLocalCandidates() {
+  const current = autoArchiveStaleCandidates(localCandidates());
+  const hasOutdatedRuleVersion = current.some(
+    (candidate) => candidate.evaluation && candidate.evaluation.ruleVersion !== EVALUATION_RULE_VERSION
+  );
+
+  if (!hasOutdatedRuleVersion) {
+    return current.map(ensureEvaluation);
+  }
+
+  return reevaluateCandidatesForRuleVersionChange().map(ensureEvaluation);
+}
+
 export function getCandidateActivities() {
   const seeds = seedCandidates();
-  const local = localCandidates().map(ensureEvaluation);
+  const local = getFreshLocalCandidates();
   return [...local, ...seeds];
 }
 
@@ -141,25 +263,33 @@ export function createCandidateFromSubmission(submissionId: string) {
 
 export function updateCandidateStatus(id: string, status: CandidateStatus) {
   const existing = localCandidates();
+  const timestamp = now();
   const updated = existing.map((candidate) => {
     if (candidate.id !== id) {
       return candidate;
     }
 
     const activityStatus: ActivityStatus =
-      status === "cancelled" ? "cancelled" : status === "rejected" ? "uncertain" : "published";
+      status === "cancelled"
+        ? "cancelled"
+        : status === "rejected"
+          ? "uncertain"
+          : status === "archived"
+            ? "expired"
+            : status === "draft" || status === "pending"
+              ? "draft"
+              : "published";
     const next = {
       ...candidate,
       candidateStatus: status,
       status: activityStatus,
+      archivedAt: status === "archived" ? candidate.archivedAt ?? timestamp : undefined,
+      archiveReason: status === "archived" ? candidate.archiveReason : undefined,
       evaluation:
         status === "evaluated" || status === "published"
-          ? evaluateActivity(
-              { ...candidate, status: activityStatus },
-              { sources: getSourcePool(), correctionImpacts: getCorrectionImpacts() }
-            )
+          ? evaluateActivity({ ...candidate, status: activityStatus }, evaluationContext())
           : candidate.evaluation,
-      updatedAt: now()
+      updatedAt: timestamp
     };
 
     return next;
@@ -180,6 +310,43 @@ export function getPublicEvaluatedActivities() {
 
 export function replaceCandidateActivities(candidates: CandidateActivity[]) {
   writeLocalCandidates(candidates);
+}
+
+export function reevaluateCandidatesForRuleVersionChange() {
+  const existing = localCandidates();
+  const timestamp = now();
+  let hasRuleVersionUpdates = false;
+  const updated: CandidateActivity[] = existing.map((candidate): CandidateActivity => {
+    if (!candidate.evaluation || candidate.evaluation.ruleVersion === EVALUATION_RULE_VERSION) {
+      return candidate;
+    }
+
+    hasRuleVersionUpdates = true;
+    const previousEvaluation = candidate.evaluation;
+    const nextEvaluation = evaluateActivity(candidate, evaluationContext());
+    const changed = hasRuleUpdateScoreChange(previousEvaluation, nextEvaluation);
+
+    return {
+      ...candidate,
+      evaluation: nextEvaluation,
+      evaluationChange: changed
+        ? {
+            changedBy: "rule_version_update",
+            reason: "规则版本更新后重新评分",
+            changedAt: timestamp,
+            previous: toEvaluationSnapshot(previousEvaluation)
+          }
+        : undefined,
+      updatedAt: timestamp
+    };
+  });
+
+  if (!hasRuleVersionUpdates) {
+    return existing;
+  }
+
+  writeLocalCandidates(updated);
+  return updated;
 }
 
 export function resetCandidateData() {
@@ -219,7 +386,7 @@ export function createCollectedCandidate(input: {
     status: "draft",
     weeklyFeatured: false,
     childSafetyComplete: !input.audience.includes("family"),
-    candidateStatus: "draft",
+    candidateStatus: "pending",
     collectedFromSourceId: input.sourceId,
     createdAt: now(),
     updatedAt: now()

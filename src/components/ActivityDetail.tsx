@@ -1,4 +1,5 @@
 import { AlertTriangle, ExternalLink, MapPin } from "lucide-react";
+import { useEffect, useId, useState } from "react";
 import { Link } from "react-router-dom";
 import { getTrustState } from "../domain/activitySelectors";
 import { evaluateActivity } from "../domain/evaluationRules";
@@ -13,12 +14,53 @@ type ActivityDetailProps = {
 };
 
 export default function ActivityDetail({ activity }: ActivityDetailProps) {
+  const reasonsPanelId = useId();
+  const evidencePanelId = useId();
+  const [isCompactViewport, setIsCompactViewport] = useState(() => {
+    if (typeof window === "undefined" || typeof window.matchMedia !== "function") {
+      return false;
+    }
+
+    return window.matchMedia("(max-width: 860px)").matches;
+  });
+  const [showReasons, setShowReasons] = useState(!isCompactViewport);
+  const [showEvidence, setShowEvidence] = useState(!isCompactViewport);
   const trust = getTrustState(activity);
   const evaluation = activity.evaluation ?? evaluateActivity(activity, { sources: getSourcePool() });
   const start = new Intl.DateTimeFormat("zh-CN", {
     dateStyle: "medium",
     timeStyle: "short"
   }).format(new Date(activity.startAt));
+
+  useEffect(() => {
+    if (typeof window === "undefined" || typeof window.matchMedia !== "function") {
+      return;
+    }
+
+    const mediaQuery = window.matchMedia("(max-width: 860px)");
+    const syncViewport = () => setIsCompactViewport(mediaQuery.matches);
+
+    syncViewport();
+
+    if (typeof mediaQuery.addEventListener === "function") {
+      mediaQuery.addEventListener("change", syncViewport);
+      return () => mediaQuery.removeEventListener("change", syncViewport);
+    }
+
+    mediaQuery.addListener(syncViewport);
+    return () => mediaQuery.removeListener(syncViewport);
+  }, []);
+
+  useEffect(() => {
+    if (isCompactViewport) {
+      setShowReasons(false);
+      setShowEvidence(false);
+      return;
+    }
+
+    setShowReasons(true);
+    setShowEvidence(true);
+  }, [isCompactViewport]);
 
   return (
     <main className="detail-page">
@@ -42,20 +84,58 @@ export default function ActivityDetail({ activity }: ActivityDetailProps) {
 
       <section className="detail-grid">
         <article className="detail-card">
-          <h2>是否值得去</h2>
-          <ul>
-            {evaluation.valueReasons.map((reason) => (
-              <li key={reason}>{reason}</li>
-            ))}
-          </ul>
-          <h3>适合谁</h3>
-          <p>{activity.bestFor}</p>
+          <div className="detail-card-heading">
+            <h2>是否值得去</h2>
+            {isCompactViewport ? (
+              <button
+                type="button"
+                className="detail-fold-toggle"
+                aria-expanded={showReasons}
+                aria-controls={reasonsPanelId}
+                onClick={() => setShowReasons((current) => !current)}
+              >
+                {showReasons ? "收起理由" : "展开理由"}
+              </button>
+            ) : null}
+          </div>
+          <div id={reasonsPanelId} hidden={!showReasons}>
+            {showReasons ? (
+              <>
+              <ul>
+                {evaluation.valueReasons.map((reason) => (
+                  <li key={reason}>{reason}</li>
+                ))}
+              </ul>
+              <h3>适合谁</h3>
+              <p>{activity.bestFor}</p>
+              </>
+            ) : null}
+          </div>
         </article>
 
         <article className="detail-card">
-          <h2>系统判断依据</h2>
-          <EvaluationBadge evaluation={evaluation} />
-          <EvidenceSummary evaluation={evaluation} />
+          <div className="detail-card-heading">
+            <h2>系统判断依据</h2>
+            {isCompactViewport ? (
+              <button
+                type="button"
+                className="detail-fold-toggle"
+                aria-expanded={showEvidence}
+                aria-controls={evidencePanelId}
+                onClick={() => setShowEvidence((current) => !current)}
+              >
+                {showEvidence ? "收起证据" : "展开证据"}
+              </button>
+            ) : null}
+          </div>
+          <div id={evidencePanelId} hidden={!showEvidence}>
+            {showEvidence ? (
+              <>
+              <EvaluationBadge evaluation={evaluation} />
+              <EvidenceSummary evaluation={evaluation} />
+              </>
+            ) : null}
+          </div>
         </article>
 
         <article className="detail-card">
