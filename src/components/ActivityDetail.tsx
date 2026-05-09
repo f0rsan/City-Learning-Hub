@@ -1,7 +1,11 @@
 import { AlertTriangle, ExternalLink, MapPin } from "lucide-react";
 import { Link } from "react-router-dom";
 import { getTrustState } from "../domain/activitySelectors";
+import { evaluateActivity } from "../domain/evaluationRules";
+import { getSourcePool } from "../domain/sourcePool";
 import type { Activity } from "../domain/types";
+import EvaluationBadge from "./EvaluationBadge";
+import EvidenceSummary from "./EvidenceSummary";
 import StatusBadge from "./StatusBadge";
 
 type ActivityDetailProps = {
@@ -10,6 +14,7 @@ type ActivityDetailProps = {
 
 export default function ActivityDetail({ activity }: ActivityDetailProps) {
   const trust = getTrustState(activity);
+  const evaluation = activity.evaluation ?? evaluateActivity(activity, { sources: getSourcePool() });
   const start = new Intl.DateTimeFormat("zh-CN", {
     dateStyle: "medium",
     timeStyle: "short"
@@ -30,6 +35,7 @@ export default function ActivityDetail({ activity }: ActivityDetailProps) {
         </div>
         <aside className={`trust-panel ${trust.level}`}>
           <StatusBadge activity={activity} />
+          <EvaluationBadge evaluation={evaluation} />
           <p>{trust.message}</p>
         </aside>
       </section>
@@ -37,9 +43,19 @@ export default function ActivityDetail({ activity }: ActivityDetailProps) {
       <section className="detail-grid">
         <article className="detail-card">
           <h2>是否值得去</h2>
-          <p>{activity.recommendation}</p>
+          <ul>
+            {evaluation.valueReasons.map((reason) => (
+              <li key={reason}>{reason}</li>
+            ))}
+          </ul>
           <h3>适合谁</h3>
           <p>{activity.bestFor}</p>
+        </article>
+
+        <article className="detail-card">
+          <h2>系统判断依据</h2>
+          <EvaluationBadge evaluation={evaluation} />
+          <EvidenceSummary evaluation={evaluation} />
         </article>
 
         <article className="detail-card">
@@ -80,7 +96,7 @@ export default function ActivityDetail({ activity }: ActivityDetailProps) {
         <article className="detail-card">
           <h2>去之前要知道</h2>
           <ul>
-            {activity.cautions.map((caution) => (
+            {evaluation.riskReasons.map((caution) => (
               <li key={caution}>
                 <AlertTriangle size={16} aria-hidden="true" />
                 {caution}

@@ -5,11 +5,12 @@ import type {
   SubmittedActivityInput,
   SubmittedActivityStatus
 } from "./types";
+import type { CorrectionImpact } from "./evaluationTypes";
 
-const submittedActivitiesKey = "shenzhen-learning-hub:submitted-activities";
-const correctionReportsKey = "shenzhen-learning-hub:correction-reports";
+export const submittedActivitiesKey = "shenzhen-learning-hub:submitted-activities";
+export const correctionReportsKey = "shenzhen-learning-hub:correction-reports";
 
-function createId(prefix: string) {
+export function createId(prefix: string) {
   if (typeof crypto !== "undefined" && "randomUUID" in crypto) {
     return `${prefix}-${crypto.randomUUID()}`;
   }
@@ -17,7 +18,7 @@ function createId(prefix: string) {
   return `${prefix}-${Date.now()}-${Math.random().toString(16).slice(2)}`;
 }
 
-function readList<T>(key: string): T[] {
+export function readList<T>(key: string): T[] {
   const raw = window.localStorage.getItem(key);
 
   if (!raw) {
@@ -32,7 +33,7 @@ function readList<T>(key: string): T[] {
   }
 }
 
-function writeList<T>(key: string, value: T[]) {
+export function writeList<T>(key: string, value: T[]) {
   window.localStorage.setItem(key, JSON.stringify(value));
 }
 
@@ -65,6 +66,14 @@ export function getCorrectionReports() {
   return readList<CorrectionReport>(correctionReportsKey);
 }
 
+export function replaceSubmittedActivities(value: SubmittedActivity[]) {
+  writeList(submittedActivitiesKey, value);
+}
+
+export function replaceCorrectionReports(value: CorrectionReport[]) {
+  writeList(correctionReportsKey, value);
+}
+
 export function addCorrectionReport(input: CorrectionReportInput): CorrectionReport {
   const next: CorrectionReport = {
     ...input,
@@ -75,6 +84,48 @@ export function addCorrectionReport(input: CorrectionReportInput): CorrectionRep
 
   writeList(correctionReportsKey, [next, ...getCorrectionReports()]);
   return next;
+}
+
+export function getCorrectionImpacts(): CorrectionImpact[] {
+  return getCorrectionReports().map((report) => {
+    if (report.issueType === "活动取消") {
+      return {
+        activitySlug: report.activitySlug,
+        issueType: report.issueType,
+        riskDelta: 30,
+        confidenceDelta: -30,
+        reason: "活动取消"
+      };
+    }
+
+    if (report.issueType === "链接失效") {
+      return {
+        activitySlug: report.activitySlug,
+        issueType: report.issueType,
+        riskDelta: 12,
+        confidenceDelta: -20,
+        reason: "官方链接失效，来源信心下降"
+      };
+    }
+
+    if (report.issueType === "时间变更" || report.issueType === "地点变更") {
+      return {
+        activitySlug: report.activitySlug,
+        issueType: report.issueType,
+        riskDelta: 8,
+        confidenceDelta: -12,
+        reason: `${report.issueType}，需要重新确认`
+      };
+    }
+
+    return {
+      activitySlug: report.activitySlug,
+      issueType: report.issueType,
+      riskDelta: 6,
+      confidenceDelta: -8,
+      reason: "补充信息会降低当前判断信心，直到复核完成"
+    };
+  });
 }
 
 export function resetLocalHubData() {

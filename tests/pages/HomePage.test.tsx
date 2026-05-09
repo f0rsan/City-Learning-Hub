@@ -16,7 +16,11 @@ describe("HomePage", () => {
     renderRoute(<App />);
 
     expect(screen.getByText("南山 AI 互动体验日")).toBeInTheDocument();
-    expect(screen.getByText(/有互动环节，不只是看展/)).toBeInTheDocument();
+    expect(screen.getAllByText(/为什么值得去/)[0]).toBeInTheDocument();
+    expect(screen.getAllByText(/有互动环节，不只是看展/)[0]).toBeInTheDocument();
+    expect(screen.getAllByText(/主要风险/)[0]).toBeInTheDocument();
+    expect(screen.getAllByText(/系统推荐/)[0]).toBeInTheDocument();
+    expect(screen.getAllByText(/判断信心/)[0]).toBeInTheDocument();
     expect(screen.getByText(/价值、风险和判断信心/)).toBeInTheDocument();
   });
 

@@ -9,6 +9,11 @@ describe("ActivityPage", () => {
 
     expect(screen.getByRole("heading", { name: "南山 AI 互动体验日" })).toBeInTheDocument();
     expect(screen.getByText(/适合第一次带孩子接触 AI/)).toBeInTheDocument();
+    expect(screen.getByText("系统判断依据")).toBeInTheDocument();
+    expect(screen.getByText(/来源可信度/)).toBeInTheDocument();
+    expect(screen.getByText(/组织方信号/)).toBeInTheDocument();
+    expect(screen.getByText(/场地信号/)).toBeInTheDocument();
+    expect(screen.getAllByText(/判断信心/)[0]).toBeInTheDocument();
     expect(screen.getByText(/低龄儿童需要家长全程陪同/)).toBeInTheDocument();
     expect(screen.getByRole("link", { name: "查看官方报名页面" })).toBeInTheDocument();
   });
@@ -16,7 +21,7 @@ describe("ActivityPage", () => {
   it("shows a clear warning for cancelled activities", () => {
     renderRoute(<App />, "/activities/cancelled-ai-lecture");
 
-    expect(screen.getByText("活动已取消")).toBeInTheDocument();
+    expect(screen.getAllByText("活动已取消")[0]).toBeInTheDocument();
     expect(screen.getByText(/不能进入本周精选/)).toBeInTheDocument();
   });
 

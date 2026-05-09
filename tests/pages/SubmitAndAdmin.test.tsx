@@ -22,16 +22,16 @@ describe("submit and admin flow", () => {
     await user.type(screen.getByLabelText("官方链接"), "https://example.com/robot");
     await user.type(screen.getByLabelText("联系方式"), "organizer@example.com");
     await user.type(screen.getByLabelText("推荐理由"), "适合小学家庭");
-    await user.click(screen.getByRole("button", { name: "提交到待审核" }));
+    await user.click(screen.getByRole("button", { name: "提交到候选池" }));
 
-    expect(screen.getByText("已进入待审核队列")).toBeInTheDocument();
+    expect(screen.getByText("已进入候选池")).toBeInTheDocument();
 
     submitPage.unmount();
     renderRoute(<App />, "/admin");
 
-    expect(screen.getByRole("heading", { name: "轻后台" })).toBeInTheDocument();
-    expect(screen.getByText("周末机器人体验营")).toBeInTheDocument();
-    expect(screen.getByText("待审核")).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "系统评估台" })).toBeInTheDocument();
+    expect(screen.getAllByText("周末机器人体验营")[0]).toBeInTheDocument();
+    expect(screen.getAllByText("候选草稿")[0]).toBeInTheDocument();
   });
 
   it("lets a reader report a correction for an activity", async () => {
@@ -51,5 +51,6 @@ describe("submit and admin flow", () => {
 
     expect(screen.getByText("时间变更")).toBeInTheDocument();
     expect(screen.getByText("主办方页面显示改到周日")).toBeInTheDocument();
+    expect(screen.getAllByText(/降低信心/)[0]).toBeInTheDocument();
   });
 });

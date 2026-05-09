@@ -1,7 +1,7 @@
 import { Navigate, useParams } from "react-router-dom";
 import WeeklySection from "../components/WeeklySection";
 import { filterByAudience } from "../domain/activitySelectors";
-import { sampleActivities } from "../domain/sampleData";
+import { getPublicEvaluatedActivities } from "../domain/candidateStore";
 import type { Audience } from "../domain/types";
 
 function isAudience(value: string | undefined): value is Audience {
@@ -15,7 +15,7 @@ export default function AudiencePage() {
     return <Navigate to="/" replace />;
   }
 
-  const activities = filterByAudience(sampleActivities, audience);
+  const activities = filterByAudience(getPublicEvaluatedActivities(), audience);
   const title = audience === "family" ? "带孩子去学习" : "大人去交流";
   const subtitle =
     audience === "family"

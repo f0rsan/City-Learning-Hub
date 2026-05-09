@@ -1,5 +1,6 @@
 import { useState } from "react";
-import { addSubmittedActivity } from "../domain/localStore";
+import { createCandidateFromSubmission } from "../domain/candidateStore";
+import { addSubmittedActivity, updateSubmittedActivityStatus } from "../domain/localStore";
 import type { Activity, Audience } from "../domain/types";
 
 const categories: Activity["category"][] = [
@@ -44,7 +45,7 @@ export default function SubmitActivityPage() {
 
       {submittedTitle ? (
         <p className="success-message">
-          <strong>已进入待审核队列</strong>：{submittedTitle}
+          <strong>已进入候选池</strong>：{submittedTitle}
         </p>
       ) : null}
 
@@ -55,7 +56,7 @@ export default function SubmitActivityPage() {
           const form = new FormData(event.currentTarget);
           const title = String(form.get("title") ?? "").trim();
 
-          addSubmittedActivity({
+          const submission = addSubmittedActivity({
             title,
             category: String(form.get("category") ?? "亲子科技") as Activity["category"],
             audience: audienceFromValue(String(form.get("audience") ?? "亲子")),
@@ -66,6 +67,8 @@ export default function SubmitActivityPage() {
             contact: String(form.get("contact") ?? "").trim(),
             note: String(form.get("note") ?? "").trim()
           });
+          createCandidateFromSubmission(submission.id);
+          updateSubmittedActivityStatus(submission.id, "approved");
 
           setSubmittedTitle(title);
           event.currentTarget.reset();
@@ -117,7 +120,7 @@ export default function SubmitActivityPage() {
           推荐理由
           <textarea name="note" required rows={4} />
         </label>
-        <button type="submit">提交到待审核</button>
+        <button type="submit">提交到候选池</button>
       </form>
     </section>
   );

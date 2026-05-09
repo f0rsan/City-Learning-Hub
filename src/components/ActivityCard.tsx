@@ -1,6 +1,9 @@
 import { Clock, MapPin, Ticket } from "lucide-react";
 import { Link } from "react-router-dom";
+import { evaluateActivity } from "../domain/evaluationRules";
+import { getSourcePool } from "../domain/sourcePool";
 import type { Activity } from "../domain/types";
+import EvaluationBadge from "./EvaluationBadge";
 import StatusBadge from "./StatusBadge";
 
 type ActivityCardProps = {
@@ -8,6 +11,7 @@ type ActivityCardProps = {
 };
 
 export default function ActivityCard({ activity }: ActivityCardProps) {
+  const evaluation = activity.evaluation ?? evaluateActivity(activity, { sources: getSourcePool() });
   const date = new Intl.DateTimeFormat("zh-CN", {
     month: "numeric",
     day: "numeric",
@@ -26,6 +30,7 @@ export default function ActivityCard({ activity }: ActivityCardProps) {
         <Link to={`/activities/${activity.slug}`}>{activity.title}</Link>
       </h3>
       <p className="summary">{activity.summary}</p>
+      <EvaluationBadge evaluation={evaluation} />
       <dl className="activity-facts">
         <div>
           <Clock size={16} aria-hidden="true" />
@@ -45,7 +50,12 @@ export default function ActivityCard({ activity }: ActivityCardProps) {
           <dd>{activity.priceNote}</dd>
         </div>
       </dl>
-      <p className="recommendation">{activity.recommendation}</p>
+      <div className="card-judgment">
+        <strong>为什么值得去</strong>
+        <p>{evaluation.valueReasons[0]}</p>
+        <strong>主要风险</strong>
+        <p>{evaluation.riskReasons[0]}</p>
+      </div>
       <div className="tag-row">
         {activity.tags.slice(0, 4).map((tag) => (
           <span key={tag}>{tag}</span>

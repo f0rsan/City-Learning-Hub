@@ -1,6 +1,6 @@
 # 系统评估优先 Hub 实施计划
 
-> **给后续执行代理：** 必须使用 `superpowers:subagent-driven-development`（推荐）或 `superpowers:executing-plans`，按任务逐项推进本计划。步骤使用 checkbox（`- [ ]`）语法追踪进度。
+> **给后续执行代理：** 必须使用 `superpowers:subagent-driven-development`（推荐）或 `superpowers:executing-plans`，按任务逐项推进本计划。步骤使用 checkbox（`- [x]`）语法追踪进度。
 
 **目标：** 把 Shenzhen Learning Hub 从人工整理活动，转为“80% 系统驱动的活动价值判断引擎 + 20% 人工校准”的产品。
 
@@ -99,7 +99,7 @@ git commit -m "docs: shift hub strategy to system evaluation first"
 - 创建：`tests/domain/evaluationRules.test.ts`
 - 修改：`src/domain/types.ts`
 
-- [ ] **步骤 1：先写失败的评估输出测试**
+- [x] **步骤 1：先写失败的评估输出测试**
 
 新增测试，确认每个被评估的活动都具备：
 
@@ -118,7 +118,7 @@ npm run test:run -- tests/domain/evaluationRules.test.ts
 
 预期结果：失败，因为评估类型和规则还不存在。
 
-- [ ] **步骤 2：增加评估类型**
+- [x] **步骤 2：增加评估类型**
 
 实现这些类型：
 
@@ -130,7 +130,7 @@ npm run test:run -- tests/domain/evaluationRules.test.ts
 - `ConfidenceLevel`
 - `CalibrationNote`
 
-- [ ] **步骤 3：验证类型集成**
+- [x] **步骤 3：验证类型集成**
 
 运行：
 
@@ -147,7 +147,7 @@ npm run build
 - 创建：`src/domain/evaluationRules.ts`
 - 修改：`tests/domain/evaluationRules.test.ts`
 
-- [ ] **步骤 1：编写评分测试**
+- [x] **步骤 1：编写评分测试**
 
 覆盖这些情况：
 
@@ -157,7 +157,7 @@ npm run build
 - 新组织方如果内容质量好，可以是中等信心，而不是自动低价值。
 - 社媒信号不能单独主导最终评分。
 
-- [ ] **步骤 2：实现确定性评分**
+- [x] **步骤 2：实现确定性评分**
 
 创建函数：
 
@@ -170,7 +170,7 @@ npm run build
 - `deriveRecommendationLevel(evaluation)`
 - `deriveConfidenceLevel(evaluation)`
 
-- [ ] **步骤 3：验证评分行为**
+- [x] **步骤 3：验证评分行为**
 
 运行：
 
@@ -189,7 +189,7 @@ npm run build
 - 修改：`src/domain/localStore.ts`
 - 创建：`tests/domain/candidateStore.test.ts`
 
-- [ ] **步骤 1：先写失败的候选活动存储测试**
+- [x] **步骤 1：先写失败的候选活动存储测试**
 
 测试必须覆盖：
 
@@ -198,7 +198,7 @@ npm run build
 - 用户提交可以变成候选草稿。
 - 已发布候选活动必须经过评估后，才可以出现在公开推荐里。
 
-- [ ] **步骤 2：实现本地候选活动存储**
+- [x] **步骤 2：实现本地候选活动存储**
 
 第一版使用 localStorage，但 API 要保持可替换：
 
@@ -208,7 +208,7 @@ npm run build
 - `updateCandidateStatus(id, status)`
 - `resetCandidateData()`
 
-- [ ] **步骤 3：验证候选活动存储**
+- [x] **步骤 3：验证候选活动存储**
 
 运行：
 
@@ -228,7 +228,7 @@ npm run test:run
 - 创建：`src/components/EvaluationBadge.tsx`
 - 创建：`tests/pages/EvaluationAdmin.test.tsx`
 
-- [ ] **步骤 1：先写失败的后台测试**
+- [x] **步骤 1：先写失败的后台测试**
 
 测试必须验证：
 
@@ -238,7 +238,7 @@ npm run test:run
 - 后台可以确认、降低信心、拒绝或送入校准。
 - 后台可以把已确认的用户提交转成候选草稿。
 
-- [ ] **步骤 2：实现评估控制台界面**
+- [x] **步骤 2：实现评估控制台界面**
 
 后台分区：
 
@@ -248,7 +248,7 @@ npm run test:run
 - 影响可信度的纠错。
 - 来源池健康度。
 
-- [ ] **步骤 3：验证后台工作流**
+- [x] **步骤 3：验证后台工作流**
 
 运行：
 
@@ -268,7 +268,7 @@ npm run build
 - 修改：`tests/pages/HomePage.test.tsx`
 - 修改：`tests/pages/ActivityPage.test.tsx`
 
-- [ ] **步骤 1：先写失败的公开页面测试**
+- [x] **步骤 1：先写失败的公开页面测试**
 
 测试必须验证：
 
@@ -278,7 +278,7 @@ npm run build
 - 有风险时，卡片至少展示一个风险理由。
 - 详情页在官方链接前展示证据拆解。
 
-- [ ] **步骤 2：更新公开组件**
+- [x] **步骤 2：更新公开组件**
 
 卡片和详情页应该展示：
 
@@ -290,7 +290,7 @@ npm run build
 - 有历史或社媒信号时展示对应信息。
 - 信心等级。
 
-- [ ] **步骤 3：验证公开页面**
+- [x] **步骤 3：验证公开页面**
 
 运行：
 
@@ -310,7 +310,7 @@ npm run build
 - 修改：`src/pages/CorrectionPage.tsx`
 - 修改：`tests/pages/SubmitAndAdmin.test.tsx`
 
-- [ ] **步骤 1：先写失败的工作流测试**
+- [x] **步骤 1：先写失败的工作流测试**
 
 测试必须验证：
 
@@ -318,7 +318,7 @@ npm run build
 - 纠错可以标记链接失效、活动取消、时间变化或场地变化。
 - 纠错处理后会影响风险或信心。
 
-- [ ] **步骤 2：实现纠错影响**
+- [x] **步骤 2：实现纠错影响**
 
 纠错类型应该映射成结构化影响：
 
@@ -327,7 +327,7 @@ npm run build
 - 时间或场地变化会降低信心，直到重新确认。
 - 重复纠错会提高风险。
 
-- [ ] **步骤 3：验证工作流**
+- [x] **步骤 3：验证工作流**
 
 运行：
 
@@ -347,7 +347,7 @@ npm run e2e
 - 创建：`tests/domain/collectionQueue.test.ts`
 - 修改：`src/pages/AdminPage.tsx`
 
-- [ ] **步骤 1：先写失败的来源队列测试**
+- [x] **步骤 1：先写失败的来源队列测试**
 
 测试必须验证：
 
@@ -356,11 +356,11 @@ npm run e2e
 - 来源失败会被记录。
 - 采集到的候选活动必须经过评估后，才可以公开展示。
 
-- [ ] **步骤 2：实现原型来源池**
+- [x] **步骤 2：实现原型来源池**
 
 先从人工维护的来源定义开始。本任务不抓取真实网站，目标是安全地建模采集管线。
 
-- [ ] **步骤 3：验证来源队列**
+- [x] **步骤 3：验证来源队列**
 
 运行：
 
@@ -379,7 +379,7 @@ npm run build
 - 修改：`src/pages/AdminPage.tsx`
 - 创建：`tests/domain/exportImport.test.ts`
 
-- [ ] **步骤 1：先写失败的导出/导入测试**
+- [x] **步骤 1：先写失败的导出/导入测试**
 
 测试必须验证：
 
@@ -387,11 +387,11 @@ npm run build
 - 导入在写入前先验证数据形状。
 - 格式错误的导入会被拒绝。
 
-- [ ] **步骤 2：实现导出/导入**
+- [x] **步骤 2：实现导出/导入**
 
 为本地原型数据增加 JSON 导出和导入函数。
 
-- [ ] **步骤 3：验证备份流程**
+- [x] **步骤 3：验证备份流程**
 
 运行：
 
@@ -408,7 +408,7 @@ npm run test:run
 
 - 修改：`e2e/hub.spec.ts`
 
-- [ ] **步骤 1：更新 Playwright 测试**
+- [x] **步骤 1：更新 Playwright 测试**
 
 浏览器测试必须覆盖：
 
@@ -418,7 +418,7 @@ npm run test:run
 - 校准会改变推荐等级或信心等级。
 - 移动端布局仍然可读。
 
-- [ ] **步骤 2：运行完整验证**
+- [x] **步骤 2：运行完整验证**
 
 运行：
 

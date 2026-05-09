@@ -39,6 +39,7 @@ export type Activity = {
   status: ActivityStatus;
   weeklyFeatured: boolean;
   childSafetyComplete: boolean;
+  evaluation?: import("./evaluationTypes").ActivityEvaluation;
 };
 
 export type TrustState = {

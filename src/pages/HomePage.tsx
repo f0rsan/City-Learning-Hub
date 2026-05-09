@@ -2,10 +2,10 @@ import AudienceEntry from "../components/AudienceEntry";
 import WeeklySection from "../components/WeeklySection";
 import heroImage from "../assets/shenzhen-learning-hub-hero.png";
 import { getWeeklyFeatured } from "../domain/activitySelectors";
-import { sampleActivities } from "../domain/sampleData";
+import { getPublicEvaluatedActivities } from "../domain/candidateStore";
 
 export default function HomePage() {
-  const featured = getWeeklyFeatured(sampleActivities);
+  const featured = getWeeklyFeatured(getPublicEvaluatedActivities());
 
   return (
     <main>

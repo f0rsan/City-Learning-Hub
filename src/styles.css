@@ -242,10 +242,29 @@ main,
   color: #46534e;
 }
 
-.recommendation {
+.recommendation,
+.card-judgment {
   padding: 12px;
   background: #eef5f1;
   border-radius: 8px;
+}
+
+.card-judgment {
+  display: grid;
+  gap: 6px;
+}
+
+.card-judgment strong,
+.admin-reasons strong {
+  color: #18352d;
+  font-size: 13px;
+}
+
+.card-judgment p,
+.admin-reasons p {
+  margin: 0;
+  color: #46534e;
+  line-height: 1.5;
 }
 
 .tag-row span,
@@ -272,6 +291,48 @@ main,
 .status-badge.blocked {
   background: #ffe3df;
   color: #9a2c1f;
+}
+
+.evaluation-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.evaluation-badge {
+  display: inline-flex;
+  align-items: center;
+  border-radius: 999px;
+  padding: 5px 9px;
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.evaluation-badge.recommendation.strong {
+  background: #dff4e9;
+  color: #006b5f;
+}
+
+.evaluation-badge.recommendation.good,
+.evaluation-badge.confidence.medium {
+  background: #eaf0ff;
+  color: #244b8f;
+}
+
+.evaluation-badge.recommendation.caution,
+.evaluation-badge.confidence.low {
+  background: #fff3d8;
+  color: #7c5200;
+}
+
+.evaluation-badge.recommendation.blocked {
+  background: #ffe3df;
+  color: #9a2c1f;
+}
+
+.evaluation-badge.confidence.high {
+  background: #e1f3ed;
+  color: #006b5f;
 }
 
 .page-stack {
@@ -366,6 +427,27 @@ main,
   display: flex;
   gap: 8px;
   align-items: flex-start;
+}
+
+.evidence-summary {
+  display: grid;
+  gap: 10px;
+  margin-top: 14px;
+}
+
+.evidence-item {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 4px 10px;
+  border-top: 1px solid #e7eee9;
+  padding-top: 10px;
+}
+
+.evidence-item p {
+  grid-column: 1 / -1;
+  margin: 0;
+  color: #46534e;
+  line-height: 1.5;
 }
 
 .detail-actions {
@@ -492,6 +574,10 @@ main,
   background: #ffffff;
 }
 
+.evaluation-admin-item {
+  align-items: flex-start;
+}
+
 .admin-item h3 {
   margin: 10px 0 6px;
 }
@@ -511,6 +597,25 @@ main,
 .admin-actions button + button {
   background: #edf0ed;
   color: #14201d;
+}
+
+.inline-status {
+  border-radius: 8px;
+  padding: 8px 10px;
+  background: #eef5f1;
+  color: #006b5f !important;
+  font-weight: 800;
+}
+
+.pill {
+  display: inline-flex;
+  width: fit-content;
+  border-radius: 999px;
+  padding: 4px 9px;
+  background: #edf0ed;
+  color: #34423d;
+  font-size: 13px;
+  font-weight: 800;
 }
 
 .empty-state {
