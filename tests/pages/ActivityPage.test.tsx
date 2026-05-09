@@ -1,0 +1,28 @@
+import { screen } from "@testing-library/react";
+import { describe, expect, it } from "vitest";
+import App from "../../src/App";
+import { renderRoute } from "../../src/test/render";
+
+describe("ActivityPage", () => {
+  it("shows decision details before the official link", () => {
+    renderRoute(<App />, "/activities/nanshan-ai-family-day");
+
+    expect(screen.getByRole("heading", { name: "南山 AI 互动体验日" })).toBeInTheDocument();
+    expect(screen.getByText(/适合第一次带孩子接触 AI/)).toBeInTheDocument();
+    expect(screen.getByText(/低龄儿童需要家长全程陪同/)).toBeInTheDocument();
+    expect(screen.getByRole("link", { name: "查看官方报名页面" })).toBeInTheDocument();
+  });
+
+  it("shows a clear warning for cancelled activities", () => {
+    renderRoute(<App />, "/activities/cancelled-ai-lecture");
+
+    expect(screen.getByText("活动已取消")).toBeInTheDocument();
+    expect(screen.getByText(/不能进入本周精选/)).toBeInTheDocument();
+  });
+
+  it("redirects unknown activities to the homepage", () => {
+    renderRoute(<App />, "/activities/missing-activity");
+
+    expect(screen.getByRole("heading", { name: "深圳本周值得去" })).toBeInTheDocument();
+  });
+});
