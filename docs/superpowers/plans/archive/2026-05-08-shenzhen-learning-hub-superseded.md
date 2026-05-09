@@ -1,5 +1,7 @@
 # Shenzhen Learning Hub Implementation Plan
 
+> Superseded on 2026-05-09 by `docs/superpowers/plans/2026-05-09-system-evaluation-first-hub.md`. This archived plan reflects the earlier manual-curation-first direction and must not be used for new implementation.
+
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
 **Goal:** Build the first working version of the Shenzhen weekly learning-and-exchange Hub: a single-city website with weekly curated activities, parent-child and adult entry points, activity judgment pages, submission/correction flows, and a lightweight maintenance view.

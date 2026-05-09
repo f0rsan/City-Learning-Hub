@@ -17,6 +17,7 @@ describe("HomePage", () => {
 
     expect(screen.getByText("南山 AI 互动体验日")).toBeInTheDocument();
     expect(screen.getByText(/有互动环节，不只是看展/)).toBeInTheDocument();
+    expect(screen.getByText(/价值、风险和判断信心/)).toBeInTheDocument();
   });
 
   it("shows a Shenzhen learning visual", () => {

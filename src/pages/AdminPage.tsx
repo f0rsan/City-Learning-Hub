@@ -33,11 +33,11 @@ export default function AdminPage() {
         <div>
           <p className="eyebrow">编辑维护</p>
           <h1>轻后台</h1>
-          <p>第一版先用本地待审队列验证流程：人工看来源、补齐判断信息，再决定是否放进每周精选。</p>
+          <p>第一版先把后台从人工审核队列升级为系统评估台：系统先判断，人工只校准低信心和高风险活动。</p>
         </div>
         <div className="trust-panel">
-          <strong>本周维护口径</strong>
-          <p>投稿和纠错先进入暂存区，不直接影响公开精选。</p>
+          <strong>本周决策口径</strong>
+          <p>投稿和纠错先进入候选与校准流程，不直接影响公开推荐。</p>
         </div>
       </div>
 

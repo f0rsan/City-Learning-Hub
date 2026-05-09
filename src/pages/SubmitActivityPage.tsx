@@ -34,7 +34,7 @@ export default function SubmitActivityPage() {
         <div>
           <p className="eyebrow">共同维护</p>
           <h1>提交活动</h1>
-          <p>把值得去的展会、讲座、沙龙或 Hackathon 放进待审核队列，编辑确认后再进入每周精选。</p>
+          <p>把可能值得去的展会、讲座、沙龙或 Hackathon 放进候选池，由系统先评估价值、风险和信心。</p>
         </div>
         <div className="trust-panel">
           <strong>收录原则</strong>
