@@ -1,6 +1,6 @@
-# Shenzhen Learning Hub Implementation Plan
+# Shenzhen Learning Hub 旧实施计划归档
 
-> Superseded on 2026-05-09 by `docs/superpowers/plans/2026-05-09-system-evaluation-first-hub.md`. This archived plan reflects the earlier manual-curation-first direction and must not be used for new implementation.
+> 已在 2026-05-09 被 `docs/superpowers/plans/2026-05-09-system-evaluation-first-hub.md` 取代。这个归档计划反映的是早期“人工整理优先”的方向，不能再作为新的开发依据。
 
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
