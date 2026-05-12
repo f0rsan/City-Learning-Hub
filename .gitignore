@@ -5,3 +5,4 @@ test-results/
 *.tsbuildinfo
 *.config.js
 *.config.d.ts
+.vercel
