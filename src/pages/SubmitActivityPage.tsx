@@ -116,7 +116,7 @@ export default function SubmitActivityPage() {
           你为什么推荐它
           <textarea name="note" required rows={4} />
         </label>
-        <button type="submit">提交活动线索</button>
+        <button type="submit">推荐这个活动</button>
       </form>
     </section>
   );

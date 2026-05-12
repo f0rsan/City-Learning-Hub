@@ -8,10 +8,10 @@ type StatusBadgeProps = {
 
 const shortLabels = {
   "信息已确认": "已确认",
-  "信息待确认": "待确认",
+  "信息待确认": "需再确认",
   "活动已过期": "已过期",
   "活动已取消": "已取消",
-  "亲子信息不足": "待补充"
+  "亲子信息不足": "信息不全"
 } as const;
 
 export default function StatusBadge({ activity }: StatusBadgeProps) {

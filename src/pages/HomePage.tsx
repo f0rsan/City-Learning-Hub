@@ -13,7 +13,7 @@ export default function HomePage() {
         <div className="hero-copy">
           <p className="eyebrow">深圳本周精选</p>
           <h1>深圳本周值得去</h1>
-          <p>给家长和成人看的深圳活动清单：看点、注意事项和把握度都放前面。</p>
+          <p>给家长和成人看的深圳活动清单：先看亮点、注意事项和信息可靠性。</p>
         </div>
         <img className="hero-image" src={heroImage} alt="深圳学习活动现场氛围" />
       </section>

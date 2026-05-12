@@ -378,7 +378,7 @@ export default function AdminPage() {
             {correctionReports.map((report) => (
               <article className="admin-item" key={report.id}>
                 <div>
-                  <span className="pill">{report.status === "resolved" ? "已核对（部分恢复）" : "影响把握度"}</span>
+                  <span className="pill">{report.status === "resolved" ? "已核对（部分恢复）" : "影响可靠性"}</span>
                   <h3>{activityTitles.get(report.activitySlug) ?? report.activitySlug}</h3>
                   <p>{report.issueType}</p>
                   <p>{report.detail}</p>

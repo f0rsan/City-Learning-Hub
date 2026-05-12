@@ -309,6 +309,17 @@ export function getPublicEvaluatedActivities() {
     .map((candidate) => ({ ...candidate, evaluation: candidate.evaluation }));
 }
 
+export function getPublicReadableActivities() {
+  return getCandidateActivities()
+    .filter(
+      (candidate) =>
+        candidate.candidateStatus === "evaluated" ||
+        candidate.candidateStatus === "published" ||
+        candidate.candidateStatus === "cancelled"
+    )
+    .filter((candidate) => candidate.status === "published" || candidate.status === "cancelled");
+}
+
 export function replaceCandidateActivities(candidates: CandidateActivity[]) {
   writeLocalCandidates(candidates);
 }

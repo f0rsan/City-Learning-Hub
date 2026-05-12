@@ -9,9 +9,9 @@ const recommendationLabels: Record<ActivityEvaluation["recommendationLevel"], st
 };
 
 const confidenceLabels: Record<ActivityEvaluation["confidenceLevel"], string> = {
-  high: "高",
-  medium: "中",
-  low: "低"
+  high: "高可靠",
+  medium: "可参考",
+  low: "待核对"
 };
 
 type EvaluationBadgeProps = {
@@ -38,19 +38,19 @@ export default function EvaluationBadge({ evaluation }: EvaluationBadgeProps) {
     <div className="evaluation-badges" aria-label="活动判断">
       <span
         className={`evaluation-badge recommendation ${evaluation.recommendationLevel}`}
-        aria-label={`推荐等级：${recommendationLabels[evaluation.recommendationLevel]}`}
-        title={`推荐等级：${recommendationLabels[evaluation.recommendationLevel]}`}
+        aria-label={`推荐：${recommendationLabels[evaluation.recommendationLevel]}`}
+        title={`推荐：${recommendationLabels[evaluation.recommendationLevel]}`}
       >
         <RecommendationIcon size={15} aria-hidden="true" strokeWidth={2.4} />
         {recommendationLabels[evaluation.recommendationLevel]}
       </span>
       <span
         className={`evaluation-badge confidence ${evaluation.confidenceLevel}`}
-        aria-label={`把握度：${confidenceLabels[evaluation.confidenceLevel]}`}
-        title={`把握度：${confidenceLabels[evaluation.confidenceLevel]}`}
+        aria-label={`信息可靠性：${confidenceLabels[evaluation.confidenceLevel]}`}
+        title={`信息可靠性：${confidenceLabels[evaluation.confidenceLevel]}`}
       >
         <ConfidenceIcon size={15} aria-hidden="true" strokeWidth={2.4} />
-        {confidenceLabels[evaluation.confidenceLevel]}把握
+        {confidenceLabels[evaluation.confidenceLevel]}
       </span>
     </div>
   );

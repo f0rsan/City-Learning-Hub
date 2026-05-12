@@ -23,7 +23,7 @@ export default function AboutPage() {
         </article>
         <article className="detail-card">
           <h2>每周更新</h2>
-          <p>自动搜集和初筛，人只处理信息不清或风险较高的活动。</p>
+          <p>持续更新深圳活动，优先保留来源清楚、适合人群明确的内容。</p>
         </article>
       </section>
     </main>

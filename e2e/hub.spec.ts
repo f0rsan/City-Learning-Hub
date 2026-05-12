@@ -7,9 +7,9 @@ test("home page guides users into family and adult discovery", async ({ page }) 
   await expect(page.getByRole("img", { name: "深圳学习活动现场氛围" })).toBeVisible();
   await expect(page.getByRole("link", { name: /带孩子去学习/ })).toBeVisible();
   await expect(page.getByRole("link", { name: /成人学习交流/ })).toBeVisible();
-  await expect(page.getByTitle("真实采集").first()).toBeVisible();
+  await expect(page.getByTitle("来源可查").first()).toBeVisible();
   await expect(page.getByText(/强推荐|值得考虑|谨慎选择|不建议前往/).first()).toBeVisible();
-  await expect(page.getByText(/高把握|中把握|低把握/).first()).toBeVisible();
+  await expect(page.getByText(/高可靠|可参考|待核对/).first()).toBeVisible();
 
   await page.getByRole("link", { name: /带孩子去学习/ }).click();
   await expect(page.getByRole("heading", { name: "带孩子去学习" })).toBeVisible();
@@ -23,12 +23,12 @@ test("activity detail page shows decision information and correction entry", asy
   await expect(page.getByText("是否值得去")).toBeVisible();
   await expect(page.getByText("参考依据")).toBeVisible();
   if (testInfo.project.name === "mobile") {
-    await page.getByRole("button", { name: "展开证据" }).click();
+    await page.getByRole("button", { name: "查看核对信息" }).click();
   }
   await expect(page.getByText(/^来源$/)).toBeVisible();
-  await expect(page.getByText(/高把握|中把握|低把握/).first()).toBeVisible();
+  await expect(page.getByText(/高可靠|可参考|待核对/).first()).toBeVisible();
   await expect(page.getByText(/低龄儿童需要家长全程陪同/)).toBeVisible();
-  await expect(page.getByRole("link", { name: "补充或纠错" })).toBeVisible();
+  await expect(page.getByRole("link", { name: "补充信息或更正" })).toBeVisible();
 });
 
 test("activity card body opens the detail page", async ({ page }) => {
@@ -53,7 +53,7 @@ test("submission enters candidate queue and can be calibrated", async ({ page })
   await page.getByLabel("活动链接").fill("https://example.com/event");
   await page.getByLabel("联系方式").fill("contact@example.com");
   await page.getByLabel("你为什么推荐它").fill("适合 10 岁以上亲子同行，也适合成人了解电子展趋势");
-  await page.getByRole("button", { name: "提交活动线索" }).click();
+  await page.getByRole("button", { name: "推荐这个活动" }).click();
   await expect(page.getByText("已收到")).toBeVisible();
 
   await page.goto("/admin");

@@ -22,7 +22,7 @@ describe("submit and admin flow", () => {
     await user.type(screen.getByLabelText("活动链接"), "https://example.com/robot");
     await user.type(screen.getByLabelText("联系方式"), "organizer@example.com");
     await user.type(screen.getByLabelText("你为什么推荐它"), "适合小学家庭");
-    await user.click(screen.getByRole("button", { name: "提交活动线索" }));
+    await user.click(screen.getByRole("button", { name: "推荐这个活动" }));
 
     expect(screen.getByText(/已收到：周末机器人体验营/)).toBeInTheDocument();
 
@@ -42,15 +42,15 @@ describe("submit and admin flow", () => {
     await user.selectOptions(screen.getByLabelText("问题类型"), "时间变更");
     await user.type(screen.getByLabelText("哪里需要改"), "主办方页面显示改到周日");
     await user.type(screen.getByLabelText("联系方式"), "reader@example.com");
-    await user.click(screen.getByRole("button", { name: "提交纠错线索" }));
+    await user.click(screen.getByRole("button", { name: "提交更正信息" }));
 
-    expect(screen.getByText("已收到，会复核")).toBeInTheDocument();
+    expect(screen.getByText("已收到，会核对")).toBeInTheDocument();
 
     correctionPage.unmount();
     renderRoute(<App />, "/admin");
 
     expect(screen.getByText("时间变更")).toBeInTheDocument();
     expect(screen.getByText("主办方页面显示改到周日")).toBeInTheDocument();
-    expect(screen.getAllByText(/影响把握度/)[0]).toBeInTheDocument();
+    expect(screen.getAllByText(/影响可靠性/)[0]).toBeInTheDocument();
   });
 });

@@ -125,7 +125,7 @@ export default function ActivityDetail({ activity }: ActivityDetailProps) {
                 aria-controls={evidencePanelId}
                 onClick={() => setShowEvidence((current) => !current)}
               >
-                {showEvidence ? "收起证据" : "展开证据"}
+                {showEvidence ? "收起核对信息" : "查看核对信息"}
               </button>
             ) : null}
           </div>
@@ -209,7 +209,7 @@ export default function ActivityDetail({ activity }: ActivityDetailProps) {
               去活动页面报名
               <ExternalLink size={16} aria-hidden="true" />
             </a>
-            <Link to={`/correct/${activity.slug}`}>补充或纠错</Link>
+            <Link to={`/correct/${activity.slug}`}>补充信息或更正</Link>
           </div>
         </article>
       </section>

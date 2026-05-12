@@ -70,7 +70,7 @@ export default function ActivityCard({ activity }: ActivityCardProps) {
           <div className="tag-row">
             {visibleTags.map((tag) =>
               tag === "真实采集" ? (
-                <span className="icon-tag" key={tag} aria-label={tag} title={tag}>
+                <span className="icon-tag" key={tag} aria-label="来源可查" title="来源可查">
                   <Database size={14} aria-hidden="true" strokeWidth={2.2} />
                 </span>
               ) : (

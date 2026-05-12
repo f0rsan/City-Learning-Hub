@@ -1,12 +1,12 @@
 import { useState } from "react";
 import { Navigate, useParams } from "react-router-dom";
 import { getActivityBySlug } from "../domain/activitySelectors";
-import { getCandidateActivities } from "../domain/candidateStore";
+import { getPublicReadableActivities } from "../domain/candidateStore";
 import { addCorrectionReport } from "../domain/localStore";
 
 export default function CorrectionPage() {
   const { slug } = useParams();
-  const activity = slug ? getActivityBySlug(getCandidateActivities(), slug) : undefined;
+  const activity = slug ? getActivityBySlug(getPublicReadableActivities(), slug) : undefined;
   const [submitted, setSubmitted] = useState(false);
 
   if (!activity) {
@@ -27,7 +27,7 @@ export default function CorrectionPage() {
         </div>
       </div>
 
-      {submitted ? <p className="success-message">已收到，会复核</p> : null}
+      {submitted ? <p className="success-message">已收到，会核对</p> : null}
 
       <form
         className="hub-form"
@@ -64,7 +64,7 @@ export default function CorrectionPage() {
           哪里需要改
           <textarea name="detail" required rows={5} />
         </label>
-        <button type="submit">提交纠错线索</button>
+        <button type="submit">提交更正信息</button>
       </form>
     </section>
   );

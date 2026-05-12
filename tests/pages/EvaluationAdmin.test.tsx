@@ -25,7 +25,7 @@ describe("EvaluationAdmin", () => {
 
     expect(screen.getByRole("heading", { name: "活动审核台" })).toBeInTheDocument();
     expect(screen.getAllByText(/强推荐|值得考虑|谨慎选择|不建议前往/)[0]).toBeInTheDocument();
-    expect(screen.getAllByText(/高把握|中把握|低把握/)[0]).toBeInTheDocument();
+    expect(screen.getAllByText(/高可靠|可参考|待核对/)[0]).toBeInTheDocument();
     expect(screen.getAllByText(/看点/)[0]).toBeInTheDocument();
     expect(screen.getAllByText(/注意/)[0]).toBeInTheDocument();
   });
