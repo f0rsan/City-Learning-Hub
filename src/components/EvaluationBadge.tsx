@@ -1,3 +1,4 @@
+import { Ban, ShieldAlert, ShieldCheck, ShieldQuestion, Star, StarHalf } from "lucide-react";
 import type { ActivityEvaluation } from "../domain/evaluationTypes";
 
 const recommendationLabels: Record<ActivityEvaluation["recommendationLevel"], string> = {
@@ -18,13 +19,38 @@ type EvaluationBadgeProps = {
 };
 
 export default function EvaluationBadge({ evaluation }: EvaluationBadgeProps) {
+  const RecommendationIcon =
+    evaluation.recommendationLevel === "strong"
+      ? Star
+      : evaluation.recommendationLevel === "good"
+        ? StarHalf
+        : evaluation.recommendationLevel === "blocked"
+          ? Ban
+          : ShieldAlert;
+  const ConfidenceIcon =
+    evaluation.confidenceLevel === "high"
+      ? ShieldCheck
+      : evaluation.confidenceLevel === "medium"
+        ? ShieldQuestion
+        : ShieldAlert;
+
   return (
-    <div className="evaluation-badges" aria-label="系统评估结果">
-      <span className={`evaluation-badge recommendation ${evaluation.recommendationLevel}`}>
-        系统推荐：{recommendationLabels[evaluation.recommendationLevel]}
+    <div className="evaluation-badges" aria-label="活动判断">
+      <span
+        className={`evaluation-badge recommendation ${evaluation.recommendationLevel}`}
+        aria-label={`推荐等级：${recommendationLabels[evaluation.recommendationLevel]}`}
+        title={`推荐等级：${recommendationLabels[evaluation.recommendationLevel]}`}
+      >
+        <RecommendationIcon size={15} aria-hidden="true" strokeWidth={2.4} />
+        {recommendationLabels[evaluation.recommendationLevel]}
       </span>
-      <span className={`evaluation-badge confidence ${evaluation.confidenceLevel}`}>
-        判断信心：{confidenceLabels[evaluation.confidenceLevel]}
+      <span
+        className={`evaluation-badge confidence ${evaluation.confidenceLevel}`}
+        aria-label={`把握度：${confidenceLabels[evaluation.confidenceLevel]}`}
+        title={`把握度：${confidenceLabels[evaluation.confidenceLevel]}`}
+      >
+        <ConfidenceIcon size={15} aria-hidden="true" strokeWidth={2.4} />
+        {confidenceLabels[evaluation.confidenceLevel]}把握
       </span>
     </div>
   );

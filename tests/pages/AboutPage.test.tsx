@@ -7,9 +7,10 @@ describe("AboutPage", () => {
   it("explains sources and trust rules", () => {
     renderRoute(<App />, "/about");
 
-    expect(screen.getByRole("heading", { name: "我们怎样整理深圳活动" })).toBeInTheDocument();
-    expect(screen.getByText(/80% 系统判断、20% 人工校准/)).toBeInTheDocument();
-    expect(screen.getByRole("heading", { name: "儿童活动" })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "深圳活动怎么选" })).toBeInTheDocument();
+    expect(screen.getByText(/标出适合人群和注意事项/)).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "来源可查" })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "亲子活动" })).toBeInTheDocument();
     expect(screen.getByText(/不会进入亲子精选/)).toBeInTheDocument();
   });
 });

@@ -33,21 +33,17 @@ export default function SubmitActivityPage() {
     <section className="form-page">
       <div className="page-hero">
         <div>
-          <p className="eyebrow">共同维护</p>
+          <p className="eyebrow">推荐线索</p>
           <h1>提交活动</h1>
-          <p>把可能值得去的展会、讲座、沙龙或 Hackathon 放进候选池，由系统先评估价值、风险和信心。</p>
+          <p>发来你看到的深圳活动。核对后再放进精选。</p>
         </div>
         <div className="trust-panel">
-          <strong>收录原则</strong>
-          <p>优先收录有官方页面、时间地点清楚、适合学习和交流的深圳活动。</p>
+          <strong>更容易收录的活动</strong>
+          <p>有明确时间地点、活动链接、适合人群和推荐理由。</p>
         </div>
       </div>
 
-      {submittedTitle ? (
-        <p className="success-message">
-          <strong>已进入候选池</strong>：{submittedTitle}
-        </p>
-      ) : null}
+      {submittedTitle ? <p className="success-message">已收到：{submittedTitle}</p> : null}
 
       <form
         className="hub-form"
@@ -109,7 +105,7 @@ export default function SubmitActivityPage() {
           <input name="venue" required />
         </label>
         <label>
-          官方链接
+          活动链接
           <input name="officialUrl" required type="url" />
         </label>
         <label>
@@ -117,10 +113,10 @@ export default function SubmitActivityPage() {
           <input name="contact" required />
         </label>
         <label className="wide-field">
-          推荐理由
+          你为什么推荐它
           <textarea name="note" required rows={4} />
         </label>
-        <button type="submit">提交到候选池</button>
+        <button type="submit">提交活动线索</button>
       </form>
     </section>
   );

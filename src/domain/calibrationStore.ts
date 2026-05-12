@@ -14,10 +14,10 @@ const defaultReasonType: CalibrationReasonType = "other";
 const defaultAudience: CalibrationAudience = "unknown";
 
 const actionMessages: Record<CalibrationAction, string> = {
-  confirm: "已确认系统判断",
-  lower_confidence: "已降低信心，等待更多证据",
-  reject: "已拒绝推荐",
-  send_to_calibration: "已送入人工校准"
+  confirm: "已确认展示",
+  lower_confidence: "已降为待观察",
+  reject: "已设为不展示",
+  send_to_calibration: "已加入复核列表"
 };
 
 type CalibrationMetadata = {

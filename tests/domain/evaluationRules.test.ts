@@ -52,7 +52,7 @@ describe("evaluationRules", () => {
 
     expect(evaluation.audienceFit.family?.level).toBe("blocked");
     expect(evaluation.confidenceLevel).not.toBe("high");
-    expect(evaluation.riskReasons.join(" ")).toContain("亲子安全信息不足");
+    expect(evaluation.riskReasons.join(" ")).toContain("亲子信息不够完整");
   });
 
   it("cancelled activities are blocked", () => {
@@ -109,6 +109,18 @@ describe("evaluationRules", () => {
     expect(evaluation.confidenceLevel).not.toBe("high");
   });
 
+  it("applies source signal weight during trust scoring", () => {
+    const weightedSources = sampleSources.map((source) =>
+      source.id === "nanshan-tech-museum" ? { ...source, signalWeight: 0.7 } : source
+    );
+    const baseline = evaluateActivity(baseActivity, { sources: sampleSources });
+    const weighted = evaluateActivity(baseActivity, { sources: weightedSources });
+    const baselineSource = baseline.evidenceSignals.find((signal) => signal.type === "source")?.score ?? 0;
+    const weightedSource = weighted.evidenceSignals.find((signal) => signal.type === "source")?.score ?? 0;
+
+    expect(weightedSource).toBeLessThan(baselineSource);
+  });
+
   it("uses explicit confidence score thresholds", () => {
     expect(CONFIDENCE_SCORE_THRESHOLDS.high).toBeGreaterThan(CONFIDENCE_SCORE_THRESHOLDS.medium);
 
@@ -152,7 +164,7 @@ describe("evaluationRules", () => {
           isResolved: false,
           riskDelta: 8,
           confidenceDelta: -12,
-          reason: "时间变更，纠错未解决，需要重新确认"
+          reason: "时间变更，需要重新确认"
         }
       ]
     });
@@ -165,7 +177,7 @@ describe("evaluationRules", () => {
           isResolved: true,
           riskDelta: 3,
           confidenceDelta: -5,
-          reason: "时间变更已处理，风险和信心惩罚部分恢复"
+          reason: "时间变更已处理，影响已部分恢复"
         }
       ]
     });
@@ -177,7 +189,7 @@ describe("evaluationRules", () => {
 
     expect(openRiskScore).toBeLessThan(resolvedRiskScore);
     expect(resolvedRiskScore).toBeLessThanOrEqual(baselineRiskScore);
-    expect(openCorrection.riskReasons.join(" ")).toContain("纠错未解决");
+    expect(openCorrection.riskReasons.join(" ")).toContain("需要重新确认");
     expect(resolvedCorrection.riskReasons.join(" ")).toContain("已处理");
     expect(resolvedCorrection.confidenceLevel).not.toBe("low");
   });

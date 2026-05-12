@@ -13,8 +13,11 @@ export default function EvidenceSummary({ evaluation, compact = false }: Evidenc
       {signals.map((signal) => (
         <div className="evidence-item" key={signal.type}>
           <strong>{signal.label}</strong>
-          <span>
-            {signal.score}/{signal.maxScore}
+          <div className="evidence-meter" aria-hidden="true">
+            <span style={{ width: `${Math.round((signal.score / signal.maxScore) * 100)}%` }} />
+          </div>
+          <span className="sr-only">
+            {signal.label}：{signal.score}/{signal.maxScore}
           </span>
           {!compact ? <p>{signal.detail}</p> : null}
         </div>

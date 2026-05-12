@@ -26,7 +26,7 @@ export function getTrustState(activity: Activity): TrustState {
     return {
       level: "blocked",
       label: "活动已取消",
-      message: "这个活动不能进入本周精选，详情页需要提示用户不要前往。"
+      message: "主办方已取消，请不要按原计划前往。"
     };
   }
 
@@ -34,7 +34,7 @@ export function getTrustState(activity: Activity): TrustState {
     return {
       level: "warning",
       label: "活动已过期",
-      message: "这个活动可以保留在过期记录中，但不能出现在本周精选。"
+      message: "活动已结束，仅作为参考记录保留。"
     };
   }
 
@@ -42,7 +42,7 @@ export function getTrustState(activity: Activity): TrustState {
     return {
       level: "warning",
       label: "信息待确认",
-      message: "活动信息还没有确认，应避免重点推荐。"
+      message: "时间、地点或报名信息仍需确认，出发前请再核对。"
     };
   }
 
@@ -50,13 +50,13 @@ export function getTrustState(activity: Activity): TrustState {
     return {
       level: "blocked",
       label: "亲子信息不足",
-      message: "儿童相关活动必须补齐适龄、陪同要求和注意事项后才能进入亲子精选。"
+      message: "适龄或陪同信息不足，暂不建议作为亲子安排。"
     };
   }
 
   return {
     level: "clear",
     label: "信息已确认",
-    message: `来源信息最后确认于 ${activity.lastConfirmedAt}。`
+    message: `信息最后核对于 ${activity.lastConfirmedAt}。`
   };
 }

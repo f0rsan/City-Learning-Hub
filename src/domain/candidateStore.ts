@@ -13,6 +13,7 @@ import {
   readList,
   writeList
 } from "./localStore";
+import { liveCollectedActivities } from "./liveActivities.generated";
 import { sampleActivities } from "./sampleData";
 import { getSourcePool } from "./sourcePool";
 import type { Activity, ActivityStatus, Audience } from "./types";
@@ -50,7 +51,7 @@ function districtFromInput(value: string): Activity["district"] {
 }
 
 function seedCandidates(): CandidateActivity[] {
-  return sampleActivities.map((activity) => {
+  return [...sampleActivities, ...liveCollectedActivities].map((activity) => {
     const evaluation = evaluateActivity(activity, evaluationContext());
     return {
       ...activity,
@@ -244,8 +245,8 @@ export function createCandidateFromSubmission(submissionId: string) {
     ageBand: submission.audience.includes("family") ? "待确认" : undefined,
     difficulty: "入门",
     recommendation: submission.note,
-    bestFor: submission.audience.includes("family") ? "亲子家庭，待系统补充证据。" : "成人学习交流，待系统补充证据。",
-    cautions: ["候选活动，信息仍需系统评估和人工校准"],
+    bestFor: submission.audience.includes("family") ? "亲子家庭，信息还需补充。" : "成人学习交流，信息还需补充。",
+    cautions: ["来自用户提交，信息仍需核对"],
     officialUrl: submission.officialUrl,
     sourceId: "user-submission",
     lastConfirmedAt: now().slice(0, 10),
@@ -364,7 +365,7 @@ export function createCollectedCandidate(input: {
     id: createId("candidate"),
     slug: slugify(input.title),
     title: input.title,
-    summary: "自动采集候选，需要系统评估后才可公开展示。",
+    summary: "从来源池发现的活动，等待补齐时间、地点和报名信息。",
     category: input.category,
     audience: input.audience,
     tags: ["自动采集", "候选"],
@@ -377,9 +378,9 @@ export function createCollectedCandidate(input: {
     priceNote: "待确认",
     reservationRequired: true,
     difficulty: "入门",
-    recommendation: "来源池自动发现，等待系统补全证据。",
-    bestFor: "待系统判断适合人群。",
-    cautions: ["自动采集候选，未完成评估前不公开推荐"],
+    recommendation: "已有公开线索，等待确认活动看点。",
+    bestFor: "待确认适合人群。",
+    cautions: ["信息还未核对，暂不展示到精选"],
     officialUrl: input.officialUrl,
     sourceId: input.sourceId,
     lastConfirmedAt: now().slice(0, 10),

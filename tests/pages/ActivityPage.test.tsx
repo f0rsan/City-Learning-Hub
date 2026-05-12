@@ -10,20 +10,20 @@ describe("ActivityPage", () => {
 
     expect(screen.getByRole("heading", { name: "南山 AI 互动体验日" })).toBeInTheDocument();
     expect(screen.getByText(/适合第一次带孩子接触 AI/)).toBeInTheDocument();
-    expect(screen.getByText("系统判断依据")).toBeInTheDocument();
-    expect(screen.getByText(/来源可信度/)).toBeInTheDocument();
-    expect(screen.getByText(/组织方信号/)).toBeInTheDocument();
-    expect(screen.getByText(/场地信号/)).toBeInTheDocument();
-    expect(screen.getAllByText(/判断信心/)[0]).toBeInTheDocument();
+    expect(screen.getByText("参考依据")).toBeInTheDocument();
+    expect(screen.getByText(/^来源$/)).toBeInTheDocument();
+    expect(screen.getByText(/^组织方$/)).toBeInTheDocument();
+    expect(screen.getByText(/^场地$/)).toBeInTheDocument();
+    expect(screen.getAllByText(/高把握|中把握|低把握/)[0]).toBeInTheDocument();
     expect(screen.getByText(/低龄儿童需要家长全程陪同/)).toBeInTheDocument();
-    expect(screen.getByRole("link", { name: "查看官方报名页面" })).toBeInTheDocument();
+    expect(screen.getByRole("link", { name: "去活动页面报名" })).toBeInTheDocument();
   });
 
   it("shows a clear warning for cancelled activities", () => {
     renderRoute(<App />, "/activities/cancelled-ai-lecture");
 
     expect(screen.getAllByText("活动已取消")[0]).toBeInTheDocument();
-    expect(screen.getByText(/不能进入本周精选/)).toBeInTheDocument();
+    expect(screen.getByText(/请不要按原计划前往/)).toBeInTheDocument();
   });
 
   it("redirects unknown activities to the homepage", () => {
@@ -52,7 +52,7 @@ describe("ActivityPage", () => {
       renderRoute(<App />, "/activities/nanshan-ai-family-day");
 
       expect(screen.queryByRole("heading", { name: "适合谁" })).not.toBeInTheDocument();
-      expect(screen.queryByText(/来源可信度/)).not.toBeInTheDocument();
+      expect(screen.queryByText(/^来源$/)).not.toBeInTheDocument();
       const reasonsToggle = screen.getByRole("button", { name: "展开理由" });
       const evidenceToggle = screen.getByRole("button", { name: "展开证据" });
 
@@ -66,7 +66,7 @@ describe("ActivityPage", () => {
       expect(reasonsToggle).toHaveAttribute("aria-expanded", "true");
 
       await user.click(evidenceToggle);
-      expect(screen.getByText(/来源可信度/)).toBeInTheDocument();
+      expect(screen.getByText(/^来源$/)).toBeInTheDocument();
       expect(evidenceToggle).toHaveAttribute("aria-expanded", "true");
     } finally {
       window.matchMedia = originalMatchMedia;

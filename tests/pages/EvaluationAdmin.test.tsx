@@ -23,28 +23,28 @@ describe("EvaluationAdmin", () => {
   it("shows system recommendation, confidence, value reasons, and risk reasons", () => {
     renderRoute(<App />, "/admin");
 
-    expect(screen.getByRole("heading", { name: "系统评估台" })).toBeInTheDocument();
-    expect(screen.getAllByText(/系统推荐/)[0]).toBeInTheDocument();
-    expect(screen.getAllByText(/判断信心/)[0]).toBeInTheDocument();
-    expect(screen.getAllByText(/为什么值得去/)[0]).toBeInTheDocument();
-    expect(screen.getAllByText(/主要风险/)[0]).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "活动审核台" })).toBeInTheDocument();
+    expect(screen.getAllByText(/强推荐|值得考虑|谨慎选择|不建议前往/)[0]).toBeInTheDocument();
+    expect(screen.getAllByText(/高把握|中把握|低把握/)[0]).toBeInTheDocument();
+    expect(screen.getAllByText(/看点/)[0]).toBeInTheDocument();
+    expect(screen.getAllByText(/注意/)[0]).toBeInTheDocument();
   });
 
   it("can confirm, lower confidence, reject, or send to calibration", async () => {
     const user = userEvent.setup();
     renderRoute(<App />, "/admin");
 
-    await user.click(screen.getAllByRole("button", { name: /确认推荐/ })[0]);
-    expect(screen.getByText("已确认系统判断")).toBeInTheDocument();
+    await user.click(screen.getAllByRole("button", { name: /确认展示/ })[0]);
+    expect(screen.getByText("已确认展示")).toBeInTheDocument();
 
-    await user.click(screen.getAllByRole("button", { name: /降低信心/ })[0]);
-    expect(screen.getByText("已降低信心，等待更多证据")).toBeInTheDocument();
+    await user.click(screen.getAllByRole("button", { name: /降为待观察/ })[0]);
+    expect(screen.getByText("已降为待观察")).toBeInTheDocument();
 
-    await user.click(screen.getAllByRole("button", { name: /送入校准/ })[0]);
-    expect(screen.getByText("已送入人工校准")).toBeInTheDocument();
+    await user.click(screen.getAllByRole("button", { name: /加入复核/ })[0]);
+    expect(screen.getByText("已加入复核列表")).toBeInTheDocument();
 
-    await user.click(screen.getAllByRole("button", { name: /拒绝推荐/ })[0]);
-    expect(screen.getByText("已拒绝推荐")).toBeInTheDocument();
+    await user.click(screen.getAllByRole("button", { name: /不展示/ })[0]);
+    expect(screen.getByText("已设为不展示")).toBeInTheDocument();
 
     const noteByAction = new Map(getCalibrationNotes().map((note) => [note.action, note]));
 
@@ -86,10 +86,10 @@ describe("EvaluationAdmin", () => {
 
     renderRoute(<App />, "/admin");
 
-    await user.click(screen.getByRole("button", { name: /转为候选草稿/ }));
+    await user.click(screen.getByRole("button", { name: /转为待补充/ }));
 
     expect(screen.getByText("深圳机器人开放课")).toBeInTheDocument();
-    expect(screen.getAllByText("候选草稿")[0]).toBeInTheDocument();
+    expect(screen.getAllByText("待补充")[0]).toBeInTheDocument();
   });
 
   it("shows corrections that affect trust", () => {
@@ -102,7 +102,7 @@ describe("EvaluationAdmin", () => {
 
     renderRoute(<App />, "/admin");
 
-    expect(screen.getByText("影响可信度的纠错")).toBeInTheDocument();
+    expect(screen.getByText("待核对纠错")).toBeInTheDocument();
     expect(screen.getByText("官方页面无法打开")).toBeInTheDocument();
   });
 
@@ -119,8 +119,8 @@ describe("EvaluationAdmin", () => {
 
     await user.click(screen.getByRole("button", { name: "标记已解决" }));
 
-    expect(screen.getByText("已标记纠错为解决状态，系统会部分恢复风险和信心")).toBeInTheDocument();
-    expect(screen.getByText("已解决（部分恢复）")).toBeInTheDocument();
+    expect(screen.getByText("已标记为已核对，相关影响会部分恢复")).toBeInTheDocument();
+    expect(screen.getByText("已核对（部分恢复）")).toBeInTheDocument();
   });
 
   it("shows rule-update marker when scoring changed after rule version update", () => {
@@ -146,7 +146,7 @@ describe("EvaluationAdmin", () => {
 
     renderRoute(<App />, "/admin");
 
-    expect(screen.getAllByText("评分因规则更新发生变化")[0]).toBeInTheDocument();
+    expect(screen.getAllByText("规则更新后，结果有变化")[0]).toBeInTheDocument();
   });
 
   it("shows hotspot section when calibration notes exist", () => {
@@ -166,10 +166,22 @@ describe("EvaluationAdmin", () => {
 
     renderRoute(<App />, "/admin");
 
-    expect(screen.getByRole("heading", { name: "近30天人工覆盖热点" })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "近30天复核集中在哪" })).toBeInTheDocument();
     expect(screen.getByText("近30天 0 次")).toBeInTheDocument();
-    expect(screen.getByText("风险更新")).toBeInTheDocument();
-    expect(screen.getByText("规则标签：RULE_RISK")).toBeInTheDocument();
+    expect(screen.getByText("注意事项更新")).toBeInTheDocument();
+    expect(screen.getByText("标签：RULE_RISK")).toBeInTheDocument();
     expect(screen.getByText(/趋势：↘\s*下降/)).toBeInTheDocument();
+  });
+
+  it("shows source collection groups in the admin source section", () => {
+    renderRoute(<App />, "/admin");
+
+    expect(screen.getByText("自动更新：每 12 小时")).toBeInTheDocument();
+    expect(screen.getByText("可直接自动采集")).toBeInTheDocument();
+    expect(screen.getByText("半自动候选")).toBeInTheDocument();
+    expect(screen.getByText("只做口碑信号")).toBeInTheDocument();
+    expect(screen.getByText("深圳市少年宫主题活动")).toBeInTheDocument();
+    expect(screen.getByText("Luma 深圳活动")).toBeInTheDocument();
+    expect(screen.getByText("小红书深圳活动反馈")).toBeInTheDocument();
   });
 });

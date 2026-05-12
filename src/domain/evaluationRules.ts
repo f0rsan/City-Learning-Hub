@@ -33,10 +33,10 @@ export function scoreSourceSignal(activity: Activity, source?: ActivitySource): 
   if (!source) {
     return {
       type: "source",
-      label: "来源可信度",
+      label: "来源",
       score: 0,
       maxScore: 18,
-      detail: "没有匹配到稳定来源，需人工确认来源可靠性。"
+      detail: "还没有匹配到稳定来源，需要进一步核对。"
     };
   }
 
@@ -45,13 +45,14 @@ export function scoreSourceSignal(activity: Activity, source?: ActivitySource): 
     medium: 11,
     unverified: 4
   };
+  const weightedScore = Math.round(scoreByTrust[source.trustLevel] * (source.signalWeight ?? 1));
 
   return {
     type: "source",
-    label: "来源可信度",
-    score: scoreByTrust[source.trustLevel],
+    label: "来源",
+    score: clamp(weightedScore, 18),
     maxScore: 18,
-    detail: `${source.name} 为${source.trustLevel === "high" ? "高可信" : source.trustLevel === "medium" ? "中等可信" : "待验证"}来源，最后检查 ${source.lastChecked}。`
+    detail: `${source.name}：${source.trustLevel === "high" ? "较稳定" : source.trustLevel === "medium" ? "可参考" : "待验证"}，${source.lastChecked} 更新。`
   };
 }
 
@@ -59,10 +60,10 @@ export function scoreOrganizerSignal(activity: Activity, organizerHistory?: Orga
   if (!organizerHistory) {
     return {
       type: "organizer",
-      label: "组织方信号",
+      label: "组织方",
       score: 8,
       maxScore: 16,
-      detail: "暂无明确组织方历史，先按中性信号处理。"
+      detail: "还没有明确的组织方历史记录。"
     };
   }
 
@@ -72,13 +73,13 @@ export function scoreOrganizerSignal(activity: Activity, organizerHistory?: Orga
 
   return {
     type: "organizer",
-    label: "组织方信号",
+    label: "组织方",
     score: clamp(base + positive - corrections, 16),
     maxScore: 16,
     detail:
       organizerHistory.completedEvents > 0
         ? `${organizerHistory.organizerName} 有 ${organizerHistory.completedEvents} 次历史活动记录。`
-        : `${organizerHistory.organizerName} 是新组织方，需要保留信心折扣。`
+        : `${organizerHistory.organizerName} 是新组织方，需要更多观察。`
   };
 }
 
@@ -90,16 +91,16 @@ export function scoreVenueSignal(activity: Activity, venueHistory?: VenueHistory
 
     return {
       type: "venue",
-      label: "场地信号",
+      label: "场地",
       score: stableVenue ? 12 : 8,
       maxScore: 14,
-      detail: stableVenue ? "场地类型清晰，适合公开学习活动。" : "场地信息可用，但缺少历史稳定性数据。"
+      detail: stableVenue ? "场地类型清楚，适合公开学习活动。" : "场地信息可用，但历史记录还不多。"
     };
   }
 
   return {
     type: "venue",
-    label: "场地信号",
+    label: "场地",
     score: clamp(venueHistory.accessibilityScore + Math.min(venueHistory.completedEvents, 4) - venueHistory.correctionCount * 2, 14),
     maxScore: 14,
     detail: `${venueHistory.venueName} 有 ${venueHistory.completedEvents} 次历史活动记录。`
@@ -124,10 +125,10 @@ export function scoreContentSignal(activity: Activity): EvidenceSignal {
 
   return {
     type: "content",
-    label: "活动本身质量",
+    label: "活动内容",
     score: clamp(score, 28),
     maxScore: 28,
-    detail: hasRecommendation ? activity.recommendation : "活动介绍过薄，系统无法充分判断学习价值。"
+    detail: hasRecommendation ? activity.recommendation : "活动介绍还不够完整，暂时难判断学习价值。"
   };
 }
 
@@ -135,10 +136,10 @@ function scoreSocialSignal(activity: Activity, socialSignal?: SocialSignal): Evi
   if (!socialSignal) {
     return {
       type: "social",
-      label: "公开反馈信号",
+      label: "公开反馈",
       score: 3,
       maxScore: 8,
-      detail: "暂无明显公开反馈，社媒不参与主导判断。"
+      detail: "暂无明显公开反馈。"
     };
   }
 
@@ -147,7 +148,7 @@ function scoreSocialSignal(activity: Activity, socialSignal?: SocialSignal): Evi
 
   return {
     type: "social",
-    label: "公开反馈信号",
+    label: "公开反馈",
     score: clamp(sentimentScore + volumeScore, 8),
     maxScore: 8,
     detail: socialSignal.summary
@@ -170,12 +171,12 @@ export function scoreRiskSignal(activity: Activity, context: EvaluationContext =
 
   if (activity.audience.includes("family") && !activity.childSafetyComplete) {
     risk += 18;
-    reasons.push("亲子安全信息不足");
+    reasons.push("亲子信息不够完整");
   }
 
   if (!activity.officialUrl.startsWith("https://")) {
     risk += 8;
-    reasons.push("官方链接可信度不足");
+    reasons.push("活动链接需要核对");
   }
 
   const correctionRisk = (context.correctionImpacts ?? [])
@@ -186,10 +187,10 @@ export function scoreRiskSignal(activity: Activity, context: EvaluationContext =
 
   return {
     type: "risk",
-    label: "风险识别",
+    label: "注意事项",
     score: clamp(20 - risk, 20),
     maxScore: 20,
-    detail: reasons.length ? reasons.join("；") : "未发现明显阻断风险，仍需以官方临时变更为准。"
+    detail: reasons.length ? reasons.join("；") : "暂无明显阻断问题，出发前再看活动页。"
   };
 }
 
@@ -199,13 +200,13 @@ function buildAudienceFit(activity: Activity): { family: AudienceFit; adult: Aud
 
   return {
     family: !familyIncluded
-      ? { level: "not_applicable", reasons: ["活动不是亲子入口优先内容。"] }
+      ? { level: "not_applicable", reasons: ["这场活动不优先面向亲子同行。"] }
       : !activity.childSafetyComplete
-        ? { level: "blocked", reasons: ["亲子安全信息不足，不能高信心推荐给家庭。"] }
+        ? { level: "blocked", reasons: ["适龄、陪同或安全信息还不够清楚。"] }
         : { level: "recommended", reasons: [activity.ageBand ? `适龄范围：${activity.ageBand}` : "适合亲子同行。"] },
     adult: adultIncluded
       ? { level: "recommended", reasons: ["适合成人学习、交流或行业连接。"] }
-      : { level: "not_applicable", reasons: ["活动主要面向亲子场景。"] }
+      : { level: "not_applicable", reasons: ["这场活动主要面向亲子场景。"] }
   };
 }
 
@@ -237,7 +238,7 @@ export function deriveConfidenceLevel(evaluation: ConfidenceEvaluationInput) {
   const hasNewOrganizer = evaluation.evidenceSignals.some(
     (signal) => signal.type === "organizer" && signal.detail.includes("新组织方")
   );
-  const hasChildRisk = evaluation.riskReasons.some((reason) => reason.includes("亲子安全信息不足"));
+  const hasChildRisk = evaluation.riskReasons.some((reason) => reason.includes("亲子信息不够完整"));
   const hasUnresolvedCorrectionRisk =
     evaluation.hasUnresolvedCorrectionRisk ??
     evaluation.riskReasons.some((reason) => reason.includes("纠错未解决") || reason.includes("直到纠错解决"));
@@ -260,9 +261,9 @@ export function deriveConfidenceLevel(evaluation: ConfidenceEvaluationInput) {
 }
 
 function riskReasons(activity: Activity, riskSignal: EvidenceSignal, context: EvaluationContext) {
-  const reasons = activity.cautions.length ? [...activity.cautions] : ["暂无明确注意事项，出行前仍需复核官方页面。"];
+  const reasons = activity.cautions.length ? [...activity.cautions] : ["暂无明显注意事项，出发前再看活动页。"];
 
-  if (riskSignal.detail !== "未发现明显阻断风险，仍需以官方临时变更为准。") {
+  if (riskSignal.score < riskSignal.maxScore) {
     reasons.unshift(riskSignal.detail);
   }
 
@@ -302,8 +303,8 @@ export function evaluateActivity(activity: Activity, context: EvaluationContext 
     totalScore,
     valueReasons: [
       activity.recommendation || scoreContentSignal(activity).detail,
-      source ? `来源来自 ${source.name}，可追溯。` : "来源需要补充确认。",
-      activity.bestFor || "适合人群仍需补充。"
+      activity.bestFor || "适合人群待补充。",
+      `${activity.district} · ${activity.venue}，方便提前判断出行成本。`
     ],
     riskReasons: risks,
     evidenceSignals: signals,

@@ -1,4 +1,4 @@
-import { AlertTriangle, ExternalLink, MapPin } from "lucide-react";
+import { AlertTriangle, CalendarCheck, Clock, ExternalLink, Gauge, MapPin, Ticket, UserRound } from "lucide-react";
 import { useEffect, useId, useState } from "react";
 import { Link } from "react-router-dom";
 import { getTrustState } from "../domain/activitySelectors";
@@ -27,10 +27,17 @@ export default function ActivityDetail({ activity }: ActivityDetailProps) {
   const [showEvidence, setShowEvidence] = useState(!isCompactViewport);
   const trust = getTrustState(activity);
   const evaluation = activity.evaluation ?? evaluateActivity(activity, { sources: getSourcePool() });
-  const start = new Intl.DateTimeFormat("zh-CN", {
-    dateStyle: "medium",
-    timeStyle: "short"
-  }).format(new Date(activity.startAt));
+  const primaryValueReason = evaluation.valueReasons[0] ?? activity.recommendation;
+  const evidencePreview = evaluation.evidenceSignals
+    .slice(0, 3)
+    .map((signal) => signal.label)
+    .join(" / ");
+  const start =
+    activity.dateNote ??
+    new Intl.DateTimeFormat("zh-CN", {
+      dateStyle: "medium",
+      timeStyle: "short"
+    }).format(new Date(activity.startAt));
 
   useEffect(() => {
     if (typeof window === "undefined" || typeof window.matchMedia !== "function") {
@@ -69,16 +76,11 @@ export default function ActivityDetail({ activity }: ActivityDetailProps) {
           <p className="eyebrow">{activity.category}</p>
           <h1>{activity.title}</h1>
           <p>{activity.summary}</p>
-          <div className="tag-row">
-            {activity.tags.map((tag) => (
-              <span key={tag}>{tag}</span>
-            ))}
-          </div>
         </div>
         <aside className={`trust-panel ${trust.level}`}>
           <StatusBadge activity={activity} />
           <EvaluationBadge evaluation={evaluation} />
-          <p>{trust.message}</p>
+          {trust.level !== "clear" ? <p>{trust.message}</p> : null}
         </aside>
       </section>
 
@@ -98,13 +100,12 @@ export default function ActivityDetail({ activity }: ActivityDetailProps) {
               </button>
             ) : null}
           </div>
+          {!showReasons ? <p className="detail-preview">{primaryValueReason}</p> : null}
           <div id={reasonsPanelId} hidden={!showReasons}>
             {showReasons ? (
               <>
               <ul>
-                {evaluation.valueReasons.map((reason) => (
-                  <li key={reason}>{reason}</li>
-                ))}
+                <li>{primaryValueReason}</li>
               </ul>
               <h3>适合谁</h3>
               <p>{activity.bestFor}</p>
@@ -115,7 +116,7 @@ export default function ActivityDetail({ activity }: ActivityDetailProps) {
 
         <article className="detail-card">
           <div className="detail-card-heading">
-            <h2>系统判断依据</h2>
+            <h2>参考依据</h2>
             {isCompactViewport ? (
               <button
                 type="button"
@@ -128,10 +129,10 @@ export default function ActivityDetail({ activity }: ActivityDetailProps) {
               </button>
             ) : null}
           </div>
+          {!showEvidence ? <p className="detail-preview">已核对：{evidencePreview}</p> : null}
           <div id={evidencePanelId} hidden={!showEvidence}>
             {showEvidence ? (
               <>
-              <EvaluationBadge evaluation={evaluation} />
               <EvidenceSummary evaluation={evaluation} />
               </>
             ) : null}
@@ -143,7 +144,10 @@ export default function ActivityDetail({ activity }: ActivityDetailProps) {
           <dl className="detail-list">
             <div>
               <dt>时间</dt>
-              <dd>{start}</dd>
+              <dd>
+                <Clock size={16} aria-hidden="true" />
+                {start}
+              </dd>
             </div>
             <div>
               <dt>地点</dt>
@@ -154,20 +158,32 @@ export default function ActivityDetail({ activity }: ActivityDetailProps) {
             </div>
             <div>
               <dt>费用</dt>
-              <dd>{activity.priceNote}</dd>
+              <dd>
+                <Ticket size={16} aria-hidden="true" />
+                {activity.priceNote}
+              </dd>
             </div>
             <div>
               <dt>预约</dt>
-              <dd>{activity.reservationRequired ? "需要提前预约" : "无需预约或现场确认"}</dd>
+              <dd>
+                <CalendarCheck size={16} aria-hidden="true" />
+                {activity.reservationRequired ? "需要提前预约" : "无需预约或现场确认"}
+              </dd>
             </div>
             <div>
               <dt>难度</dt>
-              <dd>{activity.difficulty}</dd>
+              <dd>
+                <Gauge size={16} aria-hidden="true" />
+                {activity.difficulty}
+              </dd>
             </div>
             {activity.ageBand ? (
               <div>
                 <dt>年龄</dt>
-                <dd>{activity.ageBand}</dd>
+                <dd>
+                  <UserRound size={16} aria-hidden="true" />
+                  {activity.ageBand}
+                </dd>
               </div>
             ) : null}
           </dl>
@@ -185,16 +201,15 @@ export default function ActivityDetail({ activity }: ActivityDetailProps) {
           </ul>
         </article>
 
-        <article className="detail-card">
-          <h2>来源和更新</h2>
-          <p>最后确认时间：{activity.lastConfirmedAt}</p>
-          <p>请以官方页面的报名和临时变更为准。</p>
+        <article className="detail-card activity-page-card">
+          <h2>活动页面</h2>
+          <p>最后核对：{activity.lastConfirmedAt}</p>
           <div className="detail-actions">
             <a href={activity.officialUrl} target="_blank" rel="noreferrer">
-              查看官方报名页面
+              去活动页面报名
               <ExternalLink size={16} aria-hidden="true" />
             </a>
-            <Link to={`/correct/${activity.slug}`}>纠错或补充信息</Link>
+            <Link to={`/correct/${activity.slug}`}>补充或纠错</Link>
           </div>
         </article>
       </section>

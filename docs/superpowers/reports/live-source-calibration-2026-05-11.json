@@ -1,0 +1,491 @@
+{
+  "generatedAt": "2026-05-11T09:33:55.629Z",
+  "rounds": 4,
+  "concurrency": 2,
+  "requiredSuccessfulSources": 10,
+  "successfulSources": 10,
+  "passedGate": true,
+  "sources": [
+    {
+      "sourceId": "eventbrite-shenzhen",
+      "sourceName": "Eventbrite 深圳",
+      "sourceUrl": "https://www.eventbrite.com/d/china--shenzhen/events/",
+      "attempts": 4,
+      "successRuns": 4,
+      "failureRuns": 0,
+      "successRate": 1,
+      "avgLatencyMs": 2417,
+      "avgItemsPerSuccess": 16,
+      "totalItems": 64,
+      "uniqueUrls": 16,
+      "uniqueTitles": 16,
+      "uniquenessRatio": 0.25,
+      "titleUniquenessRatio": 0.25,
+      "localRelevanceRatio": 0,
+      "sourceQualityScore": 0.63,
+      "recommendedTrustLevel": "unverified",
+      "recommendedSignalWeight": 0.97,
+      "sampleItems": [
+        {
+          "sourceId": "eventbrite-shenzhen",
+          "title": "Happy French Wednesday: Free Social Night at Happy Valley",
+          "url": "https://www.eventbrite.hk/e/happy-french-wednesday-free-social-night-at-happy-valley-tickets-1988055642945",
+          "startAt": "2026-05-13"
+        },
+        {
+          "sourceId": "eventbrite-shenzhen",
+          "title": "Affordable Art Fair Hong Kong 2026 | 14-17 May",
+          "url": "https://www.eventbrite.com/e/affordable-art-fair-hong-kong-2026-14-17-may-registration-1740893010859",
+          "startAt": "2026-05-14"
+        },
+        {
+          "sourceId": "eventbrite-shenzhen",
+          "title": "Hong Kong - The Rise of Machine Customers_Other_HKG",
+          "url": "https://www.eventbrite.sg/e/hong-kong-the-rise-of-machine-customers-other-hkg-tickets-1988276112375",
+          "startAt": "2026-05-17"
+        },
+        {
+          "sourceId": "eventbrite-shenzhen",
+          "title": "CICES x RICS Member Engagement Event",
+          "url": "https://www.eventbrite.hk/e/cices-x-rics-member-engagement-event-tickets-1985259080351",
+          "startAt": "2026-05-18"
+        },
+        {
+          "sourceId": "eventbrite-shenzhen",
+          "title": "The Next BIG Thing – a 3-hour improv workshop on bold new choices",
+          "url": "https://www.eventbrite.hk/e/the-next-big-thing-a-3-hour-improv-workshop-on-bold-new-choices-tickets-1851278968229",
+          "startAt": "2026-05-24"
+        }
+      ]
+    },
+    {
+      "sourceId": "douban-shenzhen",
+      "sourceName": "豆瓣同城深圳",
+      "sourceUrl": "https://shenzhen.douban.com/",
+      "attempts": 4,
+      "successRuns": 4,
+      "failureRuns": 0,
+      "successRate": 1,
+      "avgLatencyMs": 864,
+      "avgItemsPerSuccess": 86.75,
+      "totalItems": 347,
+      "uniqueUrls": 140,
+      "uniqueTitles": 140,
+      "uniquenessRatio": 0.403,
+      "titleUniquenessRatio": 0.403,
+      "localRelevanceRatio": 1,
+      "sourceQualityScore": 0.881,
+      "recommendedTrustLevel": "high",
+      "recommendedSignalWeight": 1.31,
+      "sampleItems": [
+        {
+          "sourceId": "douban-shenzhen",
+          "title": "《枫丹乐影》张鼎萨克斯独奏音乐会",
+          "url": "https://www.douban.com/event/37826917/"
+        },
+        {
+          "sourceId": "douban-shenzhen",
+          "title": "西班牙钢琴王子马里奥2026巡演-深圳站",
+          "url": "https://www.douban.com/event/37743155/"
+        },
+        {
+          "sourceId": "douban-shenzhen",
+          "title": "《源起华夏 月球冒险之旅》大型VR沉浸探索",
+          "url": "https://www.douban.com/event/37309455/"
+        },
+        {
+          "sourceId": "douban-shenzhen",
+          "title": "杨千嬅 Live MY LIVE 1.0 世界巡回演唱会-深圳站",
+          "url": "https://www.douban.com/event/37827695/"
+        },
+        {
+          "sourceId": "douban-shenzhen",
+          "title": "“多厨狂喜”白金交响乐团二次元交响音乐会",
+          "url": "https://www.douban.com/event/37808418/"
+        }
+      ]
+    },
+    {
+      "sourceId": "lianpu-tech-events",
+      "sourceName": "联谱科技活动",
+      "sourceUrl": "https://lianpu.com/",
+      "attempts": 4,
+      "successRuns": 4,
+      "failureRuns": 0,
+      "successRate": 1,
+      "avgLatencyMs": 196,
+      "avgItemsPerSuccess": 50,
+      "totalItems": 200,
+      "uniqueUrls": 50,
+      "uniqueTitles": 50,
+      "uniquenessRatio": 0.25,
+      "titleUniquenessRatio": 0.25,
+      "localRelevanceRatio": 0.1,
+      "sourceQualityScore": 0.67,
+      "recommendedTrustLevel": "unverified",
+      "recommendedSignalWeight": 0.99,
+      "sampleItems": [
+        {
+          "sourceId": "lianpu-tech-events",
+          "title": "Search Central Live Shanghai 2026",
+          "url": "https://lianpu.com/event/search-central-live-shanghai-2026"
+        },
+        {
+          "sourceId": "lianpu-tech-events",
+          "title": "2026 企服养虾大会 | 成都站",
+          "url": "https://lianpu.com/event/2026-qi-fu-yang-xia-da-hui-cheng-du-zhan"
+        },
+        {
+          "sourceId": "lianpu-tech-events",
+          "title": "HappyHorse & OPC 创客日",
+          "url": "https://lianpu.com/event/happyhorse-opc-chuang-ke-ri"
+        },
+        {
+          "sourceId": "lianpu-tech-events",
+          "title": "首届 AI 仿真人短剧大会 | 新视界 新规则",
+          "url": "https://lianpu.com/event/shou-jie-ai-fang-zhen-ren-duan-ju-da-hui-xin-shi-jie-xin-gui"
+        },
+        {
+          "sourceId": "lianpu-tech-events",
+          "title": "具身智能生态大会",
+          "url": "https://lianpu.com/event/ju-shen-zhi-neng-sheng-tai-da-hui"
+        }
+      ]
+    },
+    {
+      "sourceId": "huodongxing-shenzhen",
+      "sourceName": "活动行深圳",
+      "sourceUrl": "https://www.huodongxing.com/events?city=%E6%B7%B1%E5%9C%B3",
+      "attempts": 4,
+      "successRuns": 4,
+      "failureRuns": 0,
+      "successRate": 1,
+      "avgLatencyMs": 249,
+      "avgItemsPerSuccess": 21,
+      "totalItems": 84,
+      "uniqueUrls": 21,
+      "uniqueTitles": 21,
+      "uniquenessRatio": 0.25,
+      "titleUniquenessRatio": 0.25,
+      "localRelevanceRatio": 1,
+      "sourceQualityScore": 0.85,
+      "recommendedTrustLevel": "high",
+      "recommendedSignalWeight": 1.29,
+      "sampleItems": [
+        {
+          "sourceId": "huodongxing-shenzhen",
+          "title": "2026中国智算产业生态发展年会",
+          "url": "https://www.huodongxing.com/event/9852705015800"
+        },
+        {
+          "sourceId": "huodongxing-shenzhen",
+          "title": "AGIC2026深圳人工智能展",
+          "url": "https://www.huodongxing.com/event/5859922218300"
+        },
+        {
+          "sourceId": "huodongxing-shenzhen",
+          "title": "【倒计时3天】2026 CCEE雨果跨境选品大会",
+          "url": "https://www.huodongxing.com/event/8844211344400"
+        },
+        {
+          "sourceId": "huodongxing-shenzhen",
+          "title": "「见微知著」2026品牌方舟出海论坛",
+          "url": "https://www.huodongxing.com/event/1852425184300"
+        },
+        {
+          "sourceId": "huodongxing-shenzhen",
+          "title": "2025年“科创中国”创新创业投资大会——高端装备制造专家终审会",
+          "url": "https://www.huodongxing.com/event/8859641727600"
+        }
+      ]
+    },
+    {
+      "sourceId": "meetup-shenzhen",
+      "sourceName": "Meetup 深圳",
+      "sourceUrl": "https://www.meetup.com/find/?location=cn--shenzhen&source=EVENTS",
+      "attempts": 4,
+      "successRuns": 4,
+      "failureRuns": 0,
+      "successRate": 1,
+      "avgLatencyMs": 1477,
+      "avgItemsPerSuccess": 12,
+      "totalItems": 48,
+      "uniqueUrls": 12,
+      "uniqueTitles": 12,
+      "uniquenessRatio": 0.25,
+      "titleUniquenessRatio": 0.25,
+      "localRelevanceRatio": 0.333,
+      "sourceQualityScore": 0.677,
+      "recommendedTrustLevel": "unverified",
+      "recommendedSignalWeight": 1,
+      "sampleItems": [
+        {
+          "sourceId": "meetup-shenzhen",
+          "title": "WhatsApp group for event updates 認識國際朋友 Sat, May 30 · 8:00 PM CST by Friend to Friend hangout 4.8 1106 attendees",
+          "url": "https://www.meetup.com/friend-to-friend-hangout/events/311899395/"
+        },
+        {
+          "sourceId": "meetup-shenzhen",
+          "title": "Waitlist 🌎 (Online/Free) Free English Conversation Club with global people Every Sun, Mon, Tue, Wed, Thu, Fri, Sat · May 11 · 6:00 PM ICT · Online by Free English Speaking Practice BKK ฝึกพูดภาษาอังกฤษออนไลน์ฟร 4.4 25 attendees",
+          "url": "https://www.meetup.com/meetup-group-txqscvrf/events/314640886/"
+        },
+        {
+          "sourceId": "meetup-shenzhen",
+          "title": "(免费公益技术演讲)SEO 小平:WordPress网站内链结构 Sun, May 24 · 12:00 PM CST by WordPress Meetup Shenzhen 4.8 11 attendees",
+          "url": "https://www.meetup.com/wordpress-meetup-shenzhen/events/314696490/"
+        },
+        {
+          "sourceId": "meetup-shenzhen",
+          "title": "古迹铁路双语行 (英语/普通话) Sat, May 16 · 2:30 PM CST by Discover Hong Kong 发掘在港生活的美好 4.9 3 attendees",
+          "url": "https://www.meetup.com/discover-hong-kong-%E5%8F%91%E6%8E%98%E5%9C%A8%E6%B8%AF%E7%94%9F%E6%B4%BB%E7%9A%84%E7%BE%8E%E5%A5%BD/events/314641902/"
+        },
+        {
+          "sourceId": "meetup-shenzhen",
+          "title": "(官方) WordPress Meetup Shenzhen线下聚会｜开发者/设计师/站长 同城集结 微信：duncangu Mon, Jun 1 · 7:00 PM CST by WordPress Meetup Shenzhen 4.8 4 attendees",
+          "url": "https://www.meetup.com/wordpress-meetup-shenzhen/events/314524012/"
+        }
+      ]
+    },
+    {
+      "sourceId": "nanshan-library-activities",
+      "sourceName": "南山图书馆活动平台",
+      "sourceUrl": "https://activity.nslib.cn/",
+      "attempts": 4,
+      "successRuns": 4,
+      "failureRuns": 0,
+      "successRate": 1,
+      "avgLatencyMs": 341,
+      "avgItemsPerSuccess": 15,
+      "totalItems": 60,
+      "uniqueUrls": 15,
+      "uniqueTitles": 13,
+      "uniquenessRatio": 0.25,
+      "titleUniquenessRatio": 0.217,
+      "localRelevanceRatio": 1,
+      "sourceQualityScore": 0.822,
+      "recommendedTrustLevel": "high",
+      "recommendedSignalWeight": 1.27,
+      "sampleItems": [
+        {
+          "sourceId": "nanshan-library-activities",
+          "title": "法律咨询",
+          "url": "https://activity.nslib.cn/activity/info/11448"
+        },
+        {
+          "sourceId": "nanshan-library-activities",
+          "title": "南图双语故事会|Presents for Dad",
+          "url": "https://activity.nslib.cn/activity/info/11423"
+        },
+        {
+          "sourceId": "nanshan-library-activities",
+          "title": "心理咨询",
+          "url": "https://activity.nslib.cn/activity/info/11444"
+        },
+        {
+          "sourceId": "nanshan-library-activities",
+          "title": "法律咨询",
+          "url": "https://activity.nslib.cn/activity/info/11447"
+        },
+        {
+          "sourceId": "nanshan-library-activities",
+          "title": "阅见南山·探索成长丨赤湾寻迹—海神、海防、海洋观",
+          "url": "https://activity.nslib.cn/activity/info/11426"
+        }
+      ]
+    },
+    {
+      "sourceId": "luohu-library-events",
+      "sourceName": "罗湖图书馆活动速递",
+      "sourceUrl": "https://www.szlhlib.org.cn/category/1021",
+      "attempts": 4,
+      "successRuns": 4,
+      "failureRuns": 0,
+      "successRate": 1,
+      "avgLatencyMs": 363,
+      "avgItemsPerSuccess": 9,
+      "totalItems": 36,
+      "uniqueUrls": 9,
+      "uniqueTitles": 9,
+      "uniquenessRatio": 0.25,
+      "titleUniquenessRatio": 0.25,
+      "localRelevanceRatio": 1,
+      "sourceQualityScore": 0.795,
+      "recommendedTrustLevel": "medium",
+      "recommendedSignalWeight": 1.25,
+      "sampleItems": [
+        {
+          "sourceId": "luohu-library-events",
+          "title": "【获奖公告】《春暖花开，“阅” 见新生》线上活动获奖名单公布 2026/03/26",
+          "url": "https://www.szlhlib.org.cn/information/20430"
+        },
+        {
+          "sourceId": "luohu-library-events",
+          "title": "【绎说养生 云享罗图】骨质疏松的防治；用AI制作背景音乐 2026/03/26",
+          "url": "https://www.szlhlib.org.cn/information/20427"
+        },
+        {
+          "sourceId": "luohu-library-events",
+          "title": "【真人图书馆】幸福家庭 健康人生 2026/03/26",
+          "url": "https://www.szlhlib.org.cn/information/20426"
+        },
+        {
+          "sourceId": "luohu-library-events",
+          "title": "【涂涂故事列车】《星期三书店》；《今天我是一粒黄豆》 2026/03/26",
+          "url": "https://www.szlhlib.org.cn/information/20425"
+        },
+        {
+          "sourceId": "luohu-library-events",
+          "title": "【涂涂故事列车 创阅汇】《白雪公主和77个小矮人》；气象卫星模型制作 2026/03/01",
+          "url": "https://www.szlhlib.org.cn/information/20367"
+        }
+      ]
+    },
+    {
+      "sourceId": "szu-library-events",
+      "sourceName": "深圳大学图书馆活动",
+      "sourceUrl": "https://www.lib.szu.edu.cn/jsonapi/node/event?sort=-event_date.value",
+      "attempts": 4,
+      "successRuns": 4,
+      "failureRuns": 0,
+      "successRate": 1,
+      "avgLatencyMs": 584,
+      "avgItemsPerSuccess": 50,
+      "totalItems": 200,
+      "uniqueUrls": 50,
+      "uniqueTitles": 49,
+      "uniquenessRatio": 0.25,
+      "titleUniquenessRatio": 0.245,
+      "localRelevanceRatio": 1,
+      "sourceQualityScore": 0.849,
+      "recommendedTrustLevel": "high",
+      "recommendedSignalWeight": 1.29,
+      "sampleItems": [
+        {
+          "sourceId": "szu-library-events",
+          "title": "同城讲堂第4季：“人机协作的方法”系列下周讲座（5.6-5.8）",
+          "url": "http://www.lib.szu.edu.cn/wp?url=http://info.lib.szu.edu.cn/infoliteracy/node/1012",
+          "startAt": "2026-05-06T00:00:00+08:00"
+        },
+        {
+          "sourceId": "szu-library-events",
+          "title": "同城讲堂第4季：“人机协作的方法”系列本周讲座（4.27-4.30）",
+          "url": "http://www.lib.szu.edu.cn/wp?url=http://info.lib.szu.edu.cn/infoliteracy/node/1008",
+          "startAt": "2026-04-28T00:00:00+08:00"
+        },
+        {
+          "sourceId": "szu-library-events",
+          "title": "【书封解码大挑战】荔园读书人，快来猜书名赢好礼！",
+          "url": "https://mp.weixin.qq.com/s?__biz=MzIyOTAyMDUxOQ==&tempkey=MTM3MF9TeUNzSkcrOGFBcWtDRCtnOThPakVOekxXRkJuelI0YU1QVjBXcEZsdzlOMG14S1JDU3g3MEVJX0t0YUtCSGYxQU9RUVU4S0VZZW5xdXJTYXdoRXdNeHEwd0RQN3NUYlU3aFYxOFROdFVFb2FWUmczV3RJZktCRzQ3V29QN2VYamYxVTNTWGFNSWNxTmttSlJLdFpqYmVDdGtHOXdlMjVDdUhMWXhBfn4%3D&chksm=f39423aac4e3aabc65524c6a5b0bf554e443c2dda62a9a29e1c5ef69ddd668646f66bd8dde86&token=1494154694&lang=zh_CN",
+          "startAt": "2026-04-23T00:00:00+08:00"
+        },
+        {
+          "sourceId": "szu-library-events",
+          "title": "翌日之光 星汉灿烂 - 2026 Emerald AI知多少趣味知识竞赛",
+          "url": "http://www.lib.szu.edu.cn/wp?url=http://info.lib.szu.edu.cn/infoliteracy/node/1005",
+          "startAt": "2026-04-21T00:00:00+08:00"
+        },
+        {
+          "sourceId": "szu-library-events",
+          "title": "书页观山海，春风入卷来｜2026“你选书・我买单” 活动重磅回归！",
+          "url": "https://mp.weixin.qq.com/s/xzSiplAEyivW7M4b_FUqew",
+          "startAt": "2026-04-20T00:00:00+08:00"
+        }
+      ]
+    },
+    {
+      "sourceId": "ites-meetings",
+      "sourceName": "ITES 深圳工业展会议活动",
+      "sourceUrl": "https://www.iteschina.com/zh-cn/meeting",
+      "attempts": 4,
+      "successRuns": 4,
+      "failureRuns": 0,
+      "successRate": 1,
+      "avgLatencyMs": 10324,
+      "avgItemsPerSuccess": 8,
+      "totalItems": 32,
+      "uniqueUrls": 8,
+      "uniqueTitles": 8,
+      "uniquenessRatio": 0.25,
+      "titleUniquenessRatio": 0.25,
+      "localRelevanceRatio": 1,
+      "sourceQualityScore": 0.755,
+      "recommendedTrustLevel": "medium",
+      "recommendedSignalWeight": 1.22,
+      "sampleItems": [
+        {
+          "sourceId": "ites-meetings",
+          "title": "半导体设备",
+          "url": "https://www.iteschina.com/zh-cn/meeting/2005573281005867009"
+        },
+        {
+          "sourceId": "ites-meetings",
+          "title": "航空航天",
+          "url": "https://www.iteschina.com/zh-cn/meeting/2005566920071221250"
+        },
+        {
+          "sourceId": "ites-meetings",
+          "title": "新能源汽车",
+          "url": "https://www.iteschina.com/zh-cn/meeting/1847563984212345000"
+        },
+        {
+          "sourceId": "ites-meetings",
+          "title": "AI服务器",
+          "url": "https://www.iteschina.com/zh-cn/meeting/2005573499738820610"
+        },
+        {
+          "sourceId": "ites-meetings",
+          "title": "具身智能",
+          "url": "https://www.iteschina.com/zh-cn/meeting/2005573624691331074"
+        }
+      ]
+    },
+    {
+      "sourceId": "szwen-cultural-events",
+      "sourceName": "深圳文体通活动",
+      "sourceUrl": "https://www.szwen.cn/",
+      "attempts": 4,
+      "successRuns": 4,
+      "failureRuns": 0,
+      "successRate": 1,
+      "avgLatencyMs": 176,
+      "avgItemsPerSuccess": 33,
+      "totalItems": 132,
+      "uniqueUrls": 33,
+      "uniqueTitles": 33,
+      "uniquenessRatio": 0.25,
+      "titleUniquenessRatio": 0.25,
+      "localRelevanceRatio": 1,
+      "sourceQualityScore": 0.85,
+      "recommendedTrustLevel": "high",
+      "recommendedSignalWeight": 1.29,
+      "sampleItems": [
+        {
+          "sourceId": "szwen-cultural-events",
+          "title": "美美与共——全国美术馆书法邀请展 地址：何香凝美术馆7-8展厅 时间：2026-03-17 09:30 至 2026-04-23 16:30 发布时间：2026-03-12 15:03:42",
+          "url": "https://www.szwen.cn/eventDetail?id=a8fb4c9eb673440092febdddf17da31a"
+        },
+        {
+          "sourceId": "szwen-cultural-events",
+          "title": "物外烟霞——20世纪中国风景画探索研究展 地址：何香凝美术馆1-6展厅 时间：2026-03-28 09:30 至 2026-05-31 16:30 发布时间：2026-03-24 15:23:25",
+          "url": "https://www.szwen.cn/eventDetail?id=05bffdcfeaf6486e87678595c7f59bd0"
+        },
+        {
+          "sourceId": "szwen-cultural-events",
+          "title": "安德拉什 席夫爵士钢琴独奏音乐会 地址：深圳音乐厅二楼演奏大厅 时间：2026-04-17 20:00 至 2026-04-17 22:00 发布时间：2026-03-09 15:20:43",
+          "url": "https://www.szwen.cn/eventDetail?id=fb7879e11bcd45cd8dca66a2f2c9ea98"
+        },
+        {
+          "sourceId": "szwen-cultural-events",
+          "title": "国画赏析活动 开始时间：2026-04-14 结束时间：2026-04-14 地址：深圳市罗湖区桂园街道办事处鸿翔花园7-A栋3楼书画室 发布时间：2026-04-13 11:19:12",
+          "url": "https://www.szwen.cn/eventDetail?id=07eea8ffbd4549d2b2383b8f0a658d67"
+        },
+        {
+          "sourceId": "szwen-cultural-events",
+          "title": "爵士热舞狂欢，解锁多巴胺爵士舞活动（4月14日19：30-20：30） 开始时间：2026-04-14 结束时间：2026-04-14 地址：深圳市罗湖区翠竹街道办事处愉天社区综合文化服务中心 发布时间：2026-04-08 10:11:20",
+          "url": "https://www.szwen.cn/eventDetail?id=0d2750c83f054e15a3b83605742e76f4"
+        }
+      ]
+    }
+  ],
+  "failures": []
+}

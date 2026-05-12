@@ -2,14 +2,34 @@ export type Audience = "family" | "adult";
 export type ActivityStatus = "draft" | "published" | "expired" | "cancelled" | "uncertain";
 export type Difficulty = "入门" | "进阶" | "专业";
 export type PriceType = "免费" | "收费" | "公益";
+export type SourceFamily = "confirmation" | "discovery" | "reputation" | "user";
+export type SourceCollectionMode = "auto" | "candidate" | "reputation";
+export type SourceAccessMode = "public_web" | "json_api" | "search" | "authorized_import" | "manual_link";
+export type SourceComplianceLevel = "auto_allowed" | "needs_review" | "manual_only";
+export type SourceConfirmationPower = "strong" | "supporting" | "none";
 
 export type ActivitySource = {
   id: string;
   name: string;
-  type: "venue" | "university" | "bookstore" | "tech-park" | "community" | "conference-platform" | "organizer";
+  type:
+    | "venue"
+    | "university"
+    | "bookstore"
+    | "tech-park"
+    | "community"
+    | "conference-platform"
+    | "organizer"
+    | "listing-platform";
   url: string;
   trustLevel: "high" | "medium" | "unverified";
+  signalWeight?: number;
   lastChecked: string;
+  sourceFamily?: SourceFamily;
+  collectionMode?: SourceCollectionMode;
+  accessMode?: SourceAccessMode;
+  coverageTags?: string[];
+  complianceLevel?: SourceComplianceLevel;
+  confirmationPower?: SourceConfirmationPower;
 };
 
 export type Activity = {
@@ -25,6 +45,7 @@ export type Activity = {
   address: string;
   startAt: string;
   endAt: string;
+  dateNote?: string;
   priceType: PriceType;
   priceNote: string;
   reservationRequired: boolean;

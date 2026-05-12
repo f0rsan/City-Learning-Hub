@@ -11,9 +11,9 @@ export default function HomePage() {
     <main>
       <section className="hero visual-hero">
         <div className="hero-copy">
-          <p className="eyebrow">深圳单城市 · 每周精选</p>
+          <p className="eyebrow">深圳本周精选</p>
           <h1>深圳本周值得去</h1>
-          <p>用系统化证据从零碎活动信息里筛出真正值得带孩子去、或者大人自己去学习交流的活动。</p>
+          <p>给家长和成人看的深圳活动清单：看点、注意事项和把握度都放前面。</p>
         </div>
         <img className="hero-image" src={heroImage} alt="深圳学习活动现场氛围" />
       </section>
@@ -25,7 +25,7 @@ export default function HomePage() {
 
       <WeeklySection
         title="本周精选"
-        subtitle="不是活动越多越好，而是每个活动都要解释价值、风险和判断信心。"
+        subtitle="先看要点，再决定要不要报名。"
         activities={featured}
       />
     </main>

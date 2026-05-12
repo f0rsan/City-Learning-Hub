@@ -5,7 +5,10 @@
     "preview": "vite preview --host 127.0.0.1",
     "test": "vitest",
     "test:run": "vitest run",
-    "e2e": "playwright test"
+    "e2e": "playwright test",
+    "collection:stress": "node scripts/collection/run-live-calibration.mjs 4 2",
+    "collection:import": "node scripts/collection/import-live-activities.mjs",
+    "collection:scheduled": "node scripts/collection/import-live-activities.mjs"
   },
   "dependencies": {
     "lucide-react": "latest",

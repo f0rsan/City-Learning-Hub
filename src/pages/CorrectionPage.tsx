@@ -1,12 +1,12 @@
 import { useState } from "react";
 import { Navigate, useParams } from "react-router-dom";
 import { getActivityBySlug } from "../domain/activitySelectors";
+import { getCandidateActivities } from "../domain/candidateStore";
 import { addCorrectionReport } from "../domain/localStore";
-import { sampleActivities } from "../domain/sampleData";
 
 export default function CorrectionPage() {
   const { slug } = useParams();
-  const activity = slug ? getActivityBySlug(sampleActivities, slug) : undefined;
+  const activity = slug ? getActivityBySlug(getCandidateActivities(), slug) : undefined;
   const [submitted, setSubmitted] = useState(false);
 
   if (!activity) {
@@ -19,15 +19,15 @@ export default function CorrectionPage() {
         <div>
           <p className="eyebrow">信息纠错</p>
           <h1>纠错：{activity.title}</h1>
-          <p>如果时间、地点、报名链接或适龄信息有变化，可以把线索发给编辑复核。</p>
+          <p>看到时间、地点、报名链接或适龄信息不对，可以告诉我们。</p>
         </div>
         <div className="trust-panel">
-          <strong>当前来源</strong>
+          <strong>原始链接</strong>
           <p>{activity.officialUrl}</p>
         </div>
       </div>
 
-      {submitted ? <p className="success-message">已收到纠错信息</p> : null}
+      {submitted ? <p className="success-message">已收到，会复核</p> : null}
 
       <form
         className="hub-form"
@@ -61,10 +61,10 @@ export default function CorrectionPage() {
           <input name="contact" required />
         </label>
         <label className="wide-field">
-          具体说明
+          哪里需要改
           <textarea name="detail" required rows={5} />
         </label>
-        <button type="submit">提交纠错</button>
+        <button type="submit">提交纠错线索</button>
       </form>
     </section>
   );

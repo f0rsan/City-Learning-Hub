@@ -16,22 +16,22 @@ export default function AudiencePage() {
   }
 
   const activities = filterByAudience(getPublicEvaluatedActivities(), audience);
-  const title = audience === "family" ? "带孩子去学习" : "大人去交流";
+  const title = audience === "family" ? "带孩子去学习" : "成人学习交流";
   const subtitle =
     audience === "family"
-      ? "优先展示适龄、可亲子同行、注意事项清楚的活动。"
-      : "优先展示科技、产业、读书、社科和技术交流活动。";
+      ? "优先看适合年龄、互动体验和陪同要求都清楚的活动。"
+      : "优先看技术、产业、读书、社科和创业交流活动。";
 
   return (
     <main className="page-stack">
       <section className="page-hero">
         <div>
-          <p className="eyebrow">深圳精选入口</p>
+          <p className="eyebrow">深圳分类精选</p>
           <h1>{title}</h1>
           <p>{subtitle}</p>
         </div>
       </section>
-      <WeeklySection title="精选活动" subtitle={subtitle} activities={activities} />
+      <WeeklySection title="精选活动" subtitle="看点和注意事项放在卡片上，方便比较。" activities={activities} />
     </main>
   );
 }

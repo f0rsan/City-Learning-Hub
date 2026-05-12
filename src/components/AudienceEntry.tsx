@@ -11,9 +11,9 @@ export default function AudienceEntry({ type }: AudienceEntryProps) {
     <Link className="audience-entry" to={`/audience/${type}`}>
       {isFamily ? <Baby aria-hidden="true" /> : <Users aria-hidden="true" />}
       <span>
-        <strong>{isFamily ? "带孩子去学习" : "大人去交流"}</strong>
+        <strong>{isFamily ? "带孩子去学习" : "成人学习交流"}</strong>
         <small>
-          {isFamily ? "适龄、体验价值、预约门槛和陪同要求" : "科技、读书、社科、创业和技术交流"}
+          {isFamily ? "适合年龄、体验亮点、预约和陪同要求" : "技术、社科、读书和创业活动"}
         </small>
       </span>
       <ArrowRight aria-hidden="true" />

@@ -114,7 +114,7 @@ function withResolvedRecovery(base: Omit<CorrectionImpact, "reason">, issueType:
     ...base,
     riskDelta,
     confidenceDelta,
-    reason: `${issueType}已处理，风险和信心惩罚部分恢复`
+    reason: `${issueType}已处理，影响已部分恢复`
   };
 }
 
@@ -161,18 +161,18 @@ export function getCorrectionImpacts(): CorrectionImpact[] {
     }
 
     if (report.issueType === "活动取消") {
-      return { ...baseImpact, reason: "活动取消，纠错未解决，风险最高" };
+      return { ...baseImpact, reason: "活动取消，需要尽快核对" };
     }
 
     if (report.issueType === "链接失效") {
-      return { ...baseImpact, reason: "官方链接失效，纠错未解决，来源信心下降" };
+      return { ...baseImpact, reason: "活动链接失效，需要重新核对" };
     }
 
     if (report.issueType === "时间变更" || report.issueType === "地点变更") {
-      return { ...baseImpact, reason: `${report.issueType}，纠错未解决，需要重新确认` };
+      return { ...baseImpact, reason: `${report.issueType}，需要重新确认` };
     }
 
-    return { ...baseImpact, reason: "补充信息会降低当前判断信心，直到纠错解决" };
+    return { ...baseImpact, reason: "补充信息待核对" };
   });
 }
 

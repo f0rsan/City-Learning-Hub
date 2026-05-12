@@ -16,6 +16,7 @@ import {
   getCandidateActivities,
   updateCandidateStatus
 } from "../domain/candidateStore";
+import { getCollectionIntervalHours } from "../domain/collectionSchedule";
 import {
   addCalibrationNote,
   buildCalibrationMetadata,
@@ -29,9 +30,9 @@ import {
   updateCorrectionReportStatus,
   updateSubmittedActivityStatus
 } from "../domain/localStore";
-import { getSourceHealth } from "../domain/sourcePool";
+import { getSourceHealth, type SourceHealth } from "../domain/sourcePool";
 import type { CalibrationAction, CalibrationReasonType } from "../domain/evaluationTypes";
-import type { SubmittedActivityStatus } from "../domain/types";
+import type { SourceCollectionMode, SubmittedActivityStatus } from "../domain/types";
 
 const statusLabels: Record<SubmittedActivityStatus, string> = {
   pending: "待处理",
@@ -40,16 +41,16 @@ const statusLabels: Record<SubmittedActivityStatus, string> = {
 };
 
 const candidateQueueLabels = {
-  draft: "候选草稿",
+  draft: "待补充",
   pending: "待评估",
   archived: "已归档"
 } as const;
 
 const reasonTypeLabels: Record<CalibrationReasonType, string> = {
   evidence_gap: "证据不足",
-  risk_update: "风险更新",
+  risk_update: "注意事项更新",
   audience_mismatch: "人群不匹配",
-  rule_exception: "规则特例",
+  rule_exception: "特殊情况",
   other: "其他原因"
 };
 
@@ -65,6 +66,24 @@ const trendSymbols = {
   flat: "→"
 } as const;
 
+const sourceHealthLabels: Record<SourceHealth, string> = {
+  healthy: "稳定",
+  needs_review: "需复核",
+  failing: "异常"
+};
+
+const sourceCollectionModeLabels: Record<SourceCollectionMode, string> = {
+  auto: "可直接自动采集",
+  candidate: "半自动候选",
+  reputation: "只做口碑信号"
+};
+
+const confirmationPowerLabels = {
+  strong: "可确认",
+  supporting: "辅助确认",
+  none: "不确认"
+} as const;
+
 export default function AdminPage() {
   const [submittedActivities, setSubmittedActivities] = useState(() =>
     getSubmittedActivities().filter((activity) => activity.status === "pending")
@@ -73,6 +92,11 @@ export default function AdminPage() {
   const [lastAction, setLastAction] = useState("");
   const correctionReports = getCorrectionReports();
   const sourceHealth = getSourceHealth();
+  const sourceGroups = (Object.keys(sourceCollectionModeLabels) as SourceCollectionMode[]).map((mode) => ({
+    mode,
+    label: sourceCollectionModeLabels[mode],
+    sources: sourceHealth.filter((source) => source.collectionMode === mode)
+  }));
   const activityTitles = useMemo(
     () => new Map(candidates.map((activity) => [activity.slug, activity.title])),
     [candidates]
@@ -98,7 +122,7 @@ export default function AdminPage() {
     const activity = candidates.find((candidate) => candidate.id === activityId);
 
     if (!activity) {
-      setLastAction("未找到活动，无法写入校准记录");
+      setLastAction("未找到活动，无法记录操作");
       return;
     }
 
@@ -124,13 +148,13 @@ export default function AdminPage() {
   function convertSubmission(id: string) {
     updateSubmittedActivityStatus(id, "approved");
     createCandidateFromSubmission(id);
-    setLastAction("已转为候选草稿");
+    setLastAction("已转为待补充");
     refresh();
   }
 
   function resolveCorrection(id: string) {
     updateCorrectionReportStatus(id, "resolved");
-    setLastAction("已标记纠错为解决状态，系统会部分恢复风险和信心");
+    setLastAction("已标记为已核对，相关影响会部分恢复");
     refresh();
   }
 
@@ -151,38 +175,42 @@ export default function AdminPage() {
     <section className="admin-page">
       <div className="page-hero">
         <div>
-          <p className="eyebrow">80% 系统判断 · 20% 人工校准</p>
-          <h1>系统评估台</h1>
-          <p>后台不再逐条人工整理活动，而是查看系统推荐、证据、风险和信心，把人的投入集中在校准低信心和高风险样本。</p>
+          <p className="eyebrow">工具初筛 · 人工复核</p>
+          <h1>活动审核台</h1>
+          <p>查看本周推荐、参考依据和注意事项，把人工时间留给信息不清或风险较高的活动。</p>
         </div>
         <div className="trust-panel">
-          <strong>本周决策口径</strong>
-          <p>投稿和纠错先进入候选与校准流程，不直接影响公开推荐。</p>
-          {lastAction ? <p className="inline-status">{lastAction}</p> : null}
+          <strong>本周口径</strong>
+          <p>投稿和纠错先进入待处理列表，确认后才影响公开页面。</p>
+          {lastAction ? (
+            <p className="inline-status" aria-live="polite" role="status">
+              {lastAction}
+            </p>
+          ) : null}
         </div>
       </div>
 
       <section className="admin-section">
         <div className="section-title">
           <SlidersHorizontal size={22} aria-hidden="true" />
-          <h2>系统推荐</h2>
+          <h2>本周候选推荐</h2>
         </div>
         <div className="admin-list">
           {evaluated.slice(0, 4).map((activity) => (
             <article className="admin-item evaluation-admin-item" key={activity.id}>
               <div>
-                <span className="pill">系统推荐</span>
+                <span className="pill">推荐中</span>
                 <h3>{activity.title}</h3>
                 {activity.evaluation ? (
                   <>
                     <EvaluationBadge evaluation={activity.evaluation} />
                     {activity.evaluationChange?.changedBy === "rule_version_update" ? (
-                      <p className="inline-status">评分因规则更新发生变化</p>
+                      <p className="inline-status">规则更新后，结果有变化</p>
                     ) : null}
                     <div className="admin-reasons">
-                      <strong>为什么值得去</strong>
+                      <strong>看点</strong>
                       <p>{activity.evaluation.valueReasons[0]}</p>
-                      <strong>主要风险</strong>
+                      <strong>注意</strong>
                       <p>{activity.evaluation.riskReasons[0]}</p>
                     </div>
                     <EvidenceSummary compact evaluation={activity.evaluation} />
@@ -192,19 +220,19 @@ export default function AdminPage() {
               <div className="admin-actions">
                 <button type="button" onClick={() => calibrate(activity.id, "confirm")}>
                   <CheckCircle2 size={17} aria-hidden="true" />
-                  确认推荐
+                  确认展示
                 </button>
                 <button type="button" onClick={() => calibrate(activity.id, "lower_confidence")}>
                   <ShieldAlert size={17} aria-hidden="true" />
-                  降低信心
+                  降为待观察
                 </button>
                 <button type="button" onClick={() => calibrate(activity.id, "send_to_calibration")}>
                   <SlidersHorizontal size={17} aria-hidden="true" />
-                  送入校准
+                  加入复核
                 </button>
                 <button type="button" onClick={() => calibrate(activity.id, "reject")}>
                   <CircleSlash2 size={17} aria-hidden="true" />
-                  拒绝推荐
+                  不展示
                 </button>
               </div>
             </article>
@@ -215,7 +243,7 @@ export default function AdminPage() {
       <section className="admin-section">
         <div className="section-title">
           <ShieldAlert size={22} aria-hidden="true" />
-          <h2>近30天人工覆盖热点</h2>
+          <h2>近30天复核集中在哪</h2>
         </div>
         {calibrationHotspots.length ? (
           <div className="admin-list">
@@ -224,7 +252,7 @@ export default function AdminPage() {
                 <div>
                   <span className="pill">近30天 {hotspot.currentCount} 次</span>
                   <h3>{reasonTypeLabels[hotspot.reasonType] ?? hotspot.reasonType}</h3>
-                  <p>规则标签：{hotspot.ruleTag ?? "未标注"}</p>
+                  <p>标签：{hotspot.ruleTag ?? "未标注"}</p>
                   <p>
                     趋势：{trendSymbols[hotspot.trend]} {trendLabels[hotspot.trend]}（前30天 {hotspot.previousCount} 次）
                   </p>
@@ -233,21 +261,21 @@ export default function AdminPage() {
             ))}
           </div>
         ) : (
-          <p className="empty-state">近30天暂无人工覆盖热点。</p>
+          <p className="empty-state">近30天暂无集中复核问题。</p>
         )}
       </section>
 
       <section className="admin-section">
         <div className="section-title">
           <ShieldAlert size={22} aria-hidden="true" />
-          <h2>需要校准</h2>
+          <h2>需要复核</h2>
         </div>
         {needsCalibration.length ? (
           <div className="admin-list">
             {needsCalibration.slice(0, 3).map((activity) => (
               <article className="admin-item" key={activity.id}>
                 <div>
-                  <span className="pill">低信心或高风险</span>
+                  <span className="pill">低把握或高风险</span>
                   <h3>{activity.title}</h3>
                   <p>{activity.evaluation?.riskReasons[0]}</p>
                 </div>
@@ -255,14 +283,14 @@ export default function AdminPage() {
             ))}
           </div>
         ) : (
-          <p className="empty-state">暂无需要校准的活动。</p>
+          <p className="empty-state">暂无需要复核的活动。</p>
         )}
       </section>
 
       <section className="admin-section">
         <div className="section-title">
           <Inbox size={22} aria-hidden="true" />
-          <h2>候选草稿与待处理</h2>
+          <h2>待补充活动</h2>
         </div>
         {pendingCandidates.length || submittedActivities.length ? (
           <div className="admin-list">
@@ -281,7 +309,7 @@ export default function AdminPage() {
                 <div className="admin-actions">
                   <button type="button" onClick={() => updateCandidateStatus(activity.id, "evaluated") && refresh()}>
                     <CheckCircle2 size={17} aria-hidden="true" />
-                    系统评估
+                    开始评估
                   </button>
                 </div>
               </article>
@@ -299,7 +327,7 @@ export default function AdminPage() {
                 <div className="admin-actions">
                   <button type="button" onClick={() => convertSubmission(activity.id)}>
                     <CheckCircle2 size={17} aria-hidden="true" />
-                    转为候选草稿
+                    转为待补充
                   </button>
                   <button type="button" onClick={() => setStatus(activity.id, "rejected")}>
                     <CircleSlash2 size={17} aria-hidden="true" />
@@ -310,14 +338,14 @@ export default function AdminPage() {
             ))}
           </div>
         ) : (
-          <p className="empty-state">暂无候选草稿或待处理活动。</p>
+          <p className="empty-state">暂无待补充或待处理活动。</p>
         )}
       </section>
 
       <section className="admin-section">
         <div className="section-title">
           <Inbox size={22} aria-hidden="true" />
-          <h2>自动归档候选</h2>
+          <h2>已过期线索</h2>
         </div>
         {archivedCandidates.length ? (
           <div className="admin-list">
@@ -336,21 +364,21 @@ export default function AdminPage() {
             ))}
           </div>
         ) : (
-          <p className="empty-state">暂无自动归档候选。</p>
+          <p className="empty-state">暂无已过期线索。</p>
         )}
       </section>
 
       <section className="admin-section">
         <div className="section-title">
           <MessageSquareWarning size={22} aria-hidden="true" />
-          <h2>影响可信度的纠错</h2>
+          <h2>待核对纠错</h2>
         </div>
         {correctionReports.length ? (
           <div className="admin-list">
             {correctionReports.map((report) => (
               <article className="admin-item" key={report.id}>
                 <div>
-                  <span className="pill">{report.status === "resolved" ? "已解决（部分恢复）" : "降低信心"}</span>
+                  <span className="pill">{report.status === "resolved" ? "已核对（部分恢复）" : "影响把握度"}</span>
                   <h3>{activityTitles.get(report.activitySlug) ?? report.activitySlug}</h3>
                   <p>{report.issueType}</p>
                   <p>{report.detail}</p>
@@ -376,24 +404,36 @@ export default function AdminPage() {
       <section className="admin-section">
         <div className="section-title">
           <DatabaseBackup size={22} aria-hidden="true" />
-          <h2>来源池健康度与备份</h2>
+          <h2>来源状态与备份</h2>
         </div>
-        <div className="admin-list">
-          {sourceHealth.map((source) => (
-            <article className="admin-item" key={source.sourceId}>
-              <div>
-                <span className="pill">{source.health}</span>
-                <h3>{source.name}</h3>
-                <p>基础状态：{source.baseHealth}</p>
-                <p>最后检查：{source.lastChecked}</p>
-                <p>连续失败：{source.consecutiveFailures}</p>
-                <p>最近成功：{source.lastSuccessAt ?? "暂无"}</p>
-                <p>最近失败：{source.lastFailureAt ?? "暂无"}</p>
-                <p>失败原因：{source.lastFailureReason ?? "暂无"}</p>
-              </div>
-            </article>
-          ))}
-        </div>
+        <p className="section-note">自动更新：每 {getCollectionIntervalHours("auto")} 小时</p>
+        {sourceGroups.map((group) => (
+          <div className="source-group" key={group.mode}>
+            <div className="source-group-heading">
+              <h3>{group.label}</h3>
+              <span className="pill">{group.sources.length} 个来源</span>
+            </div>
+            <div className="admin-list">
+              {group.sources.map((source) => (
+                <article className="admin-item" key={source.sourceId}>
+                  <div>
+                    <div className="badge-row">
+                      <span className="pill">{sourceHealthLabels[source.health]}</span>
+                      <span className="pill">{confirmationPowerLabels[source.confirmationPower]}</span>
+                    </div>
+                    <h3>{source.name}</h3>
+                    <p>{source.coverageTags.slice(0, 3).join(" / ")}</p>
+                    <p>最后检查：{source.lastChecked}</p>
+                    <p>连续失败：{source.consecutiveFailures}</p>
+                    <p>最近成功：{source.lastSuccessAt ?? "暂无"}</p>
+                    {source.lastFailureAt ? <p>最近失败：{source.lastFailureAt}</p> : null}
+                    {source.lastFailureReason ? <p>失败原因：{source.lastFailureReason}</p> : null}
+                  </div>
+                </article>
+              ))}
+            </div>
+          </div>
+        ))}
         <div className="admin-actions">
           <button type="button" onClick={exportData}>
             <DatabaseBackup size={17} aria-hidden="true" />
