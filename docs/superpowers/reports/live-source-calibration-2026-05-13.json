@@ -1,0 +1,1359 @@
+{
+  "generatedAt": "2026-05-13T01:44:39.318Z",
+  "rounds": 1,
+  "concurrency": 3,
+  "requiredSuccessfulSources": 10,
+  "successfulSources": 22,
+  "passedGate": true,
+  "sources": [
+    {
+      "sourceId": "nanshan-tech-museum",
+      "sourceName": "深圳科学馆",
+      "sourceUrl": "https://www.szstm.com/",
+      "sourceFamily": "confirmation",
+      "collectionMode": "candidate",
+      "confirmationPower": "supporting",
+      "coverageTags": [
+        "亲子科技",
+        "科普"
+      ],
+      "attempts": 1,
+      "successRuns": 0,
+      "failureRuns": 1,
+      "successRate": 0,
+      "avgLatencyMs": 1924,
+      "avgItemsPerSuccess": 0,
+      "totalItems": 0,
+      "uniqueUrls": 0,
+      "uniqueTitles": 0,
+      "uniquenessRatio": 0,
+      "titleUniquenessRatio": 0,
+      "localRelevanceRatio": 0,
+      "sourceQualityScore": 0.05,
+      "recommendedTrustLevel": "unverified",
+      "recommendedSignalWeight": 0.6,
+      "sampleItems": []
+    },
+    {
+      "sourceId": "shenzhen-book-city",
+      "sourceName": "深圳书城",
+      "sourceUrl": "https://www.szbookmall.com/activity",
+      "sourceFamily": "confirmation",
+      "collectionMode": "candidate",
+      "confirmationPower": "supporting",
+      "coverageTags": [
+        "读书沙龙",
+        "社科讲座",
+        "亲子"
+      ],
+      "attempts": 1,
+      "successRuns": 0,
+      "failureRuns": 1,
+      "successRate": 0,
+      "avgLatencyMs": 175,
+      "avgItemsPerSuccess": 0,
+      "totalItems": 0,
+      "uniqueUrls": 0,
+      "uniqueTitles": 0,
+      "uniquenessRatio": 0,
+      "titleUniquenessRatio": 0,
+      "localRelevanceRatio": 1,
+      "sourceQualityScore": 0.25,
+      "recommendedTrustLevel": "unverified",
+      "recommendedSignalWeight": 0.84,
+      "sampleItems": []
+    },
+    {
+      "sourceId": "tech-community",
+      "sourceName": "深圳技术社区线索",
+      "sourceUrl": "https://lu.ma/discover?location=Shenzhen",
+      "sourceFamily": "discovery",
+      "collectionMode": "candidate",
+      "confirmationPower": "supporting",
+      "coverageTags": [
+        "技术大会",
+        "Hackathon",
+        "AI"
+      ],
+      "attempts": 1,
+      "successRuns": 0,
+      "failureRuns": 1,
+      "successRate": 0,
+      "avgLatencyMs": 3197,
+      "avgItemsPerSuccess": 0,
+      "totalItems": 0,
+      "uniqueUrls": 0,
+      "uniqueTitles": 0,
+      "uniquenessRatio": 0,
+      "titleUniquenessRatio": 0,
+      "localRelevanceRatio": 0,
+      "sourceQualityScore": 0.05,
+      "recommendedTrustLevel": "unverified",
+      "recommendedSignalWeight": 0.6,
+      "sampleItems": []
+    },
+    {
+      "sourceId": "shenzhen-conference-platform",
+      "sourceName": "深圳会展中心近期展会",
+      "sourceUrl": "https://www.szcec.com/szcec/cn-schedule/current/index.html",
+      "sourceFamily": "confirmation",
+      "collectionMode": "candidate",
+      "confirmationPower": "supporting",
+      "coverageTags": [
+        "电子展会",
+        "科技展会",
+        "福田"
+      ],
+      "attempts": 1,
+      "successRuns": 1,
+      "failureRuns": 0,
+      "successRate": 1,
+      "avgLatencyMs": 48,
+      "avgItemsPerSuccess": 42,
+      "totalItems": 42,
+      "uniqueUrls": 42,
+      "uniqueTitles": 42,
+      "uniquenessRatio": 1,
+      "titleUniquenessRatio": 1,
+      "localRelevanceRatio": 1,
+      "sourceQualityScore": 1,
+      "recommendedTrustLevel": "high",
+      "recommendedSignalWeight": 1.4,
+      "sampleItems": [
+        {
+          "sourceId": "shenzhen-conference-platform",
+          "title": "国际数字能源展",
+          "url": "https://www.ideesz.com/"
+        },
+        {
+          "sourceId": "shenzhen-conference-platform",
+          "title": "深圳智慧养老展",
+          "url": "https://www.szwbzl.com/zdxm"
+        },
+        {
+          "sourceId": "shenzhen-conference-platform",
+          "title": "26|27赛季HYROX健身跑深圳站",
+          "url": "https://hyrox.com/"
+        },
+        {
+          "sourceId": "shenzhen-conference-platform",
+          "title": "2026第三届深圳国际耳机展",
+          "url": "http://www.audioexpo.net/?news_12/="
+        },
+        {
+          "sourceId": "shenzhen-conference-platform",
+          "title": "2026全球医疗健康展览会暨第四届深圳生殖医学健康大会",
+          "url": "https://www.nexpoworld.com/"
+        }
+      ]
+    },
+    {
+      "sourceId": "eventbrite-shenzhen",
+      "sourceName": "Eventbrite 深圳",
+      "sourceUrl": "https://www.eventbrite.com/d/china--shenzhen/events/",
+      "sourceFamily": "discovery",
+      "collectionMode": "candidate",
+      "confirmationPower": "supporting",
+      "coverageTags": [
+        "技术大会",
+        "国际活动"
+      ],
+      "attempts": 1,
+      "successRuns": 1,
+      "failureRuns": 0,
+      "successRate": 1,
+      "avgLatencyMs": 3336,
+      "avgItemsPerSuccess": 16,
+      "totalItems": 16,
+      "uniqueUrls": 16,
+      "uniqueTitles": 16,
+      "uniquenessRatio": 1,
+      "titleUniquenessRatio": 1,
+      "localRelevanceRatio": 0,
+      "sourceQualityScore": 0.78,
+      "recommendedTrustLevel": "medium",
+      "recommendedSignalWeight": 1.06,
+      "sampleItems": [
+        {
+          "sourceId": "eventbrite-shenzhen",
+          "title": "Affordable Art Fair Hong Kong 2026 | 14-17 May",
+          "url": "https://www.eventbrite.com/e/affordable-art-fair-hong-kong-2026-14-17-may-registration-1740893010859",
+          "startAt": "2026-05-14"
+        },
+        {
+          "sourceId": "eventbrite-shenzhen",
+          "title": "MIT-HKMA-AoF/HKIMR Joint Seminar by Professor Robert Townsend",
+          "url": "https://www.eventbrite.com/e/mit-hkma-aofhkimr-joint-seminar-by-professor-robert-townsend-tickets-1987370092445",
+          "startAt": "2026-05-15"
+        },
+        {
+          "sourceId": "eventbrite-shenzhen",
+          "title": "德萃小學部 (大埔校)  Info Day 入學資訊日2026",
+          "url": "https://www.eventbrite.hk/e/info-day-2026-tickets-1986300220429",
+          "startAt": "2026-05-16"
+        },
+        {
+          "sourceId": "eventbrite-shenzhen",
+          "title": "Hong Kong - The Rise of Machine Customers_Other_HKG",
+          "url": "https://www.eventbrite.sg/e/hong-kong-the-rise-of-machine-customers-other-hkg-tickets-1988276112375",
+          "startAt": "2026-05-17"
+        },
+        {
+          "sourceId": "eventbrite-shenzhen",
+          "title": "AIA Vitality Hub | Mindfulness & Meditation 正念與冥想",
+          "url": "https://www.eventbrite.hk/e/aia-vitality-hub-mindfulness-meditation-tickets-1988064273760",
+          "startAt": "2026-05-21"
+        }
+      ]
+    },
+    {
+      "sourceId": "douban-shenzhen",
+      "sourceName": "豆瓣同城深圳",
+      "sourceUrl": "https://shenzhen.douban.com/",
+      "sourceFamily": "discovery",
+      "collectionMode": "candidate",
+      "confirmationPower": "supporting",
+      "coverageTags": [
+        "社科讲座",
+        "读书沙龙",
+        "展览"
+      ],
+      "attempts": 1,
+      "successRuns": 1,
+      "failureRuns": 0,
+      "successRate": 1,
+      "avgLatencyMs": 792,
+      "avgItemsPerSuccess": 85,
+      "totalItems": 85,
+      "uniqueUrls": 85,
+      "uniqueTitles": 84,
+      "uniquenessRatio": 1,
+      "titleUniquenessRatio": 0.988,
+      "localRelevanceRatio": 1,
+      "sourceQualityScore": 0.999,
+      "recommendedTrustLevel": "high",
+      "recommendedSignalWeight": 1.4,
+      "sampleItems": [
+        {
+          "sourceId": "douban-shenzhen",
+          "title": "《枫丹乐影》张鼎萨克斯独奏音乐会",
+          "url": "https://www.douban.com/event/37826917/"
+        },
+        {
+          "sourceId": "douban-shenzhen",
+          "title": "西班牙钢琴王子马里奥2026巡演-深圳站",
+          "url": "https://www.douban.com/event/37743155/"
+        },
+        {
+          "sourceId": "douban-shenzhen",
+          "title": "暑期带娃必体验|探索川剧变脸的奇妙世界",
+          "url": "https://www.douban.com/event/37309570/"
+        },
+        {
+          "sourceId": "douban-shenzhen",
+          "title": "大梅沙《星海纪元》水上科技秀",
+          "url": "https://www.douban.com/event/37734267/"
+        },
+        {
+          "sourceId": "douban-shenzhen",
+          "title": "To Mozart! 纪念莫扎特诞辰270周年暨中奥建交55周年 钢琴四手联弹专场音乐会",
+          "url": "https://www.douban.com/event/37840780/"
+        }
+      ]
+    },
+    {
+      "sourceId": "lianpu-tech-events",
+      "sourceName": "联谱科技活动",
+      "sourceUrl": "https://lianpu.com/",
+      "sourceFamily": "discovery",
+      "collectionMode": "candidate",
+      "confirmationPower": "supporting",
+      "coverageTags": [
+        "技术大会",
+        "科技展会"
+      ],
+      "attempts": 1,
+      "successRuns": 1,
+      "failureRuns": 0,
+      "successRate": 1,
+      "avgLatencyMs": 197,
+      "avgItemsPerSuccess": 39,
+      "totalItems": 39,
+      "uniqueUrls": 39,
+      "uniqueTitles": 39,
+      "uniquenessRatio": 1,
+      "titleUniquenessRatio": 1,
+      "localRelevanceRatio": 0.128,
+      "sourceQualityScore": 0.826,
+      "recommendedTrustLevel": "medium",
+      "recommendedSignalWeight": 1.09,
+      "sampleItems": [
+        {
+          "sourceId": "lianpu-tech-events",
+          "title": "RTE 2026 春夏巡游 · 深圳站 | 消费级机器人的多模态交互“实时进化论”",
+          "url": "https://lianpu.com/event/rte-2026-chun-xia-xun-you-shen-zhen-zhan-xiao-fei-ji-ji-qi-r"
+        },
+        {
+          "sourceId": "lianpu-tech-events",
+          "title": "AI 中国行 · 走进新紫光集团 | AI · 共创——2026 企业 AI 应用场景实战会",
+          "url": "https://lianpu.com/event/ai-zhong-guo-xing-zou-jin-xin-zi-guang-ji-tuan-ai-gong-chuan"
+        },
+        {
+          "sourceId": "lianpu-tech-events",
+          "title": "ArkClaw × Harness | AI Agent 全场景实战：研发·增长·内容",
+          "url": "https://lianpu.com/event/arkclaw-harness-ai-agent-quan-chang-jing-shi-zhan-yan-fa-zen"
+        },
+        {
+          "sourceId": "lianpu-tech-events",
+          "title": "AI 驱动下的交易未来——打破资产边界，重构交易效率",
+          "url": "https://lianpu.com/event/ai-qu-dong-xia-de-jiao-yi-wei-lai-da-po-zi-chan-bian-jie-zho"
+        },
+        {
+          "sourceId": "lianpu-tech-events",
+          "title": "AI 坦白局：AI 转型者的实践复盘",
+          "url": "https://lianpu.com/event/ai-tan-bai-ju-ai-zhuan-xing-zhe-de-shi-jian-fu-pan"
+        }
+      ]
+    },
+    {
+      "sourceId": "huodongxing-shenzhen",
+      "sourceName": "活动行深圳",
+      "sourceUrl": "https://www.huodongxing.com/events?city=%E6%B7%B1%E5%9C%B3",
+      "sourceFamily": "discovery",
+      "collectionMode": "candidate",
+      "confirmationPower": "supporting",
+      "coverageTags": [
+        "技术大会",
+        "社科讲座",
+        "亲子"
+      ],
+      "attempts": 1,
+      "successRuns": 1,
+      "failureRuns": 0,
+      "successRate": 1,
+      "avgLatencyMs": 273,
+      "avgItemsPerSuccess": 22,
+      "totalItems": 22,
+      "uniqueUrls": 22,
+      "uniqueTitles": 22,
+      "uniquenessRatio": 1,
+      "titleUniquenessRatio": 1,
+      "localRelevanceRatio": 1,
+      "sourceQualityScore": 1,
+      "recommendedTrustLevel": "high",
+      "recommendedSignalWeight": 1.4,
+      "sampleItems": [
+        {
+          "sourceId": "huodongxing-shenzhen",
+          "title": "「AI驱动，跨境跃迁」26年AI赋能跨境电商创新峰会",
+          "url": "https://www.huodongxing.com/event/7856454460100"
+        },
+        {
+          "sourceId": "huodongxing-shenzhen",
+          "title": "AGIC2026深圳人工智能展",
+          "url": "https://www.huodongxing.com/event/5859922218300"
+        },
+        {
+          "sourceId": "huodongxing-shenzhen",
+          "title": "「AI赋能跨境 国货热卖全球」2026第二届跨境电商生态链展览会",
+          "url": "https://www.huodongxing.com/event/7849662707300"
+        },
+        {
+          "sourceId": "huodongxing-shenzhen",
+          "title": "孩子分数不理想？这条「全日制本科」捷径千万别错过！",
+          "url": "https://www.huodongxing.com/event/3860344214800"
+        },
+        {
+          "sourceId": "huodongxing-shenzhen",
+          "title": "【倒计时2天】2026 CCEE雨果跨境选品大会",
+          "url": "https://www.huodongxing.com/event/8844211344400"
+        }
+      ]
+    },
+    {
+      "sourceId": "meetup-shenzhen",
+      "sourceName": "Meetup 深圳",
+      "sourceUrl": "https://www.meetup.com/find/?location=cn--shenzhen&source=EVENTS",
+      "sourceFamily": "discovery",
+      "collectionMode": "candidate",
+      "confirmationPower": "supporting",
+      "coverageTags": [
+        "技术大会",
+        "Hackathon",
+        "国际活动"
+      ],
+      "attempts": 1,
+      "successRuns": 1,
+      "failureRuns": 0,
+      "successRate": 1,
+      "avgLatencyMs": 2801,
+      "avgItemsPerSuccess": 12,
+      "totalItems": 12,
+      "uniqueUrls": 12,
+      "uniqueTitles": 12,
+      "uniquenessRatio": 1,
+      "titleUniquenessRatio": 1,
+      "localRelevanceRatio": 0.25,
+      "sourceQualityScore": 0.81,
+      "recommendedTrustLevel": "medium",
+      "recommendedSignalWeight": 1.08,
+      "sampleItems": [
+        {
+          "sourceId": "meetup-shenzhen",
+          "title": "WhatsApp group for event updates 認識國際朋友 Sat, May 30 · 8:00 PM CST by Friend to Friend hangout 4.8 1111 attendees",
+          "url": "https://www.meetup.com/friend-to-friend-hangout/events/311899395/"
+        },
+        {
+          "sourceId": "meetup-shenzhen",
+          "title": "(免费公益技术演讲)SEO 小平:WordPress网站内链结构 Sun, May 24 · 12:00 PM CST by WordPress Meetup Shenzhen 4.8 11 attendees",
+          "url": "https://www.meetup.com/wordpress-meetup-shenzhen/events/314696490/"
+        },
+        {
+          "sourceId": "meetup-shenzhen",
+          "title": "古迹铁路双语行 (英语/普通话) Sat, May 16 · 2:30 PM CST by Discover Hong Kong 发掘在港生活的美好 4.9 4 attendees",
+          "url": "https://www.meetup.com/discover-hong-kong-%E5%8F%91%E6%8E%98%E5%9C%A8%E6%B8%AF%E7%94%9F%E6%B4%BB%E7%9A%84%E7%BE%8E%E5%A5%BD/events/314641902/"
+        },
+        {
+          "sourceId": "meetup-shenzhen",
+          "title": "All-You-Can-Drink Beer Cha Chaan Teng Feast Fri, May 29 · 7:00 PM CST by Friend to Friend hangout 4.8 6 attendees",
+          "url": "https://www.meetup.com/friend-to-friend-hangout/events/314343885/"
+        },
+        {
+          "sourceId": "meetup-shenzhen",
+          "title": "Waitlist 🌎 (Online/Free) Free English Conversation Club with global people Every Sun, Mon, Tue, Wed, Thu, Fri, Sat · May 13 · 9:00 AM ICT · Online by Free English Speaking Practice BKK ฝึกพูดภาษาอังกฤษออนไลน์ฟร 4.4 25 attendees",
+          "url": "https://www.meetup.com/meetup-group-txqscvrf/events/314670781/"
+        }
+      ]
+    },
+    {
+      "sourceId": "nanshan-library-activities",
+      "sourceName": "南山图书馆活动平台",
+      "sourceUrl": "https://activity.nslib.cn/",
+      "sourceFamily": "confirmation",
+      "collectionMode": "auto",
+      "confirmationPower": "strong",
+      "coverageTags": [
+        "读书沙龙",
+        "社科讲座",
+        "亲子"
+      ],
+      "attempts": 1,
+      "successRuns": 1,
+      "failureRuns": 0,
+      "successRate": 1,
+      "avgLatencyMs": 417,
+      "avgItemsPerSuccess": 15,
+      "totalItems": 15,
+      "uniqueUrls": 15,
+      "uniqueTitles": 14,
+      "uniquenessRatio": 1,
+      "titleUniquenessRatio": 0.933,
+      "localRelevanceRatio": 1,
+      "sourceQualityScore": 0.968,
+      "recommendedTrustLevel": "high",
+      "recommendedSignalWeight": 1.38,
+      "sampleItems": [
+        {
+          "sourceId": "nanshan-library-activities",
+          "title": "法律咨询",
+          "url": "https://activity.nslib.cn/activity/info/11448"
+        },
+        {
+          "sourceId": "nanshan-library-activities",
+          "title": "南图双语故事会|Presents for Dad",
+          "url": "https://activity.nslib.cn/activity/info/11423"
+        },
+        {
+          "sourceId": "nanshan-library-activities",
+          "title": "心理咨询",
+          "url": "https://activity.nslib.cn/activity/info/11444"
+        },
+        {
+          "sourceId": "nanshan-library-activities",
+          "title": "法律咨询",
+          "url": "https://activity.nslib.cn/activity/info/11447"
+        },
+        {
+          "sourceId": "nanshan-library-activities",
+          "title": "阅见南山·探索成长丨赤湾寻迹—海神、海防、海洋观",
+          "url": "https://activity.nslib.cn/activity/info/11426"
+        }
+      ]
+    },
+    {
+      "sourceId": "luohu-library-events",
+      "sourceName": "罗湖图书馆活动速递",
+      "sourceUrl": "https://www.szlhlib.org.cn/category/1021",
+      "sourceFamily": "confirmation",
+      "collectionMode": "auto",
+      "confirmationPower": "strong",
+      "coverageTags": [
+        "读书沙龙",
+        "社科讲座",
+        "罗湖"
+      ],
+      "attempts": 1,
+      "successRuns": 1,
+      "failureRuns": 0,
+      "successRate": 1,
+      "avgLatencyMs": 299,
+      "avgItemsPerSuccess": 8,
+      "totalItems": 8,
+      "uniqueUrls": 8,
+      "uniqueTitles": 8,
+      "uniquenessRatio": 1,
+      "titleUniquenessRatio": 1,
+      "localRelevanceRatio": 1,
+      "sourceQualityScore": 0.94,
+      "recommendedTrustLevel": "high",
+      "recommendedSignalWeight": 1.35,
+      "sampleItems": [
+        {
+          "sourceId": "luohu-library-events",
+          "title": "【绎说养生 云享罗图】骨质疏松的防治；用AI制作背景音乐 2026/03/26",
+          "url": "https://www.szlhlib.org.cn/information/20427"
+        },
+        {
+          "sourceId": "luohu-library-events",
+          "title": "【真人图书馆】幸福家庭 健康人生 2026/03/26",
+          "url": "https://www.szlhlib.org.cn/information/20426"
+        },
+        {
+          "sourceId": "luohu-library-events",
+          "title": "【涂涂故事列车】《星期三书店》；《今天我是一粒黄豆》 2026/03/26",
+          "url": "https://www.szlhlib.org.cn/information/20425"
+        },
+        {
+          "sourceId": "luohu-library-events",
+          "title": "【涂涂故事列车 创阅汇】《白雪公主和77个小矮人》；气象卫星模型制作 2026/03/01",
+          "url": "https://www.szlhlib.org.cn/information/20367"
+        },
+        {
+          "sourceId": "luohu-library-events",
+          "title": "【妇女节主题活动】音乐，最美的精神之声；水彩体验：绘花·她之约 2026/03/01",
+          "url": "https://www.szlhlib.org.cn/information/20366"
+        }
+      ]
+    },
+    {
+      "sourceId": "szu-library-events",
+      "sourceName": "深圳大学图书馆活动",
+      "sourceUrl": "https://www.lib.szu.edu.cn/jsonapi/node/event?sort=-event_date.value",
+      "sourceFamily": "confirmation",
+      "collectionMode": "auto",
+      "confirmationPower": "strong",
+      "coverageTags": [
+        "高校讲座",
+        "技术大会",
+        "读书沙龙"
+      ],
+      "attempts": 1,
+      "successRuns": 1,
+      "failureRuns": 0,
+      "successRate": 1,
+      "avgLatencyMs": 676,
+      "avgItemsPerSuccess": 50,
+      "totalItems": 50,
+      "uniqueUrls": 50,
+      "uniqueTitles": 49,
+      "uniquenessRatio": 1,
+      "titleUniquenessRatio": 0.98,
+      "localRelevanceRatio": 1,
+      "sourceQualityScore": 0.998,
+      "recommendedTrustLevel": "high",
+      "recommendedSignalWeight": 1.4,
+      "sampleItems": [
+        {
+          "sourceId": "szu-library-events",
+          "title": "同城讲堂第4季：“人机协作的方法”系列本周讲座（5.11-5.15）",
+          "url": "http://www.lib.szu.edu.cn/wp?url=http://info.lib.szu.edu.cn/infoliteracy/node/1015",
+          "startAt": "2026-05-12T00:00:00+08:00"
+        },
+        {
+          "sourceId": "szu-library-events",
+          "title": "2026年可知电子书21天阅读打卡季，参与即有机会赢得京东购物卡！",
+          "url": "http://www.lib.szu.edu.cn/wp?url=http://info.lib.szu.edu.cn/infoliteracy/node/1016",
+          "startAt": "2026-05-11T00:00:00+08:00"
+        },
+        {
+          "sourceId": "szu-library-events",
+          "title": "同城讲堂第4季：“人机协作的方法”系列下周讲座（5.6-5.8）",
+          "url": "http://www.lib.szu.edu.cn/wp?url=http://info.lib.szu.edu.cn/infoliteracy/node/1012",
+          "startAt": "2026-05-06T00:00:00+08:00"
+        },
+        {
+          "sourceId": "szu-library-events",
+          "title": "重逢 “最美的书”，赴一场文字与设计的美学之约 ——中国 “最美的书” 专题书展启幕",
+          "url": "https://mp.weixin.qq.com/s/diWiwvMJWJYqUL_dgdHF2g?token=575127374&lang=zh_CN",
+          "startAt": "2026-04-30T00:00:00+08:00"
+        },
+        {
+          "sourceId": "szu-library-events",
+          "title": "图书馆@你：阅读成长树发新芽啦，这份书香邀约请收下！",
+          "url": "https://mp.weixin.qq.com/s/gSTYWxGuTMT9FWZIILz-PA",
+          "startAt": "2026-04-28T00:00:00+08:00"
+        }
+      ]
+    },
+    {
+      "sourceId": "ites-meetings",
+      "sourceName": "ITES 深圳工业展会议活动",
+      "sourceUrl": "https://www.iteschina.com/zh-cn/meeting",
+      "sourceFamily": "confirmation",
+      "collectionMode": "auto",
+      "confirmationPower": "strong",
+      "coverageTags": [
+        "电子展会",
+        "技术大会",
+        "工业"
+      ],
+      "attempts": 1,
+      "successRuns": 1,
+      "failureRuns": 0,
+      "successRate": 1,
+      "avgLatencyMs": 489,
+      "avgItemsPerSuccess": 8,
+      "totalItems": 8,
+      "uniqueUrls": 8,
+      "uniqueTitles": 8,
+      "uniquenessRatio": 1,
+      "titleUniquenessRatio": 1,
+      "localRelevanceRatio": 1,
+      "sourceQualityScore": 0.94,
+      "recommendedTrustLevel": "high",
+      "recommendedSignalWeight": 1.35,
+      "sampleItems": [
+        {
+          "sourceId": "ites-meetings",
+          "title": "半导体设备",
+          "url": "https://www.iteschina.com/zh-cn/meeting/2005573281005867009"
+        },
+        {
+          "sourceId": "ites-meetings",
+          "title": "航空航天",
+          "url": "https://www.iteschina.com/zh-cn/meeting/2005566920071221250"
+        },
+        {
+          "sourceId": "ites-meetings",
+          "title": "新能源汽车",
+          "url": "https://www.iteschina.com/zh-cn/meeting/1847563984212345000"
+        },
+        {
+          "sourceId": "ites-meetings",
+          "title": "AI服务器",
+          "url": "https://www.iteschina.com/zh-cn/meeting/2005573499738820610"
+        },
+        {
+          "sourceId": "ites-meetings",
+          "title": "具身智能",
+          "url": "https://www.iteschina.com/zh-cn/meeting/2005573624691331074"
+        }
+      ]
+    },
+    {
+      "sourceId": "szwen-cultural-events",
+      "sourceName": "深圳文体通活动",
+      "sourceUrl": "https://www.szwen.cn/",
+      "sourceFamily": "confirmation",
+      "collectionMode": "auto",
+      "confirmationPower": "strong",
+      "coverageTags": [
+        "社科讲座",
+        "亲子",
+        "展览"
+      ],
+      "attempts": 1,
+      "successRuns": 1,
+      "failureRuns": 0,
+      "successRate": 1,
+      "avgLatencyMs": 194,
+      "avgItemsPerSuccess": 33,
+      "totalItems": 33,
+      "uniqueUrls": 33,
+      "uniqueTitles": 33,
+      "uniquenessRatio": 1,
+      "titleUniquenessRatio": 1,
+      "localRelevanceRatio": 1,
+      "sourceQualityScore": 1,
+      "recommendedTrustLevel": "high",
+      "recommendedSignalWeight": 1.4,
+      "sampleItems": [
+        {
+          "sourceId": "szwen-cultural-events",
+          "title": "美美与共——全国美术馆书法邀请展 地址：何香凝美术馆7-8展厅 时间：2026-03-17 09:30 至 2026-04-23 16:30 发布时间：2026-03-12 15:03:42",
+          "url": "https://www.szwen.cn/eventDetail?id=a8fb4c9eb673440092febdddf17da31a"
+        },
+        {
+          "sourceId": "szwen-cultural-events",
+          "title": "物外烟霞——20世纪中国风景画探索研究展 地址：何香凝美术馆1-6展厅 时间：2026-03-28 09:30 至 2026-05-31 16:30 发布时间：2026-03-24 15:23:25",
+          "url": "https://www.szwen.cn/eventDetail?id=05bffdcfeaf6486e87678595c7f59bd0"
+        },
+        {
+          "sourceId": "szwen-cultural-events",
+          "title": "安德拉什 席夫爵士钢琴独奏音乐会 地址：深圳音乐厅二楼演奏大厅 时间：2026-04-17 20:00 至 2026-04-17 22:00 发布时间：2026-03-09 15:20:43",
+          "url": "https://www.szwen.cn/eventDetail?id=fb7879e11bcd45cd8dca66a2f2c9ea98"
+        },
+        {
+          "sourceId": "szwen-cultural-events",
+          "title": "国画赏析活动 开始时间：2026-04-14 结束时间：2026-04-14 地址：深圳市罗湖区桂园街道办事处鸿翔花园7-A栋3楼书画室 发布时间：2026-04-13 11:19:12",
+          "url": "https://www.szwen.cn/eventDetail?id=07eea8ffbd4549d2b2383b8f0a658d67"
+        },
+        {
+          "sourceId": "szwen-cultural-events",
+          "title": "爵士热舞狂欢，解锁多巴胺爵士舞活动（4月14日19：30-20：30） 开始时间：2026-04-14 结束时间：2026-04-14 地址：深圳市罗湖区翠竹街道办事处愉天社区综合文化服务中心 发布时间：2026-04-08 10:11:20",
+          "url": "https://www.szwen.cn/eventDetail?id=0d2750c83f054e15a3b83605742e76f4"
+        }
+      ]
+    },
+    {
+      "sourceId": "shenzhen-childrens-palace",
+      "sourceName": "深圳市少年宫主题活动",
+      "sourceUrl": "https://www.szcp.com/Activity/",
+      "sourceFamily": "confirmation",
+      "collectionMode": "candidate",
+      "confirmationPower": "supporting",
+      "coverageTags": [
+        "亲子科技",
+        "青少年",
+        "科普"
+      ],
+      "attempts": 1,
+      "successRuns": 1,
+      "failureRuns": 0,
+      "successRate": 1,
+      "avgLatencyMs": 77,
+      "avgItemsPerSuccess": 26,
+      "totalItems": 26,
+      "uniqueUrls": 26,
+      "uniqueTitles": 26,
+      "uniquenessRatio": 1,
+      "titleUniquenessRatio": 1,
+      "localRelevanceRatio": 1,
+      "sourceQualityScore": 1,
+      "recommendedTrustLevel": "high",
+      "recommendedSignalWeight": 1.4,
+      "sampleItems": [
+        {
+          "sourceId": "shenzhen-childrens-palace",
+          "title": "青少年科学艺术节",
+          "url": "https://www.szcp.com/Activity/sienceartfestival/"
+        },
+        {
+          "sourceId": "shenzhen-childrens-palace",
+          "title": "鹏鹏科学秀",
+          "url": "https://www.szcp.com/Activity/sienceartfestival1/"
+        },
+        {
+          "sourceId": "shenzhen-childrens-palace",
+          "title": "艺术交流演出季",
+          "url": "https://www.szcp.com/Activity/artseason/"
+        },
+        {
+          "sourceId": "shenzhen-childrens-palace",
+          "title": "喜气羊羊过大年-深圳市少年宫欢度春节系列活动",
+          "url": "https://www.szcp.com/Activity/Goodhabit/2015/09/18/5924.html"
+        },
+        {
+          "sourceId": "shenzhen-childrens-palace",
+          "title": "少年宫“良好习惯伴我成长”系列活动之——争当快乐小雷锋",
+          "url": "https://www.szcp.com/Activity/Goodhabit/2010/04/21/2117.html"
+        }
+      ]
+    },
+    {
+      "sourceId": "shenzhen-science-museum",
+      "sourceName": "深圳科学馆",
+      "sourceUrl": "https://www.szstm.com/",
+      "sourceFamily": "confirmation",
+      "collectionMode": "candidate",
+      "confirmationPower": "supporting",
+      "coverageTags": [
+        "亲子科技",
+        "科普"
+      ],
+      "attempts": 1,
+      "successRuns": 0,
+      "failureRuns": 1,
+      "successRate": 0,
+      "avgLatencyMs": 2056,
+      "avgItemsPerSuccess": 0,
+      "totalItems": 0,
+      "uniqueUrls": 0,
+      "uniqueTitles": 0,
+      "uniquenessRatio": 0,
+      "titleUniquenessRatio": 0,
+      "localRelevanceRatio": 0,
+      "sourceQualityScore": 0.05,
+      "recommendedTrustLevel": "unverified",
+      "recommendedSignalWeight": 0.6,
+      "sampleItems": []
+    },
+    {
+      "sourceId": "shenzhen-museum-events",
+      "sourceName": "深圳博物馆活动讲座",
+      "sourceUrl": "https://www.shenzhenmuseum.com/webCollection",
+      "sourceFamily": "confirmation",
+      "collectionMode": "candidate",
+      "confirmationPower": "supporting",
+      "coverageTags": [
+        "社科讲座",
+        "展览",
+        "亲子"
+      ],
+      "attempts": 1,
+      "successRuns": 1,
+      "failureRuns": 0,
+      "successRate": 1,
+      "avgLatencyMs": 359,
+      "avgItemsPerSuccess": 3,
+      "totalItems": 3,
+      "uniqueUrls": 3,
+      "uniqueTitles": 3,
+      "uniquenessRatio": 1,
+      "titleUniquenessRatio": 1,
+      "localRelevanceRatio": 1,
+      "sourceQualityScore": 0.915,
+      "recommendedTrustLevel": "high",
+      "recommendedSignalWeight": 1.34,
+      "sampleItems": [
+        {
+          "sourceId": "shenzhen-museum-events",
+          "title": "专题展览",
+          "url": "https://www.shenzhenmuseum.com/exhibition/index"
+        },
+        {
+          "sourceId": "shenzhen-museum-events",
+          "title": "小讲解员",
+          "url": "https://www.shenzhenmuseum.com/socialisation/index?type=socialisation&curIndex=2"
+        },
+        {
+          "sourceId": "shenzhen-museum-events",
+          "title": "活动讲座预约",
+          "url": "https://www.shenzhenmuseum.com/socialisation/index?type=socialisation&curIndex=4"
+        }
+      ]
+    },
+    {
+      "sourceId": "university-town-library",
+      "sourceName": "深圳大学城图书馆",
+      "sourceUrl": "https://www.utszlib.edu.cn/",
+      "sourceFamily": "confirmation",
+      "collectionMode": "candidate",
+      "confirmationPower": "supporting",
+      "coverageTags": [
+        "高校讲座",
+        "技术大会",
+        "读书沙龙"
+      ],
+      "attempts": 1,
+      "successRuns": 0,
+      "failureRuns": 1,
+      "successRate": 0,
+      "avgLatencyMs": 12005,
+      "avgItemsPerSuccess": 0,
+      "totalItems": 0,
+      "uniqueUrls": 0,
+      "uniqueTitles": 0,
+      "uniquenessRatio": 0,
+      "titleUniquenessRatio": 0,
+      "localRelevanceRatio": 1,
+      "sourceQualityScore": 0.215,
+      "recommendedTrustLevel": "unverified",
+      "recommendedSignalWeight": 0.81,
+      "sampleItems": []
+    },
+    {
+      "sourceId": "shenzhen-redcube-events",
+      "sourceName": "深圳红立方文化活动",
+      "sourceUrl": "https://www.sz-redcube.com/",
+      "sourceFamily": "confirmation",
+      "collectionMode": "candidate",
+      "confirmationPower": "supporting",
+      "coverageTags": [
+        "亲子科技",
+        "展览",
+        "龙岗"
+      ],
+      "attempts": 1,
+      "successRuns": 0,
+      "failureRuns": 1,
+      "successRate": 0,
+      "avgLatencyMs": 42,
+      "avgItemsPerSuccess": 0,
+      "totalItems": 0,
+      "uniqueUrls": 0,
+      "uniqueTitles": 0,
+      "uniquenessRatio": 0,
+      "titleUniquenessRatio": 0,
+      "localRelevanceRatio": 0,
+      "sourceQualityScore": 0.05,
+      "recommendedTrustLevel": "unverified",
+      "recommendedSignalWeight": 0.6,
+      "sampleItems": []
+    },
+    {
+      "sourceId": "shenzhen-youth-activity-center",
+      "sourceName": "深圳市青少年活动中心",
+      "sourceUrl": "https://www.szaac.com/",
+      "sourceFamily": "confirmation",
+      "collectionMode": "candidate",
+      "confirmationPower": "supporting",
+      "coverageTags": [
+        "亲子科技",
+        "青少年",
+        "公益课"
+      ],
+      "attempts": 1,
+      "successRuns": 1,
+      "failureRuns": 0,
+      "successRate": 1,
+      "avgLatencyMs": 438,
+      "avgItemsPerSuccess": 14,
+      "totalItems": 14,
+      "uniqueUrls": 14,
+      "uniqueTitles": 14,
+      "uniquenessRatio": 1,
+      "titleUniquenessRatio": 1,
+      "localRelevanceRatio": 1,
+      "sourceQualityScore": 0.97,
+      "recommendedTrustLevel": "high",
+      "recommendedSignalWeight": 1.38,
+      "sampleItems": [
+        {
+          "sourceId": "shenzhen-youth-activity-center",
+          "title": "红领巾爱科学 | 元旦假期青少年人工智能公开课第三",
+          "url": "https://mp.weixin.qq.com/s/s9vhTU9tUIuxgs5u6I54qw"
+        },
+        {
+          "sourceId": "shenzhen-youth-activity-center",
+          "title": "【亲子公益系列讲座五】智能时代成长力：未来人才的关",
+          "url": "https://mp.weixin.qq.com/s/kPMQRop-F0Ql7aKTG5x8MA"
+        },
+        {
+          "sourceId": "shenzhen-youth-activity-center",
+          "title": "【亲子公益系列讲座四】专注力与任务管理： 孩子变身",
+          "url": "https://mp.weixin.qq.com/s/NUxu-9qjGrvq-PzR0Dipog"
+        },
+        {
+          "sourceId": "shenzhen-youth-activity-center",
+          "title": "【亲子公益讲座】告别说教与对抗，让孩子主动改掉坏习",
+          "url": "https://mp.weixin.qq.com/s/8ZevvOeCUHJki45MVPvmpw"
+        },
+        {
+          "sourceId": "shenzhen-youth-activity-center",
+          "title": "红领巾讲解员招募令丨传承红色基因，致敬改革先锋",
+          "url": "https://mp.weixin.qq.com/s/UCezxHwFFxZEbzT20fltYg"
+        }
+      ]
+    },
+    {
+      "sourceId": "shenzhen-world-schedule",
+      "sourceName": "深圳国际会展中心排期",
+      "sourceUrl": "https://www.shenzhen-world.com/scheduling/index.html",
+      "sourceFamily": "confirmation",
+      "collectionMode": "candidate",
+      "confirmationPower": "supporting",
+      "coverageTags": [
+        "电子展会",
+        "科技展会",
+        "宝安"
+      ],
+      "attempts": 1,
+      "successRuns": 0,
+      "failureRuns": 1,
+      "successRate": 0,
+      "avgLatencyMs": 51,
+      "avgItemsPerSuccess": 0,
+      "totalItems": 0,
+      "uniqueUrls": 0,
+      "uniqueTitles": 0,
+      "uniquenessRatio": 0,
+      "titleUniquenessRatio": 0,
+      "localRelevanceRatio": 1,
+      "sourceQualityScore": 0.25,
+      "recommendedTrustLevel": "unverified",
+      "recommendedSignalWeight": 0.84,
+      "sampleItems": []
+    },
+    {
+      "sourceId": "szcec-futian-schedule",
+      "sourceName": "深圳会展中心近期展会",
+      "sourceUrl": "https://www.szcec.com/szcec/cn-schedule/current/index.html",
+      "sourceFamily": "confirmation",
+      "collectionMode": "auto",
+      "confirmationPower": "strong",
+      "coverageTags": [
+        "电子展会",
+        "科技展会",
+        "福田"
+      ],
+      "attempts": 1,
+      "successRuns": 1,
+      "failureRuns": 0,
+      "successRate": 1,
+      "avgLatencyMs": 52,
+      "avgItemsPerSuccess": 42,
+      "totalItems": 42,
+      "uniqueUrls": 42,
+      "uniqueTitles": 42,
+      "uniquenessRatio": 1,
+      "titleUniquenessRatio": 1,
+      "localRelevanceRatio": 1,
+      "sourceQualityScore": 1,
+      "recommendedTrustLevel": "high",
+      "recommendedSignalWeight": 1.4,
+      "sampleItems": [
+        {
+          "sourceId": "szcec-futian-schedule",
+          "title": "国际数字能源展",
+          "url": "https://www.ideesz.com/"
+        },
+        {
+          "sourceId": "szcec-futian-schedule",
+          "title": "深圳智慧养老展",
+          "url": "https://www.szwbzl.com/zdxm"
+        },
+        {
+          "sourceId": "szcec-futian-schedule",
+          "title": "26|27赛季HYROX健身跑深圳站",
+          "url": "https://hyrox.com/"
+        },
+        {
+          "sourceId": "szcec-futian-schedule",
+          "title": "2026第三届深圳国际耳机展",
+          "url": "http://www.audioexpo.net/?news_12/="
+        },
+        {
+          "sourceId": "szcec-futian-schedule",
+          "title": "2026全球医疗健康展览会暨第四届深圳生殖医学健康大会",
+          "url": "https://www.nexpoworld.com/"
+        }
+      ]
+    },
+    {
+      "sourceId": "cite-expo",
+      "sourceName": "CITE 中国电子信息博览会",
+      "sourceUrl": "https://www.citexpo.org/about/introduction.html",
+      "sourceFamily": "confirmation",
+      "collectionMode": "auto",
+      "confirmationPower": "strong",
+      "coverageTags": [
+        "电子展会",
+        "技术大会",
+        "产业"
+      ],
+      "attempts": 1,
+      "successRuns": 1,
+      "failureRuns": 0,
+      "successRate": 1,
+      "avgLatencyMs": 294,
+      "avgItemsPerSuccess": 1,
+      "totalItems": 1,
+      "uniqueUrls": 1,
+      "uniqueTitles": 1,
+      "uniquenessRatio": 1,
+      "titleUniquenessRatio": 1,
+      "localRelevanceRatio": 1,
+      "sourceQualityScore": 0.905,
+      "recommendedTrustLevel": "high",
+      "recommendedSignalWeight": 1.33,
+      "sampleItems": [
+        {
+          "sourceId": "cite-expo",
+          "title": "CITE 中国电子信息博览会",
+          "url": "https://www.citexpo.org/about/introduction.html",
+          "startAt": "2026-04-09T10:00:00+08:00"
+        }
+      ]
+    },
+    {
+      "sourceId": "elexcon-shenzhen",
+      "sourceName": "ELEXCON 深圳国际电子展",
+      "sourceUrl": "https://elexcon.com/en",
+      "sourceFamily": "confirmation",
+      "collectionMode": "auto",
+      "confirmationPower": "strong",
+      "coverageTags": [
+        "电子展会",
+        "嵌入式",
+        "硬件"
+      ],
+      "attempts": 1,
+      "successRuns": 1,
+      "failureRuns": 0,
+      "successRate": 1,
+      "avgLatencyMs": 559,
+      "avgItemsPerSuccess": 1,
+      "totalItems": 1,
+      "uniqueUrls": 1,
+      "uniqueTitles": 1,
+      "uniquenessRatio": 1,
+      "titleUniquenessRatio": 1,
+      "localRelevanceRatio": 1,
+      "sourceQualityScore": 0.905,
+      "recommendedTrustLevel": "high",
+      "recommendedSignalWeight": 1.33,
+      "sampleItems": [
+        {
+          "sourceId": "elexcon-shenzhen",
+          "title": "ELEXCON 深圳国际电子展",
+          "url": "https://elexcon.com/en",
+          "startAt": "2026-01-16T10:00:00+08:00"
+        }
+      ]
+    },
+    {
+      "sourceId": "eiotexpo-shenzhen",
+      "sourceName": "E-IOT 嵌入式与物联网展",
+      "sourceUrl": "https://www.eiotexpo.com/",
+      "sourceFamily": "confirmation",
+      "collectionMode": "auto",
+      "confirmationPower": "strong",
+      "coverageTags": [
+        "电子展会",
+        "物联网",
+        "AIoT"
+      ],
+      "attempts": 1,
+      "successRuns": 1,
+      "failureRuns": 0,
+      "successRate": 1,
+      "avgLatencyMs": 94,
+      "avgItemsPerSuccess": 1,
+      "totalItems": 1,
+      "uniqueUrls": 1,
+      "uniqueTitles": 1,
+      "uniquenessRatio": 1,
+      "titleUniquenessRatio": 1,
+      "localRelevanceRatio": 1,
+      "sourceQualityScore": 0.905,
+      "recommendedTrustLevel": "high",
+      "recommendedSignalWeight": 1.33,
+      "sampleItems": [
+        {
+          "sourceId": "eiotexpo-shenzhen",
+          "title": "E-IOT 嵌入式与物联网展",
+          "url": "https://www.eiotexpo.com/",
+          "startAt": "2026-08-26T10:00:00+08:00"
+        }
+      ]
+    },
+    {
+      "sourceId": "luma-shenzhen",
+      "sourceName": "Luma 深圳活动",
+      "sourceUrl": "https://lu.ma/discover?location=Shenzhen",
+      "sourceFamily": "discovery",
+      "collectionMode": "candidate",
+      "confirmationPower": "supporting",
+      "coverageTags": [
+        "Hackathon",
+        "技术大会",
+        "AI"
+      ],
+      "attempts": 1,
+      "successRuns": 0,
+      "failureRuns": 1,
+      "successRate": 0,
+      "avgLatencyMs": 4118,
+      "avgItemsPerSuccess": 0,
+      "totalItems": 0,
+      "uniqueUrls": 0,
+      "uniqueTitles": 0,
+      "uniquenessRatio": 0,
+      "titleUniquenessRatio": 0,
+      "localRelevanceRatio": 0,
+      "sourceQualityScore": 0.035,
+      "recommendedTrustLevel": "unverified",
+      "recommendedSignalWeight": 0.6,
+      "sampleItems": []
+    },
+    {
+      "sourceId": "hackquest-shenzhen-hackathons",
+      "sourceName": "HackQuest 深圳 Hackathon",
+      "sourceUrl": "https://www.hackquest.io/en/hackathons/AI-%C3%97-Web3-%E9%BB%91%E5%AE%A2%E6%9D%BE%E6%B7%B1%E5%9C%B3%E7%AB%99",
+      "sourceFamily": "discovery",
+      "collectionMode": "candidate",
+      "confirmationPower": "supporting",
+      "coverageTags": [
+        "Hackathon",
+        "AI",
+        "Web3"
+      ],
+      "attempts": 1,
+      "successRuns": 1,
+      "failureRuns": 0,
+      "successRate": 1,
+      "avgLatencyMs": 3514,
+      "avgItemsPerSuccess": 1,
+      "totalItems": 1,
+      "uniqueUrls": 1,
+      "uniqueTitles": 1,
+      "uniquenessRatio": 1,
+      "titleUniquenessRatio": 1,
+      "localRelevanceRatio": 1,
+      "sourceQualityScore": 0.905,
+      "recommendedTrustLevel": "high",
+      "recommendedSignalWeight": 1.33,
+      "sampleItems": [
+        {
+          "sourceId": "hackquest-shenzhen-hackathons",
+          "title": "HackQuest 深圳 Hackathon",
+          "url": "https://www.hackquest.io/en/hackathons/AI-%C3%97-Web3-%E9%BB%91%E5%AE%A2%E6%9D%BE%E6%B7%B1%E5%9C%B3%E7%AB%99"
+        }
+      ]
+    },
+    {
+      "sourceId": "hackathonradar-shenzhen",
+      "sourceName": "HackathonRadar 深圳线索",
+      "sourceUrl": "https://www.hackathonradar.com/database/hackathon/9a9d9772-703e-4263-b163-c1f52cb784a8",
+      "sourceFamily": "discovery",
+      "collectionMode": "candidate",
+      "confirmationPower": "supporting",
+      "coverageTags": [
+        "Hackathon"
+      ],
+      "attempts": 1,
+      "successRuns": 1,
+      "failureRuns": 0,
+      "successRate": 1,
+      "avgLatencyMs": 2576,
+      "avgItemsPerSuccess": 1,
+      "totalItems": 1,
+      "uniqueUrls": 1,
+      "uniqueTitles": 1,
+      "uniquenessRatio": 1,
+      "titleUniquenessRatio": 1,
+      "localRelevanceRatio": 1,
+      "sourceQualityScore": 0.905,
+      "recommendedTrustLevel": "high",
+      "recommendedSignalWeight": 1.33,
+      "sampleItems": [
+        {
+          "sourceId": "hackathonradar-shenzhen",
+          "title": "HackathonRadar 深圳线索",
+          "url": "https://www.hackathonradar.com/database/hackathon/9a9d9772-703e-4263-b163-c1f52cb784a8"
+        }
+      ]
+    },
+    {
+      "sourceId": "sdcon-tech-conference",
+      "sourceName": "SDCon 技术大会",
+      "sourceUrl": "https://sdcon.com.cn/",
+      "sourceFamily": "discovery",
+      "collectionMode": "candidate",
+      "confirmationPower": "supporting",
+      "coverageTags": [
+        "技术大会",
+        "软件研发"
+      ],
+      "attempts": 1,
+      "successRuns": 1,
+      "failureRuns": 0,
+      "successRate": 1,
+      "avgLatencyMs": 267,
+      "avgItemsPerSuccess": 1,
+      "totalItems": 1,
+      "uniqueUrls": 1,
+      "uniqueTitles": 1,
+      "uniquenessRatio": 1,
+      "titleUniquenessRatio": 1,
+      "localRelevanceRatio": 0,
+      "sourceQualityScore": 0.705,
+      "recommendedTrustLevel": "medium",
+      "recommendedSignalWeight": 1.01,
+      "sampleItems": [
+        {
+          "sourceId": "sdcon-tech-conference",
+          "title": "SDCon 技术大会",
+          "url": "https://sdcon.com.cn/"
+        }
+      ]
+    },
+    {
+      "sourceId": "iotexpo-shenzhen",
+      "sourceName": "IOTE 深圳物联网展",
+      "sourceUrl": "https://www.iotexpo.com.cn/sz/",
+      "sourceFamily": "confirmation",
+      "collectionMode": "auto",
+      "confirmationPower": "strong",
+      "coverageTags": [
+        "电子展会",
+        "物联网",
+        "AIoT"
+      ],
+      "attempts": 1,
+      "successRuns": 1,
+      "failureRuns": 0,
+      "successRate": 1,
+      "avgLatencyMs": 404,
+      "avgItemsPerSuccess": 1,
+      "totalItems": 1,
+      "uniqueUrls": 1,
+      "uniqueTitles": 1,
+      "uniquenessRatio": 1,
+      "titleUniquenessRatio": 1,
+      "localRelevanceRatio": 1,
+      "sourceQualityScore": 0.905,
+      "recommendedTrustLevel": "high",
+      "recommendedSignalWeight": 1.33,
+      "sampleItems": [
+        {
+          "sourceId": "iotexpo-shenzhen",
+          "title": "IOTE 深圳物联网展",
+          "url": "https://www.iotexpo.com.cn/sz/",
+          "startAt": "2020-07-31T10:00:00+08:00"
+        }
+      ]
+    }
+  ],
+  "failures": [
+    {
+      "sourceId": "nanshan-tech-museum",
+      "sourceName": "深圳科学馆",
+      "error": "fetch failed",
+      "durationMs": 1924
+    },
+    {
+      "sourceId": "shenzhen-book-city",
+      "sourceName": "深圳书城",
+      "error": "解析成功但未提取到活动",
+      "durationMs": 175
+    },
+    {
+      "sourceId": "tech-community",
+      "sourceName": "深圳技术社区线索",
+      "error": "解析成功但未提取到活动",
+      "durationMs": 3197
+    },
+    {
+      "sourceId": "shenzhen-science-museum",
+      "sourceName": "深圳科学馆",
+      "error": "fetch failed",
+      "durationMs": 2056
+    },
+    {
+      "sourceId": "university-town-library",
+      "sourceName": "深圳大学城图书馆",
+      "error": "This operation was aborted",
+      "durationMs": 12005
+    },
+    {
+      "sourceId": "shenzhen-redcube-events",
+      "sourceName": "深圳红立方文化活动",
+      "error": "fetch failed",
+      "durationMs": 42
+    },
+    {
+      "sourceId": "shenzhen-world-schedule",
+      "sourceName": "深圳国际会展中心排期",
+      "error": "解析成功但未提取到活动",
+      "durationMs": 51
+    },
+    {
+      "sourceId": "luma-shenzhen",
+      "sourceName": "Luma 深圳活动",
+      "error": "解析成功但未提取到活动",
+      "durationMs": 4118
+    }
+  ]
+}

@@ -13,9 +13,12 @@ import {
 } from "../../src/domain/candidateStore";
 import { addSubmittedActivity, resetLocalHubData } from "../../src/domain/localStore";
 import { EVALUATION_RULE_VERSION, evaluateActivity } from "../../src/domain/evaluationRules";
-import { sampleActivities } from "../../src/domain/sampleData";
+import { liveCollectedActivities } from "../../src/domain/liveActivities.generated";
+import { sampleActivities } from "../fixtures/sampleData";
 
 describe("candidateStore", () => {
+  const liveSeedActivity = liveCollectedActivities[0];
+
   beforeEach(() => {
     resetLocalHubData();
     resetCandidateData();
@@ -35,20 +38,28 @@ describe("candidateStore", () => {
 
     const candidates = getCandidateActivities();
 
-    expect(candidates.some((candidate) => candidate.slug === sampleActivities[0].slug)).toBe(true);
+    expect(candidates.some((candidate) => candidate.slug === liveSeedActivity.slug)).toBe(true);
     expect(candidates.some((candidate) => candidate.slug === "local-candidate")).toBe(true);
+  });
+
+  it("uses only real collected activities for the production seed", () => {
+    const candidates = getCandidateActivities();
+
+    expect(candidates.some((candidate) => candidate.officialUrl.includes("example.com"))).toBe(false);
+    expect(candidates.some((candidate) => candidate.title === "南山 AI 互动体验日")).toBe(false);
+    expect(getPublicEvaluatedActivities().some((activity) => activity.officialUrl.includes("example.com"))).toBe(false);
   });
 
   it("detects duplicate slug or official URL", () => {
     const saved = saveCandidateActivity({
-      ...sampleActivities[0],
+      ...liveSeedActivity,
       id: "duplicate-candidate",
       candidateStatus: "draft",
       createdAt: "2026-05-09T00:00:00.000Z",
       updatedAt: "2026-05-09T00:00:00.000Z"
     });
 
-    expect(saved.duplicateOf).toBe(sampleActivities[0].id);
+    expect(saved.duplicateOf).toBe(liveSeedActivity.id);
   });
 
   it("creates a candidate draft from a submission", () => {

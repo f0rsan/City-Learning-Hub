@@ -1,4 +1,4 @@
-import type { Activity, ActivitySource } from "./types";
+import type { Activity, ActivitySource } from "../../src/domain/types";
 
 export const sampleSources: ActivitySource[] = [
   {

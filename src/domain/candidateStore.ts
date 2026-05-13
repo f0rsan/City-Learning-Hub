@@ -14,13 +14,13 @@ import {
   writeList
 } from "./localStore";
 import { liveCollectedActivities } from "./liveActivities.generated";
-import { sampleActivities } from "./sampleData";
 import { getSourcePool } from "./sourcePool";
 import type { Activity, ActivityStatus, Audience } from "./types";
 
 const candidateActivitiesKey = "shenzhen-learning-hub:candidate-activities";
 export const CANDIDATE_DRAFT_TTL_MS = 14 * 24 * 60 * 60 * 1000;
 export const CANDIDATE_PENDING_TTL_MS = 7 * 24 * 60 * 60 * 1000;
+const productionSeedActivities: readonly Activity[] = liveCollectedActivities;
 
 const candidateTtlByStatus: Partial<Record<CandidateStatus, number>> = {
   draft: CANDIDATE_DRAFT_TTL_MS,
@@ -51,7 +51,7 @@ function districtFromInput(value: string): Activity["district"] {
 }
 
 function seedCandidates(): CandidateActivity[] {
-  return [...sampleActivities, ...liveCollectedActivities].map((activity) => {
+  return productionSeedActivities.map((activity) => {
     const evaluation = evaluateActivity(activity, evaluationContext());
     return {
       ...activity,

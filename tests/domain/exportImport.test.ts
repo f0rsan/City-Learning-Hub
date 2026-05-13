@@ -3,7 +3,7 @@ import { exportHubData, importHubData } from "../../src/domain/exportImport";
 import { addCorrectionReport, addSubmittedActivity, getSubmittedActivities, resetLocalHubData } from "../../src/domain/localStore";
 import { resetCandidateData, saveCandidateActivity } from "../../src/domain/candidateStore";
 import { getSourceRuntimeMetrics, recordSourceFailure, resetSourceRuntimeMetrics } from "../../src/domain/sourcePool";
-import { sampleActivities } from "../../src/domain/sampleData";
+import { sampleActivities } from "../fixtures/sampleData";
 
 describe("exportImport", () => {
   beforeEach(() => {

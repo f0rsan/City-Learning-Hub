@@ -6,7 +6,7 @@ import {
   getTrustState,
   getWeeklyFeatured
 } from "../../src/domain/activitySelectors";
-import { sampleActivities } from "../../src/domain/sampleData";
+import { sampleActivities } from "../fixtures/sampleData";
 
 describe("activity selectors", () => {
   it("returns only published activities for public pages", () => {

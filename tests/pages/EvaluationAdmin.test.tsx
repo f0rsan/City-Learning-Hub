@@ -10,7 +10,7 @@ import {
 } from "../../src/domain/candidateStore";
 import { evaluateActivity } from "../../src/domain/evaluationRules";
 import { addCorrectionReport, addSubmittedActivity, resetLocalHubData } from "../../src/domain/localStore";
-import { sampleActivities } from "../../src/domain/sampleData";
+import { sampleActivities } from "../fixtures/sampleData";
 import { renderRoute } from "../../src/test/render";
 
 describe("EvaluationAdmin", () => {

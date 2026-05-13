@@ -2,9 +2,20 @@ import { screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { describe, expect, it } from "vitest";
 import App from "../../src/App";
+import { liveCollectedActivities } from "../../src/domain/liveActivities.generated";
+import type { Activity } from "../../src/domain/types";
 import { renderRoute } from "../../src/test/render";
 
 describe("HomePage", () => {
+  const collectedActivities: readonly Activity[] = liveCollectedActivities;
+  const familyActivity = collectedActivities.find(
+    (activity) => activity.status === "published" && activity.audience.includes("family")
+  )!;
+  const adultActivity = collectedActivities.find(
+    (activity) => activity.status === "published" && activity.audience.includes("adult")
+  )!;
+  const hiddenMobileActivity = collectedActivities.find((activity) => activity.title === "E-IOT 嵌入式与物联网展")!;
+
   it("shows the weekly Shenzhen positioning and two audience entries", () => {
     renderRoute(<App />);
 
@@ -16,9 +27,8 @@ describe("HomePage", () => {
   it("shows curated activity cards with recommendation reasons", () => {
     renderRoute(<App />);
 
-    expect(screen.getByText("南山 AI 互动体验日")).toBeInTheDocument();
+    expect(screen.getByText(familyActivity.title)).toBeInTheDocument();
     expect(screen.getAllByText(/看点/)[0]).toBeInTheDocument();
-    expect(screen.getAllByText(/有互动环节，不只是看展/)[0]).toBeInTheDocument();
     expect(screen.getAllByText(/注意/)[0]).toBeInTheDocument();
     expect(screen.getAllByText(/强推荐|值得考虑|谨慎选择|不建议前往/)[0]).toBeInTheDocument();
     expect(screen.getAllByText(/高可靠|可参考|待核对/)[0]).toBeInTheDocument();
@@ -35,8 +45,8 @@ describe("HomePage", () => {
     renderRoute(<App />, "/audience/family");
 
     expect(screen.getByRole("heading", { name: "带孩子去学习" })).toBeInTheDocument();
-    expect(screen.getByText("南山 AI 互动体验日")).toBeInTheDocument();
-    expect(screen.queryByText("AI 产品实践 Meetup")).not.toBeInTheDocument();
+    expect(screen.getByText(familyActivity.title)).toBeInTheDocument();
+    expect(screen.queryByText(adultActivity.title)).not.toBeInTheDocument();
   });
 
   it("toggles theme mode from the header", async () => {
@@ -69,7 +79,7 @@ describe("HomePage", () => {
 
       renderRoute(<App />);
       expect(screen.getByRole("button", { name: /展开其余 \d+ 条活动/ })).toBeInTheDocument();
-      expect(screen.queryByText("城市与技术社科读书沙龙")).not.toBeInTheDocument();
+      expect(screen.queryByText(hiddenMobileActivity.title)).not.toBeInTheDocument();
     } finally {
       window.matchMedia = originalMatchMedia;
     }

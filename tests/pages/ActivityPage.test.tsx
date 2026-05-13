@@ -2,32 +2,54 @@ import { screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { beforeEach, describe, expect, it } from "vitest";
 import App from "../../src/App";
-import { createCandidateFromSubmission, resetCandidateData } from "../../src/domain/candidateStore";
+import { createCandidateFromSubmission, resetCandidateData, saveCandidateActivity } from "../../src/domain/candidateStore";
+import { evaluateActivity } from "../../src/domain/evaluationRules";
+import { liveCollectedActivities } from "../../src/domain/liveActivities.generated";
 import { addSubmittedActivity, resetLocalHubData } from "../../src/domain/localStore";
+import { sampleActivities } from "../fixtures/sampleData";
+import type { Activity } from "../../src/domain/types";
 import { renderRoute } from "../../src/test/render";
 
 describe("ActivityPage", () => {
+  const collectedActivities: readonly Activity[] = liveCollectedActivities;
+  const familyActivity = collectedActivities.find(
+    (activity) => activity.status === "published" && activity.audience.includes("family")
+  )!;
+
   beforeEach(() => {
     resetLocalHubData();
     resetCandidateData();
   });
 
   it("shows decision details before the official link", () => {
-    renderRoute(<App />, "/activities/nanshan-ai-family-day");
+    renderRoute(<App />, `/activities/${familyActivity.slug}`);
 
-    expect(screen.getByRole("heading", { name: "南山 AI 互动体验日" })).toBeInTheDocument();
-    expect(screen.getByText(/适合第一次带孩子接触 AI/)).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: familyActivity.title })).toBeInTheDocument();
+    expect(screen.getByText("是否值得去")).toBeInTheDocument();
     expect(screen.getByText("参考依据")).toBeInTheDocument();
     expect(screen.getByText(/^来源$/)).toBeInTheDocument();
     expect(screen.getByText(/^组织方$/)).toBeInTheDocument();
     expect(screen.getByText(/^场地$/)).toBeInTheDocument();
     expect(screen.getAllByText(/高可靠|可参考|待核对/)[0]).toBeInTheDocument();
-    expect(screen.getByText(/低龄儿童需要家长全程陪同/)).toBeInTheDocument();
     expect(screen.getByRole("link", { name: "去活动页面报名" })).toBeInTheDocument();
   });
 
   it("shows a clear warning for cancelled activities", () => {
-    renderRoute(<App />, "/activities/cancelled-ai-lecture");
+    const cancelledActivity = {
+      ...sampleActivities[0],
+      id: "cancelled-test-activity",
+      slug: "cancelled-test-activity",
+      title: "已取消活动",
+      officialUrl: "https://activity.nslib.cn/activity/info/11423",
+      status: "cancelled" as const,
+      candidateStatus: "cancelled" as const,
+      evaluation: evaluateActivity({ ...sampleActivities[0], status: "cancelled" }),
+      createdAt: "2026-05-09T00:00:00.000Z",
+      updatedAt: "2026-05-09T00:00:00.000Z"
+    };
+    saveCandidateActivity(cancelledActivity);
+
+    renderRoute(<App />, "/activities/cancelled-test-activity");
 
     expect(screen.getAllByText("活动已取消")[0]).toBeInTheDocument();
     expect(screen.getByText(/请不要按原计划前往/)).toBeInTheDocument();
@@ -47,8 +69,8 @@ describe("ActivityPage", () => {
       dateText: "周六 10:00",
       district: "南山",
       venue: "深圳湾",
-      officialUrl: "https://example.com/private-draft",
-      contact: "reader@example.com",
+      officialUrl: "https://activity.nslib.cn/activity/info/11423?draft=1",
+      contact: "reader@city-learning.local",
       note: "还没核对完整"
     });
     const candidate = createCandidateFromSubmission(submission.id);
@@ -76,7 +98,7 @@ describe("ActivityPage", () => {
           dispatchEvent: () => false
         }) as MediaQueryList);
 
-      renderRoute(<App />, "/activities/nanshan-ai-family-day");
+      renderRoute(<App />, `/activities/${familyActivity.slug}`);
 
       expect(screen.queryByRole("heading", { name: "适合谁" })).not.toBeInTheDocument();
       expect(screen.queryByText(/^来源$/)).not.toBeInTheDocument();

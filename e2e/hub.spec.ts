@@ -1,5 +1,10 @@
 import { expect, test } from "@playwright/test";
 
+const familyActivityTitle = "南图双语故事会|Presents for Dad";
+const familyActivitySlug = "南图双语故事会-presents-for-dad-88a32e99e4";
+const encodedFamilyActivitySlug = encodeURIComponent(familyActivitySlug);
+const hiddenMobileActivityTitle = "E-IOT 嵌入式与物联网展";
+
 test("home page guides users into family and adult discovery", async ({ page }) => {
   await page.goto("/");
 
@@ -13,13 +18,13 @@ test("home page guides users into family and adult discovery", async ({ page }) 
 
   await page.getByRole("link", { name: /带孩子去学习/ }).click();
   await expect(page.getByRole("heading", { name: "带孩子去学习" })).toBeVisible();
-  await expect(page.getByText("南山 AI 互动体验日")).toBeVisible();
+  await expect(page.getByText(familyActivityTitle)).toBeVisible();
 });
 
 test("activity detail page shows decision information and correction entry", async ({ page }, testInfo) => {
-  await page.goto("/activities/nanshan-ai-family-day");
+  await page.goto(`/activities/${familyActivitySlug}`);
 
-  await expect(page.getByRole("heading", { name: "南山 AI 互动体验日" })).toBeVisible();
+  await expect(page.getByRole("heading", { name: familyActivityTitle })).toBeVisible();
   await expect(page.getByText("是否值得去")).toBeVisible();
   await expect(page.getByText("参考依据")).toBeVisible();
   if (testInfo.project.name === "mobile") {
@@ -27,17 +32,16 @@ test("activity detail page shows decision information and correction entry", asy
   }
   await expect(page.getByText(/^来源$/)).toBeVisible();
   await expect(page.getByText(/高可靠|可参考|待核对/).first()).toBeVisible();
-  await expect(page.getByText(/低龄儿童需要家长全程陪同/)).toBeVisible();
   await expect(page.getByRole("link", { name: "补充信息或更正" })).toBeVisible();
 });
 
 test("activity card body opens the detail page", async ({ page }) => {
   await page.goto("/audience/family");
 
-  await page.getByText("南山 AI 互动体验日").click();
+  await page.getByText(familyActivityTitle).click();
 
-  await expect(page).toHaveURL(/\/activities\/nanshan-ai-family-day$/);
-  await expect(page.getByRole("heading", { name: "南山 AI 互动体验日" })).toBeVisible();
+  await expect(page).toHaveURL(new RegExp(`/activities/${encodedFamilyActivitySlug}$`));
+  await expect(page.getByRole("heading", { name: familyActivityTitle })).toBeVisible();
 });
 
 test("submission enters candidate queue and can be calibrated", async ({ page }) => {
@@ -50,8 +54,8 @@ test("submission enters candidate queue and can be calibrated", async ({ page })
   await page.getByLabel("时间").fill("周六 10:00");
   await page.getByLabel("区域").fill("福田");
   await page.getByLabel("地点").fill("会展中心");
-  await page.getByLabel("活动链接").fill("https://example.com/event");
-  await page.getByLabel("联系方式").fill("contact@example.com");
+  await page.getByLabel("活动链接").fill("https://www.szcec.com/szcec/cn-schedule/current/index.html");
+  await page.getByLabel("联系方式").fill("contact@city-learning.local");
   await page.getByLabel("你为什么推荐它").fill("适合 10 岁以上亲子同行，也适合成人了解电子展趋势");
   await page.getByRole("button", { name: "推荐这个活动" }).click();
   await expect(page.getByText("已收到")).toBeVisible();
@@ -91,12 +95,12 @@ test("mobile home uses progressive disclosure for weekly list", async ({ page })
   await page.goto("/");
 
   await expect(page.getByRole("button", { name: /展开其余 \d+ 条活动/ })).toBeVisible();
-  await expect(page.getByText("城市与技术社科读书沙龙")).toHaveCount(0);
+  await expect(page.getByText(hiddenMobileActivityTitle)).toHaveCount(0);
 });
 
 test("mobile detail collapses reasons and evidence by default", async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 844 });
-  await page.goto("/activities/nanshan-ai-family-day");
+  await page.goto(`/activities/${familyActivitySlug}`);
 
   const reasonsToggle = page.locator(".detail-fold-toggle").first();
   const evidenceToggle = page.locator(".detail-fold-toggle").nth(1);

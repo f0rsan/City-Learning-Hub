@@ -5,7 +5,7 @@ import {
   deriveConfidenceLevel,
   evaluateActivity
 } from "../../src/domain/evaluationRules";
-import { sampleActivities, sampleSources } from "../../src/domain/sampleData";
+import { sampleActivities, sampleSources } from "../fixtures/sampleData";
 import type { Activity } from "../../src/domain/types";
 
 const baseActivity = sampleActivities.find((activity) => activity.slug === "nanshan-ai-family-day")!;
