@@ -960,21 +960,55 @@ main,
 
 @media (max-width: 860px) {
   .site-header {
-    display: grid;
-    grid-template-columns: 1fr auto;
+    display: flex;
+    max-width: none;
     align-items: center;
+    gap: 8px;
+    overflow-x: auto;
+    padding: 9px 12px;
+    scrollbar-width: none;
+  }
+
+  .site-header::-webkit-scrollbar,
+  .site-header nav::-webkit-scrollbar {
+    display: none;
+  }
+
+  .brand {
+    min-height: 34px;
+    font-size: 16px;
   }
 
   .site-header nav {
-    grid-column: 1 / -1;
+    flex: 1 1 auto;
+    min-width: 0;
+    flex-wrap: nowrap;
     justify-content: flex-start;
-    gap: 8px;
+    gap: 4px;
+    overflow-x: auto;
   }
 
   .nav-link,
   .theme-toggle {
-    min-height: 40px;
-    padding: 7px 9px;
+    flex: 0 0 auto;
+    min-height: 34px;
+    padding: 6px 7px;
+    font-size: 14px;
+  }
+
+  .theme-toggle {
+    width: 34px;
+    justify-content: center;
+    padding: 6px;
+  }
+
+  .submit-nav-label {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
   }
 
   .hero,
@@ -997,13 +1031,13 @@ main,
 
   .hero,
   .page-hero {
-    gap: 22px;
-    padding: 26px 0 28px;
+    gap: 14px;
+    padding: 18px 0 20px;
   }
 
   .hero h1,
   .page-hero h1 {
-    font-size: 42px;
+    font-size: 36px;
     line-height: 1.05;
   }
 
@@ -1013,7 +1047,8 @@ main,
   }
 
   .hero-image {
-    min-height: 220px;
+    min-height: 0;
+    height: 132px;
   }
 
   .section-heading {

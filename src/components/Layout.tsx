@@ -39,7 +39,7 @@ export default function Layout({ children }: LayoutProps) {
           </NavLink>
           <NavLink to="/submit" className={({ isActive }) => (isActive ? "nav-link active" : "nav-link")}>
             <ClipboardPlus size={18} aria-hidden="true" />
-            提交活动
+            <span className="submit-nav-label">提交活动</span>
           </NavLink>
           <button
             type="button"

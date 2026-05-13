@@ -21,6 +21,15 @@ test("home page guides users into family and adult discovery", async ({ page }) 
   await expect(page.getByText(familyActivityTitle)).toBeVisible();
 });
 
+test("shows a visible fallback when the app script is blocked", async ({ page }) => {
+  await page.route(/\/src\/main\.tsx|\/assets\/index-.*\.js/, (route) => route.abort());
+
+  await page.goto("/");
+
+  await expect(page.getByText("正在打开深圳学习 Hub")).toBeVisible();
+  await expect(page.getByText("网络较慢时可能需要几秒。若一直停留，请刷新，或用系统浏览器打开。")).toBeVisible();
+});
+
 test("activity detail page shows decision information and correction entry", async ({ page }, testInfo) => {
   await page.goto(`/activities/${familyActivitySlug}`);
 

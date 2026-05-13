@@ -3,10 +3,53 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#f4f7f4" />
     <title>深圳学习 Hub</title>
+    <style>
+      body {
+        margin: 0;
+        background: #f4f7f4;
+        color: #14201d;
+        font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif;
+      }
+
+      .boot-fallback {
+        display: grid;
+        gap: 10px;
+        max-width: 420px;
+        margin: 22vh auto 0;
+        padding: 0 24px;
+        line-height: 1.6;
+      }
+
+      .boot-fallback strong {
+        font-size: 22px;
+      }
+
+      .boot-fallback p {
+        margin: 0;
+        color: #46534e;
+      }
+
+      .boot-fallback a {
+        width: fit-content;
+        border: 1px solid #d0dbd4;
+        border-radius: 8px;
+        padding: 8px 12px;
+        color: #00534a;
+        text-decoration: none;
+        font-weight: 700;
+      }
+    </style>
   </head>
   <body>
-    <div id="root"></div>
+    <div id="root">
+      <div class="boot-fallback" role="status" aria-live="polite">
+        <strong>正在打开深圳学习 Hub</strong>
+        <p>网络较慢时可能需要几秒。若一直停留，请刷新，或用系统浏览器打开。</p>
+        <a href="/">重新加载</a>
+      </div>
+    </div>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
