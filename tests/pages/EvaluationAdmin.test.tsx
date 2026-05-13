@@ -14,13 +14,39 @@ import { sampleActivities } from "../fixtures/sampleData";
 import { renderRoute } from "../../src/test/render";
 
 describe("EvaluationAdmin", () => {
+  function authenticateAdmin() {
+    window.sessionStorage.setItem("shenzhen-learning-hub:admin-authenticated", "true");
+  }
+
   beforeEach(() => {
+    window.sessionStorage.clear();
     resetLocalHubData();
     resetCandidateData();
     resetCalibrationData();
   });
 
+  it("requires the admin password before showing the operation console", async () => {
+    const user = userEvent.setup();
+    renderRoute(<App />, "/admin");
+
+    expect(screen.getByRole("heading", { name: "后台登录" })).toBeInTheDocument();
+    expect(screen.queryByRole("heading", { name: "活动审核台" })).not.toBeInTheDocument();
+
+    await user.type(screen.getByLabelText("后台密码"), "wrong-password");
+    await user.click(screen.getByRole("button", { name: "进入后台" }));
+
+    expect(screen.getByText("密码不正确")).toBeInTheDocument();
+    expect(screen.queryByRole("heading", { name: "活动审核台" })).not.toBeInTheDocument();
+
+    await user.clear(screen.getByLabelText("后台密码"));
+    await user.type(screen.getByLabelText("后台密码"), "2026@admin");
+    await user.click(screen.getByRole("button", { name: "进入后台" }));
+
+    expect(screen.getByRole("heading", { name: "活动审核台" })).toBeInTheDocument();
+  });
+
   it("shows system recommendation, confidence, value reasons, and risk reasons", () => {
+    authenticateAdmin();
     renderRoute(<App />, "/admin");
 
     expect(screen.getByRole("heading", { name: "活动审核台" })).toBeInTheDocument();
@@ -32,6 +58,7 @@ describe("EvaluationAdmin", () => {
 
   it("can confirm, lower confidence, reject, or send to calibration", async () => {
     const user = userEvent.setup();
+    authenticateAdmin();
     renderRoute(<App />, "/admin");
 
     await user.click(screen.getAllByRole("button", { name: /确认展示/ })[0]);
@@ -72,6 +99,7 @@ describe("EvaluationAdmin", () => {
 
   it("converts an approved submission into a candidate draft", async () => {
     const user = userEvent.setup();
+    authenticateAdmin();
     addSubmittedActivity({
       title: "深圳机器人开放课",
       category: "亲子科技",
@@ -93,6 +121,7 @@ describe("EvaluationAdmin", () => {
   });
 
   it("shows corrections that affect trust", () => {
+    authenticateAdmin();
     addCorrectionReport({
       activitySlug: "nanshan-ai-family-day",
       issueType: "链接失效",
@@ -108,6 +137,7 @@ describe("EvaluationAdmin", () => {
 
   it("can mark a correction as resolved and shows recovery state", async () => {
     const user = userEvent.setup();
+    authenticateAdmin();
     addCorrectionReport({
       activitySlug: "nanshan-ai-family-day",
       issueType: "链接失效",
@@ -124,6 +154,7 @@ describe("EvaluationAdmin", () => {
   });
 
   it("shows rule-update marker when scoring changed after rule version update", () => {
+    authenticateAdmin();
     const baseline = evaluateActivity(sampleActivities[0]);
 
     saveCandidateActivity({
@@ -150,6 +181,7 @@ describe("EvaluationAdmin", () => {
   });
 
   it("shows hotspot section when calibration notes exist", () => {
+    authenticateAdmin();
     const now = Date.now();
     replaceCalibrationNotes([
       {
@@ -174,6 +206,7 @@ describe("EvaluationAdmin", () => {
   });
 
   it("shows source collection groups in the admin source section", () => {
+    authenticateAdmin();
     renderRoute(<App />, "/admin");
 
     expect(screen.getByText("自动更新：每 12 小时")).toBeInTheDocument();

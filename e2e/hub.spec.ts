@@ -71,6 +71,9 @@ test("submission enters candidate queue and can be calibrated", async ({ page })
   await expect(page.getByText("已收到")).toBeVisible();
 
   await page.goto("/admin");
+  await expect(page.getByRole("heading", { name: "后台登录" })).toBeVisible();
+  await page.getByLabel("后台密码").fill("2026@admin");
+  await page.getByRole("button", { name: "进入后台" }).click();
   await expect(page.getByText("深圳电子展周末场")).toBeVisible();
   await expect(page.getByText("待补充").first()).toBeVisible();
   await page.getByRole("button", { name: /降为待观察/ }).first().click();

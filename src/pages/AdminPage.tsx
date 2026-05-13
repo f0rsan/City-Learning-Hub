@@ -8,7 +8,7 @@ import {
   ShieldAlert,
   SlidersHorizontal
 } from "lucide-react";
-import { useMemo, useState } from "react";
+import { useMemo, useState, type FormEvent } from "react";
 import EvaluationBadge from "../components/EvaluationBadge";
 import EvidenceSummary from "../components/EvidenceSummary";
 import {
@@ -33,6 +33,9 @@ import {
 import { getSourceHealth, type SourceHealth } from "../domain/sourcePool";
 import type { CalibrationAction, CalibrationReasonType } from "../domain/evaluationTypes";
 import type { SourceCollectionMode, SubmittedActivityStatus } from "../domain/types";
+
+const adminPassword = "2026@admin";
+const adminAuthStorageKey = "shenzhen-learning-hub:admin-authenticated";
 
 const statusLabels: Record<SubmittedActivityStatus, string> = {
   pending: "待处理",
@@ -85,6 +88,10 @@ const confirmationPowerLabels = {
 } as const;
 
 export default function AdminPage() {
+  const [isAuthenticated, setIsAuthenticated] = useState(
+    () => window.sessionStorage.getItem(adminAuthStorageKey) === "true"
+  );
+  const [loginError, setLoginError] = useState("");
   const [submittedActivities, setSubmittedActivities] = useState(() =>
     getSubmittedActivities().filter((activity) => activity.status === "pending")
   );
@@ -169,6 +176,43 @@ export default function AdminPage() {
     const result = importHubData(raw ? JSON.parse(raw) : {});
     setLastAction(result.ok ? "已导入本地 JSON 备份" : result.error);
     refresh();
+  }
+
+  function login(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    const form = new FormData(event.currentTarget);
+    const password = String(form.get("password") ?? "");
+
+    if (password !== adminPassword) {
+      setLoginError("密码不正确");
+      return;
+    }
+
+    window.sessionStorage.setItem(adminAuthStorageKey, "true");
+    setLoginError("");
+    setIsAuthenticated(true);
+  }
+
+  if (!isAuthenticated) {
+    return (
+      <section className="admin-login-page" aria-labelledby="admin-login-title">
+        <div className="admin-login-panel">
+          <p className="eyebrow">内部操作</p>
+          <h1 id="admin-login-title">后台登录</h1>
+          <p>请输入后台密码后继续。</p>
+          <form className="admin-login-form" onSubmit={login}>
+            <label htmlFor="admin-password">后台密码</label>
+            <input id="admin-password" name="password" type="password" autoComplete="current-password" required />
+            {loginError ? (
+              <p className="form-error" role="alert">
+                {loginError}
+              </p>
+            ) : null}
+            <button type="submit">进入后台</button>
+          </form>
+        </div>
+      </section>
+    );
   }
 
   return (

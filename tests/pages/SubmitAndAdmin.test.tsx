@@ -14,6 +14,7 @@ describe("submit and admin flow", () => {
   )!;
 
   beforeEach(() => {
+    window.sessionStorage.clear();
     resetLocalHubData();
   });
 
@@ -34,6 +35,7 @@ describe("submit and admin flow", () => {
     expect(screen.getByText(/已收到：周末机器人体验营/)).toBeInTheDocument();
 
     submitPage.unmount();
+    window.sessionStorage.setItem("shenzhen-learning-hub:admin-authenticated", "true");
     renderRoute(<App />, "/admin");
 
     expect(screen.getByRole("heading", { name: "活动审核台" })).toBeInTheDocument();
@@ -54,6 +56,7 @@ describe("submit and admin flow", () => {
     expect(screen.getByText("已收到，会核对")).toBeInTheDocument();
 
     correctionPage.unmount();
+    window.sessionStorage.setItem("shenzhen-learning-hub:admin-authenticated", "true");
     renderRoute(<App />, "/admin");
 
     expect(screen.getByText("时间变更")).toBeInTheDocument();
