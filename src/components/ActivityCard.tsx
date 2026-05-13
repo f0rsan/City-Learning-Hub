@@ -1,5 +1,6 @@
 import { Clock, Database, MapPin, Ticket } from "lucide-react";
 import { Link } from "react-router-dom";
+import { getActivityCoverImage } from "../domain/activityCovers";
 import { evaluateActivity } from "../domain/evaluationRules";
 import { getSourcePool } from "../domain/sourcePool";
 import type { Activity } from "../domain/types";
@@ -12,6 +13,7 @@ type ActivityCardProps = {
 
 export default function ActivityCard({ activity }: ActivityCardProps) {
   const evaluation = activity.evaluation ?? evaluateActivity(activity, { sources: getSourcePool() });
+  const coverImage = getActivityCoverImage(activity);
   const titleId = `activity-title-${activity.id}`;
   const visibleTags = activity.tags
     .filter((tag) => tag !== activity.category)
@@ -31,6 +33,12 @@ export default function ActivityCard({ activity }: ActivityCardProps) {
   return (
     <article className="activity-card">
       <Link className="activity-card-link" to={`/activities/${activity.slug}`} aria-labelledby={titleId}>
+        {coverImage ? (
+          <figure className="activity-card-cover">
+            <img src={coverImage.src} alt={coverImage.alt} loading="lazy" decoding="async" />
+            <figcaption>{coverImage.sourceName}</figcaption>
+          </figure>
+        ) : null}
         <div className="card-topline">
           <span>{activity.category}</span>
           <StatusBadge activity={activity} />

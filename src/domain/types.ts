@@ -63,6 +63,12 @@ export type Activity = {
   evaluation?: import("./evaluationTypes").ActivityEvaluation;
 };
 
+export type ActivityCoverImage = {
+  src: string;
+  alt: string;
+  sourceName: string;
+};
+
 export type TrustState = {
   level: "clear" | "warning" | "blocked";
   label: string;

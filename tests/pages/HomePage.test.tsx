@@ -28,6 +28,7 @@ describe("HomePage", () => {
     renderRoute(<App />);
 
     expect(screen.getByText(familyActivity.title)).toBeInTheDocument();
+    expect(screen.getByRole("img", { name: "AI服务器先进制造技术创新系列论坛封面" })).toBeInTheDocument();
     expect(screen.getAllByText(/看点/)[0]).toBeInTheDocument();
     expect(screen.getAllByText(/注意/)[0]).toBeInTheDocument();
     expect(screen.getAllByText(/强推荐|值得考虑|谨慎选择|不建议前往/)[0]).toBeInTheDocument();
