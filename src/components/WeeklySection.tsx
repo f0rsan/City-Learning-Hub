@@ -22,7 +22,7 @@ export default function WeeklySection({ title, subtitle, activities }: WeeklySec
       return activities;
     }
 
-    return activities.slice(0, 4);
+    return activities.slice(0, 6);
   }, [activities, isCompactViewport, showAll]);
   const remainingCount = Math.max(0, activities.length - visibleActivities.length);
 

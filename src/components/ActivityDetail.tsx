@@ -78,14 +78,16 @@ export default function ActivityDetail({ activity }: ActivityDetailProps) {
           <p>{activity.summary}</p>
         </div>
         <aside className={`trust-panel ${trust.level}`}>
-          <StatusBadge activity={activity} />
-          <EvaluationBadge evaluation={evaluation} />
+          <div className="trust-panel-badges">
+            <StatusBadge activity={activity} />
+            <EvaluationBadge evaluation={evaluation} />
+          </div>
           {trust.level !== "clear" ? <p>{trust.message}</p> : null}
         </aside>
       </section>
 
       <section className="detail-grid">
-        <article className="detail-card">
+        <article className="detail-card decision-card">
           <div className="detail-card-heading">
             <h2>是否值得去</h2>
             {isCompactViewport ? (
@@ -100,21 +102,18 @@ export default function ActivityDetail({ activity }: ActivityDetailProps) {
               </button>
             ) : null}
           </div>
-          {!showReasons ? <p className="detail-preview">{primaryValueReason}</p> : null}
+          <p className="decision-lead">{primaryValueReason}</p>
           <div id={reasonsPanelId} hidden={!showReasons}>
             {showReasons ? (
-              <>
-              <ul>
-                <li>{primaryValueReason}</li>
-              </ul>
-              <h3>适合谁</h3>
-              <p>{activity.bestFor}</p>
-              </>
+              <div className="decision-expanded">
+                <h3>适合谁</h3>
+                <p>{activity.bestFor}</p>
+              </div>
             ) : null}
           </div>
         </article>
 
-        <article className="detail-card">
+        <article className="detail-card evidence-card">
           <div className="detail-card-heading">
             <h2>参考依据</h2>
             {isCompactViewport ? (
@@ -139,7 +138,7 @@ export default function ActivityDetail({ activity }: ActivityDetailProps) {
           </div>
         </article>
 
-        <article className="detail-card">
+        <article className="detail-card basic-info-card">
           <h2>基本信息</h2>
           <dl className="detail-list">
             <div>
@@ -189,7 +188,7 @@ export default function ActivityDetail({ activity }: ActivityDetailProps) {
           </dl>
         </article>
 
-        <article className="detail-card">
+        <article className="detail-card risk-card">
           <h2>去之前要知道</h2>
           <ul>
             {evaluation.riskReasons.map((caution) => (

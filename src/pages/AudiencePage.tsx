@@ -31,7 +31,7 @@ export default function AudiencePage() {
           <p>{subtitle}</p>
         </div>
       </section>
-      <WeeklySection title="精选活动" subtitle="看点和注意事项放在卡片上，方便比较。" activities={activities} />
+      <WeeklySection title="精选活动" subtitle="看点、注意事项和可靠性放在同一行比较。" activities={activities} />
     </main>
   );
 }

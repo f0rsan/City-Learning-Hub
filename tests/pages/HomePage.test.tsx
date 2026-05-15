@@ -2,6 +2,7 @@ import { screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { describe, expect, it } from "vitest";
 import App from "../../src/App";
+import { getWeeklyFeatured } from "../../src/domain/activitySelectors";
 import { liveCollectedActivities } from "../../src/domain/liveActivities.generated";
 import type { Activity } from "../../src/domain/types";
 import { renderRoute } from "../../src/test/render";
@@ -24,7 +25,7 @@ describe("HomePage", () => {
     expect(screen.getByRole("link", { name: /成人学习交流/ })).toBeInTheDocument();
   });
 
-  it("shows curated activity cards with recommendation reasons", () => {
+  it("shows curated activity rows with recommendation reasons", () => {
     renderRoute(<App />);
 
     expect(screen.getByText(familyActivity.title)).toBeInTheDocument();
@@ -33,13 +34,14 @@ describe("HomePage", () => {
     expect(screen.getAllByText(/注意/)[0]).toBeInTheDocument();
     expect(screen.getAllByText(/强推荐|值得考虑|谨慎选择|不建议前往/)[0]).toBeInTheDocument();
     expect(screen.getAllByText(/高可靠|可参考|待核对/)[0]).toBeInTheDocument();
-    expect(screen.getByText(/先看要点/)).toBeInTheDocument();
+    expect(screen.getByText(/按时间排列/)).toBeInTheDocument();
   });
 
-  it("shows a Shenzhen learning visual", () => {
+  it("shows compact weekly signals", () => {
     renderRoute(<App />);
 
-    expect(screen.getByRole("img", { name: "深圳学习活动现场氛围" })).toBeInTheDocument();
+    expect(screen.getByText(`${getWeeklyFeatured([...collectedActivities]).length} 条精选`)).toBeInTheDocument();
+    expect(screen.getByText("真实采集")).toBeInTheDocument();
   });
 
   it("filters the family route to parent-child activities", () => {

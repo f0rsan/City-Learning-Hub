@@ -1,6 +1,5 @@
 import AudienceEntry from "../components/AudienceEntry";
 import WeeklySection from "../components/WeeklySection";
-import heroImage from "../assets/shenzhen-learning-hub-hero.png";
 import { getWeeklyFeatured } from "../domain/activitySelectors";
 import { getPublicEvaluatedActivities } from "../domain/candidateStore";
 
@@ -9,25 +8,29 @@ export default function HomePage() {
 
   return (
     <main>
-      <section className="hero visual-hero">
+      <section className="hero compact-hero">
         <div className="hero-copy">
-          <p className="eyebrow">深圳本周精选</p>
+          <p className="eyebrow">深圳学习活动</p>
           <h1>深圳本周值得去</h1>
-          <p>给家长和成人看的深圳活动清单：先看亮点、注意事项和信息可靠性。</p>
+          <p>给家长和成人看的活动清单：先看价值、风险和可靠性。</p>
+          <div className="hero-signal-row" aria-label="本周信息概览">
+            <span>{featured.length} 条精选</span>
+            <span>真实采集</span>
+            <span>亲子/成人并列</span>
+          </div>
         </div>
-        <img className="hero-image" src={heroImage} alt="深圳学习活动现场氛围" />
-      </section>
-
-      <section className="audience-grid" aria-label="选择入口">
-        <AudienceEntry type="family" />
-        <AudienceEntry type="adult" />
       </section>
 
       <WeeklySection
         title="本周精选"
-        subtitle="先看要点，再决定要不要报名。"
+        subtitle="按时间排列，先看判断，再进详情。"
         activities={featured}
       />
+
+      <section className="audience-grid secondary-audience-grid" aria-label="选择入口">
+        <AudienceEntry type="family" />
+        <AudienceEntry type="adult" />
+      </section>
     </main>
   );
 }
