@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-05-15T03:06:19.477Z",
+  "generatedAt": "2026-05-15T03:37:03.425Z",
   "rounds": 1,
   "concurrency": 3,
   "requiredSuccessfulSources": 10,
@@ -21,7 +21,7 @@
       "successRuns": 0,
       "failureRuns": 1,
       "successRate": 0,
-      "avgLatencyMs": 181,
+      "avgLatencyMs": 87,
       "avgItemsPerSuccess": 0,
       "totalItems": 0,
       "uniqueUrls": 0,
@@ -50,7 +50,7 @@
       "successRuns": 0,
       "failureRuns": 1,
       "successRate": 0,
-      "avgLatencyMs": 1364,
+      "avgLatencyMs": 973,
       "avgItemsPerSuccess": 0,
       "totalItems": 0,
       "uniqueUrls": 0,
@@ -79,7 +79,7 @@
       "successRuns": 0,
       "failureRuns": 1,
       "successRate": 0,
-      "avgLatencyMs": 1040,
+      "avgLatencyMs": 758,
       "avgItemsPerSuccess": 0,
       "totalItems": 0,
       "uniqueUrls": 0,
@@ -108,7 +108,7 @@
       "successRuns": 1,
       "failureRuns": 0,
       "successRate": 1,
-      "avgLatencyMs": 907,
+      "avgLatencyMs": 829,
       "avgItemsPerSuccess": 42,
       "totalItems": 42,
       "uniqueUrls": 42,
@@ -162,7 +162,7 @@
       "successRuns": 0,
       "failureRuns": 1,
       "successRate": 0,
-      "avgLatencyMs": 121,
+      "avgLatencyMs": 49,
       "avgItemsPerSuccess": 0,
       "totalItems": 0,
       "uniqueUrls": 0,
@@ -191,11 +191,11 @@
       "successRuns": 1,
       "failureRuns": 0,
       "successRate": 1,
-      "avgLatencyMs": 1891,
-      "avgItemsPerSuccess": 86,
-      "totalItems": 86,
-      "uniqueUrls": 86,
-      "uniqueTitles": 86,
+      "avgLatencyMs": 2338,
+      "avgItemsPerSuccess": 87,
+      "totalItems": 87,
+      "uniqueUrls": 87,
+      "uniqueTitles": 87,
       "uniquenessRatio": 1,
       "titleUniquenessRatio": 1,
       "localRelevanceRatio": 1,
@@ -220,13 +220,13 @@
         },
         {
           "sourceId": "douban-shenzhen",
-          "title": "《源起华夏 月球冒险之旅》大型VR沉浸探索",
-          "url": "https://www.douban.com/event/37309455/"
+          "title": "金声合唱团“文人情致” 第5季-诗词散文合唱专场音乐会",
+          "url": "https://www.douban.com/event/37840435/"
         },
         {
           "sourceId": "douban-shenzhen",
-          "title": "话剧《吉他男》｜独角戏·诺奖得主代表作｜一把吉他，半生失落｜共同寻找孤独的定义",
-          "url": "https://www.douban.com/event/37809579/"
+          "title": "陈明「等你爱我」2026深圳演唱会",
+          "url": "https://www.douban.com/event/37843312/"
         }
       ]
     },
@@ -245,7 +245,7 @@
       "successRuns": 1,
       "failureRuns": 0,
       "successRate": 1,
-      "avgLatencyMs": 5678,
+      "avgLatencyMs": 1256,
       "avgItemsPerSuccess": 42,
       "totalItems": 42,
       "uniqueUrls": 42,
@@ -253,9 +253,9 @@
       "uniquenessRatio": 1,
       "titleUniquenessRatio": 1,
       "localRelevanceRatio": 0.119,
-      "sourceQualityScore": 0.809,
+      "sourceQualityScore": 0.824,
       "recommendedTrustLevel": "medium",
-      "recommendedSignalWeight": 1.08,
+      "recommendedSignalWeight": 1.09,
       "sampleItems": [
         {
           "sourceId": "lianpu-tech-events",
@@ -300,11 +300,11 @@
       "successRuns": 1,
       "failureRuns": 0,
       "successRate": 1,
-      "avgLatencyMs": 994,
-      "avgItemsPerSuccess": 22,
-      "totalItems": 22,
-      "uniqueUrls": 22,
-      "uniqueTitles": 22,
+      "avgLatencyMs": 968,
+      "avgItemsPerSuccess": 21,
+      "totalItems": 21,
+      "uniqueUrls": 21,
+      "uniqueTitles": 21,
       "uniquenessRatio": 1,
       "titleUniquenessRatio": 1,
       "localRelevanceRatio": 1,
@@ -355,7 +355,7 @@
       "successRuns": 1,
       "failureRuns": 0,
       "successRate": 1,
-      "avgLatencyMs": 1289,
+      "avgLatencyMs": 1186,
       "avgItemsPerSuccess": 8,
       "totalItems": 8,
       "uniqueUrls": 8,
@@ -384,13 +384,13 @@
         },
         {
           "sourceId": "meetup-shenzhen",
-          "title": "Claude Code Workshop: From Installation to Building Apps with AI Level 01 Sat, May 16 · 10:00 AM SST · Online by Rocketone.AI Singapore 292 attendees",
-          "url": "https://www.meetup.com/rocketone-ai-singapore/events/314541709/"
+          "title": "古迹铁路双语行 (英语/普通话) Sat, May 16 · 2:30 PM CST by Discover Hong Kong 发掘在港生活的美好 4.9 4 attendees",
+          "url": "https://www.meetup.com/discover-hong-kong-%E5%8F%91%E6%8E%98%E5%9C%A8%E6%B8%AF%E7%94%9F%E6%B4%BB%E7%9A%84%E7%BE%8E%E5%A5%BD/events/314641902/"
         },
         {
           "sourceId": "meetup-shenzhen",
-          "title": "古迹铁路双语行 (英语/普通话) Sat, May 16 · 2:30 PM CST by Discover Hong Kong 发掘在港生活的美好 4.9 4 attendees",
-          "url": "https://www.meetup.com/discover-hong-kong-%E5%8F%91%E6%8E%98%E5%9C%A8%E6%B8%AF%E7%94%9F%E6%B4%BB%E7%9A%84%E7%BE%8E%E5%A5%BD/events/314641902/"
+          "title": "Claude Code Workshop: From Installation to Building Apps with AI Level 01 Sat, May 16 · 10:00 AM SST · Online by Rocketone.AI Singapore 294 attendees",
+          "url": "https://www.meetup.com/rocketone-ai-singapore/events/314541709/"
         }
       ]
     },
@@ -410,7 +410,7 @@
       "successRuns": 1,
       "failureRuns": 0,
       "successRate": 1,
-      "avgLatencyMs": 2351,
+      "avgLatencyMs": 2354,
       "avgItemsPerSuccess": 15,
       "totalItems": 15,
       "uniqueUrls": 15,
@@ -465,7 +465,7 @@
       "successRuns": 0,
       "failureRuns": 1,
       "successRate": 0,
-      "avgLatencyMs": 10483,
+      "avgLatencyMs": 10231,
       "avgItemsPerSuccess": 0,
       "totalItems": 0,
       "uniqueUrls": 0,
@@ -494,7 +494,7 @@
       "successRuns": 1,
       "failureRuns": 0,
       "successRate": 1,
-      "avgLatencyMs": 3200,
+      "avgLatencyMs": 2273,
       "avgItemsPerSuccess": 50,
       "totalItems": 50,
       "uniqueUrls": 50,
@@ -554,7 +554,7 @@
       "successRuns": 1,
       "failureRuns": 0,
       "successRate": 1,
-      "avgLatencyMs": 1038,
+      "avgLatencyMs": 1486,
       "avgItemsPerSuccess": 8,
       "totalItems": 8,
       "uniqueUrls": 8,
@@ -609,7 +609,7 @@
       "successRuns": 1,
       "failureRuns": 0,
       "successRate": 1,
-      "avgLatencyMs": 1667,
+      "avgLatencyMs": 1878,
       "avgItemsPerSuccess": 33,
       "totalItems": 33,
       "uniqueUrls": 33,
@@ -664,7 +664,7 @@
       "successRuns": 1,
       "failureRuns": 0,
       "successRate": 1,
-      "avgLatencyMs": 1567,
+      "avgLatencyMs": 1305,
       "avgItemsPerSuccess": 26,
       "totalItems": 26,
       "uniqueUrls": 26,
@@ -718,7 +718,7 @@
       "successRuns": 0,
       "failureRuns": 1,
       "successRate": 0,
-      "avgLatencyMs": 52,
+      "avgLatencyMs": 28,
       "avgItemsPerSuccess": 0,
       "totalItems": 0,
       "uniqueUrls": 0,
@@ -747,7 +747,7 @@
       "successRuns": 1,
       "failureRuns": 0,
       "successRate": 1,
-      "avgLatencyMs": 2590,
+      "avgLatencyMs": 1291,
       "avgItemsPerSuccess": 3,
       "totalItems": 3,
       "uniqueUrls": 3,
@@ -792,7 +792,7 @@
       "successRuns": 1,
       "failureRuns": 0,
       "successRate": 1,
-      "avgLatencyMs": 6086,
+      "avgLatencyMs": 4780,
       "avgItemsPerSuccess": 11,
       "totalItems": 11,
       "uniqueUrls": 11,
@@ -847,7 +847,7 @@
       "successRuns": 0,
       "failureRuns": 1,
       "successRate": 0,
-      "avgLatencyMs": 747,
+      "avgLatencyMs": 643,
       "avgItemsPerSuccess": 0,
       "totalItems": 0,
       "uniqueUrls": 0,
@@ -876,7 +876,7 @@
       "successRuns": 1,
       "failureRuns": 0,
       "successRate": 1,
-      "avgLatencyMs": 3058,
+      "avgLatencyMs": 4690,
       "avgItemsPerSuccess": 14,
       "totalItems": 14,
       "uniqueUrls": 14,
@@ -884,9 +884,9 @@
       "uniquenessRatio": 1,
       "titleUniquenessRatio": 1,
       "localRelevanceRatio": 1,
-      "sourceQualityScore": 0.97,
+      "sourceQualityScore": 0.955,
       "recommendedTrustLevel": "high",
-      "recommendedSignalWeight": 1.38,
+      "recommendedSignalWeight": 1.37,
       "sampleItems": [
         {
           "sourceId": "shenzhen-youth-activity-center",
@@ -931,7 +931,7 @@
       "successRuns": 0,
       "failureRuns": 1,
       "successRate": 0,
-      "avgLatencyMs": 2447,
+      "avgLatencyMs": 1567,
       "avgItemsPerSuccess": 0,
       "totalItems": 0,
       "uniqueUrls": 0,
@@ -960,7 +960,7 @@
       "successRuns": 1,
       "failureRuns": 0,
       "successRate": 1,
-      "avgLatencyMs": 793,
+      "avgLatencyMs": 814,
       "avgItemsPerSuccess": 42,
       "totalItems": 42,
       "uniqueUrls": 42,
@@ -1015,7 +1015,7 @@
       "successRuns": 1,
       "failureRuns": 0,
       "successRate": 1,
-      "avgLatencyMs": 2304,
+      "avgLatencyMs": 1363,
       "avgItemsPerSuccess": 1,
       "totalItems": 1,
       "uniqueUrls": 1,
@@ -1051,7 +1051,7 @@
       "successRuns": 1,
       "failureRuns": 0,
       "successRate": 1,
-      "avgLatencyMs": 2757,
+      "avgLatencyMs": 2267,
       "avgItemsPerSuccess": 1,
       "totalItems": 1,
       "uniqueUrls": 1,
@@ -1087,7 +1087,7 @@
       "successRuns": 1,
       "failureRuns": 0,
       "successRate": 1,
-      "avgLatencyMs": 868,
+      "avgLatencyMs": 847,
       "avgItemsPerSuccess": 1,
       "totalItems": 1,
       "uniqueUrls": 1,
@@ -1123,7 +1123,7 @@
       "successRuns": 0,
       "failureRuns": 1,
       "successRate": 0,
-      "avgLatencyMs": 864,
+      "avgLatencyMs": 565,
       "avgItemsPerSuccess": 0,
       "totalItems": 0,
       "uniqueUrls": 0,
@@ -1152,7 +1152,7 @@
       "successRuns": 1,
       "failureRuns": 0,
       "successRate": 1,
-      "avgLatencyMs": 1497,
+      "avgLatencyMs": 981,
       "avgItemsPerSuccess": 1,
       "totalItems": 1,
       "uniqueUrls": 1,
@@ -1185,7 +1185,7 @@
       "successRuns": 1,
       "failureRuns": 0,
       "successRate": 1,
-      "avgLatencyMs": 1711,
+      "avgLatencyMs": 1494,
       "avgItemsPerSuccess": 1,
       "totalItems": 1,
       "uniqueUrls": 1,
@@ -1219,7 +1219,7 @@
       "successRuns": 1,
       "failureRuns": 0,
       "successRate": 1,
-      "avgLatencyMs": 1039,
+      "avgLatencyMs": 1213,
       "avgItemsPerSuccess": 1,
       "totalItems": 1,
       "uniqueUrls": 1,
@@ -1254,7 +1254,7 @@
       "successRuns": 1,
       "failureRuns": 0,
       "successRate": 1,
-      "avgLatencyMs": 1815,
+      "avgLatencyMs": 1760,
       "avgItemsPerSuccess": 1,
       "totalItems": 1,
       "uniqueUrls": 1,
@@ -1280,55 +1280,55 @@
       "sourceId": "nanshan-tech-museum",
       "sourceName": "深圳科学馆",
       "error": "fetch failed",
-      "durationMs": 181
+      "durationMs": 87
     },
     {
       "sourceId": "shenzhen-book-city",
       "sourceName": "深圳书城",
       "error": "解析成功但未提取到活动",
-      "durationMs": 1364
+      "durationMs": 973
     },
     {
       "sourceId": "tech-community",
       "sourceName": "深圳技术社区线索",
       "error": "解析成功但未提取到活动",
-      "durationMs": 1040
+      "durationMs": 758
     },
     {
       "sourceId": "eventbrite-shenzhen",
       "sourceName": "Eventbrite 深圳",
       "error": "HTTP 405",
-      "durationMs": 121
+      "durationMs": 49
     },
     {
       "sourceId": "luohu-library-events",
       "sourceName": "罗湖图书馆活动速递",
       "error": "fetch failed",
-      "durationMs": 10483
+      "durationMs": 10231
     },
     {
       "sourceId": "shenzhen-science-museum",
       "sourceName": "深圳科学馆",
       "error": "fetch failed",
-      "durationMs": 52
+      "durationMs": 28
     },
     {
       "sourceId": "shenzhen-redcube-events",
       "sourceName": "深圳红立方文化活动",
       "error": "fetch failed",
-      "durationMs": 747
+      "durationMs": 643
     },
     {
       "sourceId": "shenzhen-world-schedule",
       "sourceName": "深圳国际会展中心排期",
       "error": "解析成功但未提取到活动",
-      "durationMs": 2447
+      "durationMs": 1567
     },
     {
       "sourceId": "luma-shenzhen",
       "sourceName": "Luma 深圳活动",
       "error": "解析成功但未提取到活动",
-      "durationMs": 864
+      "durationMs": 565
     }
   ]
 }
