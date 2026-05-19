@@ -54,6 +54,8 @@ export const sampleActivities: Activity[] = [
     lastConfirmedAt: "2026-05-08",
     status: "published",
     weeklyFeatured: true,
+    publicListingTier: "featured",
+    publicScore: 92,
     childSafetyComplete: true
   },
   {
@@ -81,6 +83,8 @@ export const sampleActivities: Activity[] = [
     lastConfirmedAt: "2026-05-08",
     status: "published",
     weeklyFeatured: true,
+    publicListingTier: "featured",
+    publicScore: 88,
     childSafetyComplete: true
   },
   {
@@ -108,6 +112,8 @@ export const sampleActivities: Activity[] = [
     lastConfirmedAt: "2026-05-08",
     status: "published",
     weeklyFeatured: true,
+    publicListingTier: "featured",
+    publicScore: 84,
     childSafetyComplete: true
   },
   {
@@ -136,6 +142,8 @@ export const sampleActivities: Activity[] = [
     lastConfirmedAt: "2026-05-08",
     status: "published",
     weeklyFeatured: true,
+    publicListingTier: "featured",
+    publicScore: 80,
     childSafetyComplete: true
   },
   {
@@ -163,6 +171,8 @@ export const sampleActivities: Activity[] = [
     lastConfirmedAt: "2026-05-08",
     status: "published",
     weeklyFeatured: true,
+    publicListingTier: "featured",
+    publicScore: 86,
     childSafetyComplete: true
   },
   {
@@ -191,6 +201,8 @@ export const sampleActivities: Activity[] = [
     lastConfirmedAt: "2026-05-08",
     status: "published",
     weeklyFeatured: true,
+    publicListingTier: "featured",
+    publicScore: 82,
     childSafetyComplete: true
   },
   {
@@ -218,6 +230,36 @@ export const sampleActivities: Activity[] = [
     lastConfirmedAt: "2026-05-08",
     status: "cancelled",
     weeklyFeatured: false,
+    childSafetyComplete: true
+  },
+  {
+    id: "a9",
+    slug: "reference-ai-salon",
+    title: "深圳 AI 创业沙龙",
+    summary: "从高信任来源发现的深圳学习活动，时间仍需出发前核对。",
+    category: "技术大会",
+    audience: ["adult"],
+    tags: ["AI", "创业", "真实采集"],
+    district: "南山",
+    venue: "深圳湾创业广场",
+    address: "深圳市南山区",
+    startAt: "2026-05-20T10:00:00+08:00",
+    endAt: "2026-05-20T12:00:00+08:00",
+    dateNote: "时间见活动页",
+    priceType: "公益",
+    priceNote: "见活动页",
+    reservationRequired: true,
+    difficulty: "入门",
+    recommendation: "主题和来源都值得参考，但活动细节仍需核对。",
+    bestFor: "关注 AI 创业交流的成人。",
+    cautions: ["时间待核对"],
+    officialUrl: "https://example.com/events/reference-ai-salon",
+    sourceId: "tech-community",
+    lastConfirmedAt: "2026-05-08",
+    status: "uncertain",
+    weeklyFeatured: false,
+    publicListingTier: "reference",
+    publicScore: 76,
     childSafetyComplete: true
   },
   {

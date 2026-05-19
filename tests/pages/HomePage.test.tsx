@@ -35,6 +35,8 @@ describe("HomePage", () => {
     expect(screen.getAllByText(/强推荐|值得考虑|谨慎选择|不建议前往/)[0]).toBeInTheDocument();
     expect(screen.getAllByText(/高可靠|可参考|待核对/)[0]).toBeInTheDocument();
     expect(screen.getByText(/按时间排列/)).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "更多可参考活动" })).toBeInTheDocument();
+    expect(screen.getByText(/系统筛过/)).toBeInTheDocument();
   });
 
   it("shows compact weekly signals", () => {
@@ -78,10 +80,10 @@ describe("HomePage", () => {
           addListener: () => {},
           removeListener: () => {},
           dispatchEvent: () => false
-        }) as MediaQueryList);
+      }) as MediaQueryList);
 
       renderRoute(<App />);
-      expect(screen.getByRole("button", { name: /展开其余 \d+ 条活动/ })).toBeInTheDocument();
+      expect(screen.getAllByRole("button", { name: /展开其余 \d+ 条活动/ }).length).toBeGreaterThan(0);
       expect(screen.queryByText(hiddenMobileActivity.title)).not.toBeInTheDocument();
     } finally {
       window.matchMedia = originalMatchMedia;

@@ -128,7 +128,7 @@ export default function ActivityDetail({ activity }: ActivityDetailProps) {
               </button>
             ) : null}
           </div>
-          {!showEvidence ? <p className="detail-preview">已核对：{evidencePreview}</p> : null}
+          {!showEvidence ? <p className="detail-preview">参考：{evidencePreview}</p> : null}
           <div id={evidencePanelId} hidden={!showEvidence}>
             {showEvidence ? (
               <>
@@ -202,7 +202,7 @@ export default function ActivityDetail({ activity }: ActivityDetailProps) {
 
         <article className="detail-card activity-page-card">
           <h2>活动页面</h2>
-          <p>最后核对：{activity.lastConfirmedAt}</p>
+          <p>{activity.publicListingTier === "reference" || activity.dateNote ? "最近采集" : "最后核对"}：{activity.lastConfirmedAt}</p>
           <div className="detail-actions">
             <a href={activity.officialUrl} target="_blank" rel="noreferrer">
               去活动页面报名

@@ -1,20 +1,54 @@
 import type { Activity, Audience, TrustState } from "./types";
 
+function normalizePublicTitle(title: string) {
+  return title.toLowerCase().replace(/[\s\p{P}\p{S}]+/gu, "");
+}
+
 export function getPublishedActivities(activities: Activity[]) {
   return activities.filter((activity) => activity.status === "published");
 }
 
 export function getWeeklyFeatured(activities: Activity[]) {
-  return getPublishedActivities(activities)
-    .filter((activity) => activity.weeklyFeatured && getTrustState(activity).level !== "blocked")
+  return activities
+    .filter(
+      (activity) =>
+        activity.status === "published" &&
+        activity.weeklyFeatured &&
+        activity.publicListingTier === "featured" &&
+        getTrustState(activity).level !== "blocked"
+    )
     .sort((a, b) => a.startAt.localeCompare(b.startAt));
 }
 
+export function getReferenceActivities(activities: Activity[]) {
+  const featuredTitles = new Set(getWeeklyFeatured(activities).map((activity) => normalizePublicTitle(activity.title)));
+  const featuredUrls = new Set(getWeeklyFeatured(activities).map((activity) => activity.officialUrl));
+
+  return activities
+    .filter(
+      (activity) =>
+        activity.publicListingTier === "reference" &&
+        activity.status === "uncertain" &&
+        !featuredTitles.has(normalizePublicTitle(activity.title)) &&
+        !featuredUrls.has(activity.officialUrl) &&
+        getTrustState(activity).level !== "blocked"
+    )
+    .sort((a, b) => (b.publicScore ?? 0) - (a.publicScore ?? 0) || a.startAt.localeCompare(b.startAt));
+}
+
+export function getPublicListedActivities(activities: Activity[]) {
+  return [...getWeeklyFeatured(activities), ...getReferenceActivities(activities)];
+}
+
 export function filterByAudience(activities: Activity[], audience: Audience) {
-  return getPublishedActivities(activities)
+  return getPublicListedActivities(activities)
     .filter((activity) => activity.audience.includes(audience))
     .filter((activity) => (audience === "family" ? activity.childSafetyComplete : true))
-    .sort((a, b) => a.startAt.localeCompare(b.startAt));
+    .sort(
+      (a, b) =>
+        (b.publicScore ?? 0) - (a.publicScore ?? 0) ||
+        a.startAt.localeCompare(b.startAt)
+    );
 }
 
 export function getActivityBySlug(activities: Activity[], slug: string) {
@@ -38,19 +72,27 @@ export function getTrustState(activity: Activity): TrustState {
     };
   }
 
-  if (activity.status === "uncertain") {
-    return {
-      level: "warning",
-      label: "信息待确认",
-      message: "时间、地点或报名信息仍需确认，出发前请再核对。"
-    };
-  }
-
   if (activity.audience.includes("family") && !activity.childSafetyComplete) {
     return {
       level: "blocked",
       label: "亲子信息不足",
       message: "适龄或陪同信息不足，暂不建议作为亲子安排。"
+    };
+  }
+
+  if (activity.dateNote) {
+    return {
+      level: "warning",
+      label: "时间待核对",
+      message: "时间仍需以活动页为准，出发前请再核对。"
+    };
+  }
+
+  if (activity.status === "uncertain") {
+    return {
+      level: "warning",
+      label: "信息待确认",
+      message: "时间、地点或报名信息仍需确认，出发前请再核对。"
     };
   }
 

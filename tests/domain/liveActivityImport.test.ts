@@ -18,12 +18,19 @@ describe("live activity import", () => {
 
     const publicActivities = getPublicEvaluatedActivities();
     const imported = publicActivities.find((activity) => activity.tags.includes("真实采集"));
+    const reference = publicActivities.find((activity) => activity.publicListingTier === "reference");
 
     expect(imported).toEqual(
       expect.objectContaining({
         officialUrl: expect.stringMatching(/^https?:\/\//),
-        status: "published",
-        weeklyFeatured: true
+        publicListingTier: expect.stringMatching(/featured|reference/)
+      })
+    );
+    expect(reference).toEqual(
+      expect.objectContaining({
+        status: "uncertain",
+        publicListingTier: "reference",
+        publicScore: expect.any(Number)
       })
     );
     expect(imported?.tags).toContain("真实采集");

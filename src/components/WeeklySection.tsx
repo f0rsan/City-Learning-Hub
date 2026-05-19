@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useId, useMemo, useState } from "react";
 import type { Activity } from "../domain/types";
 import ActivityCard from "./ActivityCard";
 
@@ -9,6 +9,7 @@ type WeeklySectionProps = {
 };
 
 export default function WeeklySection({ title, subtitle, activities }: WeeklySectionProps) {
+  const titleId = useId();
   const [isCompactViewport, setIsCompactViewport] = useState(() => {
     if (typeof window === "undefined" || typeof window.matchMedia !== "function") {
       return false;
@@ -55,9 +56,9 @@ export default function WeeklySection({ title, subtitle, activities }: WeeklySec
   }, [isCompactViewport]);
 
   return (
-    <section className="weekly-section" aria-labelledby="weekly-title">
+    <section className="weekly-section" aria-labelledby={titleId}>
       <div className="section-heading">
-        <h2 id="weekly-title">{title}</h2>
+        <h2 id={titleId}>{title}</h2>
         <p>{subtitle}</p>
       </div>
       <div className="activity-grid">

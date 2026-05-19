@@ -59,6 +59,8 @@ export type Activity = {
   lastConfirmedAt: string;
   status: ActivityStatus;
   weeklyFeatured: boolean;
+  publicListingTier?: "featured" | "reference";
+  publicScore?: number;
   childSafetyComplete: boolean;
   evaluation?: import("./evaluationTypes").ActivityEvaluation;
 };

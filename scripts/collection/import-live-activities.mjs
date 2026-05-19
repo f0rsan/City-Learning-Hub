@@ -10,7 +10,7 @@ const reportDate = new Date().toISOString().slice(0, 10);
 const reportPath = join(process.cwd(), "docs", "superpowers", "reports", `live-source-calibration-${reportDate}.json`);
 const outputPath = join(process.cwd(), "src", "domain", "liveActivities.generated.ts");
 const maxItemsPerSource = 5;
-const trustedLevels = new Set(["high", "medium"]);
+const publicTrustLevels = new Set(["high"]);
 const currentYear = new Date().getFullYear();
 
 if (shouldCollect) {
@@ -147,12 +147,15 @@ function hasTechSignal(title) {
 function hasLearningSignal(title) {
   return (
     hasTechSignal(title) ||
-    /讲座|讲堂|论坛|峰会|大会|沙龙|读书|阅读|书|故事|展|VR|体验|国学|公益课|课程|工作坊|创客|智能|科学|产业|跨境|出海/i.test(title)
+    /讲座|讲堂|论坛|峰会|大会|沙龙|读书|阅读|书|故事|展|国学|公益课|课程|工作坊|创客|智能|科学|产业|跨境|出海/i.test(title)
   );
 }
 
 function isEntertainmentOnly(title) {
-  return /演唱会|音乐会|话剧|舞蹈|钢琴|相声|音乐/.test(title) && !/讲座|论坛|工作坊|公益课|课程|分享|展|VR|体验/.test(title);
+  const purePerformance = /演唱会|音乐会|话剧|舞蹈|钢琴|相声|音乐/.test(title) && !/讲座|论坛|工作坊|公益课|课程|分享|展/.test(title);
+  const pureVrExperience = /VR|体验|冒险旅程/.test(title) && !/AI|人工智能|科技|科学|科普|讲座|论坛|工作坊|公益课|课程|分享|展|创客|制作|启蒙|产业/i.test(title);
+
+  return purePerformance || pureVrExperience;
 }
 
 function isCoreRelevant(title) {
@@ -161,6 +164,10 @@ function isCoreRelevant(title) {
 
 function inferAudience(title) {
   return /亲子|儿童|少儿|青少年|孩子|故事会|家庭/.test(title) ? ["family"] : ["adult"];
+}
+
+function hasChildSafetySignal(title, sourceName) {
+  return /图书馆|故事|亲子|儿童|少儿|青少年|少年宫|活动中心|科学|科普/.test(`${title} ${sourceName}`);
 }
 
 function inferVenue(title, sourceName, sourceId) {
@@ -224,16 +231,77 @@ function tagsFor(title, sourceName) {
   return [...new Set(tags)].slice(0, 4);
 }
 
+function clampScore(value) {
+  return Math.max(0, Math.min(100, Number(value.toFixed(1))));
+}
+
+function titleValueScore(title) {
+  let score = Math.min(18, Math.max(4, title.length / 3));
+
+  if (hasTechSignal(title)) {
+    score += 18;
+  }
+  if (/讲座|讲堂|论坛|峰会|大会|沙龙|读书|阅读|故事|工作坊|课程|公益课|展|体验|Hackathon|黑客松/i.test(title)) {
+    score += 18;
+  }
+  if (/亲子|儿童|少儿|青少年|孩子|家庭|科普|科学/.test(title)) {
+    score += 8;
+  }
+  if (isEntertainmentOnly(title)) {
+    score -= 35;
+  }
+  if (/^(法律咨询|展览速递|数据库培训|预约培训|专题展览|小讲解员|活动讲座预约)$/.test(title)) {
+    score -= 18;
+  }
+
+  return score;
+}
+
+function sourceValueScore(source) {
+  const trustScore = source.recommendedTrustLevel === "high" ? 24 : source.recommendedTrustLevel === "medium" ? 12 : 0;
+  const localScore = Math.round((source.localRelevanceRatio ?? 0) * 22);
+  const modeScore = source.collectionMode === "auto" ? 10 : 4;
+  const confirmationScore = source.confirmationPower === "strong" ? 8 : 3;
+
+  return trustScore + localScore + modeScore + confirmationScore;
+}
+
+function itemPublicScore(source, item, index) {
+  const title = cleanTitle(item.title);
+  const parsedDate = item.startAt ? new Date(item.startAt) : parseDateFromTitle(title);
+  const hasExplicitDate = parsedDate && !Number.isNaN(parsedDate.getTime());
+  const learningScore = isCoreRelevant(title) ? 22 : -28;
+  const dateScore = hasExplicitDate ? 12 : 2;
+  const freshnessTieBreaker = Math.max(0, 5 - index * 0.1);
+
+  return clampScore(sourceValueScore(source) + titleValueScore(title) + learningScore + dateScore + freshnessTieBreaker);
+}
+
+function pickBestItemsForSource(source) {
+  return (Array.isArray(source.sampleItems) ? source.sampleItems : [])
+    .map((item, index) => ({
+      item,
+      score: itemPublicScore(source, item, index),
+      index
+    }))
+    .sort((a, b) => b.score - a.score || a.index - b.index)
+    .slice(0, maxItemsPerSource)
+    .map((entry) => entry.item);
+}
+
 function toActivity(source, item, globalIndex) {
   const title = cleanTitle(item.title);
   const audience = inferAudience(title);
   const { startAt, dateNote, dateIsExplicit } = normalizeStartDate(item, globalIndex);
   const startOfToday = new Date(report.generatedAt);
   startOfToday.setHours(0, 0, 0, 0);
-  const isTrusted = trustedLevels.has(source.recommendedTrustLevel) && source.localRelevanceRatio >= 0.5;
+  const isTrusted = publicTrustLevels.has(source.recommendedTrustLevel) && source.localRelevanceRatio >= 0.5;
   const isDirectAuto = (source.collectionMode ?? "auto") === "auto";
   const relevant = isCoreRelevant(title);
-  const status = !isDirectAuto || !isTrusted || !relevant ? "uncertain" : dateIsExplicit && startAt < startOfToday ? "expired" : "published";
+  const expired = dateIsExplicit && startAt < startOfToday;
+  const publicScore = itemPublicScore(source, item, globalIndex);
+  const publicListingTier = !expired && isTrusted && relevant ? (isDirectAuto ? "featured" : "reference") : undefined;
+  const status = expired ? "expired" : publicListingTier === "featured" ? "published" : "uncertain";
   const sourceName = source.sourceName;
   const district = inferDistrict(`${title} ${item.url}`, source.sourceId);
   const venue = inferVenue(item.title, sourceName, source.sourceId);
@@ -270,8 +338,9 @@ function toActivity(source, item, globalIndex) {
     sourceId: source.sourceId,
     lastConfirmedAt: report.generatedAt.slice(0, 10),
     status,
-    weeklyFeatured: status === "published" && isDirectAuto && source.recommendedTrustLevel === "high" && relevant,
-    childSafetyComplete: !audience.includes("family") || /图书馆|故事|亲子|儿童|少儿/.test(`${title} ${sourceName}`)
+    weeklyFeatured: publicListingTier === "featured",
+    ...(publicListingTier ? { publicListingTier, publicScore } : {}),
+    childSafetyComplete: !audience.includes("family") || hasChildSafetySignal(title, sourceName)
   };
 }
 
@@ -282,7 +351,7 @@ for (const source of report.sources ?? []) {
   if (source.collectionMode === "reputation") {
     continue;
   }
-  const items = Array.isArray(source.sampleItems) ? source.sampleItems.slice(0, maxItemsPerSource) : [];
+  const items = pickBestItemsForSource(source);
   for (const item of items) {
     activities.push(toActivity(source, item, globalIndex));
     globalIndex += 1;

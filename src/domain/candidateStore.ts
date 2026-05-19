@@ -304,7 +304,11 @@ export function getPublicEvaluatedActivities() {
   return getCandidateActivities()
     .filter((candidate) => candidate.candidateStatus === "evaluated" || candidate.candidateStatus === "published")
     .filter((candidate) => Boolean(candidate.evaluation))
-    .filter((candidate) => candidate.status === "published")
+    .filter(
+      (candidate) =>
+        candidate.status === "published" ||
+        (candidate.status === "uncertain" && candidate.publicListingTier === "reference")
+    )
     .filter((candidate) => candidate.evaluation?.recommendationLevel !== "blocked")
     .map((candidate) => ({ ...candidate, evaluation: candidate.evaluation }));
 }
@@ -317,7 +321,12 @@ export function getPublicReadableActivities() {
         candidate.candidateStatus === "published" ||
         candidate.candidateStatus === "cancelled"
     )
-    .filter((candidate) => candidate.status === "published" || candidate.status === "cancelled");
+    .filter(
+      (candidate) =>
+        candidate.status === "published" ||
+        candidate.status === "cancelled" ||
+        (candidate.status === "uncertain" && candidate.publicListingTier === "reference")
+    );
 }
 
 export function replaceCandidateActivities(candidates: CandidateActivity[]) {
