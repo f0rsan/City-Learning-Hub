@@ -162,6 +162,15 @@ function isCoreRelevant(title) {
   return hasLearningSignal(title) && !isEntertainmentOnly(title);
 }
 
+function isSourceOnlyFallback(item, title) {
+  return (
+    Boolean(item.isFallback) ||
+    /线索$|线索页|入口页|活动入口|活动安排$|文化活动$|展会排期$|排期$|专题展览$|活动讲座预约$|展览速递$|数据库培训$|预约培训$|小讲解员$/.test(
+      title
+    )
+  );
+}
+
 function inferAudience(title) {
   return /亲子|儿童|少儿|青少年|孩子|故事会|家庭/.test(title) ? ["family"] : ["adult"];
 }
@@ -298,9 +307,11 @@ function toActivity(source, item, globalIndex) {
   const isTrusted = publicTrustLevels.has(source.recommendedTrustLevel) && source.localRelevanceRatio >= 0.5;
   const isDirectAuto = (source.collectionMode ?? "auto") === "auto";
   const relevant = isCoreRelevant(title);
+  const sourceOnlyFallback = isSourceOnlyFallback(item, title);
   const expired = dateIsExplicit && startAt < startOfToday;
   const publicScore = itemPublicScore(source, item, globalIndex);
-  const publicListingTier = !expired && isTrusted && relevant ? (isDirectAuto ? "featured" : "reference") : undefined;
+  const publicListingTier =
+    !expired && isTrusted && relevant && !sourceOnlyFallback ? (isDirectAuto ? "featured" : "reference") : undefined;
   const status = expired ? "expired" : publicListingTier === "featured" ? "published" : "uncertain";
   const sourceName = source.sourceName;
   const district = inferDistrict(`${title} ${item.url}`, source.sourceId);

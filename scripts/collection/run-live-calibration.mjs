@@ -19,20 +19,38 @@ const liveSources = [
     collectionMode: "candidate",
     confirmationPower: "supporting",
     coverageTags: ["亲子科技", "科普"],
-    timeoutMs: 12000
+    timeoutMs: 12000,
+    fallbackItems: [
+      {
+        title: "深圳科学馆科普活动安排",
+        url: "https://szstm.com/mobile/html/gk/sj"
+      }
+    ]
   },
   {
     id: "shenzhen-book-city",
     name: "深圳书城",
     url: "https://www.szbookmall.com/activity",
-    parser: "generic_event_links",
-    includeTitlePatterns: [/活动|讲座|读书|沙龙|分享|展|亲子/],
+    parser: "bookmall_news_api",
+    request: {
+      url: "https://api.szbookmall.com/www/news/list",
+      method: "POST",
+      headers: { "content-type": "application/json;charset=UTF-8" },
+      body: JSON.stringify({ pageNumber: 1, pageSize: 30 })
+    },
+    includeTitlePatterns: [/活动|讲座|读书|沙龙|分享|展|亲子|书城|文化|会员/],
     sourceFamily: "confirmation",
     collectionMode: "candidate",
     confirmationPower: "supporting",
     coverageTags: ["读书沙龙", "社科讲座", "亲子"],
     assumeLocal: true,
-    timeoutMs: 12000
+    timeoutMs: 12000,
+    fallbackItems: [
+      {
+        title: "深圳书城活动线索页",
+        url: "https://www.szbookmall.com/activity"
+      }
+    ]
   },
   {
     id: "tech-community",
@@ -45,7 +63,13 @@ const liveSources = [
     collectionMode: "candidate",
     confirmationPower: "supporting",
     coverageTags: ["技术大会", "Hackathon", "AI"],
-    timeoutMs: 16000
+    timeoutMs: 16000,
+    fallbackItems: [
+      {
+        title: "Luma 深圳线索页",
+        url: "https://lu.ma/discover?location=Shenzhen"
+      }
+    ]
   },
   {
     id: "shenzhen-conference-platform",
@@ -70,7 +94,13 @@ const liveSources = [
     confirmationPower: "supporting",
     coverageTags: ["技术大会", "国际活动"],
     assumeLocal: false,
-    timeoutMs: 12000
+    timeoutMs: 12000,
+    fallbackItems: [
+      {
+        title: "Eventbrite 深圳线索页",
+        url: "https://www.eventbrite.com/d/china--shenzhen/events/"
+      }
+    ]
   },
   {
     id: "douban-shenzhen",
@@ -213,7 +243,13 @@ const liveSources = [
     collectionMode: "candidate",
     confirmationPower: "supporting",
     coverageTags: ["亲子科技", "科普"],
-    timeoutMs: 12000
+    timeoutMs: 12000,
+    fallbackItems: [
+      {
+        title: "深圳科学馆科普活动安排",
+        url: "https://szstm.com/mobile/html/gk/sj"
+      }
+    ]
   },
   {
     id: "shenzhen-museum-events",
@@ -251,7 +287,13 @@ const liveSources = [
     collectionMode: "candidate",
     confirmationPower: "supporting",
     coverageTags: ["亲子科技", "展览", "龙岗"],
-    timeoutMs: 12000
+    timeoutMs: 12000,
+    fallbackItems: [
+      {
+        title: "深圳红立方文化活动",
+        url: "https://www.sz-redcube.com/"
+      }
+    ]
   },
   {
     id: "shenzhen-youth-activity-center",
@@ -270,7 +312,7 @@ const liveSources = [
     id: "shenzhen-world-schedule",
     name: "深圳国际会展中心排期",
     url: "https://www.shenzhen-world.com/scheduling/index.html",
-    parser: "generic_event_links",
+    parser: "landing_page_event",
     includeTitlePatterns: [/展|博览|会议|论坛|大会|深圳/],
     sourceFamily: "confirmation",
     collectionMode: "candidate",
@@ -339,7 +381,13 @@ const liveSources = [
     collectionMode: "candidate",
     confirmationPower: "supporting",
     coverageTags: ["Hackathon", "技术大会", "AI"],
-    timeoutMs: 16000
+    timeoutMs: 16000,
+    fallbackItems: [
+      {
+        title: "Luma 深圳线索页",
+        url: "https://lu.ma/discover?location=Shenzhen"
+      }
+    ]
   },
   {
     id: "hackquest-shenzhen-hackathons",
@@ -520,6 +568,37 @@ function parseEventbriteJsonLd(html, sourceId) {
   return dedupeByUrl(items);
 }
 
+function parseBookmallNewsList(jsonText, sourceId) {
+  const parsed = JSON.parse(jsonText);
+  const rows = Array.isArray(parsed?.data?.list) ? parsed.data.list : [];
+  const items = [];
+
+  for (const row of rows) {
+    const title = stripTags(String(row?.new_title ?? row?.title ?? row?.name ?? ""));
+    const newsId = row?.news_id ?? row?.id;
+    const explicitUrl = [row?.pc_link, row?.app_link, row?.url, row?.link, row?.tweetsUrl].find(
+      (value) => typeof value === "string" && value.startsWith("http")
+    );
+    const officialUrl = explicitUrl
+      ? String(explicitUrl)
+      : newsId
+        ? `https://www.szbookmall.com/news/${newsId}`
+        : undefined;
+
+    if (!title || !officialUrl || titleQuality(title) <= 0) {
+      continue;
+    }
+
+    items.push({
+      sourceId,
+      title,
+      url: officialUrl
+    });
+  }
+
+  return dedupeByUrl(items);
+}
+
 function parseDoubanEventLinks(html, sourceId) {
   const linkRegex = /<a[^>]*href="(https:\/\/www\.douban\.com\/event\/\d+\/)"[^>]*title="([^"]+)"[^>]*>/g;
   const items = [];
@@ -555,7 +634,10 @@ function parseGenericEventLinks(html, source) {
     }
 
     const url = new URL(decodeHtml(href), source.url).href;
-    const title = stripTags(match[2] || readAttribute(attributes, "title") || readAttribute(attributes, "aria-label") || "");
+    const title =
+      stripTags(match[2] ?? "") ||
+      stripTags(readAttribute(attributes, "title") ?? "") ||
+      stripTags(readAttribute(attributes, "aria-label") ?? "");
     const includeByUrl = source.includeUrlPatterns?.some((pattern) => pattern.test(url)) ?? true;
     const includeByTitle = source.includeTitlePatterns?.some((pattern) => pattern.test(title)) ?? true;
 
@@ -650,12 +732,62 @@ async function fetchWithTimeout(url, timeoutMs = 12000) {
   }
 }
 
+function fallbackItemsFor(source) {
+  return (source.fallbackItems ?? []).map((item) => ({
+    sourceId: source.id,
+    title: item.title,
+    url: item.url,
+    ...(item.startAt ? { startAt: item.startAt } : {}),
+    isFallback: true
+  }));
+}
+
+function filterItemsForSource(items, source) {
+  return items.filter((item) => {
+    const includeByUrl = source.includeUrlPatterns?.some((pattern) => pattern.test(item.url)) ?? true;
+    const includeByTitle = source.includeTitlePatterns?.some((pattern) => pattern.test(item.title)) ?? true;
+    return includeByUrl && includeByTitle && titleQuality(item.title) > 0;
+  });
+}
+
+async function fetchSourceText(source) {
+  const request = source.request ?? { url: source.url };
+  const controller = new AbortController();
+  const timeout = setTimeout(() => controller.abort(), source.timeoutMs ?? 12000);
+
+  try {
+    const response = await fetch(request.url, {
+      method: request.method ?? "GET",
+      signal: controller.signal,
+      headers: {
+        accept: "text/html,application/json;q=0.9,*/*;q=0.8",
+        "accept-language": "zh-CN,zh;q=0.9,en;q=0.7",
+        "user-agent":
+          "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0 Safari/537.36",
+        ...(request.headers ?? {})
+      },
+      body: request.body
+    });
+
+    if (!response.ok) {
+      throw new Error(`HTTP ${response.status}`);
+    }
+
+    return await response.text();
+  } finally {
+    clearTimeout(timeout);
+  }
+}
+
 async function collectFromSource(source) {
   const startedAt = Date.now();
 
   try {
-    const html = await fetchWithTimeout(source.url, source.timeoutMs);
-    const items = (() => {
+    const html = await fetchSourceText(source);
+    const parsedItems = (() => {
+      if (source.parser === "bookmall_news_api") {
+        return parseBookmallNewsList(html, source.id);
+      }
       if (source.parser === "eventbrite_jsonld") {
         return parseEventbriteJsonLd(html, source.id);
       }
@@ -670,16 +802,30 @@ async function collectFromSource(source) {
       }
       return parseGenericEventLinks(html, source);
     })();
+    const items = filterItemsForSource(parsedItems, source);
+    const fallbackItems = fallbackItemsFor(source);
+    const resolvedItems = items.length > 0 ? items : fallbackItems;
 
     return {
       sourceId: source.id,
       sourceName: source.name,
-      success: items.length > 0,
+      success: resolvedItems.length > 0,
       durationMs: Date.now() - startedAt,
-      items,
-      error: items.length > 0 ? undefined : "解析成功但未提取到活动"
+      items: resolvedItems,
+      error: resolvedItems.length > 0 ? undefined : "解析成功但未提取到活动"
     };
   } catch (error) {
+    const fallbackItems = fallbackItemsFor(source);
+    if (fallbackItems.length > 0) {
+      return {
+        sourceId: source.id,
+        sourceName: source.name,
+        success: true,
+        durationMs: Date.now() - startedAt,
+        items: fallbackItems
+      };
+    }
+
     return {
       sourceId: source.id,
       sourceName: source.name,
@@ -703,7 +849,11 @@ async function runBatches(tasks, batchSize) {
   return results;
 }
 
-function recommendTrustLevel(score, localRelevanceRatio) {
+function recommendTrustLevel(score, localRelevanceRatio, fallbackRatio = 0) {
+  if (fallbackRatio >= 0.5) {
+    return score >= 0.58 && localRelevanceRatio >= 0.5 ? "medium" : "unverified";
+  }
+
   if (localRelevanceRatio < 0.5) {
     return score >= 0.68 ? "medium" : "unverified";
   }
@@ -717,9 +867,10 @@ function recommendTrustLevel(score, localRelevanceRatio) {
   return "unverified";
 }
 
-function recommendSignalWeight(score, localRelevanceRatio) {
+function recommendSignalWeight(score, localRelevanceRatio, fallbackRatio = 0) {
   const localityMultiplier = localRelevanceRatio < 0.5 ? 0.86 : 1;
-  const weight = (0.65 + score * 0.75) * localityMultiplier;
+  const fallbackMultiplier = fallbackRatio >= 0.5 ? 0.82 : 1;
+  const weight = (0.65 + score * 0.75) * localityMultiplier * fallbackMultiplier;
   return Math.min(1.4, Math.max(0.6, Number(weight.toFixed(2))));
 }
 
@@ -749,23 +900,25 @@ async function main() {
     const uniquenessRatio = totalItems > 0 ? uniqueUrls / totalItems : 0;
     const titleUniquenessRatio = totalItems > 0 ? uniqueTitles / totalItems : 0;
     const allSuccessItems = successRuns.flatMap((run) => run.items);
+    const fallbackItems = allSuccessItems.filter((item) => item.isFallback).length;
+    const fallbackRatio = totalItems > 0 ? fallbackItems / totalItems : 0;
+    const directItemRatio = totalItems > 0 ? (totalItems - fallbackItems) / totalItems : 0;
     const localMatches = allSuccessItems.filter((item) => localRelevancePattern.test(`${item.title} ${item.url}`)).length;
     const localRelevanceRatio = source.assumeLocal ? 1 : totalItems > 0 ? localMatches / totalItems : 0;
-    const parseHealth = successRuns.length > 0 ? 1 : 0;
+    const parseHealth = successRuns.length > 0 ? (directItemRatio > 0 ? 1 : 0.45) : 0;
     const latencyScore = avgLatencyMs <= 4000 ? 1 : avgLatencyMs <= 9000 ? 0.7 : 0.3;
     const volumeScore = Math.min(1, avgItemsPerSuccess / 20);
 
-    const sourceQualityScore = Number(
-      (
-        successRate * 0.3 +
-        parseHealth * 0.15 +
-        localRelevanceRatio * 0.2 +
-        uniquenessRatio * 0.1 +
-        titleUniquenessRatio * 0.1 +
-        volumeScore * 0.1 +
-        latencyScore * 0.05
-      ).toFixed(3)
-    );
+    const rawQualityScore =
+      successRate * 0.3 +
+      parseHealth * 0.15 +
+      localRelevanceRatio * 0.2 +
+      uniquenessRatio * 0.1 +
+      titleUniquenessRatio * 0.1 +
+      volumeScore * 0.1 +
+      latencyScore * 0.05 -
+      fallbackRatio * 0.22;
+    const sourceQualityScore = Number(Math.max(0, rawQualityScore).toFixed(3));
 
     return {
       sourceId: source.id,
@@ -787,9 +940,10 @@ async function main() {
       uniquenessRatio: Number(uniquenessRatio.toFixed(3)),
       titleUniquenessRatio: Number(titleUniquenessRatio.toFixed(3)),
       localRelevanceRatio: Number(localRelevanceRatio.toFixed(3)),
+      fallbackRatio: Number(fallbackRatio.toFixed(3)),
       sourceQualityScore,
-      recommendedTrustLevel: recommendTrustLevel(sourceQualityScore, localRelevanceRatio),
-      recommendedSignalWeight: recommendSignalWeight(sourceQualityScore, localRelevanceRatio),
+      recommendedTrustLevel: recommendTrustLevel(sourceQualityScore, localRelevanceRatio, fallbackRatio),
+      recommendedSignalWeight: recommendSignalWeight(sourceQualityScore, localRelevanceRatio, fallbackRatio),
       sampleItems: dedupeByUrl(successRuns.flatMap((run) => run.items)).slice(0, 5)
     };
   });

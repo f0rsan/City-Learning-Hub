@@ -24,16 +24,34 @@ const liveSourceDefinitions: Record<string, LiveSourceDefinition> = {
     parser: "generic_event_links",
     includeTitlePatterns: [/科普|活动|讲座|展|科学/],
     timeoutMs: 12000,
-    collectionMode: "candidate"
+    collectionMode: "candidate",
+    fallbackItems: [
+      {
+        title: "深圳科学馆科普活动安排",
+        url: "https://szstm.com/mobile/html/gk/sj"
+      }
+    ]
   },
   "shenzhen-book-city": {
     id: "shenzhen-book-city",
     name: "深圳书城",
     url: "https://www.szbookmall.com/activity",
-    parser: "generic_event_links",
-    includeTitlePatterns: [/活动|讲座|读书|沙龙|分享|展|亲子/],
+    parser: "bookmall_news_api",
+    request: {
+      url: "https://api.szbookmall.com/www/news/list",
+      method: "POST",
+      headers: { "content-type": "application/json;charset=UTF-8" },
+      body: JSON.stringify({ pageNumber: 1, pageSize: 30 })
+    },
+    includeTitlePatterns: [/活动|讲座|读书|沙龙|分享|展|亲子|书城|文化|会员/],
     timeoutMs: 12000,
-    collectionMode: "candidate"
+    collectionMode: "candidate",
+    fallbackItems: [
+      {
+        title: "深圳书城活动线索页",
+        url: "https://www.szbookmall.com/activity"
+      }
+    ]
   },
   "tech-community": {
     id: "tech-community",
@@ -43,7 +61,13 @@ const liveSourceDefinitions: Record<string, LiveSourceDefinition> = {
     includeUrlPatterns: [/lu\.ma\/[a-z0-9]+/i],
     includeTitlePatterns: [/Shenzhen|深圳|Hackathon|Meetup|AI|Workshop|Salon|Tech|Founder|Developer/i],
     timeoutMs: 16000,
-    collectionMode: "candidate"
+    collectionMode: "candidate",
+    fallbackItems: [
+      {
+        title: "Luma 深圳线索页",
+        url: "https://lu.ma/discover?location=Shenzhen"
+      }
+    ]
   },
   "shenzhen-conference-platform": {
     id: "shenzhen-conference-platform",
@@ -60,7 +84,13 @@ const liveSourceDefinitions: Record<string, LiveSourceDefinition> = {
     url: "https://www.eventbrite.com/d/china--shenzhen/events/",
     parser: "eventbrite_jsonld",
     timeoutMs: 12000,
-    collectionMode: "candidate"
+    collectionMode: "candidate",
+    fallbackItems: [
+      {
+        title: "Eventbrite 深圳线索页",
+        url: "https://www.eventbrite.com/d/china--shenzhen/events/"
+      }
+    ]
   },
   "douban-shenzhen": {
     id: "douban-shenzhen",
@@ -160,7 +190,13 @@ const liveSourceDefinitions: Record<string, LiveSourceDefinition> = {
     parser: "generic_event_links",
     includeTitlePatterns: [/科普|活动|讲座|展|科学/],
     timeoutMs: 12000,
-    collectionMode: "candidate"
+    collectionMode: "candidate",
+    fallbackItems: [
+      {
+        title: "深圳科学馆科普活动安排",
+        url: "https://szstm.com/mobile/html/gk/sj"
+      }
+    ]
   },
   "shenzhen-museum-events": {
     id: "shenzhen-museum-events",
@@ -187,7 +223,13 @@ const liveSourceDefinitions: Record<string, LiveSourceDefinition> = {
     parser: "generic_event_links",
     includeTitlePatterns: [/文化活动|活动|讲座|科普|展/],
     timeoutMs: 12000,
-    collectionMode: "candidate"
+    collectionMode: "candidate",
+    fallbackItems: [
+      {
+        title: "深圳红立方文化活动",
+        url: "https://www.sz-redcube.com/"
+      }
+    ]
   },
   "shenzhen-youth-activity-center": {
     id: "shenzhen-youth-activity-center",
@@ -202,7 +244,7 @@ const liveSourceDefinitions: Record<string, LiveSourceDefinition> = {
     id: "shenzhen-world-schedule",
     name: "深圳国际会展中心排期",
     url: "https://www.shenzhen-world.com/scheduling/index.html",
-    parser: "generic_event_links",
+    parser: "landing_page_event",
     includeTitlePatterns: [/展|博览|会议|论坛|大会|深圳/],
     timeoutMs: 12000,
     collectionMode: "candidate"
@@ -248,7 +290,13 @@ const liveSourceDefinitions: Record<string, LiveSourceDefinition> = {
     includeUrlPatterns: [/lu\.ma\/[a-z0-9]+/i],
     includeTitlePatterns: [/Shenzhen|深圳|Hackathon|Meetup|AI|Workshop|Salon|Tech|Founder|Developer/i],
     timeoutMs: 16000,
-    collectionMode: "candidate"
+    collectionMode: "candidate",
+    fallbackItems: [
+      {
+        title: "Luma 深圳线索页",
+        url: "https://lu.ma/discover?location=Shenzhen"
+      }
+    ]
   },
   "hackquest-shenzhen-hackathons": {
     id: "hackquest-shenzhen-hackathons",

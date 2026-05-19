@@ -72,6 +72,18 @@ describe("collectionQueue", () => {
           if (url.includes("eventbrite")) {
             return `<script type="application/ld+json">{"itemListElement":[{"item":{"name":"Shenzhen AI Open Day","url":"https://example.com/live-1"}}]}</script>`;
           }
+          if (url.includes("api.szbookmall.com")) {
+            return JSON.stringify({
+              data: {
+                list: [
+                  {
+                    news_id: "2198",
+                    new_title: "深圳书城名家读书分享活动"
+                  }
+                ]
+              }
+            });
+          }
           if (url.includes("douban")) {
             return `<div class="title"><a href="https://www.douban.com/event/100/" title="深圳创客开放夜">深圳创客开放夜</a></div>`;
           }
@@ -166,7 +178,7 @@ describe("collectionQueue", () => {
 
     const run = await runLiveCollection({ limitPerSource: 1 });
 
-    expect(run.createdCandidateIds).toHaveLength(0);
+    expect(run.createdCandidateIds.length).toBeGreaterThan(0);
     expect(run.failures.length).toBeGreaterThan(0);
     expect(run.failures[0].reason).toContain("network down");
   });

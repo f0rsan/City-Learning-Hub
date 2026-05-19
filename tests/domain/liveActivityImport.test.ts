@@ -59,4 +59,13 @@ describe("live activity import", () => {
     expect(hero?.textContent).toContain(activity!.summary);
     expect(hero?.textContent).not.toMatch(/真实来源|系统已抓取|以原页面为准|真实采集/);
   });
+
+  it("does not publish source-only fallback pages as real activities", () => {
+    const sourceOnlyTitles = liveCollectedActivities
+      .filter((activity) => activity.publicListingTier)
+      .map((activity) => activity.title)
+      .filter((title) => /线索$|线索页|活动安排$|文化活动$|排期$|专题展览$|活动讲座预约$|展览速递$/.test(title));
+
+    expect(sourceOnlyTitles).toEqual([]);
+  });
 });

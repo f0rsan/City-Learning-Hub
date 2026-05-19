@@ -1,5 +1,7 @@
 import { describe, expect, it } from "vitest";
 import {
+  collectFromLiveSource,
+  parseBookmallNewsList,
   parseDoubanEventLinks,
   parseEventbriteJsonLd,
   parseGenericEventLinks,
@@ -83,6 +85,95 @@ describe("liveSourceAdapters", () => {
         url: "https://example.com/events/robot-day.html"
       })
     );
+  });
+
+  it("uses anchor title attributes when the visible generic link text is empty", () => {
+    const html = `
+      <a href="/Activity/detail/100" title="深圳少年宫科普工作坊"><img src="/cover.jpg" /></a>
+      <a href="/Activity/detail/101" aria-label="深圳科学讲座"><span></span></a>
+    `;
+
+    const items = parseGenericEventLinks(html, {
+      id: "generic-title-source",
+      name: "测试来源",
+      url: "https://example.com/Activity/",
+      parser: "generic_event_links",
+      includeUrlPatterns: [/\/Activity\/detail\//],
+      includeTitlePatterns: [/深圳|科普|讲座/]
+    });
+
+    expect(items.map((item) => item.title)).toEqual(["深圳少年宫科普工作坊", "深圳科学讲座"]);
+  });
+
+  it("parses Shenzhen Book City news API records as cultural activity candidates", () => {
+    const json = JSON.stringify({
+      data: {
+        list: [
+          {
+            news_id: "2198",
+            new_title: "深圳出版集团与深圳大剧院会员联动活动",
+            tweetsUrl: ""
+          },
+          {
+            news_id: "1877",
+            new_title: "深圳书城名家读书分享会",
+            tweetsUrl: "https://mp.weixin.qq.com/s/bookcity"
+          },
+          {
+            id: "culture-1",
+            title: "深圳书城亲子阅读活动",
+            pc_link: "https://www.szbookmall.com/activity/culture-1"
+          }
+        ]
+      }
+    });
+
+    const items = parseBookmallNewsList(json, "shenzhen-book-city");
+
+    expect(items).toEqual([
+      expect.objectContaining({
+        sourceId: "shenzhen-book-city",
+        title: "深圳出版集团与深圳大剧院会员联动活动",
+        url: "https://www.szbookmall.com/news/2198"
+      }),
+      expect.objectContaining({
+        sourceId: "shenzhen-book-city",
+        title: "深圳书城名家读书分享会",
+        url: "https://mp.weixin.qq.com/s/bookcity"
+      }),
+      expect.objectContaining({
+        sourceId: "shenzhen-book-city",
+        title: "深圳书城亲子阅读活动",
+        url: "https://www.szbookmall.com/activity/culture-1"
+      })
+    ]);
+  });
+
+  it("uses fallback seed items when an official source is unreachable", async () => {
+    vi.stubGlobal("fetch", vi.fn().mockRejectedValue(new Error("TLS failed")));
+
+    const result = await collectFromLiveSource({
+      id: "science-fallback",
+      name: "深圳科学馆",
+      url: "https://www.szstm.com/",
+      parser: "generic_event_links",
+      fallbackItems: [
+        {
+          title: "深圳科学馆科普活动安排",
+          url: "https://szstm.com/mobile/html/gk/sj"
+        }
+      ]
+    });
+
+    expect(result.success).toBe(true);
+    expect(result.error).toBeUndefined();
+    expect(result.items).toEqual([
+      expect.objectContaining({
+        sourceId: "science-fallback",
+        title: "深圳科学馆科普活动安排",
+        isFallback: true
+      })
+    ]);
   });
 
   it("parses Shenzhen University Library JSON API events", () => {

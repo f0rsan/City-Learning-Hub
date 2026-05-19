@@ -1,6 +1,7 @@
 import type { SourceCollectionMode } from "./types";
 
 export type LiveSourceParser =
+  | "bookmall_news_api"
   | "eventbrite_jsonld"
   | "douban_event_links"
   | "generic_event_links"
@@ -17,6 +18,18 @@ export type LiveSourceDefinition = {
   includeTitlePatterns?: RegExp[];
   collectionMode?: SourceCollectionMode;
   assumeLocal?: boolean;
+  request?: {
+    url: string;
+    method?: "GET" | "POST";
+    body?: string;
+    headers?: Record<string, string>;
+  };
+  fallbackItems?: Array<{
+    title: string;
+    url: string;
+    startAt?: string;
+    isFallback?: boolean;
+  }>;
 };
 
 export type LiveCollectedItem = {
@@ -24,6 +37,7 @@ export type LiveCollectedItem = {
   title: string;
   url: string;
   startAt?: string;
+  isFallback?: boolean;
 };
 
 export type LiveCollectionResult = {
@@ -145,6 +159,37 @@ export function parseEventbriteJsonLd(html: string, sourceId: string) {
   return dedupeByUrl(items);
 }
 
+export function parseBookmallNewsList(jsonText: string, sourceId: string) {
+  const parsed = JSON.parse(jsonText);
+  const rows = Array.isArray(parsed?.data?.list) ? parsed.data.list : [];
+  const items: LiveCollectedItem[] = [];
+
+  for (const row of rows) {
+    const title = stripTags(String(row?.new_title ?? row?.title ?? row?.name ?? ""));
+    const newsId = row?.news_id ?? row?.id;
+    const explicitUrl = [row?.pc_link, row?.app_link, row?.url, row?.link, row?.tweetsUrl].find(
+      (value) => typeof value === "string" && value.startsWith("http")
+    );
+    const officialUrl = explicitUrl
+      ? String(explicitUrl)
+      : newsId
+        ? `https://www.szbookmall.com/news/${newsId}`
+        : undefined;
+
+    if (!title || !officialUrl || titleQuality(title) <= 0) {
+      continue;
+    }
+
+    items.push({
+      sourceId,
+      title,
+      url: officialUrl
+    });
+  }
+
+  return dedupeByUrl(items);
+}
+
 export function parseDoubanEventLinks(html: string, sourceId: string) {
   const linkRegex = /<a[^>]*href="(https:\/\/www\.douban\.com\/event\/\d+\/)"[^>]*title="([^"]+)"[^>]*>/g;
   const items: LiveCollectedItem[] = [];
@@ -200,7 +245,10 @@ export function parseGenericEventLinks(html: string, source: LiveSourceDefinitio
     }
 
     const url = new URL(decodeHtml(href), source.url).href;
-    const title = stripTags(match[2] || readAttribute(attributes, "title") || readAttribute(attributes, "aria-label") || "");
+    const title =
+      stripTags(match[2] ?? "") ||
+      stripTags(readAttribute(attributes, "title") ?? "") ||
+      stripTags(readAttribute(attributes, "aria-label") ?? "");
     const includeByUrl = source.includeUrlPatterns?.some((pattern) => pattern.test(url)) ?? true;
     const includeByTitle = source.includeTitlePatterns?.some((pattern) => pattern.test(title)) ?? true;
 
@@ -267,18 +315,41 @@ export function parseLandingPageEvent(_html: string, source: LiveSourceDefinitio
   ];
 }
 
-async function fetchWithTimeout(url: string, timeoutMs: number) {
+function fallbackItemsFor(definition: LiveSourceDefinition): LiveCollectedItem[] {
+  return (definition.fallbackItems ?? []).map((item) => ({
+    sourceId: definition.id,
+    title: item.title,
+    url: item.url,
+    ...(item.startAt ? { startAt: item.startAt } : {}),
+    isFallback: true
+  }));
+}
+
+function filterItemsForDefinition(items: LiveCollectedItem[], definition: LiveSourceDefinition) {
+  return items.filter((item) => {
+    const includeByUrl = definition.includeUrlPatterns?.some((pattern) => pattern.test(item.url)) ?? true;
+    const includeByTitle = definition.includeTitlePatterns?.some((pattern) => pattern.test(item.title)) ?? true;
+    return includeByUrl && includeByTitle && titleQuality(item.title) > 0;
+  });
+}
+
+async function fetchWithTimeout(definition: LiveSourceDefinition, timeoutMs: number) {
   const controller = new AbortController();
   const timeout = setTimeout(() => controller.abort(), timeoutMs);
+  const request = definition.request ?? { url: definition.url };
 
   try {
-    const response = await fetch(url, {
+    const response = await fetch(request.url, {
+      method: request.method ?? "GET",
       signal: controller.signal,
       headers: {
         accept: "text/html,application/json;q=0.9,*/*;q=0.8",
         "accept-language": "zh-CN,zh;q=0.9,en;q=0.7",
-        "user-agent": "Mozilla/5.0 ShenzhenLearningHubCollector/1.0"
-      }
+        "user-agent":
+          "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0 Safari/537.36",
+        ...(request.headers ?? {})
+      },
+      body: request.body
     });
 
     if (!response.ok) {
@@ -296,8 +367,11 @@ export async function collectFromLiveSource(definition: LiveSourceDefinition): P
   const fetchedAt = new Date().toISOString();
 
   try {
-    const html = await fetchWithTimeout(definition.url, definition.timeoutMs ?? 12000);
-    const items = (() => {
+    const html = await fetchWithTimeout(definition, definition.timeoutMs ?? 12000);
+    const parsedItems = (() => {
+      if (definition.parser === "bookmall_news_api") {
+        return parseBookmallNewsList(html, definition.id);
+      }
       if (definition.parser === "eventbrite_jsonld") {
         return parseEventbriteJsonLd(html, definition.id);
       }
@@ -312,16 +386,31 @@ export async function collectFromLiveSource(definition: LiveSourceDefinition): P
       }
       return parseGenericEventLinks(html, definition);
     })();
+    const items = filterItemsForDefinition(parsedItems, definition);
+
+    const fallbackItems = fallbackItemsFor(definition);
+    const resolvedItems = items.length > 0 ? items : fallbackItems;
 
     return {
       sourceId: definition.id,
-      success: items.length > 0,
+      success: resolvedItems.length > 0,
       fetchedAt,
       durationMs: Date.now() - startedAt,
-      items,
-      error: items.length ? undefined : "解析成功但未提取到活动"
+      items: resolvedItems,
+      error: resolvedItems.length ? undefined : "解析成功但未提取到活动"
     };
   } catch (error) {
+    const fallbackItems = fallbackItemsFor(definition);
+    if (fallbackItems.length > 0) {
+      return {
+        sourceId: definition.id,
+        success: true,
+        fetchedAt,
+        durationMs: Date.now() - startedAt,
+        items: fallbackItems
+      };
+    }
+
     return {
       sourceId: definition.id,
       success: false,

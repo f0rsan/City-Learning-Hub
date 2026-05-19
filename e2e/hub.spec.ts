@@ -107,7 +107,7 @@ test("mobile home uses progressive disclosure for weekly list", async ({ page })
   await page.setViewportSize({ width: 390, height: 844 });
   await page.goto("/");
 
-  await expect(page.getByRole("button", { name: /展开其余 \d+ 条活动/ })).toBeVisible();
+  await expect(page.locator(".weekly-section").first().getByRole("button", { name: /展开其余 \d+ 条活动/ })).toBeVisible();
   await expect(page.getByText(hiddenMobileActivityTitle)).toHaveCount(0);
 });
 
