@@ -1,9 +1,9 @@
 {
-  "generatedAt": "2026-05-29T03:44:16.720Z",
+  "generatedAt": "2026-05-29T15:36:34.498Z",
   "rounds": 1,
   "concurrency": 3,
   "requiredSuccessfulSources": 10,
-  "successfulSources": 27,
+  "successfulSources": 29,
   "passedGate": true,
   "sources": [
     {
@@ -21,7 +21,7 @@
       "successRuns": 1,
       "failureRuns": 0,
       "successRate": 1,
-      "avgLatencyMs": 92,
+      "avgLatencyMs": 119,
       "avgItemsPerSuccess": 1,
       "totalItems": 1,
       "uniqueUrls": 1,
@@ -58,7 +58,7 @@
       "successRuns": 1,
       "failureRuns": 0,
       "successRate": 1,
-      "avgLatencyMs": 1329,
+      "avgLatencyMs": 1040,
       "avgItemsPerSuccess": 10,
       "totalItems": 10,
       "uniqueUrls": 10,
@@ -114,23 +114,24 @@
       "successRuns": 1,
       "failureRuns": 0,
       "successRate": 1,
-      "avgLatencyMs": 793,
+      "avgLatencyMs": 1386,
       "avgItemsPerSuccess": 1,
       "totalItems": 1,
       "uniqueUrls": 1,
       "uniqueTitles": 1,
       "uniquenessRatio": 1,
       "titleUniquenessRatio": 1,
-      "localRelevanceRatio": 0,
-      "fallbackRatio": 0,
-      "sourceQualityScore": 0.705,
+      "localRelevanceRatio": 1,
+      "fallbackRatio": 1,
+      "sourceQualityScore": 0.603,
       "recommendedTrustLevel": "medium",
-      "recommendedSignalWeight": 1.01,
+      "recommendedSignalWeight": 0.9,
       "sampleItems": [
         {
           "sourceId": "tech-community",
-          "title": "Chicago at Work: Robotics & Physical AI in Industry",
-          "url": "https://lu.ma/rv95k3pg"
+          "title": "Luma 深圳线索页",
+          "url": "https://lu.ma/discover?location=Shenzhen",
+          "isFallback": true
         }
       ]
     },
@@ -150,7 +151,7 @@
       "successRuns": 1,
       "failureRuns": 0,
       "successRate": 1,
-      "avgLatencyMs": 1056,
+      "avgLatencyMs": 1325,
       "avgItemsPerSuccess": 42,
       "totalItems": 42,
       "uniqueUrls": 42,
@@ -205,48 +206,24 @@
       "successRuns": 1,
       "failureRuns": 0,
       "successRate": 1,
-      "avgLatencyMs": 1001,
-      "avgItemsPerSuccess": 16,
-      "totalItems": 16,
-      "uniqueUrls": 16,
-      "uniqueTitles": 16,
+      "avgLatencyMs": 219,
+      "avgItemsPerSuccess": 1,
+      "totalItems": 1,
+      "uniqueUrls": 1,
+      "uniqueTitles": 1,
       "uniquenessRatio": 1,
       "titleUniquenessRatio": 1,
-      "localRelevanceRatio": 0,
-      "fallbackRatio": 0,
-      "sourceQualityScore": 0.78,
+      "localRelevanceRatio": 1,
+      "fallbackRatio": 1,
+      "sourceQualityScore": 0.603,
       "recommendedTrustLevel": "medium",
-      "recommendedSignalWeight": 1.06,
+      "recommendedSignalWeight": 0.9,
       "sampleItems": [
         {
           "sourceId": "eventbrite-shenzhen",
-          "title": "MNYY Cantopop Party​",
-          "url": "https://www.eventbrite.hk/e/mnyy-cantopop-party-tickets-1989354409591",
-          "startAt": "2026-05-29"
-        },
-        {
-          "sourceId": "eventbrite-shenzhen",
-          "title": "Victoria Wines Grand Tasting",
-          "url": "https://www.eventbrite.hk/e/victoria-wines-grand-tasting-tickets-1986290839370",
-          "startAt": "2026-05-29"
-        },
-        {
-          "sourceId": "eventbrite-shenzhen",
-          "title": "永恆音樂事工籌款音樂會2026",
-          "url": "https://www.eventbrite.hk/e/2026-tickets-1985979445984",
-          "startAt": "2026-05-30"
-        },
-        {
-          "sourceId": "eventbrite-shenzhen",
-          "title": "AIA Vitality Hub |Sports Foundation",
-          "url": "https://www.eventbrite.hk/e/aia-vitality-hub-sports-foundation-tickets-1989361509828",
-          "startAt": "2026-06-03"
-        },
-        {
-          "sourceId": "eventbrite-shenzhen",
-          "title": "Opening Ceremony of PolyU Design Show 2026",
-          "url": "https://www.eventbrite.hk/e/opening-ceremony-of-polyu-design-show-2026-tickets-1985976970580",
-          "startAt": "2026-06-05"
+          "title": "Eventbrite 深圳线索页",
+          "url": "https://www.eventbrite.com/d/china--shenzhen/events/",
+          "isFallback": true
         }
       ]
     },
@@ -266,24 +243,19 @@
       "successRuns": 1,
       "failureRuns": 0,
       "successRate": 1,
-      "avgLatencyMs": 3105,
-      "avgItemsPerSuccess": 82,
-      "totalItems": 82,
-      "uniqueUrls": 82,
-      "uniqueTitles": 82,
+      "avgLatencyMs": 4779,
+      "avgItemsPerSuccess": 80,
+      "totalItems": 80,
+      "uniqueUrls": 80,
+      "uniqueTitles": 80,
       "uniquenessRatio": 1,
       "titleUniquenessRatio": 1,
       "localRelevanceRatio": 1,
       "fallbackRatio": 0,
-      "sourceQualityScore": 1,
+      "sourceQualityScore": 0.985,
       "recommendedTrustLevel": "high",
-      "recommendedSignalWeight": 1.4,
+      "recommendedSignalWeight": 1.39,
       "sampleItems": [
-        {
-          "sourceId": "douban-shenzhen",
-          "title": "《寻找黎明：异星》行浸式全感VR大空间电影",
-          "url": "https://www.douban.com/event/37536565/"
-        },
         {
           "sourceId": "douban-shenzhen",
           "title": "《枫丹乐影》张鼎萨克斯独奏音乐会",
@@ -296,13 +268,18 @@
         },
         {
           "sourceId": "douban-shenzhen",
-          "title": "《时空谜局》探秘恐龙纪元·沉浸式VR穿越",
-          "url": "https://www.douban.com/event/37536585/"
+          "title": "张培力：仅存的诗意",
+          "url": "https://www.douban.com/event/37700473/"
         },
         {
           "sourceId": "douban-shenzhen",
           "title": "金声合唱团“文人情致” 第5季-诗词散文合唱专场音乐会",
           "url": "https://www.douban.com/event/37840435/"
+        },
+        {
+          "sourceId": "douban-shenzhen",
+          "title": "度假太阳系 太空探索乐园",
+          "url": "https://www.douban.com/event/37576816/"
         }
       ]
     },
@@ -321,43 +298,43 @@
       "successRuns": 1,
       "failureRuns": 0,
       "successRate": 1,
-      "avgLatencyMs": 1532,
-      "avgItemsPerSuccess": 39,
-      "totalItems": 39,
-      "uniqueUrls": 39,
-      "uniqueTitles": 39,
+      "avgLatencyMs": 1244,
+      "avgItemsPerSuccess": 40,
+      "totalItems": 40,
+      "uniqueUrls": 40,
+      "uniqueTitles": 40,
       "uniquenessRatio": 1,
       "titleUniquenessRatio": 1,
-      "localRelevanceRatio": 0.051,
+      "localRelevanceRatio": 0.025,
       "fallbackRatio": 0,
-      "sourceQualityScore": 0.81,
+      "sourceQualityScore": 0.805,
       "recommendedTrustLevel": "medium",
       "recommendedSignalWeight": 1.08,
       "sampleItems": [
         {
           "sourceId": "lianpu-tech-events",
-          "title": "AI Nova 点火之夜",
-          "url": "https://lianpu.com/event/ai-nova-dian-huo-zhi-ye"
-        },
-        {
-          "sourceId": "lianpu-tech-events",
-          "title": "Social Mixer in ShenZhen | AI 硬件专场",
-          "url": "https://lianpu.com/event/social-mixer-in-shenzhen-ai-ying-jian-zhuan-chang"
-        },
-        {
-          "sourceId": "lianpu-tech-events",
-          "title": "成都周五 AI 夜话 · 开放麦线下沙龙",
-          "url": "https://lianpu.com/event/cheng-du-zhou-wu-ai-ye-hua-kai-fang-mai-xian-xia-sha-long"
-        },
-        {
-          "sourceId": "lianpu-tech-events",
-          "title": "从计划到进化：AI 时代的领导力革命",
-          "url": "https://lianpu.com/event/cong-ji-hua-dao-jin-hua-ai-shi-dai-de-ling-dao-li-ge-ming"
-        },
-        {
-          "sourceId": "lianpu-tech-events",
           "title": "智启新章——首届 OPC 论坛",
           "url": "https://lianpu.com/event/zhi-qi-xin-zhang-shou-jie-opc-lun-tan"
+        },
+        {
+          "sourceId": "lianpu-tech-events",
+          "title": "AI 驱动下的 APP 升级与创新分享会",
+          "url": "https://lianpu.com/event/ai-qu-dong-xia-de-app-sheng-ji-yu-chuang-xin-fen-xiang-hui"
+        },
+        {
+          "sourceId": "lianpu-tech-events",
+          "title": "Data Meets AI 可观测性实战",
+          "url": "https://lianpu.com/event/data-meets-ai-ke-guan-ce-xing-shi-zhan"
+        },
+        {
+          "sourceId": "lianpu-tech-events",
+          "title": "复旦 MTT 科创圆桌智汇湾区：AI 产业化的关键跨越与技术转化实践",
+          "url": "https://lianpu.com/event/fu-dan-mtt-ke-chuang-yuan-zhuo-zhi-hui-wan-qu-ai-chan-ye-hua"
+        },
+        {
+          "sourceId": "lianpu-tech-events",
+          "title": "腾讯云社区 AI 公开课 | 杭州站",
+          "url": "https://lianpu.com/event/teng-xun-yun-she-qu-ai-gong-kai-ke-hang-zhou-zhan"
         }
       ]
     },
@@ -377,28 +354,28 @@
       "successRuns": 1,
       "failureRuns": 0,
       "successRate": 1,
-      "avgLatencyMs": 2259,
-      "avgItemsPerSuccess": 19,
-      "totalItems": 19,
-      "uniqueUrls": 19,
-      "uniqueTitles": 19,
+      "avgLatencyMs": 951,
+      "avgItemsPerSuccess": 20,
+      "totalItems": 20,
+      "uniqueUrls": 20,
+      "uniqueTitles": 20,
       "uniquenessRatio": 1,
       "titleUniquenessRatio": 1,
       "localRelevanceRatio": 1,
       "fallbackRatio": 0,
-      "sourceQualityScore": 0.995,
+      "sourceQualityScore": 1,
       "recommendedTrustLevel": "high",
       "recommendedSignalWeight": 1.4,
       "sampleItems": [
         {
           "sourceId": "huodongxing-shenzhen",
-          "title": "第1期•深圳体重管理健康沙龙",
-          "url": "https://www.huodongxing.com/event/4862626467200"
+          "title": "深圳相亲会 | 6月7号深圳南山【一年内诚意结婚专场】高品质相亲交友活动",
+          "url": "https://www.huodongxing.com/event/2855199687212"
         },
         {
           "sourceId": "huodongxing-shenzhen",
-          "title": "2026华南工博会机器人与自动化展览会 | 具身智能 · 人工智能 · 机器视觉",
-          "url": "https://www.huodongxing.com/event/8854844533200"
+          "title": "【深圳活动预告】虾马对决·智驭智能体｜火山引擎ArkClaw深度实战沙龙",
+          "url": "https://www.huodongxing.com/event/8862509650000"
         },
         {
           "sourceId": "huodongxing-shenzhen",
@@ -412,8 +389,8 @@
         },
         {
           "sourceId": "huodongxing-shenzhen",
-          "title": "2026华南国际机器人展【华南工博会】",
-          "url": "https://www.huodongxing.com/event/1855440861111"
+          "title": "AI驱动下的APP升级与创新分享会",
+          "url": "https://www.huodongxing.com/event/9859631487500"
         }
       ]
     },
@@ -433,33 +410,23 @@
       "successRuns": 1,
       "failureRuns": 0,
       "successRate": 1,
-      "avgLatencyMs": 1204,
-      "avgItemsPerSuccess": 8,
-      "totalItems": 8,
-      "uniqueUrls": 8,
-      "uniqueTitles": 8,
+      "avgLatencyMs": 1302,
+      "avgItemsPerSuccess": 12,
+      "totalItems": 12,
+      "uniqueUrls": 12,
+      "uniqueTitles": 12,
       "uniquenessRatio": 1,
       "titleUniquenessRatio": 1,
-      "localRelevanceRatio": 0.375,
+      "localRelevanceRatio": 0.167,
       "fallbackRatio": 0,
-      "sourceQualityScore": 0.815,
+      "sourceQualityScore": 0.793,
       "recommendedTrustLevel": "medium",
-      "recommendedSignalWeight": 1.08,
+      "recommendedSignalWeight": 1.07,
       "sampleItems": [
         {
           "sourceId": "meetup-shenzhen",
-          "title": "🌎 (Online/Free) Free English Conversation Club with global people Every Sun, Mon, Tue, Wed, Thu, Fri, Sat · May 29 · 6:00 PM ICT · Online by Free English Speaking Practice BKK ฝึกพูดภาษาอังกฤษออนไลน์ฟร 4.4 13 attendees",
-          "url": "https://www.meetup.com/meetup-group-txqscvrf/events/314715052/"
-        },
-        {
-          "sourceId": "meetup-shenzhen",
-          "title": "WhatsApp group for event updates 認識國際朋友 Sat, Jun 6 · 8:00 PM CST by Friend to Friend hangout 4.8 1184 attendees",
+          "title": "WhatsApp group for event updates 認識國際朋友 Sat, Jun 6 · 8:00 PM CST by Friend to Friend hangout 4.8 1190 attendees",
           "url": "https://www.meetup.com/friend-to-friend-hangout/events/311899395/"
-        },
-        {
-          "sourceId": "meetup-shenzhen",
-          "title": "Waitlist 🛖深圳龍華區觀瀾古墟導賞一日遊🇨🇳 Sat, May 30 · 10:30 AM CST by Hong Kong Activities ❎ Heritage 港活動 ❎ 港遺蹟 4.5 17 attendees",
-          "url": "https://www.meetup.com/historic-site-tour-%E6%B8%AF%E9%81%BA%E8%B9%9F-%E6%8E%A2%E7%B4%A2-%E5%B0%88%E9%A1%8C%E5%82%BE%E8%AB%87%E7%BE%A4%E7%B5%84-shenzhen-hiking/events/314764243/"
         },
         {
           "sourceId": "meetup-shenzhen",
@@ -468,7 +435,17 @@
         },
         {
           "sourceId": "meetup-shenzhen",
-          "title": "Hike: Wong Shek Pier to Sai Wan Pavilion Sat, Jun 13 · 9:30 AM CST by Longitude & Latitude 4.9 10 attendees",
+          "title": "Waitlist 🛖深圳龍華區觀瀾古墟導賞一日遊🇨🇳 Sat, May 30 · 10:30 AM CST by Hong Kong Activities ❎ Heritage 港活動 ❎ 港遺蹟 4.5 17 attendees",
+          "url": "https://www.meetup.com/historic-site-tour-%E6%B8%AF%E9%81%BA%E8%B9%9F-%E6%8E%A2%E7%B4%A2-%E5%B0%88%E9%A1%8C%E5%82%BE%E8%AB%87%E7%BE%A4%E7%B5%84-shenzhen-hiking/events/314764243/"
+        },
+        {
+          "sourceId": "meetup-shenzhen",
+          "title": "Waitlist 🌎 (Online/Free) Free English Conversation Club with global people Every Sun, Mon, Tue, Wed, Thu, Fri, Sat · May 30 · 6:00 PM ICT · Online by Free English Speaking Practice BKK ฝึกพูดภาษาอังกฤษออนไลน์ฟร 4.4 25 attendees",
+          "url": "https://www.meetup.com/meetup-group-txqscvrf/events/314715053/"
+        },
+        {
+          "sourceId": "meetup-shenzhen",
+          "title": "9 seats left Hike: Wong Shek Pier to Sai Wan Pavilion Sat, Jun 13 · 9:30 AM CST by Longitude & Latitude 4.9 11 attendees",
           "url": "https://www.meetup.com/longitude-latitude/events/314874421/"
         }
       ]
@@ -489,7 +466,7 @@
       "successRuns": 1,
       "failureRuns": 0,
       "successRate": 1,
-      "avgLatencyMs": 3237,
+      "avgLatencyMs": 2973,
       "avgItemsPerSuccess": 15,
       "totalItems": 15,
       "uniqueUrls": 15,
@@ -545,7 +522,7 @@
       "successRuns": 0,
       "failureRuns": 1,
       "successRate": 0,
-      "avgLatencyMs": 10486,
+      "avgLatencyMs": 10186,
       "avgItemsPerSuccess": 0,
       "totalItems": 0,
       "uniqueUrls": 0,
@@ -575,7 +552,7 @@
       "successRuns": 1,
       "failureRuns": 0,
       "successRate": 1,
-      "avgLatencyMs": 3606,
+      "avgLatencyMs": 8405,
       "avgItemsPerSuccess": 50,
       "totalItems": 50,
       "uniqueUrls": 50,
@@ -584,9 +561,9 @@
       "titleUniquenessRatio": 1,
       "localRelevanceRatio": 1,
       "fallbackRatio": 0,
-      "sourceQualityScore": 1,
+      "sourceQualityScore": 0.985,
       "recommendedTrustLevel": "high",
-      "recommendedSignalWeight": 1.4,
+      "recommendedSignalWeight": 1.39,
       "sampleItems": [
         {
           "sourceId": "szu-library-events",
@@ -636,7 +613,7 @@
       "successRuns": 1,
       "failureRuns": 0,
       "successRate": 1,
-      "avgLatencyMs": 1048,
+      "avgLatencyMs": 1209,
       "avgItemsPerSuccess": 8,
       "totalItems": 8,
       "uniqueUrls": 8,
@@ -692,7 +669,7 @@
       "successRuns": 1,
       "failureRuns": 0,
       "successRate": 1,
-      "avgLatencyMs": 2330,
+      "avgLatencyMs": 4760,
       "avgItemsPerSuccess": 33,
       "totalItems": 33,
       "uniqueUrls": 33,
@@ -701,9 +678,9 @@
       "titleUniquenessRatio": 1,
       "localRelevanceRatio": 1,
       "fallbackRatio": 0,
-      "sourceQualityScore": 1,
+      "sourceQualityScore": 0.985,
       "recommendedTrustLevel": "high",
-      "recommendedSignalWeight": 1.4,
+      "recommendedSignalWeight": 1.39,
       "sampleItems": [
         {
           "sourceId": "szwen-cultural-events",
@@ -748,7 +725,7 @@
       "successRuns": 1,
       "failureRuns": 0,
       "successRate": 1,
-      "avgLatencyMs": 2123,
+      "avgLatencyMs": 1644,
       "avgItemsPerSuccess": 26,
       "totalItems": 26,
       "uniqueUrls": 26,
@@ -803,7 +780,7 @@
       "successRuns": 1,
       "failureRuns": 0,
       "successRate": 1,
-      "avgLatencyMs": 102,
+      "avgLatencyMs": 55,
       "avgItemsPerSuccess": 1,
       "totalItems": 1,
       "uniqueUrls": 1,
@@ -840,7 +817,7 @@
       "successRuns": 1,
       "failureRuns": 0,
       "successRate": 1,
-      "avgLatencyMs": 1752,
+      "avgLatencyMs": 1531,
       "avgItemsPerSuccess": 3,
       "totalItems": 3,
       "uniqueUrls": 3,
@@ -883,22 +860,48 @@
         "读书沙龙"
       ],
       "attempts": 1,
-      "successRuns": 0,
-      "failureRuns": 1,
-      "successRate": 0,
-      "avgLatencyMs": 12001,
-      "avgItemsPerSuccess": 0,
-      "totalItems": 0,
-      "uniqueUrls": 0,
-      "uniqueTitles": 0,
-      "uniquenessRatio": 0,
-      "titleUniquenessRatio": 0,
+      "successRuns": 1,
+      "failureRuns": 0,
+      "successRate": 1,
+      "avgLatencyMs": 6064,
+      "avgItemsPerSuccess": 11,
+      "totalItems": 11,
+      "uniqueUrls": 11,
+      "uniqueTitles": 11,
+      "uniquenessRatio": 1,
+      "titleUniquenessRatio": 1,
       "localRelevanceRatio": 1,
       "fallbackRatio": 0,
-      "sourceQualityScore": 0.215,
-      "recommendedTrustLevel": "unverified",
-      "recommendedSignalWeight": 0.81,
-      "sampleItems": []
+      "sourceQualityScore": 0.94,
+      "recommendedTrustLevel": "high",
+      "recommendedSignalWeight": 1.35,
+      "sampleItems": [
+        {
+          "sourceId": "university-town-library",
+          "title": "展览速递",
+          "url": "https://www.utszlib.edu.cn/exhibition/id-689.html?locale=zh_CN"
+        },
+        {
+          "sourceId": "university-town-library",
+          "title": "数据库培训",
+          "url": "https://www.utszlib.edu.cn/exhibition/id-690.html?locale=zh_CN"
+        },
+        {
+          "sourceId": "university-town-library",
+          "title": "预约培训",
+          "url": "https://www.utszlib.edu.cn/newStudAppointment/id-988.html?locale=zh_CN"
+        },
+        {
+          "sourceId": "university-town-library",
+          "title": "迎新活动",
+          "url": "https://www.utszlib.edu.cn/page/id-992.html?locale=zh_CN"
+        },
+        {
+          "sourceId": "university-town-library",
+          "title": "2026/03/25 “全城联动 让书回家”活动",
+          "url": "https://www.utszlib.edu.cn/article/view/id-20841.html?locale=zh_CN"
+        }
+      ]
     },
     {
       "sourceId": "shenzhen-redcube-events",
@@ -916,7 +919,7 @@
       "successRuns": 1,
       "failureRuns": 0,
       "successRate": 1,
-      "avgLatencyMs": 795,
+      "avgLatencyMs": 684,
       "avgItemsPerSuccess": 1,
       "totalItems": 1,
       "uniqueUrls": 1,
@@ -953,7 +956,7 @@
       "successRuns": 1,
       "failureRuns": 0,
       "successRate": 1,
-      "avgLatencyMs": 2661,
+      "avgLatencyMs": 3372,
       "avgItemsPerSuccess": 13,
       "totalItems": 13,
       "uniqueUrls": 13,
@@ -1006,22 +1009,28 @@
         "宝安"
       ],
       "attempts": 1,
-      "successRuns": 0,
-      "failureRuns": 1,
-      "successRate": 0,
-      "avgLatencyMs": 10142,
-      "avgItemsPerSuccess": 0,
-      "totalItems": 0,
-      "uniqueUrls": 0,
-      "uniqueTitles": 0,
-      "uniquenessRatio": 0,
-      "titleUniquenessRatio": 0,
+      "successRuns": 1,
+      "failureRuns": 0,
+      "successRate": 1,
+      "avgLatencyMs": 1079,
+      "avgItemsPerSuccess": 1,
+      "totalItems": 1,
+      "uniqueUrls": 1,
+      "uniqueTitles": 1,
+      "uniquenessRatio": 1,
+      "titleUniquenessRatio": 1,
       "localRelevanceRatio": 1,
       "fallbackRatio": 0,
-      "sourceQualityScore": 0.215,
-      "recommendedTrustLevel": "unverified",
-      "recommendedSignalWeight": 0.81,
-      "sampleItems": []
+      "sourceQualityScore": 0.905,
+      "recommendedTrustLevel": "high",
+      "recommendedSignalWeight": 1.33,
+      "sampleItems": [
+        {
+          "sourceId": "shenzhen-world-schedule",
+          "title": "深圳国际会展中心排期",
+          "url": "https://www.shenzhen-world.com/scheduling/index.html"
+        }
+      ]
     },
     {
       "sourceId": "szcec-futian-schedule",
@@ -1039,7 +1048,7 @@
       "successRuns": 1,
       "failureRuns": 0,
       "successRate": 1,
-      "avgLatencyMs": 1046,
+      "avgLatencyMs": 1991,
       "avgItemsPerSuccess": 42,
       "totalItems": 42,
       "uniqueUrls": 42,
@@ -1095,7 +1104,7 @@
       "successRuns": 1,
       "failureRuns": 0,
       "successRate": 1,
-      "avgLatencyMs": 1222,
+      "avgLatencyMs": 1279,
       "avgItemsPerSuccess": 1,
       "totalItems": 1,
       "uniqueUrls": 1,
@@ -1132,7 +1141,7 @@
       "successRuns": 1,
       "failureRuns": 0,
       "successRate": 1,
-      "avgLatencyMs": 2967,
+      "avgLatencyMs": 2971,
       "avgItemsPerSuccess": 1,
       "totalItems": 1,
       "uniqueUrls": 1,
@@ -1169,7 +1178,7 @@
       "successRuns": 1,
       "failureRuns": 0,
       "successRate": 1,
-      "avgLatencyMs": 1087,
+      "avgLatencyMs": 1041,
       "avgItemsPerSuccess": 1,
       "totalItems": 1,
       "uniqueUrls": 1,
@@ -1206,23 +1215,24 @@
       "successRuns": 1,
       "failureRuns": 0,
       "successRate": 1,
-      "avgLatencyMs": 896,
+      "avgLatencyMs": 970,
       "avgItemsPerSuccess": 1,
       "totalItems": 1,
       "uniqueUrls": 1,
       "uniqueTitles": 1,
       "uniquenessRatio": 1,
       "titleUniquenessRatio": 1,
-      "localRelevanceRatio": 0,
-      "fallbackRatio": 0,
-      "sourceQualityScore": 0.705,
+      "localRelevanceRatio": 1,
+      "fallbackRatio": 1,
+      "sourceQualityScore": 0.603,
       "recommendedTrustLevel": "medium",
-      "recommendedSignalWeight": 1.01,
+      "recommendedSignalWeight": 0.9,
       "sampleItems": [
         {
           "sourceId": "luma-shenzhen",
-          "title": "Chicago at Work: Robotics & Physical AI in Industry",
-          "url": "https://lu.ma/rv95k3pg"
+          "title": "Luma 深圳线索页",
+          "url": "https://lu.ma/discover?location=Shenzhen",
+          "isFallback": true
         }
       ]
     },
@@ -1242,7 +1252,7 @@
       "successRuns": 1,
       "failureRuns": 0,
       "successRate": 1,
-      "avgLatencyMs": 1208,
+      "avgLatencyMs": 2285,
       "avgItemsPerSuccess": 1,
       "totalItems": 1,
       "uniqueUrls": 1,
@@ -1276,7 +1286,7 @@
       "successRuns": 1,
       "failureRuns": 0,
       "successRate": 1,
-      "avgLatencyMs": 1143,
+      "avgLatencyMs": 1745,
       "avgItemsPerSuccess": 1,
       "totalItems": 1,
       "uniqueUrls": 1,
@@ -1311,7 +1321,7 @@
       "successRuns": 1,
       "failureRuns": 0,
       "successRate": 1,
-      "avgLatencyMs": 1309,
+      "avgLatencyMs": 1336,
       "avgItemsPerSuccess": 1,
       "totalItems": 1,
       "uniqueUrls": 1,
@@ -1347,7 +1357,7 @@
       "successRuns": 1,
       "failureRuns": 0,
       "successRate": 1,
-      "avgLatencyMs": 2119,
+      "avgLatencyMs": 2223,
       "avgItemsPerSuccess": 1,
       "totalItems": 1,
       "uniqueUrls": 1,
@@ -1374,19 +1384,7 @@
       "sourceId": "luohu-library-events",
       "sourceName": "罗湖图书馆活动速递",
       "error": "fetch failed",
-      "durationMs": 10486
-    },
-    {
-      "sourceId": "university-town-library",
-      "sourceName": "深圳大学城图书馆",
-      "error": "This operation was aborted",
-      "durationMs": 12001
-    },
-    {
-      "sourceId": "shenzhen-world-schedule",
-      "sourceName": "深圳国际会展中心排期",
-      "error": "fetch failed",
-      "durationMs": 10142
+      "durationMs": 10186
     }
   ]
 }
