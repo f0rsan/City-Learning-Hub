@@ -16,7 +16,7 @@ const familyActivitySlug = familyActivity.slug;
 const encodedFamilyActivitySlug = encodeURIComponent(familyActivitySlug);
 const hiddenMobileActivityTitle = "E-IOT 嵌入式与物联网展";
 
-test("home page guides users into family and adult discovery", async ({ page }, testInfo) => {
+test("home page guides users into family and adult discovery", async ({ page }) => {
   await page.goto("/");
 
   await expect(page.getByRole("heading", { name: "深圳本周值得去" })).toBeVisible();
@@ -24,9 +24,6 @@ test("home page guides users into family and adult discovery", async ({ page }, 
   await expect(page.getByRole("link", { name: /带孩子去学习/ })).toBeVisible();
   await expect(page.getByRole("link", { name: /成人学习交流/ })).toBeVisible();
   await expect(page.getByTitle(/来源：/).first()).toBeVisible();
-  if (testInfo.project.name !== "mobile") {
-    await expect(page.getByRole("img", { name: "AI服务器先进制造技术创新系列论坛封面" })).toBeVisible();
-  }
   await expect(page.getByText(/强推荐|值得考虑|谨慎选择|不建议前往/).first()).toBeVisible();
   await expect(page.getByText(/高可靠|可参考|待核对/).first()).toBeVisible();
 

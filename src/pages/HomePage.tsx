@@ -9,12 +9,11 @@ export default function HomePage() {
   const reference = getReferenceActivities(publicActivities);
 
   return (
-    <main>
-      <section className="hero compact-hero">
+    <main className="hub-main">
+      <section className="hero compact-hero feed-hero">
         <div className="hero-copy">
           <p className="eyebrow">深圳学习活动</p>
           <h1>深圳本周值得去</h1>
-          <p>给家长和成人看的活动清单：先看价值、风险和可靠性。</p>
           <div className="hero-signal-row" aria-label="本周信息概览">
             <span>{featured.length} 条精选</span>
             <span>{reference.length} 条可参考</span>
@@ -23,21 +22,34 @@ export default function HomePage() {
         </div>
       </section>
 
-      <WeeklySection
-        title="本周精选"
-        subtitle="按时间排列，先看判断，再进详情。"
-        activities={featured}
-      />
+      <section className="hub-board" aria-label="深圳学习活动信息流">
+        <div className="feed-column">
+          <WeeklySection
+            title="本周精选"
+            subtitle="确定性更强，先看判断。"
+            activities={featured}
+          />
 
-      <WeeklySection
-        title="更多可参考活动"
-        subtitle="系统筛过，适合继续查看；出发前再核对时间和报名。"
-        activities={reference}
-      />
+          <WeeklySection
+            title="更多可参考活动"
+            subtitle="系统筛过，出发前再核对。"
+            activities={reference}
+          />
+        </div>
 
-      <section className="audience-grid secondary-audience-grid" aria-label="选择入口">
-        <AudienceEntry type="family" />
-        <AudienceEntry type="adult" />
+        <aside className="feed-rail" aria-label="快速入口">
+          <div className="rail-panel">
+            <strong>快速选择</strong>
+            <div className="audience-grid secondary-audience-grid" aria-label="选择入口">
+              <AudienceEntry type="family" />
+              <AudienceEntry type="adult" />
+            </div>
+          </div>
+          <div className="rail-panel rail-note">
+            <strong>阅读顺序</strong>
+            <p>先看状态和判断，再看时间地点，最后进详情核对依据。</p>
+          </div>
+        </aside>
       </section>
     </main>
   );

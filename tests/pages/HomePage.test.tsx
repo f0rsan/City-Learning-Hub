@@ -29,12 +29,13 @@ describe("HomePage", () => {
     renderRoute(<App />);
 
     expect(screen.getByText(familyActivity.title)).toBeInTheDocument();
-    expect(screen.getByRole("img", { name: "AI服务器先进制造技术创新系列论坛封面" })).toBeInTheDocument();
+    expect(screen.getAllByLabelText("活动时间和地点").length).toBeGreaterThan(0);
+    expect(screen.getAllByLabelText("活动基本信息").length).toBeGreaterThan(0);
     expect(screen.getAllByText(/看点/)[0]).toBeInTheDocument();
     expect(screen.getAllByText(/注意/)[0]).toBeInTheDocument();
     expect(screen.getAllByText(/强推荐|值得考虑|谨慎选择|不建议前往/)[0]).toBeInTheDocument();
     expect(screen.getAllByText(/高可靠|可参考|待核对/)[0]).toBeInTheDocument();
-    expect(screen.getByText(/按时间排列/)).toBeInTheDocument();
+    expect(screen.getByText(/确定性更强/)).toBeInTheDocument();
     expect(screen.getByRole("heading", { name: "更多可参考活动" })).toBeInTheDocument();
     expect(screen.getByText(/系统筛过/)).toBeInTheDocument();
   });
