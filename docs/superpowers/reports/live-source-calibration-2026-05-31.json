@@ -1,9 +1,9 @@
 {
-  "generatedAt": "2026-05-31T10:03:31.221Z",
+  "generatedAt": "2026-05-31T13:47:08.646Z",
   "rounds": 1,
   "concurrency": 3,
   "requiredSuccessfulSources": 10,
-  "successfulSources": 29,
+  "successfulSources": 28,
   "passedGate": true,
   "sources": [
     {
@@ -21,7 +21,7 @@
       "successRuns": 1,
       "failureRuns": 0,
       "successRate": 1,
-      "avgLatencyMs": 1882,
+      "avgLatencyMs": 86,
       "avgItemsPerSuccess": 1,
       "totalItems": 1,
       "uniqueUrls": 1,
@@ -58,7 +58,7 @@
       "successRuns": 1,
       "failureRuns": 0,
       "successRate": 1,
-      "avgLatencyMs": 223,
+      "avgLatencyMs": 896,
       "avgItemsPerSuccess": 10,
       "totalItems": 10,
       "uniqueUrls": 10,
@@ -114,7 +114,7 @@
       "successRuns": 1,
       "failureRuns": 0,
       "successRate": 1,
-      "avgLatencyMs": 2985,
+      "avgLatencyMs": 313,
       "avgItemsPerSuccess": 1,
       "totalItems": 1,
       "uniqueUrls": 1,
@@ -151,7 +151,7 @@
       "successRuns": 1,
       "failureRuns": 0,
       "successRate": 1,
-      "avgLatencyMs": 47,
+      "avgLatencyMs": 1436,
       "avgItemsPerSuccess": 42,
       "totalItems": 42,
       "uniqueUrls": 42,
@@ -206,7 +206,7 @@
       "successRuns": 1,
       "failureRuns": 0,
       "successRate": 1,
-      "avgLatencyMs": 2759,
+      "avgLatencyMs": 96,
       "avgItemsPerSuccess": 1,
       "totalItems": 1,
       "uniqueUrls": 1,
@@ -243,11 +243,11 @@
       "successRuns": 1,
       "failureRuns": 0,
       "successRate": 1,
-      "avgLatencyMs": 1309,
-      "avgItemsPerSuccess": 74,
-      "totalItems": 74,
-      "uniqueUrls": 74,
-      "uniqueTitles": 74,
+      "avgLatencyMs": 2158,
+      "avgItemsPerSuccess": 80,
+      "totalItems": 80,
+      "uniqueUrls": 80,
+      "uniqueTitles": 80,
       "uniquenessRatio": 1,
       "titleUniquenessRatio": 1,
       "localRelevanceRatio": 1,
@@ -278,8 +278,8 @@
         },
         {
           "sourceId": "douban-shenzhen",
-          "title": "《时空谜局》探秘恐龙纪元·沉浸式VR穿越",
-          "url": "https://www.douban.com/event/37536585/"
+          "title": "《源起华夏 月球冒险之旅》大型VR沉浸探索",
+          "url": "https://www.douban.com/event/37309455/"
         }
       ]
     },
@@ -298,7 +298,7 @@
       "successRuns": 1,
       "failureRuns": 0,
       "successRate": 1,
-      "avgLatencyMs": 184,
+      "avgLatencyMs": 1201,
       "avgItemsPerSuccess": 1,
       "totalItems": 1,
       "uniqueUrls": 1,
@@ -334,7 +334,7 @@
       "successRuns": 1,
       "failureRuns": 0,
       "successRate": 1,
-      "avgLatencyMs": 299,
+      "avgLatencyMs": 1050,
       "avgItemsPerSuccess": 19,
       "totalItems": 19,
       "uniqueUrls": 19,
@@ -349,18 +349,13 @@
       "sampleItems": [
         {
           "sourceId": "huodongxing-shenzhen",
-          "title": "深圳相亲会 |5月31号深圳南山【90后专场】高品质相亲交友活动",
-          "url": "https://www.huodongxing.com/event/3861227129312"
+          "title": "2026中国智能制造产业大会",
+          "url": "https://www.huodongxing.com/event/9856318455600"
         },
         {
           "sourceId": "huodongxing-shenzhen",
-          "title": "2026华南国际机器人展【华南工博会】",
-          "url": "https://www.huodongxing.com/event/1855440861111"
-        },
-        {
-          "sourceId": "huodongxing-shenzhen",
-          "title": "2026深圳激光与智能装备，光子技术博览会【华南工博会】",
-          "url": "https://www.huodongxing.com/event/6862143338400"
+          "title": "2026CMM电子制造自动化&资源展【华南工博会】",
+          "url": "https://www.huodongxing.com/event/4862137137200"
         },
         {
           "sourceId": "huodongxing-shenzhen",
@@ -371,6 +366,11 @@
           "sourceId": "huodongxing-shenzhen",
           "title": "GCS @Shenzhen 2026：渠道场观众门票",
           "url": "https://www.huodongxing.com/event/6852446710300"
+        },
+        {
+          "sourceId": "huodongxing-shenzhen",
+          "title": "2026华南国际机器人展【华南工博会】",
+          "url": "https://www.huodongxing.com/event/1855440861111"
         }
       ]
     },
@@ -390,28 +390,23 @@
       "successRuns": 1,
       "failureRuns": 0,
       "successRate": 1,
-      "avgLatencyMs": 2281,
-      "avgItemsPerSuccess": 3,
-      "totalItems": 3,
-      "uniqueUrls": 3,
-      "uniqueTitles": 3,
+      "avgLatencyMs": 1105,
+      "avgItemsPerSuccess": 2,
+      "totalItems": 2,
+      "uniqueUrls": 2,
+      "uniqueTitles": 2,
       "uniquenessRatio": 1,
       "titleUniquenessRatio": 1,
       "localRelevanceRatio": 1,
       "fallbackRatio": 0,
-      "sourceQualityScore": 0.915,
+      "sourceQualityScore": 0.91,
       "recommendedTrustLevel": "high",
-      "recommendedSignalWeight": 1.34,
+      "recommendedSignalWeight": 1.33,
       "sampleItems": [
         {
           "sourceId": "meetup-shenzhen",
           "title": "China & Beyond: Life & Trade (Shenzhen) Every two weeks on Sat · Jun 6 · 3:00 PM CST by China & Beyond: Life, Trade & Conversations 4 attendees",
           "url": "https://www.meetup.com/china-europe-business-life-exchange/events/314945432/"
-        },
-        {
-          "sourceId": "meetup-shenzhen",
-          "title": "Discuss about one topic and make life better Every Sun · May 31 · 7:00 PM CST by Better Life Meetup At Shenzhen North 1 attendee",
-          "url": "https://www.meetup.com/shenzhen-civic-center-english-corner/events/314747207/"
         },
         {
           "sourceId": "meetup-shenzhen",
@@ -436,7 +431,7 @@
       "successRuns": 1,
       "failureRuns": 0,
       "successRate": 1,
-      "avgLatencyMs": 387,
+      "avgLatencyMs": 2135,
       "avgItemsPerSuccess": 15,
       "totalItems": 15,
       "uniqueUrls": 15,
@@ -489,48 +484,22 @@
         "罗湖"
       ],
       "attempts": 1,
-      "successRuns": 1,
-      "failureRuns": 0,
-      "successRate": 1,
-      "avgLatencyMs": 318,
-      "avgItemsPerSuccess": 7,
-      "totalItems": 7,
-      "uniqueUrls": 7,
-      "uniqueTitles": 7,
-      "uniquenessRatio": 1,
-      "titleUniquenessRatio": 1,
+      "successRuns": 0,
+      "failureRuns": 1,
+      "successRate": 0,
+      "avgLatencyMs": 10288,
+      "avgItemsPerSuccess": 0,
+      "totalItems": 0,
+      "uniqueUrls": 0,
+      "uniqueTitles": 0,
+      "uniquenessRatio": 0,
+      "titleUniquenessRatio": 0,
       "localRelevanceRatio": 1,
       "fallbackRatio": 0,
-      "sourceQualityScore": 0.935,
-      "recommendedTrustLevel": "high",
-      "recommendedSignalWeight": 1.35,
-      "sampleItems": [
-        {
-          "sourceId": "luohu-library-events",
-          "title": "【绎说养生 云享罗图】骨质疏松的防治；用AI制作背景音乐 2026/03/26",
-          "url": "https://www.szlhlib.org.cn/information/20427"
-        },
-        {
-          "sourceId": "luohu-library-events",
-          "title": "【真人图书馆】幸福家庭 健康人生 2026/03/26",
-          "url": "https://www.szlhlib.org.cn/information/20426"
-        },
-        {
-          "sourceId": "luohu-library-events",
-          "title": "【涂涂故事列车】《星期三书店》；《今天我是一粒黄豆》 2026/03/26",
-          "url": "https://www.szlhlib.org.cn/information/20425"
-        },
-        {
-          "sourceId": "luohu-library-events",
-          "title": "【涂涂故事列车 创阅汇】《白雪公主和77个小矮人》；气象卫星模型制作 2026/03/01",
-          "url": "https://www.szlhlib.org.cn/information/20367"
-        },
-        {
-          "sourceId": "luohu-library-events",
-          "title": "【妇女节主题活动】音乐，最美的精神之声；水彩体验：绘花·她之约 2026/03/01",
-          "url": "https://www.szlhlib.org.cn/information/20366"
-        }
-      ]
+      "sourceQualityScore": 0.215,
+      "recommendedTrustLevel": "unverified",
+      "recommendedSignalWeight": 0.81,
+      "sampleItems": []
     },
     {
       "sourceId": "szu-library-events",
@@ -548,7 +517,7 @@
       "successRuns": 1,
       "failureRuns": 0,
       "successRate": 1,
-      "avgLatencyMs": 162,
+      "avgLatencyMs": 4008,
       "avgItemsPerSuccess": 50,
       "totalItems": 50,
       "uniqueUrls": 50,
@@ -557,9 +526,9 @@
       "titleUniquenessRatio": 1,
       "localRelevanceRatio": 1,
       "fallbackRatio": 0,
-      "sourceQualityScore": 1,
+      "sourceQualityScore": 0.985,
       "recommendedTrustLevel": "high",
-      "recommendedSignalWeight": 1.4,
+      "recommendedSignalWeight": 1.39,
       "sampleItems": [
         {
           "sourceId": "szu-library-events",
@@ -609,7 +578,7 @@
       "successRuns": 1,
       "failureRuns": 0,
       "successRate": 1,
-      "avgLatencyMs": 647,
+      "avgLatencyMs": 925,
       "avgItemsPerSuccess": 8,
       "totalItems": 8,
       "uniqueUrls": 8,
@@ -665,7 +634,7 @@
       "successRuns": 1,
       "failureRuns": 0,
       "successRate": 1,
-      "avgLatencyMs": 129,
+      "avgLatencyMs": 1788,
       "avgItemsPerSuccess": 33,
       "totalItems": 33,
       "uniqueUrls": 33,
@@ -721,7 +690,7 @@
       "successRuns": 1,
       "failureRuns": 0,
       "successRate": 1,
-      "avgLatencyMs": 87,
+      "avgLatencyMs": 1710,
       "avgItemsPerSuccess": 26,
       "totalItems": 26,
       "uniqueUrls": 26,
@@ -776,7 +745,7 @@
       "successRuns": 1,
       "failureRuns": 0,
       "successRate": 1,
-      "avgLatencyMs": 1816,
+      "avgLatencyMs": 146,
       "avgItemsPerSuccess": 1,
       "totalItems": 1,
       "uniqueUrls": 1,
@@ -813,7 +782,7 @@
       "successRuns": 1,
       "failureRuns": 0,
       "successRate": 1,
-      "avgLatencyMs": 349,
+      "avgLatencyMs": 1368,
       "avgItemsPerSuccess": 3,
       "totalItems": 3,
       "uniqueUrls": 3,
@@ -859,7 +828,7 @@
       "successRuns": 1,
       "failureRuns": 0,
       "successRate": 1,
-      "avgLatencyMs": 656,
+      "avgLatencyMs": 5655,
       "avgItemsPerSuccess": 9,
       "totalItems": 9,
       "uniqueUrls": 9,
@@ -868,9 +837,9 @@
       "titleUniquenessRatio": 1,
       "localRelevanceRatio": 1,
       "fallbackRatio": 0,
-      "sourceQualityScore": 0.945,
+      "sourceQualityScore": 0.93,
       "recommendedTrustLevel": "high",
-      "recommendedSignalWeight": 1.36,
+      "recommendedSignalWeight": 1.35,
       "sampleItems": [
         {
           "sourceId": "university-town-library",
@@ -915,7 +884,7 @@
       "successRuns": 1,
       "failureRuns": 0,
       "successRate": 1,
-      "avgLatencyMs": 45,
+      "avgLatencyMs": 653,
       "avgItemsPerSuccess": 1,
       "totalItems": 1,
       "uniqueUrls": 1,
@@ -952,7 +921,7 @@
       "successRuns": 1,
       "failureRuns": 0,
       "successRate": 1,
-      "avgLatencyMs": 548,
+      "avgLatencyMs": 6262,
       "avgItemsPerSuccess": 13,
       "totalItems": 13,
       "uniqueUrls": 13,
@@ -961,9 +930,9 @@
       "titleUniquenessRatio": 1,
       "localRelevanceRatio": 1,
       "fallbackRatio": 0,
-      "sourceQualityScore": 0.965,
+      "sourceQualityScore": 0.95,
       "recommendedTrustLevel": "high",
-      "recommendedSignalWeight": 1.37,
+      "recommendedSignalWeight": 1.36,
       "sampleItems": [
         {
           "sourceId": "shenzhen-youth-activity-center",
@@ -1008,7 +977,7 @@
       "successRuns": 1,
       "failureRuns": 0,
       "successRate": 1,
-      "avgLatencyMs": 58,
+      "avgLatencyMs": 2156,
       "avgItemsPerSuccess": 1,
       "totalItems": 1,
       "uniqueUrls": 1,
@@ -1044,7 +1013,7 @@
       "successRuns": 1,
       "failureRuns": 0,
       "successRate": 1,
-      "avgLatencyMs": 51,
+      "avgLatencyMs": 1660,
       "avgItemsPerSuccess": 42,
       "totalItems": 42,
       "uniqueUrls": 42,
@@ -1100,7 +1069,7 @@
       "successRuns": 1,
       "failureRuns": 0,
       "successRate": 1,
-      "avgLatencyMs": 274,
+      "avgLatencyMs": 981,
       "avgItemsPerSuccess": 1,
       "totalItems": 1,
       "uniqueUrls": 1,
@@ -1137,7 +1106,7 @@
       "successRuns": 1,
       "failureRuns": 0,
       "successRate": 1,
-      "avgLatencyMs": 550,
+      "avgLatencyMs": 2355,
       "avgItemsPerSuccess": 1,
       "totalItems": 1,
       "uniqueUrls": 1,
@@ -1174,7 +1143,7 @@
       "successRuns": 1,
       "failureRuns": 0,
       "successRate": 1,
-      "avgLatencyMs": 89,
+      "avgLatencyMs": 1003,
       "avgItemsPerSuccess": 1,
       "totalItems": 1,
       "uniqueUrls": 1,
@@ -1211,7 +1180,7 @@
       "successRuns": 1,
       "failureRuns": 0,
       "successRate": 1,
-      "avgLatencyMs": 2865,
+      "avgLatencyMs": 260,
       "avgItemsPerSuccess": 1,
       "totalItems": 1,
       "uniqueUrls": 1,
@@ -1248,7 +1217,7 @@
       "successRuns": 1,
       "failureRuns": 0,
       "successRate": 1,
-      "avgLatencyMs": 5846,
+      "avgLatencyMs": 1798,
       "avgItemsPerSuccess": 1,
       "totalItems": 1,
       "uniqueUrls": 1,
@@ -1257,9 +1226,9 @@
       "titleUniquenessRatio": 1,
       "localRelevanceRatio": 1,
       "fallbackRatio": 0,
-      "sourceQualityScore": 0.89,
+      "sourceQualityScore": 0.905,
       "recommendedTrustLevel": "high",
-      "recommendedSignalWeight": 1.32,
+      "recommendedSignalWeight": 1.33,
       "sampleItems": [
         {
           "sourceId": "hackquest-shenzhen-hackathons",
@@ -1282,7 +1251,7 @@
       "successRuns": 1,
       "failureRuns": 0,
       "successRate": 1,
-      "avgLatencyMs": 2479,
+      "avgLatencyMs": 1031,
       "avgItemsPerSuccess": 1,
       "totalItems": 1,
       "uniqueUrls": 1,
@@ -1318,7 +1287,7 @@
       "successRuns": 1,
       "failureRuns": 0,
       "successRate": 1,
-      "avgLatencyMs": 255,
+      "avgLatencyMs": 1648,
       "avgItemsPerSuccess": 1,
       "totalItems": 1,
       "uniqueUrls": 1,
@@ -1340,5 +1309,12 @@
       ]
     }
   ],
-  "failures": []
+  "failures": [
+    {
+      "sourceId": "luohu-library-events",
+      "sourceName": "罗湖图书馆活动速递",
+      "error": "fetch failed",
+      "durationMs": 10288
+    }
+  ]
 }
