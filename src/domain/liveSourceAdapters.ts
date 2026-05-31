@@ -16,6 +16,7 @@ export type LiveSourceDefinition = {
   timeoutMs?: number;
   includeUrlPatterns?: RegExp[];
   includeTitlePatterns?: RegExp[];
+  requireLocalSignal?: boolean;
   collectionMode?: SourceCollectionMode;
   assumeLocal?: boolean;
   request?: {
@@ -123,6 +124,8 @@ function titleQuality(title: string) {
 
   return score;
 }
+
+const localRelevancePattern = /深圳|Shenzhen|南山|福田|罗湖|宝安|龙岗|龙华|光明|坪山|盐田|前海|蛇口|深港|粤港澳/i;
 
 export function parseEventbriteJsonLd(html: string, sourceId: string) {
   const scriptRegex = /<script[^>]*type="application\/ld\+json"[^>]*>([\s\S]*?)<\/script>/gi;
@@ -251,8 +254,10 @@ export function parseGenericEventLinks(html: string, source: LiveSourceDefinitio
       stripTags(readAttribute(attributes, "aria-label") ?? "");
     const includeByUrl = source.includeUrlPatterns?.some((pattern) => pattern.test(url)) ?? true;
     const includeByTitle = source.includeTitlePatterns?.some((pattern) => pattern.test(title)) ?? true;
+    const includeByLocalSignal =
+      !source.requireLocalSignal || source.assumeLocal || localRelevancePattern.test(`${title} ${url}`);
 
-    if (!includeByUrl || !includeByTitle || titleQuality(title) <= 0) {
+    if (!includeByUrl || !includeByTitle || !includeByLocalSignal || titleQuality(title) <= 0) {
       continue;
     }
 
@@ -329,7 +334,9 @@ function filterItemsForDefinition(items: LiveCollectedItem[], definition: LiveSo
   return items.filter((item) => {
     const includeByUrl = definition.includeUrlPatterns?.some((pattern) => pattern.test(item.url)) ?? true;
     const includeByTitle = definition.includeTitlePatterns?.some((pattern) => pattern.test(item.title)) ?? true;
-    return includeByUrl && includeByTitle && titleQuality(item.title) > 0;
+    const includeByLocalSignal =
+      !definition.requireLocalSignal || definition.assumeLocal || localRelevancePattern.test(`${item.title} ${item.url}`);
+    return includeByUrl && includeByTitle && includeByLocalSignal && titleQuality(item.title) > 0;
   });
 }
 

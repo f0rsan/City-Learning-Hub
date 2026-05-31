@@ -152,7 +152,6 @@ describe("sourcePool health decay and recovery", () => {
         "luma-shenzhen",
         "hackquest-shenzhen-hackathons",
         "hackathonradar-shenzhen",
-        "sdcon-tech-conference",
         "shenzhen-science-museum",
         "shenzhen-redcube-events",
         "shenzhen-book-city",
@@ -169,7 +168,8 @@ describe("sourcePool health decay and recovery", () => {
         "wechat-public-accounts",
         "xiaohongshu-shenzhen-events",
         "bilibili-shenzhen-learning",
-        "weibo-shenzhen-events"
+        "weibo-shenzhen-events",
+        "sdcon-tech-conference"
       ])
     );
   });

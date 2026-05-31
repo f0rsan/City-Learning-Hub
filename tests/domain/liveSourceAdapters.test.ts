@@ -221,6 +221,27 @@ describe("liveSourceAdapters", () => {
     expect(items.map((item) => item.title)).toEqual(["深圳 AI 技术论坛", "2026年8月26日 物联网论坛"]);
   });
 
+  it("keeps broad discovery sources focused on Shenzhen-related items", () => {
+    const html = `
+      <a href="/events/la-ai">LA AI Founder Salon</a>
+      <a href="/events/hk-data">Hong Kong Data Meetup</a>
+      <a href="/events/shenzhen-ai">Shenzhen AI Workshop</a>
+      <a href="/events/gba-makers">粤港澳创客技术沙龙</a>
+    `;
+
+    const items = parseGenericEventLinks(html, {
+      id: "broad-discovery-source",
+      name: "广域发现来源",
+      url: "https://example.com/",
+      parser: "generic_event_links",
+      includeUrlPatterns: [/\/events\//],
+      includeTitlePatterns: [/AI|Data|Workshop|Meetup|技术|沙龙/],
+      requireLocalSignal: true
+    });
+
+    expect(items.map((item) => item.title)).toEqual(["Shenzhen AI Workshop", "粤港澳创客技术沙龙"]);
+  });
+
   it("turns a stable official landing page into one candidate item", () => {
     const items = parseLandingPageEvent("<title>E-IOT@2026 嵌入式与物联网展</title><p>2026年8月26日</p>", {
       id: "eiotexpo-shenzhen",

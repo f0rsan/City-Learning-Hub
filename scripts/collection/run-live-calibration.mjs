@@ -59,6 +59,7 @@ const liveSources = [
     parser: "generic_event_links",
     includeUrlPatterns: [/lu\.ma\/[a-z0-9]+/i],
     includeTitlePatterns: [/Shenzhen|深圳|Hackathon|Meetup|AI|Workshop|Salon|Tech|Founder|Developer/i],
+    requireLocalSignal: true,
     sourceFamily: "discovery",
     collectionMode: "candidate",
     confirmationPower: "supporting",
@@ -89,6 +90,7 @@ const liveSources = [
     name: "Eventbrite 深圳",
     url: "https://www.eventbrite.com/d/china--shenzhen/events/",
     parser: "eventbrite_jsonld",
+    requireLocalSignal: true,
     sourceFamily: "discovery",
     collectionMode: "candidate",
     confirmationPower: "supporting",
@@ -121,6 +123,7 @@ const liveSources = [
     parser: "generic_event_links",
     includeUrlPatterns: [/\/event\//],
     includeTitlePatterns: [/深圳|活动|讲座|沙龙|论坛|大会|AI|科技|工作坊|Hackathon/i],
+    requireLocalSignal: true,
     sourceFamily: "discovery",
     collectionMode: "candidate",
     confirmationPower: "supporting",
@@ -147,6 +150,8 @@ const liveSources = [
     url: "https://www.meetup.com/find/?location=cn--shenzhen&source=EVENTS",
     parser: "generic_event_links",
     includeUrlPatterns: [/meetup\.com\/.+\/events\/\d+/],
+    includeTitlePatterns: [/Shenzhen|深圳|Hackathon|Meetup|AI|Workshop|Salon|Tech|Founder|Developer/i],
+    requireLocalSignal: true,
     sourceFamily: "discovery",
     collectionMode: "candidate",
     confirmationPower: "supporting",
@@ -377,6 +382,7 @@ const liveSources = [
     parser: "generic_event_links",
     includeUrlPatterns: [/lu\.ma\/[a-z0-9]+/i],
     includeTitlePatterns: [/Shenzhen|深圳|Hackathon|Meetup|AI|Workshop|Salon|Tech|Founder|Developer/i],
+    requireLocalSignal: true,
     sourceFamily: "discovery",
     collectionMode: "candidate",
     confirmationPower: "supporting",
@@ -417,7 +423,7 @@ const liveSources = [
     url: "https://sdcon.com.cn/",
     parser: "landing_page_event",
     sourceFamily: "discovery",
-    collectionMode: "candidate",
+    collectionMode: "reputation",
     confirmationPower: "supporting",
     coverageTags: ["技术大会", "软件研发"],
     timeoutMs: 12000
@@ -746,7 +752,9 @@ function filterItemsForSource(items, source) {
   return items.filter((item) => {
     const includeByUrl = source.includeUrlPatterns?.some((pattern) => pattern.test(item.url)) ?? true;
     const includeByTitle = source.includeTitlePatterns?.some((pattern) => pattern.test(item.title)) ?? true;
-    return includeByUrl && includeByTitle && titleQuality(item.title) > 0;
+    const includeByLocalSignal =
+      !source.requireLocalSignal || source.assumeLocal || localRelevancePattern.test(`${item.title} ${item.url}`);
+    return includeByUrl && includeByTitle && includeByLocalSignal && titleQuality(item.title) > 0;
   });
 }
 
@@ -875,17 +883,18 @@ function recommendSignalWeight(score, localRelevanceRatio, fallbackRatio = 0) {
 }
 
 async function main() {
+  const activeLiveSources = liveSources.filter((source) => source.collectionMode !== "reputation");
   const tasks = [];
   for (let round = 0; round < rounds; round += 1) {
-    for (const source of liveSources) {
+    for (const source of activeLiveSources) {
       tasks.push(() => collectFromSource(source));
     }
   }
 
   const runs = await runBatches(tasks, concurrency);
-  const sourceMap = new Map(liveSources.map((item) => [item.id, item]));
+  const sourceMap = new Map(activeLiveSources.map((item) => [item.id, item]));
 
-  const summary = liveSources.map((source) => {
+  const summary = activeLiveSources.map((source) => {
     const items = runs.filter((run) => run.sourceId === source.id);
     const successRuns = items.filter((run) => run.success);
     const totalItems = successRuns.reduce((count, run) => count + run.items.length, 0);

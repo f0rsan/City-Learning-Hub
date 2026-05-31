@@ -60,6 +60,7 @@ const liveSourceDefinitions: Record<string, LiveSourceDefinition> = {
     parser: "generic_event_links",
     includeUrlPatterns: [/lu\.ma\/[a-z0-9]+/i],
     includeTitlePatterns: [/Shenzhen|深圳|Hackathon|Meetup|AI|Workshop|Salon|Tech|Founder|Developer/i],
+    requireLocalSignal: true,
     timeoutMs: 16000,
     collectionMode: "candidate",
     fallbackItems: [
@@ -83,6 +84,7 @@ const liveSourceDefinitions: Record<string, LiveSourceDefinition> = {
     name: "Eventbrite 深圳",
     url: "https://www.eventbrite.com/d/china--shenzhen/events/",
     parser: "eventbrite_jsonld",
+    requireLocalSignal: true,
     timeoutMs: 12000,
     collectionMode: "candidate",
     fallbackItems: [
@@ -107,6 +109,7 @@ const liveSourceDefinitions: Record<string, LiveSourceDefinition> = {
     parser: "generic_event_links",
     includeUrlPatterns: [/\/event\//],
     includeTitlePatterns: [/深圳|活动|讲座|沙龙|论坛|大会|AI|科技|工作坊|Hackathon/i],
+    requireLocalSignal: true,
     timeoutMs: 12000,
     collectionMode: "candidate"
   },
@@ -125,6 +128,8 @@ const liveSourceDefinitions: Record<string, LiveSourceDefinition> = {
     url: "https://www.meetup.com/find/?location=cn--shenzhen&source=EVENTS",
     parser: "generic_event_links",
     includeUrlPatterns: [/meetup\.com\/.+\/events\/\d+/],
+    includeTitlePatterns: [/Shenzhen|深圳|Hackathon|Meetup|AI|Workshop|Salon|Tech|Founder|Developer/i],
+    requireLocalSignal: true,
     timeoutMs: 15000,
     collectionMode: "candidate"
   },
@@ -289,6 +294,7 @@ const liveSourceDefinitions: Record<string, LiveSourceDefinition> = {
     parser: "generic_event_links",
     includeUrlPatterns: [/lu\.ma\/[a-z0-9]+/i],
     includeTitlePatterns: [/Shenzhen|深圳|Hackathon|Meetup|AI|Workshop|Salon|Tech|Founder|Developer/i],
+    requireLocalSignal: true,
     timeoutMs: 16000,
     collectionMode: "candidate",
     fallbackItems: [
@@ -320,7 +326,7 @@ const liveSourceDefinitions: Record<string, LiveSourceDefinition> = {
     url: "https://sdcon.com.cn/",
     parser: "landing_page_event",
     timeoutMs: 12000,
-    collectionMode: "candidate"
+    collectionMode: "reputation"
   },
   "iotexpo-shenzhen": {
     id: "iotexpo-shenzhen",
