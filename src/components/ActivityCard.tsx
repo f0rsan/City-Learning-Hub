@@ -1,4 +1,4 @@
-import { ArrowRight, CalendarClock, Database, MapPin, Ticket } from "lucide-react";
+import { ArrowRight, CalendarClock, Database } from "lucide-react";
 import { Link } from "react-router-dom";
 import { evaluateActivity } from "../domain/evaluationRules";
 import { getSourcePool } from "../domain/sourcePool";
@@ -14,8 +14,9 @@ export default function ActivityCard({ activity }: ActivityCardProps) {
   const sources = getSourcePool();
   const evaluation = activity.evaluation ?? evaluateActivity(activity, { sources });
   const source = sources.find((item) => item.id === activity.sourceId);
+  const sourceName = source?.name ?? "来源可查";
+  const shouldShowVenue = activity.venue.trim() !== sourceName.trim();
   const titleId = `activity-title-${activity.id}`;
-  const shouldShowPrice = activity.priceNote !== "见活动页";
   const date =
     activity.dateNote ??
     new Intl.DateTimeFormat("zh-CN", {
@@ -29,19 +30,17 @@ export default function ActivityCard({ activity }: ActivityCardProps) {
   return (
     <article className="activity-card activity-row">
       <Link className="activity-card-link activity-row-link" to={`/activities/${activity.slug}`} aria-labelledby={titleId}>
-        <div className="activity-time-column" aria-label="活动时间和地点">
-          <span className="row-date">
-            <CalendarClock size={15} aria-hidden="true" />
-            {date}
-          </span>
-          <span className="row-place">{activity.district}</span>
-        </div>
         <div className="activity-card-main">
-          <div className="card-topline">
+          <div className="activity-time-column card-topline" aria-label="活动时间和地点">
+            <span className="row-date">
+              <CalendarClock size={14} aria-hidden="true" />
+              {date}
+            </span>
+            <span>{activity.district}</span>
             <span className="row-category">{activity.category}</span>
-            <span className="source-chip" aria-label={`来源：${source?.name ?? "来源可查"}`} title={`来源：${source?.name ?? "来源可查"}`}>
+            <span className="source-chip" aria-label={`来源：${sourceName}`} title={`来源：${sourceName}`}>
               <Database size={14} aria-hidden="true" strokeWidth={2.2} />
-              {source?.name ?? "来源可查"}
+              {sourceName}
             </span>
           </div>
           <div className="activity-title-row">
@@ -49,16 +48,9 @@ export default function ActivityCard({ activity }: ActivityCardProps) {
             <ArrowRight className="activity-row-arrow" size={17} aria-hidden="true" />
           </div>
           <div className="activity-facts" aria-label="活动基本信息">
-            <span>
-              <MapPin size={14} aria-hidden="true" />
-              {activity.venue}
-            </span>
-            {shouldShowPrice ? (
-              <span>
-                <Ticket size={14} aria-hidden="true" />
-                {activity.priceNote}
-              </span>
-            ) : null}
+            {shouldShowVenue ? <span>{activity.venue}</span> : null}
+            <StatusBadge activity={activity} />
+            <EvaluationBadge evaluation={evaluation} />
           </div>
           <div className="card-judgment">
             <p className="judgment-block value">
@@ -70,10 +62,6 @@ export default function ActivityCard({ activity }: ActivityCardProps) {
               <span>{evaluation.riskReasons[0]}</span>
             </p>
           </div>
-        </div>
-        <div className="activity-signal-column">
-          <StatusBadge activity={activity} />
-          <EvaluationBadge evaluation={evaluation} />
         </div>
       </Link>
     </article>
