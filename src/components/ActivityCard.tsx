@@ -1,4 +1,3 @@
-import { ArrowRight, CalendarClock, Database } from "lucide-react";
 import { Link } from "react-router-dom";
 import { evaluateActivity } from "../domain/evaluationRules";
 import { getSourcePool } from "../domain/sourcePool";
@@ -32,20 +31,15 @@ export default function ActivityCard({ activity }: ActivityCardProps) {
       <Link className="activity-card-link activity-row-link" to={`/activities/${activity.slug}`} aria-labelledby={titleId}>
         <div className="activity-card-main">
           <div className="activity-time-column card-topline" aria-label="活动时间和地点">
-            <span className="row-date">
-              <CalendarClock size={14} aria-hidden="true" />
-              {date}
-            </span>
+            <span className="row-date">{date}</span>
             <span>{activity.district}</span>
             <span className="row-category">{activity.category}</span>
             <span className="source-chip" aria-label={`来源：${sourceName}`} title={`来源：${sourceName}`}>
-              <Database size={14} aria-hidden="true" strokeWidth={2.2} />
               {sourceName}
             </span>
           </div>
           <div className="activity-title-row">
             <h3 id={titleId}>{activity.title}</h3>
-            <ArrowRight className="activity-row-arrow" size={17} aria-hidden="true" />
           </div>
           <div className="activity-facts" aria-label="活动基本信息">
             {shouldShowVenue ? <span>{activity.venue}</span> : null}
