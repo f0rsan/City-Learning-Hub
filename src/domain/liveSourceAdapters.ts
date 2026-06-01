@@ -126,6 +126,52 @@ function titleQuality(title: string) {
 }
 
 const localRelevancePattern = /深圳|Shenzhen|南山|福田|罗湖|宝安|龙岗|龙华|光明|坪山|盐田|前海|蛇口|深港|粤港澳/i;
+const shenzhenOffsetMs = 8 * 60 * 60 * 1000;
+const currentYear = new Date(Date.now() + shenzhenOffsetMs).getUTCFullYear();
+
+function startAtFromParts(year: string | number, month: string | number, day: string | number) {
+  return `${String(year).padStart(4, "0")}-${String(month).padStart(2, "0")}-${String(day).padStart(2, "0")}T10:00:00+08:00`;
+}
+
+function parseStartAtFromText(value: string) {
+  const normalized = value.replace(/\s+/g, " ").trim();
+  const fullDate =
+    normalized.match(/(20\d{2})\s*年\s*(\d{1,2})\s*月\s*(\d{1,2})\s*日/) ??
+    normalized.match(/(20\d{2})[./-](\d{1,2})[./-](\d{1,2})/);
+
+  if (fullDate) {
+    return startAtFromParts(fullDate[1], fullDate[2], fullDate[3]);
+  }
+
+  const monthDay = normalized.match(/(\d{1,2})\s*月\s*(\d{1,2})\s*日/);
+  if (monthDay) {
+    return startAtFromParts(currentYear, monthDay[1], monthDay[2]);
+  }
+
+  return undefined;
+}
+
+function nearestContextHtml(html: string, index: number) {
+  const candidates = ["dd", "li", "tr", "article", "section"]
+    .map((tagName) => {
+      const startMatch = [...html.slice(0, index).matchAll(new RegExp(`<${tagName}\\b[^>]*>`, "gi"))].at(-1);
+      const start = startMatch?.index;
+
+      if (start === undefined) {
+        return undefined;
+      }
+
+      const closeIndex = html.indexOf(`</${tagName}>`, index);
+      if (closeIndex === -1) {
+        return undefined;
+      }
+
+      return html.slice(start, closeIndex + tagName.length + 3);
+    })
+    .filter((candidate): candidate is string => Boolean(candidate));
+
+  return candidates.sort((a, b) => a.length - b.length)[0] ?? html.slice(Math.max(0, index - 500), index + 800);
+}
 
 export function parseEventbriteJsonLd(html: string, sourceId: string) {
   const scriptRegex = /<script[^>]*type="application\/ld\+json"[^>]*>([\s\S]*?)<\/script>/gi;
@@ -261,10 +307,13 @@ export function parseGenericEventLinks(html: string, source: LiveSourceDefinitio
       continue;
     }
 
+    const startAt = parseStartAtFromText(stripTags(nearestContextHtml(html, match.index ?? 0)));
+
     items.push({
       sourceId: source.id,
       title,
-      url
+      url,
+      ...(startAt ? { startAt } : {})
     });
   }
 

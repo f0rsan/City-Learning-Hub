@@ -87,6 +87,42 @@ describe("liveSourceAdapters", () => {
     );
   });
 
+  it("extracts concrete dates from the event row around generic links", () => {
+    const currentYear = new Date(Date.now() + 8 * 60 * 60 * 1000).getUTCFullYear();
+    const html = `
+      <dl>
+        <dd>
+          <time class="fr">08月15日 - 08月16日</time>
+          <p><a href="https://example.com/hyrox">26|27赛季HYROX健身跑深圳站</a></p>
+        </dd>
+        <dd>
+          <time class="fr">08月04日 - 08月05日</time>
+          <p><a href="https://example.com/ai-global">2026全球AI出海展览会</a></p>
+        </dd>
+      </dl>
+    `;
+
+    const items = parseGenericEventLinks(html, {
+      id: "szcec-futian-schedule",
+      name: "深圳会展中心近期展会",
+      url: "https://www.szcec.com/szcec/cn-schedule/current/index.html",
+      parser: "generic_event_links",
+      includeTitlePatterns: [/展|深圳/],
+      assumeLocal: true
+    });
+
+    expect(items).toEqual([
+      expect.objectContaining({
+        title: "26|27赛季HYROX健身跑深圳站",
+        startAt: `${currentYear}-08-15T10:00:00+08:00`
+      }),
+      expect.objectContaining({
+        title: "2026全球AI出海展览会",
+        startAt: `${currentYear}-08-04T10:00:00+08:00`
+      })
+    ]);
+  });
+
   it("uses anchor title attributes when the visible generic link text is empty", () => {
     const html = `
       <a href="/Activity/detail/100" title="深圳少年宫科普工作坊"><img src="/cover.jpg" /></a>

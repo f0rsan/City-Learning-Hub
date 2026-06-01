@@ -24,12 +24,24 @@ describe("activity selectors", () => {
   });
 
   it("opens high-quality reference activities without mixing them into weekly featured", () => {
-    const reference = getReferenceActivities(sampleActivities);
+    const explicitReference = {
+      ...sampleActivities.find((activity) => activity.slug === "reference-ai-salon")!,
+      id: "explicit-reference-ai-salon",
+      slug: "explicit-reference-ai-salon",
+      dateNote: undefined
+    };
+    const reference = getReferenceActivities([...sampleActivities, explicitReference]);
     const featured = getWeeklyFeatured(sampleActivities);
 
-    expect(reference.map((activity) => activity.slug)).toContain("reference-ai-salon");
-    expect(featured.map((activity) => activity.slug)).not.toContain("reference-ai-salon");
+    expect(reference.map((activity) => activity.slug)).toContain("explicit-reference-ai-salon");
+    expect(featured.map((activity) => activity.slug)).not.toContain("explicit-reference-ai-salon");
     expect(reference.every((activity) => activity.publicListingTier === "reference")).toBe(true);
+  });
+
+  it("keeps time-unclear reference activities out of public lists", () => {
+    const reference = getReferenceActivities(sampleActivities);
+
+    expect(reference.map((activity) => activity.slug)).not.toContain("reference-ai-salon");
   });
 
   it("does not show a reference activity when the same title is already featured", () => {

@@ -29,6 +29,7 @@ export function getReferenceActivities(activities: Activity[]) {
       (activity) =>
         activity.publicListingTier === "reference" &&
         activity.status === "uncertain" &&
+        !activity.dateNote &&
         !featuredTitles.has(normalizePublicTitle(activity.title)) &&
         !featuredUrls.has(activity.officialUrl) &&
         getTrustState(activity).level !== "blocked"

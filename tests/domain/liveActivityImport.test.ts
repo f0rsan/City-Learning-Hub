@@ -3,6 +3,7 @@ import { screen } from "@testing-library/react";
 import { createElement } from "react";
 import App from "../../src/App";
 import { getPublicEvaluatedActivities, resetCandidateData } from "../../src/domain/candidateStore";
+import { getPublicListedActivities } from "../../src/domain/activitySelectors";
 import { liveCollectedActivities } from "../../src/domain/liveActivities.generated";
 import { resetLocalHubData } from "../../src/domain/localStore";
 import { renderRoute } from "../../src/test/render";
@@ -106,5 +107,12 @@ describe("live activity import", () => {
         dateNote: "时间见活动页"
       })
     );
+  });
+
+  it("keeps public list rows focused on activities with concrete dates", () => {
+    const listedActivities = getPublicListedActivities([...liveCollectedActivities]);
+
+    expect(listedActivities.length).toBeGreaterThan(0);
+    expect(listedActivities.every((activity) => !activity.dateNote)).toBe(true);
   });
 });

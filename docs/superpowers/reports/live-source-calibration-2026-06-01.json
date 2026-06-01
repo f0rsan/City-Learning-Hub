@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-06-01T02:32:02.711Z",
+  "generatedAt": "2026-06-01T02:53:40.841Z",
   "rounds": 1,
   "concurrency": 3,
   "requiredSuccessfulSources": 10,
@@ -21,7 +21,7 @@
       "successRuns": 1,
       "failureRuns": 0,
       "successRate": 1,
-      "avgLatencyMs": 1972,
+      "avgLatencyMs": 1867,
       "avgItemsPerSuccess": 1,
       "totalItems": 1,
       "uniqueUrls": 1,
@@ -58,7 +58,7 @@
       "successRuns": 1,
       "failureRuns": 0,
       "successRate": 1,
-      "avgLatencyMs": 306,
+      "avgLatencyMs": 225,
       "avgItemsPerSuccess": 10,
       "totalItems": 10,
       "uniqueUrls": 10,
@@ -114,7 +114,7 @@
       "successRuns": 1,
       "failureRuns": 0,
       "successRate": 1,
-      "avgLatencyMs": 3120,
+      "avgLatencyMs": 2974,
       "avgItemsPerSuccess": 1,
       "totalItems": 1,
       "uniqueUrls": 1,
@@ -151,7 +151,7 @@
       "successRuns": 1,
       "failureRuns": 0,
       "successRate": 1,
-      "avgLatencyMs": 98,
+      "avgLatencyMs": 84,
       "avgItemsPerSuccess": 42,
       "totalItems": 42,
       "uniqueUrls": 42,
@@ -177,17 +177,20 @@
         {
           "sourceId": "shenzhen-conference-platform",
           "title": "26|27赛季HYROX健身跑深圳站",
-          "url": "https://hyrox.com/"
+          "url": "https://hyrox.com/",
+          "startAt": "2026-08-15T10:00:00+08:00"
         },
         {
           "sourceId": "shenzhen-conference-platform",
           "title": "2026第三届深圳国际耳机展",
-          "url": "http://www.audioexpo.net/?news_12/="
+          "url": "http://www.audioexpo.net/?news_12/=",
+          "startAt": "2026-05-16T10:00:00+08:00"
         },
         {
           "sourceId": "shenzhen-conference-platform",
           "title": "2026全球医疗健康展览会暨第四届深圳生殖医学健康大会",
-          "url": "https://www.nexpoworld.com/"
+          "url": "https://www.nexpoworld.com/",
+          "startAt": "2026-04-17T10:00:00+08:00"
         }
       ]
     },
@@ -206,7 +209,7 @@
       "successRuns": 1,
       "failureRuns": 0,
       "successRate": 1,
-      "avgLatencyMs": 2838,
+      "avgLatencyMs": 2767,
       "avgItemsPerSuccess": 1,
       "totalItems": 1,
       "uniqueUrls": 1,
@@ -243,11 +246,11 @@
       "successRuns": 1,
       "failureRuns": 0,
       "successRate": 1,
-      "avgLatencyMs": 1290,
-      "avgItemsPerSuccess": 78,
-      "totalItems": 78,
-      "uniqueUrls": 78,
-      "uniqueTitles": 78,
+      "avgLatencyMs": 1117,
+      "avgItemsPerSuccess": 82,
+      "totalItems": 82,
+      "uniqueUrls": 82,
+      "uniqueTitles": 82,
       "uniquenessRatio": 1,
       "titleUniquenessRatio": 1,
       "localRelevanceRatio": 1,
@@ -298,7 +301,7 @@
       "successRuns": 1,
       "failureRuns": 0,
       "successRate": 1,
-      "avgLatencyMs": 198,
+      "avgLatencyMs": 229,
       "avgItemsPerSuccess": 1,
       "totalItems": 1,
       "uniqueUrls": 1,
@@ -314,7 +317,8 @@
         {
           "sourceId": "lianpu-tech-events",
           "title": "OpenSchool AI Claw Demo Day —— 深圳站",
-          "url": "https://lianpu.com/event/openschool-ai-claw-demo-day-shen-zhen-zhan"
+          "url": "https://lianpu.com/event/openschool-ai-claw-demo-day-shen-zhen-zhan",
+          "startAt": "2026-05-30T10:00:00+08:00"
         }
       ]
     },
@@ -334,7 +338,7 @@
       "successRuns": 1,
       "failureRuns": 0,
       "successRate": 1,
-      "avgLatencyMs": 285,
+      "avgLatencyMs": 384,
       "avgItemsPerSuccess": 20,
       "totalItems": 20,
       "uniqueUrls": 20,
@@ -354,13 +358,13 @@
         },
         {
           "sourceId": "huodongxing-shenzhen",
-          "title": "周三局🔥财富流沙盘桌游开局啦～沉浸式体验人生彩排👐",
-          "url": "https://www.huodongxing.com/event/2861668355712"
+          "title": "LinkFox AI 2026产品发布会",
+          "url": "https://www.huodongxing.com/event/9862519603500"
         },
         {
           "sourceId": "huodongxing-shenzhen",
-          "title": "R Fusion Day“引凤归巢·产聚晋江”企业家+科学家+投资家聚合创新日 暨大湾区科创对接会",
-          "url": "https://www.huodongxing.com/event/1862511382200"
+          "title": "周三局🔥财富流沙盘桌游开局啦～沉浸式体验人生彩排👐",
+          "url": "https://www.huodongxing.com/event/2861668355712"
         },
         {
           "sourceId": "huodongxing-shenzhen",
@@ -390,7 +394,7 @@
       "successRuns": 1,
       "failureRuns": 0,
       "successRate": 1,
-      "avgLatencyMs": 2361,
+      "avgLatencyMs": 2426,
       "avgItemsPerSuccess": 1,
       "totalItems": 1,
       "uniqueUrls": 1,
@@ -426,7 +430,7 @@
       "successRuns": 1,
       "failureRuns": 0,
       "successRate": 1,
-      "avgLatencyMs": 355,
+      "avgLatencyMs": 301,
       "avgItemsPerSuccess": 15,
       "totalItems": 15,
       "uniqueUrls": 15,
@@ -442,27 +446,32 @@
         {
           "sourceId": "nanshan-library-activities",
           "title": "法律咨询",
-          "url": "https://activity.nslib.cn/activity/info/11537"
+          "url": "https://activity.nslib.cn/activity/info/11537",
+          "startAt": "2026-06-28T10:00:00+08:00"
         },
         {
           "sourceId": "nanshan-library-activities",
           "title": "走进图书馆丨《马背上的女图书馆员》",
-          "url": "https://activity.nslib.cn/activity/info/11521"
+          "url": "https://activity.nslib.cn/activity/info/11521",
+          "startAt": "2026-06-27T10:00:00+08:00"
         },
         {
           "sourceId": "nanshan-library-activities",
           "title": "心理咨询",
-          "url": "https://activity.nslib.cn/activity/info/11534"
+          "url": "https://activity.nslib.cn/activity/info/11534",
+          "startAt": "2026-06-26T10:00:00+08:00"
         },
         {
           "sourceId": "nanshan-library-activities",
           "title": "【馆员故事会】线上分享|《五月五 过端午》",
-          "url": "https://activity.nslib.cn/activity/info/11530"
+          "url": "https://activity.nslib.cn/activity/info/11530",
+          "startAt": "2026-06-17T10:00:00+08:00"
         },
         {
           "sourceId": "nanshan-library-activities",
           "title": "跟名师读名著系列丨再读《时代广场的蟋蟀》",
-          "url": "https://activity.nslib.cn/activity/info/11526"
+          "url": "https://activity.nslib.cn/activity/info/11526",
+          "startAt": "2026-06-20T10:00:00+08:00"
         }
       ]
     },
@@ -482,7 +491,7 @@
       "successRuns": 1,
       "failureRuns": 0,
       "successRate": 1,
-      "avgLatencyMs": 345,
+      "avgLatencyMs": 307,
       "avgItemsPerSuccess": 7,
       "totalItems": 7,
       "uniqueUrls": 7,
@@ -498,27 +507,32 @@
         {
           "sourceId": "luohu-library-events",
           "title": "【绎说养生 云享罗图】骨质疏松的防治；用AI制作背景音乐 2026/03/26",
-          "url": "https://www.szlhlib.org.cn/information/20427"
+          "url": "https://www.szlhlib.org.cn/information/20427",
+          "startAt": "2026-03-26T10:00:00+08:00"
         },
         {
           "sourceId": "luohu-library-events",
           "title": "【真人图书馆】幸福家庭 健康人生 2026/03/26",
-          "url": "https://www.szlhlib.org.cn/information/20426"
+          "url": "https://www.szlhlib.org.cn/information/20426",
+          "startAt": "2026-03-26T10:00:00+08:00"
         },
         {
           "sourceId": "luohu-library-events",
           "title": "【涂涂故事列车】《星期三书店》；《今天我是一粒黄豆》 2026/03/26",
-          "url": "https://www.szlhlib.org.cn/information/20425"
+          "url": "https://www.szlhlib.org.cn/information/20425",
+          "startAt": "2026-03-26T10:00:00+08:00"
         },
         {
           "sourceId": "luohu-library-events",
           "title": "【涂涂故事列车 创阅汇】《白雪公主和77个小矮人》；气象卫星模型制作 2026/03/01",
-          "url": "https://www.szlhlib.org.cn/information/20367"
+          "url": "https://www.szlhlib.org.cn/information/20367",
+          "startAt": "2026-03-01T10:00:00+08:00"
         },
         {
           "sourceId": "luohu-library-events",
           "title": "【妇女节主题活动】音乐，最美的精神之声；水彩体验：绘花·她之约 2026/03/01",
-          "url": "https://www.szlhlib.org.cn/information/20366"
+          "url": "https://www.szlhlib.org.cn/information/20366",
+          "startAt": "2026-03-01T10:00:00+08:00"
         }
       ]
     },
@@ -538,7 +552,7 @@
       "successRuns": 1,
       "failureRuns": 0,
       "successRate": 1,
-      "avgLatencyMs": 1437,
+      "avgLatencyMs": 144,
       "avgItemsPerSuccess": 50,
       "totalItems": 50,
       "uniqueUrls": 50,
@@ -599,7 +613,7 @@
       "successRuns": 1,
       "failureRuns": 0,
       "successRate": 1,
-      "avgLatencyMs": 718,
+      "avgLatencyMs": 543,
       "avgItemsPerSuccess": 8,
       "totalItems": 8,
       "uniqueUrls": 8,
@@ -655,7 +669,7 @@
       "successRuns": 1,
       "failureRuns": 0,
       "successRate": 1,
-      "avgLatencyMs": 267,
+      "avgLatencyMs": 152,
       "avgItemsPerSuccess": 33,
       "totalItems": 33,
       "uniqueUrls": 33,
@@ -671,27 +685,32 @@
         {
           "sourceId": "szwen-cultural-events",
           "title": "美美与共——全国美术馆书法邀请展 地址：何香凝美术馆7-8展厅 时间：2026-03-17 09:30 至 2026-04-23 16:30 发布时间：2026-03-12 15:03:42",
-          "url": "https://www.szwen.cn/eventDetail?id=a8fb4c9eb673440092febdddf17da31a"
+          "url": "https://www.szwen.cn/eventDetail?id=a8fb4c9eb673440092febdddf17da31a",
+          "startAt": "2026-03-17T10:00:00+08:00"
         },
         {
           "sourceId": "szwen-cultural-events",
           "title": "物外烟霞——20世纪中国风景画探索研究展 地址：何香凝美术馆1-6展厅 时间：2026-03-28 09:30 至 2026-05-31 16:30 发布时间：2026-03-24 15:23:25",
-          "url": "https://www.szwen.cn/eventDetail?id=05bffdcfeaf6486e87678595c7f59bd0"
+          "url": "https://www.szwen.cn/eventDetail?id=05bffdcfeaf6486e87678595c7f59bd0",
+          "startAt": "2026-03-17T10:00:00+08:00"
         },
         {
           "sourceId": "szwen-cultural-events",
           "title": "安德拉什 席夫爵士钢琴独奏音乐会 地址：深圳音乐厅二楼演奏大厅 时间：2026-04-17 20:00 至 2026-04-17 22:00 发布时间：2026-03-09 15:20:43",
-          "url": "https://www.szwen.cn/eventDetail?id=fb7879e11bcd45cd8dca66a2f2c9ea98"
+          "url": "https://www.szwen.cn/eventDetail?id=fb7879e11bcd45cd8dca66a2f2c9ea98",
+          "startAt": "2026-03-28T10:00:00+08:00"
         },
         {
           "sourceId": "szwen-cultural-events",
           "title": "国画赏析活动 开始时间：2026-04-14 结束时间：2026-04-14 地址：深圳市罗湖区桂园街道办事处鸿翔花园7-A栋3楼书画室 发布时间：2026-04-13 11:19:12",
-          "url": "https://www.szwen.cn/eventDetail?id=07eea8ffbd4549d2b2383b8f0a658d67"
+          "url": "https://www.szwen.cn/eventDetail?id=07eea8ffbd4549d2b2383b8f0a658d67",
+          "startAt": "2026-04-14T10:00:00+08:00"
         },
         {
           "sourceId": "szwen-cultural-events",
           "title": "爵士热舞狂欢，解锁多巴胺爵士舞活动（4月14日19：30-20：30） 开始时间：2026-04-14 结束时间：2026-04-14 地址：深圳市罗湖区翠竹街道办事处愉天社区综合文化服务中心 发布时间：2026-04-08 10:11:20",
-          "url": "https://www.szwen.cn/eventDetail?id=0d2750c83f054e15a3b83605742e76f4"
+          "url": "https://www.szwen.cn/eventDetail?id=0d2750c83f054e15a3b83605742e76f4",
+          "startAt": "2026-04-13T10:00:00+08:00"
         }
       ]
     },
@@ -711,7 +730,7 @@
       "successRuns": 1,
       "failureRuns": 0,
       "successRate": 1,
-      "avgLatencyMs": 90,
+      "avgLatencyMs": 83,
       "avgItemsPerSuccess": 26,
       "totalItems": 26,
       "uniqueUrls": 26,
@@ -766,7 +785,7 @@
       "successRuns": 1,
       "failureRuns": 0,
       "successRate": 1,
-      "avgLatencyMs": 1851,
+      "avgLatencyMs": 1836,
       "avgItemsPerSuccess": 1,
       "totalItems": 1,
       "uniqueUrls": 1,
@@ -803,7 +822,7 @@
       "successRuns": 1,
       "failureRuns": 0,
       "successRate": 1,
-      "avgLatencyMs": 394,
+      "avgLatencyMs": 324,
       "avgItemsPerSuccess": 3,
       "totalItems": 3,
       "uniqueUrls": 3,
@@ -849,7 +868,7 @@
       "successRuns": 1,
       "failureRuns": 0,
       "successRate": 1,
-      "avgLatencyMs": 932,
+      "avgLatencyMs": 894,
       "avgItemsPerSuccess": 9,
       "totalItems": 9,
       "uniqueUrls": 9,
@@ -885,7 +904,8 @@
         {
           "sourceId": "university-town-library",
           "title": "2026/03/25 “全城联动 让书回家”活动",
-          "url": "https://www.utszlib.edu.cn/article/view/id-20841.html?locale=zh_CN"
+          "url": "https://www.utszlib.edu.cn/article/view/id-20841.html?locale=zh_CN",
+          "startAt": "2026-03-25T10:00:00+08:00"
         }
       ]
     },
@@ -905,7 +925,7 @@
       "successRuns": 1,
       "failureRuns": 0,
       "successRate": 1,
-      "avgLatencyMs": 74,
+      "avgLatencyMs": 36,
       "avgItemsPerSuccess": 1,
       "totalItems": 1,
       "uniqueUrls": 1,
@@ -942,7 +962,7 @@
       "successRuns": 1,
       "failureRuns": 0,
       "successRate": 1,
-      "avgLatencyMs": 1195,
+      "avgLatencyMs": 424,
       "avgItemsPerSuccess": 13,
       "totalItems": 13,
       "uniqueUrls": 13,
@@ -958,27 +978,32 @@
         {
           "sourceId": "shenzhen-youth-activity-center",
           "title": "红领巾爱科学 | 元旦假期青少年人工智能公开课第三",
-          "url": "https://mp.weixin.qq.com/s/s9vhTU9tUIuxgs5u6I54qw"
+          "url": "https://mp.weixin.qq.com/s/s9vhTU9tUIuxgs5u6I54qw",
+          "startAt": "2025-12-29T10:00:00+08:00"
         },
         {
           "sourceId": "shenzhen-youth-activity-center",
           "title": "【亲子公益系列讲座五】智能时代成长力：未来人才的关",
-          "url": "https://mp.weixin.qq.com/s/kPMQRop-F0Ql7aKTG5x8MA"
+          "url": "https://mp.weixin.qq.com/s/kPMQRop-F0Ql7aKTG5x8MA",
+          "startAt": "2025-12-12T10:00:00+08:00"
         },
         {
           "sourceId": "shenzhen-youth-activity-center",
           "title": "【亲子公益系列讲座四】专注力与任务管理： 孩子变身",
-          "url": "https://mp.weixin.qq.com/s/NUxu-9qjGrvq-PzR0Dipog"
+          "url": "https://mp.weixin.qq.com/s/NUxu-9qjGrvq-PzR0Dipog",
+          "startAt": "2025-12-03T10:00:00+08:00"
         },
         {
           "sourceId": "shenzhen-youth-activity-center",
           "title": "【亲子公益讲座】告别说教与对抗，让孩子主动改掉坏习",
-          "url": "https://mp.weixin.qq.com/s/8ZevvOeCUHJki45MVPvmpw"
+          "url": "https://mp.weixin.qq.com/s/8ZevvOeCUHJki45MVPvmpw",
+          "startAt": "2025-11-19T10:00:00+08:00"
         },
         {
           "sourceId": "shenzhen-youth-activity-center",
           "title": "红领巾讲解员招募令丨传承红色基因，致敬改革先锋",
-          "url": "https://mp.weixin.qq.com/s/UCezxHwFFxZEbzT20fltYg"
+          "url": "https://mp.weixin.qq.com/s/UCezxHwFFxZEbzT20fltYg",
+          "startAt": "2025-10-31T10:00:00+08:00"
         }
       ]
     },
@@ -998,7 +1023,7 @@
       "successRuns": 1,
       "failureRuns": 0,
       "successRate": 1,
-      "avgLatencyMs": 340,
+      "avgLatencyMs": 47,
       "avgItemsPerSuccess": 1,
       "totalItems": 1,
       "uniqueUrls": 1,
@@ -1034,7 +1059,7 @@
       "successRuns": 1,
       "failureRuns": 0,
       "successRate": 1,
-      "avgLatencyMs": 43,
+      "avgLatencyMs": 55,
       "avgItemsPerSuccess": 42,
       "totalItems": 42,
       "uniqueUrls": 42,
@@ -1060,17 +1085,20 @@
         {
           "sourceId": "szcec-futian-schedule",
           "title": "26|27赛季HYROX健身跑深圳站",
-          "url": "https://hyrox.com/"
+          "url": "https://hyrox.com/",
+          "startAt": "2026-08-15T10:00:00+08:00"
         },
         {
           "sourceId": "szcec-futian-schedule",
           "title": "2026第三届深圳国际耳机展",
-          "url": "http://www.audioexpo.net/?news_12/="
+          "url": "http://www.audioexpo.net/?news_12/=",
+          "startAt": "2026-05-16T10:00:00+08:00"
         },
         {
           "sourceId": "szcec-futian-schedule",
           "title": "2026全球医疗健康展览会暨第四届深圳生殖医学健康大会",
-          "url": "https://www.nexpoworld.com/"
+          "url": "https://www.nexpoworld.com/",
+          "startAt": "2026-04-17T10:00:00+08:00"
         }
       ]
     },
@@ -1090,7 +1118,7 @@
       "successRuns": 1,
       "failureRuns": 0,
       "successRate": 1,
-      "avgLatencyMs": 760,
+      "avgLatencyMs": 284,
       "avgItemsPerSuccess": 1,
       "totalItems": 1,
       "uniqueUrls": 1,
@@ -1127,7 +1155,7 @@
       "successRuns": 1,
       "failureRuns": 0,
       "successRate": 1,
-      "avgLatencyMs": 614,
+      "avgLatencyMs": 522,
       "avgItemsPerSuccess": 1,
       "totalItems": 1,
       "uniqueUrls": 1,
@@ -1164,7 +1192,7 @@
       "successRuns": 1,
       "failureRuns": 0,
       "successRate": 1,
-      "avgLatencyMs": 177,
+      "avgLatencyMs": 84,
       "avgItemsPerSuccess": 1,
       "totalItems": 1,
       "uniqueUrls": 1,
@@ -1201,7 +1229,7 @@
       "successRuns": 1,
       "failureRuns": 0,
       "successRate": 1,
-      "avgLatencyMs": 2931,
+      "avgLatencyMs": 2978,
       "avgItemsPerSuccess": 1,
       "totalItems": 1,
       "uniqueUrls": 1,
@@ -1238,7 +1266,7 @@
       "successRuns": 1,
       "failureRuns": 0,
       "successRate": 1,
-      "avgLatencyMs": 3898,
+      "avgLatencyMs": 3450,
       "avgItemsPerSuccess": 1,
       "totalItems": 1,
       "uniqueUrls": 1,
@@ -1272,7 +1300,7 @@
       "successRuns": 1,
       "failureRuns": 0,
       "successRate": 1,
-      "avgLatencyMs": 2855,
+      "avgLatencyMs": 2507,
       "avgItemsPerSuccess": 1,
       "totalItems": 1,
       "uniqueUrls": 1,
@@ -1308,7 +1336,7 @@
       "successRuns": 1,
       "failureRuns": 0,
       "successRate": 1,
-      "avgLatencyMs": 308,
+      "avgLatencyMs": 280,
       "avgItemsPerSuccess": 1,
       "totalItems": 1,
       "uniqueUrls": 1,

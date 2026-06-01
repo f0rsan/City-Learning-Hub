@@ -2,7 +2,7 @@ import { screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { describe, expect, it } from "vitest";
 import App from "../../src/App";
-import { getPublicListedActivities, getReferenceActivities, getWeeklyFeatured } from "../../src/domain/activitySelectors";
+import { getPublicListedActivities, getWeeklyFeatured } from "../../src/domain/activitySelectors";
 import { liveCollectedActivities } from "../../src/domain/liveActivities.generated";
 import type { Activity } from "../../src/domain/types";
 import { renderRoute } from "../../src/test/render";
@@ -12,7 +12,6 @@ describe("HomePage", () => {
   const publicActivities = getPublicListedActivities([...collectedActivities]);
   const familyActivity = publicActivities.find((activity) => activity.audience.includes("family"))!;
   const adultActivity = publicActivities.find((activity) => activity.audience.includes("adult"))!;
-  const hiddenMobileActivity = getReferenceActivities([...collectedActivities]).at(6)!;
 
   it("shows the weekly Shenzhen positioning and two audience entries", () => {
     renderRoute(<App />);
@@ -35,6 +34,7 @@ describe("HomePage", () => {
     expect(screen.getByText(/确定性更强/)).toBeInTheDocument();
     expect(screen.getByRole("heading", { name: "更多可参考活动" })).toBeInTheDocument();
     expect(screen.getByText(/系统筛过/)).toBeInTheDocument();
+    expect(screen.queryByText("时间见活动页")).not.toBeInTheDocument();
   });
 
   it("shows compact weekly signals", () => {
@@ -64,7 +64,7 @@ describe("HomePage", () => {
     expect(root.dataset.theme).not.toBe(before);
   });
 
-  it("shows compact weekly list on mobile with progressive disclosure", () => {
+  it("shows compact weekly list on mobile without unclear time labels", () => {
     const originalMatchMedia = window.matchMedia;
 
     try {
@@ -81,8 +81,7 @@ describe("HomePage", () => {
       }) as MediaQueryList);
 
       renderRoute(<App />);
-      expect(screen.getAllByRole("button", { name: /展开其余 \d+ 条活动/ }).length).toBeGreaterThan(0);
-      expect(screen.queryByRole("heading", { name: hiddenMobileActivity.title })).not.toBeInTheDocument();
+      expect(screen.queryByText("时间见活动页")).not.toBeInTheDocument();
     } finally {
       window.matchMedia = originalMatchMedia;
     }
