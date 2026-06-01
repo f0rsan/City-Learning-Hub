@@ -2,6 +2,7 @@ import { screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { beforeEach, describe, expect, it } from "vitest";
 import App from "../../src/App";
+import { getPublicListedActivities } from "../../src/domain/activitySelectors";
 import { liveCollectedActivities } from "../../src/domain/liveActivities.generated";
 import { resetLocalHubData } from "../../src/domain/localStore";
 import type { Activity } from "../../src/domain/types";
@@ -9,8 +10,8 @@ import { renderRoute } from "../../src/test/render";
 
 describe("submit and admin flow", () => {
   const collectedActivities: readonly Activity[] = liveCollectedActivities;
-  const familyActivity = collectedActivities.find(
-    (activity) => activity.status === "published" && activity.audience.includes("family")
+  const familyActivity = getPublicListedActivities([...collectedActivities]).find((activity) =>
+    activity.audience.includes("family")
   )!;
 
   beforeEach(() => {

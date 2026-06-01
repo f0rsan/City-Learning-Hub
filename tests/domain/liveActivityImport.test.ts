@@ -68,4 +68,43 @@ describe("live activity import", () => {
 
     expect(sourceOnlyTitles).toEqual([]);
   });
+
+  it("keeps time-unclear activities out of the weekly featured list", () => {
+    const timeUnclearPublicActivities = liveCollectedActivities.filter(
+      (activity) => activity.dateNote && activity.publicListingTier
+    );
+    const aiServer = liveCollectedActivities.find((activity) => activity.slug === "ai服务器-69c5bd575d");
+
+    expect(timeUnclearPublicActivities.length).toBeGreaterThan(0);
+    expect(timeUnclearPublicActivities).toEqual(
+      expect.arrayContaining([
+        expect.objectContaining({
+          status: "uncertain",
+          weeklyFeatured: false,
+          publicListingTier: "reference"
+        })
+      ])
+    );
+    expect(timeUnclearPublicActivities).not.toEqual(
+      expect.arrayContaining([
+        expect.objectContaining({
+          status: "published"
+        }),
+        expect.objectContaining({
+          weeklyFeatured: true
+        }),
+        expect.objectContaining({
+          publicListingTier: "featured"
+        })
+      ])
+    );
+    expect(aiServer).toEqual(
+      expect.objectContaining({
+        status: "uncertain",
+        weeklyFeatured: false,
+        publicListingTier: "reference",
+        dateNote: "时间见活动页"
+      })
+    );
+  });
 });

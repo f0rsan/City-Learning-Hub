@@ -3,6 +3,7 @@ import userEvent from "@testing-library/user-event";
 import { beforeEach, describe, expect, it } from "vitest";
 import App from "../../src/App";
 import { createCandidateFromSubmission, resetCandidateData, saveCandidateActivity } from "../../src/domain/candidateStore";
+import { getPublicListedActivities } from "../../src/domain/activitySelectors";
 import { evaluateActivity } from "../../src/domain/evaluationRules";
 import { liveCollectedActivities } from "../../src/domain/liveActivities.generated";
 import { addSubmittedActivity, resetLocalHubData } from "../../src/domain/localStore";
@@ -12,8 +13,8 @@ import { renderRoute } from "../../src/test/render";
 
 describe("ActivityPage", () => {
   const collectedActivities: readonly Activity[] = liveCollectedActivities;
-  const familyActivity = collectedActivities.find(
-    (activity) => activity.status === "published" && activity.audience.includes("family")
+  const familyActivity = getPublicListedActivities([...collectedActivities]).find((activity) =>
+    activity.audience.includes("family")
   )!;
 
   beforeEach(() => {

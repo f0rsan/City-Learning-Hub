@@ -1,4 +1,5 @@
 import { expect, test } from "@playwright/test";
+import { getReferenceActivities } from "../src/domain/activitySelectors";
 import { liveCollectedActivities } from "../src/domain/liveActivities.generated";
 import type { Activity } from "../src/domain/types";
 
@@ -14,7 +15,13 @@ if (!familyActivity) {
 const familyActivityTitle = familyActivity.title;
 const familyActivitySlug = familyActivity.slug;
 const encodedFamilyActivitySlug = encodeURIComponent(familyActivitySlug);
-const hiddenMobileActivityTitle = "E-IOT 嵌入式与物联网展";
+const hiddenMobileActivity = getReferenceActivities([...activities]).at(6);
+
+if (!hiddenMobileActivity) {
+  throw new Error("E2E 需要至少 7 个可参考活动");
+}
+
+const hiddenMobileActivityTitle = hiddenMobileActivity.title;
 
 test("home page guides users into family and adult discovery", async ({ page }) => {
   await page.goto("/");
@@ -117,8 +124,10 @@ test("mobile home uses progressive disclosure for weekly list", async ({ page })
   await page.setViewportSize({ width: 390, height: 844 });
   await page.goto("/");
 
-  await expect(page.locator(".weekly-section").first().getByRole("button", { name: /展开其余 \d+ 条活动/ })).toBeVisible();
-  await expect(page.getByText(hiddenMobileActivityTitle)).toHaveCount(0);
+  const referenceSection = page.locator(".weekly-section").nth(1);
+
+  await expect(referenceSection.getByRole("button", { name: /展开其余 \d+ 条活动/ })).toBeVisible();
+  await expect(referenceSection.getByRole("heading", { name: hiddenMobileActivityTitle })).toHaveCount(0);
 });
 
 test("mobile detail collapses reasons and evidence by default", async ({ page }) => {

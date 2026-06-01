@@ -121,6 +121,20 @@ describe("evaluationRules", () => {
     expect(weightedSource).toBeLessThan(baselineSource);
   });
 
+  it("shows the activity collection date in source evidence when available", () => {
+    const evaluation = evaluateActivity(
+      {
+        ...baseActivity,
+        lastConfirmedAt: "2026-05-31"
+      },
+      { sources: sampleSources }
+    );
+    const sourceDetail = evaluation.evidenceSignals.find((signal) => signal.type === "source")?.detail;
+
+    expect(sourceDetail).toContain("2026-05-31");
+    expect(sourceDetail).not.toContain("2026-05-08 更新");
+  });
+
   it("uses explicit confidence score thresholds", () => {
     expect(CONFIDENCE_SCORE_THRESHOLDS.high).toBeGreaterThan(CONFIDENCE_SCORE_THRESHOLDS.medium);
 

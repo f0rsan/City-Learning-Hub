@@ -46,13 +46,14 @@ export function scoreSourceSignal(activity: Activity, source?: ActivitySource): 
     unverified: 4
   };
   const weightedScore = Math.round(scoreByTrust[source.trustLevel] * (source.signalWeight ?? 1));
+  const checkedAt = activity.lastConfirmedAt ?? source.lastChecked;
 
   return {
     type: "source",
     label: "来源",
     score: clamp(weightedScore, 18),
     maxScore: 18,
-    detail: `${source.name}：${source.trustLevel === "high" ? "较稳定" : source.trustLevel === "medium" ? "可参考" : "待验证"}，${source.lastChecked} 更新。`
+    detail: `${source.name}：${source.trustLevel === "high" ? "较稳定" : source.trustLevel === "medium" ? "可参考" : "待验证"}，${checkedAt} 更新。`
   };
 }
 

@@ -2,20 +2,17 @@ import { screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { describe, expect, it } from "vitest";
 import App from "../../src/App";
-import { getWeeklyFeatured } from "../../src/domain/activitySelectors";
+import { getPublicListedActivities, getReferenceActivities, getWeeklyFeatured } from "../../src/domain/activitySelectors";
 import { liveCollectedActivities } from "../../src/domain/liveActivities.generated";
 import type { Activity } from "../../src/domain/types";
 import { renderRoute } from "../../src/test/render";
 
 describe("HomePage", () => {
   const collectedActivities: readonly Activity[] = liveCollectedActivities;
-  const familyActivity = collectedActivities.find(
-    (activity) => activity.status === "published" && activity.audience.includes("family")
-  )!;
-  const adultActivity = collectedActivities.find(
-    (activity) => activity.status === "published" && activity.audience.includes("adult")
-  )!;
-  const hiddenMobileActivity = collectedActivities.find((activity) => activity.title === "E-IOT 嵌入式与物联网展")!;
+  const publicActivities = getPublicListedActivities([...collectedActivities]);
+  const familyActivity = publicActivities.find((activity) => activity.audience.includes("family"))!;
+  const adultActivity = publicActivities.find((activity) => activity.audience.includes("adult"))!;
+  const hiddenMobileActivity = getReferenceActivities([...collectedActivities]).at(6)!;
 
   it("shows the weekly Shenzhen positioning and two audience entries", () => {
     renderRoute(<App />);
@@ -85,7 +82,7 @@ describe("HomePage", () => {
 
       renderRoute(<App />);
       expect(screen.getAllByRole("button", { name: /展开其余 \d+ 条活动/ }).length).toBeGreaterThan(0);
-      expect(screen.queryByText(hiddenMobileActivity.title)).not.toBeInTheDocument();
+      expect(screen.queryByRole("heading", { name: hiddenMobileActivity.title })).not.toBeInTheDocument();
     } finally {
       window.matchMedia = originalMatchMedia;
     }
