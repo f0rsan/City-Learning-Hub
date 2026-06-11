@@ -5,6 +5,7 @@ import App from "../../src/App";
 import { createCandidateFromSubmission, resetCandidateData, saveCandidateActivity } from "../../src/domain/candidateStore";
 import { getPublicListedActivities } from "../../src/domain/activitySelectors";
 import { evaluateActivity } from "../../src/domain/evaluationRules";
+import type { CandidateActivity } from "../../src/domain/evaluationTypes";
 import { liveCollectedActivities } from "../../src/domain/liveActivities.generated";
 import { addSubmittedActivity, resetLocalHubData } from "../../src/domain/localStore";
 import { sampleActivities } from "../fixtures/sampleData";
@@ -13,9 +14,40 @@ import { renderRoute } from "../../src/test/render";
 
 describe("ActivityPage", () => {
   const collectedActivities: readonly Activity[] = liveCollectedActivities;
-  const familyActivity = getPublicListedActivities([...collectedActivities]).find((activity) =>
-    activity.audience.includes("family")
-  )!;
+  const publicActivity = getPublicListedActivities([...collectedActivities])[0];
+  const fallbackPublicActivity: CandidateActivity = {
+    ...sampleActivities[0],
+    id: "test-public-family-activity",
+    slug: "test-public-family-activity",
+    title: "测试亲子公开活动",
+    startAt: "2026-06-28T10:00:00+08:00",
+    endAt: "2026-06-28T12:00:00+08:00",
+    officialUrl: "https://example.com/events/test-public-family-activity",
+    lastConfirmedAt: "2026-06-11",
+    status: "published",
+    weeklyFeatured: true,
+    publicListingTier: "featured",
+    publicScore: 95,
+    candidateStatus: "evaluated",
+    evaluation: evaluateActivity({
+      ...sampleActivities[0],
+      id: "test-public-family-activity",
+      status: "published",
+      startAt: "2026-06-28T10:00:00+08:00",
+      endAt: "2026-06-28T12:00:00+08:00"
+    }),
+    createdAt: "2026-06-11T00:00:00.000Z",
+    updatedAt: "2026-06-11T00:00:00.000Z"
+  };
+
+  function ensureDetailActivity() {
+    if (publicActivity) {
+      return publicActivity;
+    }
+
+    saveCandidateActivity(fallbackPublicActivity);
+    return fallbackPublicActivity;
+  }
 
   beforeEach(() => {
     resetLocalHubData();
@@ -23,9 +55,10 @@ describe("ActivityPage", () => {
   });
 
   it("shows decision details before the official link", () => {
-    renderRoute(<App />, `/activities/${familyActivity.slug}`);
+    const activity = ensureDetailActivity();
+    renderRoute(<App />, `/activities/${activity.slug}`);
 
-    expect(screen.getByRole("heading", { name: familyActivity.title })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: activity.title })).toBeInTheDocument();
     expect(screen.getByText("是否值得去")).toBeInTheDocument();
     expect(screen.getByText("参考依据")).toBeInTheDocument();
     expect(screen.getByText(/^来源$/)).toBeInTheDocument();
@@ -99,7 +132,8 @@ describe("ActivityPage", () => {
           dispatchEvent: () => false
         }) as MediaQueryList);
 
-      renderRoute(<App />, `/activities/${familyActivity.slug}`);
+      const activity = ensureDetailActivity();
+      renderRoute(<App />, `/activities/${activity.slug}`);
 
       expect(screen.queryByRole("heading", { name: "适合谁" })).not.toBeInTheDocument();
       expect(screen.queryByText(/^来源$/)).not.toBeInTheDocument();

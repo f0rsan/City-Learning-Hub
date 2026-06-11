@@ -28,12 +28,14 @@ export default function HomePage() {
             title="本周精选"
             subtitle="确定性更强，先看判断。"
             activities={featured}
+            emptyStateText="暂无明确时间的精选活动，下一次采集后更新。"
           />
 
           <WeeklySection
             title="更多可参考活动"
             subtitle="系统筛过，出发前再核对。"
             activities={reference}
+            emptyStateText="暂无更多可参考活动。"
           />
         </div>
 

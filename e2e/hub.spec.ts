@@ -1,19 +1,15 @@
 import { expect, test } from "@playwright/test";
+import { getPublicListedActivities } from "../src/domain/activitySelectors";
 import { liveCollectedActivities } from "../src/domain/liveActivities.generated";
 import type { Activity } from "../src/domain/types";
 
 const activities = liveCollectedActivities as readonly Activity[];
-const familyActivity = activities.find(
-  (activity) => activity.publicListingTier && activity.audience.includes("family")
-);
-
-if (!familyActivity) {
-  throw new Error("E2E 需要至少 1 个公开亲子活动");
-}
-
-const familyActivityTitle = familyActivity.title;
-const familyActivitySlug = familyActivity.slug;
-const encodedFamilyActivitySlug = encodeURIComponent(familyActivitySlug);
+const publicActivities = getPublicListedActivities([...activities]);
+const publicActivity = publicActivities[0];
+const familyActivity = publicActivities.find((activity) => activity.audience.includes("family"));
+const publicActivityTitle = publicActivity?.title ?? "";
+const publicActivitySlug = publicActivity?.slug ?? "";
+const encodedPublicActivitySlug = encodeURIComponent(publicActivitySlug);
 
 test("home page guides users into family and adult discovery", async ({ page }) => {
   await page.goto("/");
@@ -28,7 +24,11 @@ test("home page guides users into family and adult discovery", async ({ page }) 
 
   await page.getByRole("link", { name: /带孩子去学习/ }).click();
   await expect(page.getByRole("heading", { name: "带孩子去学习" })).toBeVisible();
-  await expect(page.getByText(familyActivityTitle)).toBeVisible();
+  if (familyActivity) {
+    await expect(page.getByText(familyActivity.title)).toBeVisible();
+  } else {
+    await expect(page.getByText("暂无明确时间的亲子活动，下一次采集后更新。")).toBeVisible();
+  }
 });
 
 test("shows a visible fallback when the app script is blocked", async ({ page }) => {
@@ -41,9 +41,11 @@ test("shows a visible fallback when the app script is blocked", async ({ page })
 });
 
 test("activity detail page shows decision information and correction entry", async ({ page }, testInfo) => {
-  await page.goto(`/activities/${familyActivitySlug}`);
+  test.skip(!publicActivity, "当前采集没有可公开活动，跳过详情页检查");
 
-  await expect(page.getByRole("heading", { name: familyActivityTitle })).toBeVisible();
+  await page.goto(`/activities/${publicActivitySlug}`);
+
+  await expect(page.getByRole("heading", { name: publicActivityTitle })).toBeVisible();
   await expect(page.getByText("是否值得去")).toBeVisible();
   await expect(page.getByText("参考依据")).toBeVisible();
   if (testInfo.project.name === "mobile") {
@@ -55,12 +57,13 @@ test("activity detail page shows decision information and correction entry", asy
 });
 
 test("activity card body opens the detail page", async ({ page }) => {
-  await page.goto("/audience/family");
+  test.skip(!publicActivity, "当前采集没有可公开活动，跳过卡片跳转检查");
 
-  await page.getByText(familyActivityTitle).click();
+  await page.goto("/");
+  await page.getByText(publicActivityTitle).click();
 
-  await expect(page).toHaveURL(new RegExp(`/activities/${encodedFamilyActivitySlug}$`));
-  await expect(page.getByRole("heading", { name: familyActivityTitle })).toBeVisible();
+  await expect(page).toHaveURL(new RegExp(`/activities/${encodedPublicActivitySlug}$`));
+  await expect(page.getByRole("heading", { name: publicActivityTitle })).toBeVisible();
 });
 
 test("submission enters candidate queue and can be calibrated", async ({ page }) => {
@@ -121,8 +124,10 @@ test("mobile home keeps concrete time visible in activity rows", async ({ page }
 });
 
 test("mobile detail collapses reasons and evidence by default", async ({ page }) => {
+  test.skip(!publicActivity, "当前采集没有可公开活动，跳过详情页移动端检查");
+
   await page.setViewportSize({ width: 390, height: 844 });
-  await page.goto(`/activities/${familyActivitySlug}`);
+  await page.goto(`/activities/${publicActivitySlug}`);
 
   const reasonsToggle = page.locator(".detail-fold-toggle").first();
   const evidenceToggle = page.locator(".detail-fold-toggle").nth(1);

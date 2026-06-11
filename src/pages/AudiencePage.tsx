@@ -31,7 +31,16 @@ export default function AudiencePage() {
           <p>{subtitle}</p>
         </div>
       </section>
-      <WeeklySection title="精选活动" subtitle="看点、注意事项和可靠性放在同一行比较。" activities={activities} />
+      <WeeklySection
+        title="精选活动"
+        subtitle="看点、注意事项和可靠性放在同一行比较。"
+        activities={activities}
+        emptyStateText={
+          audience === "family"
+            ? "暂无明确时间的亲子活动，下一次采集后更新。"
+            : "暂无明确时间的成人活动，下一次采集后更新。"
+        }
+      />
     </main>
   );
 }

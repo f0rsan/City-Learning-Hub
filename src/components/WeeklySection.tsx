@@ -6,9 +6,15 @@ type WeeklySectionProps = {
   title: string;
   subtitle: string;
   activities: Activity[];
+  emptyStateText?: string;
 };
 
-export default function WeeklySection({ title, subtitle, activities }: WeeklySectionProps) {
+export default function WeeklySection({
+  title,
+  subtitle,
+  activities,
+  emptyStateText = "暂无明确时间的活动，下一次采集后更新。"
+}: WeeklySectionProps) {
   const titleId = useId();
   const [isCompactViewport, setIsCompactViewport] = useState(() => {
     if (typeof window === "undefined" || typeof window.matchMedia !== "function") {
@@ -61,11 +67,15 @@ export default function WeeklySection({ title, subtitle, activities }: WeeklySec
         <h2 id={titleId}>{title}</h2>
         <p>{subtitle}</p>
       </div>
-      <div className="activity-grid">
-        {visibleActivities.map((activity) => (
-          <ActivityCard key={activity.id} activity={activity} />
-        ))}
-      </div>
+      {activities.length > 0 ? (
+        <div className="activity-grid">
+          {visibleActivities.map((activity) => (
+            <ActivityCard key={activity.id} activity={activity} />
+          ))}
+        </div>
+      ) : (
+        <p className="empty-state">{emptyStateText}</p>
+      )}
       {isCompactViewport && remainingCount > 0 ? (
         <div className="section-actions">
           <button type="button" onClick={() => setShowAll(true)}>

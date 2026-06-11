@@ -10,8 +10,10 @@ import { renderRoute } from "../../src/test/render";
 describe("HomePage", () => {
   const collectedActivities: readonly Activity[] = liveCollectedActivities;
   const publicActivities = getPublicListedActivities([...collectedActivities]);
-  const familyActivity = publicActivities.find((activity) => activity.audience.includes("family"))!;
-  const adultActivity = publicActivities.find((activity) => activity.audience.includes("adult"))!;
+  const featuredActivities = getWeeklyFeatured([...collectedActivities]);
+  const visibleActivity = publicActivities[0];
+  const familyActivity = publicActivities.find((activity) => activity.audience.includes("family"));
+  const adultActivity = publicActivities.find((activity) => activity.audience.includes("adult"));
 
   it("shows the weekly Shenzhen positioning and two audience entries", () => {
     renderRoute(<App />);
@@ -24,13 +26,18 @@ describe("HomePage", () => {
   it("shows curated activity rows with recommendation reasons", () => {
     renderRoute(<App />);
 
-    expect(screen.getByText(familyActivity.title)).toBeInTheDocument();
-    expect(screen.getAllByLabelText("活动时间和地点").length).toBeGreaterThan(0);
-    expect(screen.getAllByLabelText("活动基本信息").length).toBeGreaterThan(0);
-    expect(screen.getAllByText(/看点/)[0]).toBeInTheDocument();
-    expect(screen.getAllByText(/注意/)[0]).toBeInTheDocument();
-    expect(screen.getAllByText(/强推荐|值得考虑|谨慎选择|不建议前往/)[0]).toBeInTheDocument();
-    expect(screen.getAllByText(/高可靠|可参考|待核对/)[0]).toBeInTheDocument();
+    if (visibleActivity) {
+      expect(screen.getByText(visibleActivity.title)).toBeInTheDocument();
+      expect(screen.getAllByLabelText("活动时间和地点").length).toBeGreaterThan(0);
+      expect(screen.getAllByLabelText("活动基本信息").length).toBeGreaterThan(0);
+      expect(screen.getAllByText(/看点/)[0]).toBeInTheDocument();
+      expect(screen.getAllByText(/注意/)[0]).toBeInTheDocument();
+      expect(screen.getAllByText(/强推荐|值得考虑|谨慎选择|不建议前往/)[0]).toBeInTheDocument();
+      expect(screen.getAllByText(/高可靠|可参考|待核对/)[0]).toBeInTheDocument();
+    } else {
+      expect(screen.getByText("暂无明确时间的精选活动，下一次采集后更新。")).toBeInTheDocument();
+    }
+
     expect(screen.getByText(/确定性更强/)).toBeInTheDocument();
     expect(screen.getByRole("heading", { name: "更多可参考活动" })).toBeInTheDocument();
     expect(screen.getByText(/系统筛过/)).toBeInTheDocument();
@@ -40,7 +47,7 @@ describe("HomePage", () => {
   it("shows compact weekly signals", () => {
     renderRoute(<App />);
 
-    expect(screen.getByText(`${getWeeklyFeatured([...collectedActivities]).length} 条精选`)).toBeInTheDocument();
+    expect(screen.getByText(`${featuredActivities.length} 条精选`)).toBeInTheDocument();
     expect(screen.getByText("真实采集")).toBeInTheDocument();
   });
 
@@ -48,8 +55,15 @@ describe("HomePage", () => {
     renderRoute(<App />, "/audience/family");
 
     expect(screen.getByRole("heading", { name: "带孩子去学习" })).toBeInTheDocument();
-    expect(screen.getByText(familyActivity.title)).toBeInTheDocument();
-    expect(screen.queryByText(adultActivity.title)).not.toBeInTheDocument();
+    if (familyActivity) {
+      expect(screen.getByText(familyActivity.title)).toBeInTheDocument();
+    } else {
+      expect(screen.getByText("暂无明确时间的亲子活动，下一次采集后更新。")).toBeInTheDocument();
+    }
+
+    if (adultActivity) {
+      expect(screen.queryByText(adultActivity.title)).not.toBeInTheDocument();
+    }
   });
 
   it("toggles theme mode from the header", async () => {

@@ -2,17 +2,52 @@ import { screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { beforeEach, describe, expect, it } from "vitest";
 import App from "../../src/App";
+import { saveCandidateActivity } from "../../src/domain/candidateStore";
 import { getPublicListedActivities } from "../../src/domain/activitySelectors";
+import { evaluateActivity } from "../../src/domain/evaluationRules";
+import type { CandidateActivity } from "../../src/domain/evaluationTypes";
 import { liveCollectedActivities } from "../../src/domain/liveActivities.generated";
 import { resetLocalHubData } from "../../src/domain/localStore";
+import { sampleActivities } from "../fixtures/sampleData";
 import type { Activity } from "../../src/domain/types";
 import { renderRoute } from "../../src/test/render";
 
 describe("submit and admin flow", () => {
   const collectedActivities: readonly Activity[] = liveCollectedActivities;
-  const familyActivity = getPublicListedActivities([...collectedActivities]).find((activity) =>
-    activity.audience.includes("family")
-  )!;
+  const publicActivity = getPublicListedActivities([...collectedActivities])[0];
+  const fallbackPublicActivity: CandidateActivity = {
+    ...sampleActivities[0],
+    id: "test-correction-public-activity",
+    slug: "test-correction-public-activity",
+    title: "测试纠错公开活动",
+    startAt: "2026-06-28T10:00:00+08:00",
+    endAt: "2026-06-28T12:00:00+08:00",
+    officialUrl: "https://example.com/events/test-correction-public-activity",
+    lastConfirmedAt: "2026-06-11",
+    status: "published",
+    weeklyFeatured: true,
+    publicListingTier: "featured",
+    publicScore: 95,
+    candidateStatus: "evaluated",
+    evaluation: evaluateActivity({
+      ...sampleActivities[0],
+      id: "test-correction-public-activity",
+      status: "published",
+      startAt: "2026-06-28T10:00:00+08:00",
+      endAt: "2026-06-28T12:00:00+08:00"
+    }),
+    createdAt: "2026-06-11T00:00:00.000Z",
+    updatedAt: "2026-06-11T00:00:00.000Z"
+  };
+
+  function ensureCorrectionActivity() {
+    if (publicActivity) {
+      return publicActivity;
+    }
+
+    saveCandidateActivity(fallbackPublicActivity);
+    return fallbackPublicActivity;
+  }
 
   beforeEach(() => {
     window.sessionStorage.clear();
@@ -46,9 +81,10 @@ describe("submit and admin flow", () => {
 
   it("lets a reader report a correction for an activity", async () => {
     const user = userEvent.setup();
-    const correctionPage = renderRoute(<App />, `/correct/${familyActivity.slug}`);
+    const activity = ensureCorrectionActivity();
+    const correctionPage = renderRoute(<App />, `/correct/${activity.slug}`);
 
-    expect(screen.getByRole("heading", { name: `纠错：${familyActivity.title}` })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: `纠错：${activity.title}` })).toBeInTheDocument();
     await user.selectOptions(screen.getByLabelText("问题类型"), "时间变更");
     await user.type(screen.getByLabelText("哪里需要改"), "主办方页面显示改到周日");
     await user.type(screen.getByLabelText("联系方式"), "reader@city-learning.local");
