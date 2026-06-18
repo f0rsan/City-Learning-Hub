@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-06-18T04:05:58.586Z",
+  "generatedAt": "2026-06-18T15:27:50.337Z",
   "rounds": 1,
   "concurrency": 3,
   "requiredSuccessfulSources": 10,
@@ -21,7 +21,7 @@
       "successRuns": 1,
       "failureRuns": 0,
       "successRate": 1,
-      "avgLatencyMs": 174,
+      "avgLatencyMs": 84,
       "avgItemsPerSuccess": 1,
       "totalItems": 1,
       "uniqueUrls": 1,
@@ -58,7 +58,7 @@
       "successRuns": 1,
       "failureRuns": 0,
       "successRate": 1,
-      "avgLatencyMs": 1641,
+      "avgLatencyMs": 1397,
       "avgItemsPerSuccess": 7,
       "totalItems": 7,
       "uniqueUrls": 7,
@@ -114,7 +114,7 @@
       "successRuns": 1,
       "failureRuns": 0,
       "successRate": 1,
-      "avgLatencyMs": 708,
+      "avgLatencyMs": 695,
       "avgItemsPerSuccess": 1,
       "totalItems": 1,
       "uniqueUrls": 1,
@@ -151,7 +151,7 @@
       "successRuns": 1,
       "failureRuns": 0,
       "successRate": 1,
-      "avgLatencyMs": 962,
+      "avgLatencyMs": 5984,
       "avgItemsPerSuccess": 42,
       "totalItems": 42,
       "uniqueUrls": 42,
@@ -160,9 +160,9 @@
       "titleUniquenessRatio": 1,
       "localRelevanceRatio": 1,
       "fallbackRatio": 0,
-      "sourceQualityScore": 1,
+      "sourceQualityScore": 0.985,
       "recommendedTrustLevel": "high",
-      "recommendedSignalWeight": 1.4,
+      "recommendedSignalWeight": 1.39,
       "sampleItems": [
         {
           "sourceId": "shenzhen-conference-platform",
@@ -209,7 +209,7 @@
       "successRuns": 1,
       "failureRuns": 0,
       "successRate": 1,
-      "avgLatencyMs": 84,
+      "avgLatencyMs": 92,
       "avgItemsPerSuccess": 1,
       "totalItems": 1,
       "uniqueUrls": 1,
@@ -243,48 +243,22 @@
         "展览"
       ],
       "attempts": 1,
-      "successRuns": 1,
-      "failureRuns": 0,
-      "successRate": 1,
-      "avgLatencyMs": 2984,
-      "avgItemsPerSuccess": 86,
-      "totalItems": 86,
-      "uniqueUrls": 86,
-      "uniqueTitles": 85,
-      "uniquenessRatio": 1,
-      "titleUniquenessRatio": 0.988,
+      "successRuns": 0,
+      "failureRuns": 1,
+      "successRate": 0,
+      "avgLatencyMs": 1243,
+      "avgItemsPerSuccess": 0,
+      "totalItems": 0,
+      "uniqueUrls": 0,
+      "uniqueTitles": 0,
+      "uniquenessRatio": 0,
+      "titleUniquenessRatio": 0,
       "localRelevanceRatio": 1,
       "fallbackRatio": 0,
-      "sourceQualityScore": 0.999,
-      "recommendedTrustLevel": "high",
-      "recommendedSignalWeight": 1.4,
-      "sampleItems": [
-        {
-          "sourceId": "douban-shenzhen",
-          "title": "【端午特惠｜领50元券】沉浸式心理悬疑戏剧《无证之罪》|层层反转|心理蒙太奇",
-          "url": "https://www.douban.com/event/37747118/"
-        },
-        {
-          "sourceId": "douban-shenzhen",
-          "title": "《数字群岛计划3.0：后人类纪》新媒体声音艺术展",
-          "url": "https://www.douban.com/event/37844191/"
-        },
-        {
-          "sourceId": "douban-shenzhen",
-          "title": "罗大佑╳黄贯中 天若有情1990-2026深圳时光演唱会",
-          "url": "https://www.douban.com/event/37884385/"
-        },
-        {
-          "sourceId": "douban-shenzhen",
-          "title": "完全莫扎特——徐洪钢琴独奏音乐会",
-          "url": "https://www.douban.com/event/37842594/"
-        },
-        {
-          "sourceId": "douban-shenzhen",
-          "title": "美国独立摇滚乐队DIIV深圳专场",
-          "url": "https://www.douban.com/event/37835309/"
-        }
-      ]
+      "sourceQualityScore": 0.25,
+      "recommendedTrustLevel": "unverified",
+      "recommendedSignalWeight": 0.84,
+      "sampleItems": []
     },
     {
       "sourceId": "lianpu-tech-events",
@@ -301,16 +275,16 @@
       "successRuns": 1,
       "failureRuns": 0,
       "successRate": 1,
-      "avgLatencyMs": 1342,
-      "avgItemsPerSuccess": 1,
-      "totalItems": 1,
-      "uniqueUrls": 1,
-      "uniqueTitles": 1,
+      "avgLatencyMs": 1485,
+      "avgItemsPerSuccess": 2,
+      "totalItems": 2,
+      "uniqueUrls": 2,
+      "uniqueTitles": 2,
       "uniquenessRatio": 1,
       "titleUniquenessRatio": 1,
       "localRelevanceRatio": 1,
       "fallbackRatio": 0,
-      "sourceQualityScore": 0.905,
+      "sourceQualityScore": 0.91,
       "recommendedTrustLevel": "high",
       "recommendedSignalWeight": 1.33,
       "sampleItems": [
@@ -318,6 +292,12 @@
           "sourceId": "lianpu-tech-events",
           "title": "TEDxShenzhen Salon「AI 时代的生存指南」主题沙龙",
           "url": "https://lianpu.com/event/tedxshenzhen-salonai-shi-dai-de-sheng-cun-zhi-nan-zhu-ti-sha",
+          "startAt": "2026-06-28T10:00:00+08:00"
+        },
+        {
+          "sourceId": "lianpu-tech-events",
+          "title": "AI 出海 & 全球化社交之夜 Social Mixer | 深圳站",
+          "url": "https://lianpu.com/event/ai-chu-hai-quan-qiu-hua-she-jiao-zhi-ye-shen-zhen-zhan",
           "startAt": "2026-06-28T10:00:00+08:00"
         }
       ]
@@ -338,47 +318,47 @@
       "successRuns": 1,
       "failureRuns": 0,
       "successRate": 1,
-      "avgLatencyMs": 11283,
-      "avgItemsPerSuccess": 23,
-      "totalItems": 23,
-      "uniqueUrls": 23,
-      "uniqueTitles": 22,
+      "avgLatencyMs": 1010,
+      "avgItemsPerSuccess": 24,
+      "totalItems": 24,
+      "uniqueUrls": 24,
+      "uniqueTitles": 23,
       "uniquenessRatio": 1,
-      "titleUniquenessRatio": 0.957,
+      "titleUniquenessRatio": 0.958,
       "localRelevanceRatio": 1,
       "fallbackRatio": 0,
-      "sourceQualityScore": 0.961,
+      "sourceQualityScore": 0.996,
       "recommendedTrustLevel": "high",
-      "recommendedSignalWeight": 1.37,
+      "recommendedSignalWeight": 1.4,
       "sampleItems": [
         {
           "sourceId": "huodongxing-shenzhen",
-          "title": "TEMU 加拿大&墨西哥本土招商运营峰会·深圳站",
-          "url": "https://www.huodongxing.com/event/7862948202911",
+          "title": "第二十七届深圳国际医疗旅游展览会暨世界辅助生殖医学技术峰会",
+          "url": "https://www.huodongxing.com/event/7862947852900",
           "startAt": "2026-06-25T10:00:00+08:00"
         },
         {
           "sourceId": "huodongxing-shenzhen",
-          "title": "AGIC2026深圳人工智能展",
-          "url": "https://www.huodongxing.com/event/5859922218300",
+          "title": "第十七届细胞生物产业大会暨第八届国际细胞治疗与再生医学大会",
+          "url": "https://www.huodongxing.com/event/3862949505800",
           "startAt": "2026-06-25T10:00:00+08:00"
         },
         {
           "sourceId": "huodongxing-shenzhen",
-          "title": "全球首个情绪感知AI吊坠NUNA——中国独家线下首发！",
-          "url": "https://www.huodongxing.com/event/7864689151500",
+          "title": "深圳相亲会 |6月19号深圳南山【端午节专场】高品质相亲交友活动",
+          "url": "https://www.huodongxing.com/event/5864114092712",
           "startAt": "2026-06-25T10:00:00+08:00"
         },
         {
           "sourceId": "huodongxing-shenzhen",
-          "title": "国研大咖课深圳专场｜《大健康产业趋势和企业机遇》暨标杆企业参访走进华大集团·探索生命科学",
-          "url": "https://www.huodongxing.com/event/8864821921711",
+          "title": "【财务破局】AI 时代，财务人突破30万年薪的4 条转型路",
+          "url": "https://www.huodongxing.com/event/7862834605512",
           "startAt": "2026-06-25T10:00:00+08:00"
         },
         {
           "sourceId": "huodongxing-shenzhen",
-          "title": "2026深圳世界滑板日",
-          "url": "https://www.huodongxing.com/event/8862657485712",
+          "title": "深圳相亲会 |6月21号深圳南山【90后女生专场】高品质相亲交友活动",
+          "url": "https://www.huodongxing.com/event/3859533465412",
           "startAt": "2026-06-25T10:00:00+08:00"
         }
       ]
@@ -399,7 +379,7 @@
       "successRuns": 1,
       "failureRuns": 0,
       "successRate": 1,
-      "avgLatencyMs": 1958,
+      "avgLatencyMs": 1155,
       "avgItemsPerSuccess": 1,
       "totalItems": 1,
       "uniqueUrls": 1,
@@ -435,7 +415,7 @@
       "successRuns": 1,
       "failureRuns": 0,
       "successRate": 1,
-      "avgLatencyMs": 2634,
+      "avgLatencyMs": 6632,
       "avgItemsPerSuccess": 16,
       "totalItems": 16,
       "uniqueUrls": 16,
@@ -444,10 +424,16 @@
       "titleUniquenessRatio": 1,
       "localRelevanceRatio": 1,
       "fallbackRatio": 0,
-      "sourceQualityScore": 0.98,
+      "sourceQualityScore": 0.965,
       "recommendedTrustLevel": "high",
-      "recommendedSignalWeight": 1.39,
+      "recommendedSignalWeight": 1.37,
       "sampleItems": [
+        {
+          "sourceId": "nanshan-library-activities",
+          "title": "南图双语故事会|Go Away,Floppy",
+          "url": "https://activity.nslib.cn/activity/info/11605",
+          "startAt": "2026-07-31T10:00:00+08:00"
+        },
         {
           "sourceId": "nanshan-library-activities",
           "title": "新语听书·“粽香迎端午，听书赴华章”打榜活动",
@@ -471,12 +457,6 @@
           "title": "跟南图读《红楼梦》| “草根智者”刘姥姥",
           "url": "https://activity.nslib.cn/activity/info/11543",
           "startAt": "2026-06-28T10:00:00+08:00"
-        },
-        {
-          "sourceId": "nanshan-library-activities",
-          "title": "科普小讲堂丨大海发脾气了，你敢来当渔业大亨吗？",
-          "url": "https://activity.nslib.cn/activity/info/11561",
-          "startAt": "2026-06-28T10:00:00+08:00"
         }
       ]
     },
@@ -496,7 +476,7 @@
       "successRuns": 0,
       "failureRuns": 1,
       "successRate": 0,
-      "avgLatencyMs": 10441,
+      "avgLatencyMs": 10114,
       "avgItemsPerSuccess": 0,
       "totalItems": 0,
       "uniqueUrls": 0,
@@ -526,7 +506,7 @@
       "successRuns": 1,
       "failureRuns": 0,
       "successRate": 1,
-      "avgLatencyMs": 3041,
+      "avgLatencyMs": 6790,
       "avgItemsPerSuccess": 50,
       "totalItems": 50,
       "uniqueUrls": 50,
@@ -535,9 +515,9 @@
       "titleUniquenessRatio": 1,
       "localRelevanceRatio": 1,
       "fallbackRatio": 0,
-      "sourceQualityScore": 1,
+      "sourceQualityScore": 0.985,
       "recommendedTrustLevel": "high",
-      "recommendedSignalWeight": 1.4,
+      "recommendedSignalWeight": 1.39,
       "sampleItems": [
         {
           "sourceId": "szu-library-events",
@@ -587,7 +567,7 @@
       "successRuns": 1,
       "failureRuns": 0,
       "successRate": 1,
-      "avgLatencyMs": 911,
+      "avgLatencyMs": 820,
       "avgItemsPerSuccess": 8,
       "totalItems": 8,
       "uniqueUrls": 8,
@@ -643,7 +623,7 @@
       "successRuns": 1,
       "failureRuns": 0,
       "successRate": 1,
-      "avgLatencyMs": 2064,
+      "avgLatencyMs": 3682,
       "avgItemsPerSuccess": 33,
       "totalItems": 33,
       "uniqueUrls": 33,
@@ -704,7 +684,7 @@
       "successRuns": 1,
       "failureRuns": 0,
       "successRate": 1,
-      "avgLatencyMs": 1653,
+      "avgLatencyMs": 2926,
       "avgItemsPerSuccess": 26,
       "totalItems": 26,
       "uniqueUrls": 26,
@@ -759,7 +739,7 @@
       "successRuns": 1,
       "failureRuns": 0,
       "successRate": 1,
-      "avgLatencyMs": 24,
+      "avgLatencyMs": 21,
       "avgItemsPerSuccess": 1,
       "totalItems": 1,
       "uniqueUrls": 1,
@@ -796,7 +776,7 @@
       "successRuns": 1,
       "failureRuns": 0,
       "successRate": 1,
-      "avgLatencyMs": 1464,
+      "avgLatencyMs": 1558,
       "avgItemsPerSuccess": 3,
       "totalItems": 3,
       "uniqueUrls": 3,
@@ -839,22 +819,49 @@
         "读书沙龙"
       ],
       "attempts": 1,
-      "successRuns": 0,
-      "failureRuns": 1,
-      "successRate": 0,
-      "avgLatencyMs": 12002,
-      "avgItemsPerSuccess": 0,
-      "totalItems": 0,
-      "uniqueUrls": 0,
-      "uniqueTitles": 0,
-      "uniquenessRatio": 0,
-      "titleUniquenessRatio": 0,
+      "successRuns": 1,
+      "failureRuns": 0,
+      "successRate": 1,
+      "avgLatencyMs": 5571,
+      "avgItemsPerSuccess": 12,
+      "totalItems": 12,
+      "uniqueUrls": 12,
+      "uniqueTitles": 12,
+      "uniquenessRatio": 1,
+      "titleUniquenessRatio": 1,
       "localRelevanceRatio": 1,
       "fallbackRatio": 0,
-      "sourceQualityScore": 0.215,
-      "recommendedTrustLevel": "unverified",
-      "recommendedSignalWeight": 0.81,
-      "sampleItems": []
+      "sourceQualityScore": 0.945,
+      "recommendedTrustLevel": "high",
+      "recommendedSignalWeight": 1.36,
+      "sampleItems": [
+        {
+          "sourceId": "university-town-library",
+          "title": "展览速递",
+          "url": "https://www.utszlib.edu.cn/exhibition/id-689.html?locale=zh_CN"
+        },
+        {
+          "sourceId": "university-town-library",
+          "title": "数据库培训",
+          "url": "https://www.utszlib.edu.cn/exhibition/id-690.html?locale=zh_CN"
+        },
+        {
+          "sourceId": "university-town-library",
+          "title": "预约培训",
+          "url": "https://www.utszlib.edu.cn/newStudAppointment/id-988.html?locale=zh_CN"
+        },
+        {
+          "sourceId": "university-town-library",
+          "title": "迎新活动",
+          "url": "https://www.utszlib.edu.cn/page/id-992.html?locale=zh_CN"
+        },
+        {
+          "sourceId": "university-town-library",
+          "title": "2026/06/04 书香礼遇--凭读书券领取学习用品活动",
+          "url": "https://www.utszlib.edu.cn/article/view/id-19062.html?locale=zh_CN",
+          "startAt": "2026-06-05T10:00:00+08:00"
+        }
+      ]
     },
     {
       "sourceId": "shenzhen-redcube-events",
@@ -872,7 +879,7 @@
       "successRuns": 1,
       "failureRuns": 0,
       "successRate": 1,
-      "avgLatencyMs": 919,
+      "avgLatencyMs": 854,
       "avgItemsPerSuccess": 1,
       "totalItems": 1,
       "uniqueUrls": 1,
@@ -909,7 +916,7 @@
       "successRuns": 1,
       "failureRuns": 0,
       "successRate": 1,
-      "avgLatencyMs": 2503,
+      "avgLatencyMs": 3207,
       "avgItemsPerSuccess": 12,
       "totalItems": 12,
       "uniqueUrls": 12,
@@ -970,7 +977,7 @@
       "successRuns": 1,
       "failureRuns": 0,
       "successRate": 1,
-      "avgLatencyMs": 1191,
+      "avgLatencyMs": 1079,
       "avgItemsPerSuccess": 1,
       "totalItems": 1,
       "uniqueUrls": 1,
@@ -1006,7 +1013,7 @@
       "successRuns": 1,
       "failureRuns": 0,
       "successRate": 1,
-      "avgLatencyMs": 964,
+      "avgLatencyMs": 903,
       "avgItemsPerSuccess": 42,
       "totalItems": 42,
       "uniqueUrls": 42,
@@ -1065,7 +1072,7 @@
       "successRuns": 0,
       "failureRuns": 1,
       "successRate": 0,
-      "avgLatencyMs": 910,
+      "avgLatencyMs": 1160,
       "avgItemsPerSuccess": 0,
       "totalItems": 0,
       "uniqueUrls": 0,
@@ -1095,7 +1102,7 @@
       "successRuns": 1,
       "failureRuns": 0,
       "successRate": 1,
-      "avgLatencyMs": 2646,
+      "avgLatencyMs": 2794,
       "avgItemsPerSuccess": 1,
       "totalItems": 1,
       "uniqueUrls": 1,
@@ -1132,7 +1139,7 @@
       "successRuns": 1,
       "failureRuns": 0,
       "successRate": 1,
-      "avgLatencyMs": 956,
+      "avgLatencyMs": 1111,
       "avgItemsPerSuccess": 1,
       "totalItems": 1,
       "uniqueUrls": 1,
@@ -1169,7 +1176,7 @@
       "successRuns": 1,
       "failureRuns": 0,
       "successRate": 1,
-      "avgLatencyMs": 590,
+      "avgLatencyMs": 440,
       "avgItemsPerSuccess": 1,
       "totalItems": 1,
       "uniqueUrls": 1,
@@ -1206,7 +1213,7 @@
       "successRuns": 1,
       "failureRuns": 0,
       "successRate": 1,
-      "avgLatencyMs": 1084,
+      "avgLatencyMs": 11230,
       "avgItemsPerSuccess": 1,
       "totalItems": 1,
       "uniqueUrls": 1,
@@ -1215,9 +1222,9 @@
       "titleUniquenessRatio": 1,
       "localRelevanceRatio": 1,
       "fallbackRatio": 0,
-      "sourceQualityScore": 0.905,
+      "sourceQualityScore": 0.87,
       "recommendedTrustLevel": "high",
-      "recommendedSignalWeight": 1.33,
+      "recommendedSignalWeight": 1.3,
       "sampleItems": [
         {
           "sourceId": "hackquest-shenzhen-hackathons",
@@ -1240,7 +1247,7 @@
       "successRuns": 1,
       "failureRuns": 0,
       "successRate": 1,
-      "avgLatencyMs": 1769,
+      "avgLatencyMs": 1761,
       "avgItemsPerSuccess": 1,
       "totalItems": 1,
       "uniqueUrls": 1,
@@ -1276,7 +1283,7 @@
       "successRuns": 1,
       "failureRuns": 0,
       "successRate": 1,
-      "avgLatencyMs": 1880,
+      "avgLatencyMs": 2166,
       "avgItemsPerSuccess": 1,
       "totalItems": 1,
       "uniqueUrls": 1,
@@ -1300,22 +1307,22 @@
   ],
   "failures": [
     {
+      "sourceId": "douban-shenzhen",
+      "sourceName": "豆瓣同城深圳",
+      "error": "HTTP 403",
+      "durationMs": 1243
+    },
+    {
       "sourceId": "luohu-library-events",
       "sourceName": "罗湖图书馆活动速递",
       "error": "fetch failed",
-      "durationMs": 10441
-    },
-    {
-      "sourceId": "university-town-library",
-      "sourceName": "深圳大学城图书馆",
-      "error": "This operation was aborted",
-      "durationMs": 12002
+      "durationMs": 10114
     },
     {
       "sourceId": "cite-expo",
       "sourceName": "CITE 中国电子信息博览会",
       "error": "fetch failed",
-      "durationMs": 910
+      "durationMs": 1160
     }
   ]
 }
